@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('dist/img/logo.png') }}" width="300px" height="300px" alt="AleAduit Logo" class="brand-image img-circle elevation-3"
+                <img src="{{ asset('dist/img/logo.png') }}" width="300px" height="300px" alt="AleAudit Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
             </a>
             </div>
