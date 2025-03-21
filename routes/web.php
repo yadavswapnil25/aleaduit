@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BookletController;
 use App\Http\Controllers\Admin\BookletQuestionController;
-
+use App\Http\Controllers\Admin\ClientController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -25,6 +25,11 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::put('/changePasswordUpdate', [ProfileController::class, 'changePasswordUpdate'])->name('user.changePasswordUpdate');
     Route::get('/resetPassword/{id}', [UserController::class, 'resetPassword']);
     Route::put('/resetPassword/{id}', [UserController::class, 'sendResetUpdate'])->name('reset.password.update');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
+    Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::post('/client/update', [ClientController::class, 'update'])->name('client.update');
     Route::resource('users', UserController::class);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
@@ -41,8 +46,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // Define resource routes for exam enrollments and custom routes for edit, update, and delete actions.
     Route::resource('examEnrollments', ExamEnrollmentController::class);
-    Route::get('/examEnrollment/edit/{id}', [ExamEnrollmentController::class, 'edit'])->name('examEnrollments.edit');
-    Route::post('/examEnrollment/update', [ExamEnrollmentController::class, 'update'])->name('examEnrollments.update');
+    // Route::get('/examEnrollment/edit/{id}', [ExamEnrollmentController::class, 'edit'])->name('examEnrollments.edit');
+    // Route::post('/examEnrollment/update', [ExamEnrollmentController::class, 'update'])->name('examEnrollments.update');
     Route::get('/examEnrollment/delete/{id}', [ExamEnrollmentController::class, 'destroy'])->name('examEnrollments.delete');
     // Route for fetching soft-deleted exam enrollments
     // Route to restore a soft-deleted exam enrollment

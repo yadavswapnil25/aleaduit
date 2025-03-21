@@ -1,9 +1,9 @@
 ﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-        <img src="{{ asset('dist/img/logo.jpg') }}" alt="Invezza Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('dist/img/logo.svg') }}" alt="Invezza Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">Invezza</span>
+        <span class="brand-text font-weight-light">AleAduit</span>
     </a>
 
     <!-- Sidebar -->
@@ -31,7 +31,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('admin.users.index') }}"
                         class="nav-link @if (route('admin.users.index') == URL::current()) active @endif">
                         <i class="nav-icon fas fa-user"></i>
@@ -39,8 +39,17 @@
                             Users
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
+                    <a href="{{ route('admin.clients.index') }}"
+                        class="nav-link @if (route('admin.clients.index') == URL::current()) active @endif">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Clients
+                        </p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
                     <a href="{{ route('admin.booklets.index') }}"
                         class="nav-link @if (route('admin.booklets.index') == URL::current()) active @endif">
                         <i class="nav-icon fas fa-book"></i>
@@ -58,15 +67,13 @@
                         </p>
                     </a>
                 </li>
-
-                <!-- This is a navigation list item that represents a link in the sidebar menu. -->
                 <li class="nav-item">
                     <a href="{{ route('admin.examEnrollments.index') }}"
                         class="nav-link @if (route('admin.examEnrollments.index') == URL::current()) active @endif">
                         <i class="nav-icon fas fa-user-plus"></i>
                         <p>Exam Enrollments</p>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </nav>
