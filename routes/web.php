@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\ExamEnrollmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BookletController;
-use App\Http\Controllers\Admin\BookletQuestionController;
+use App\Http\Controllers\Admin\AuditController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\BookletController;
+use App\Http\Controllers\Admin\ExamEnrollmentController;
+use App\Http\Controllers\Admin\BookletQuestionController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -53,7 +54,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // Route to restore a soft-deleted exam enrollment
     Route::get('/examEnrollment/restore/{id}', [ExamEnrollmentController::class, 'restoreExamEnrollment'])->name('examEnrollment.restore');
 
-
+    Route::resource('audits', AuditController::class);
+    Route::get('/audit/edit/{id}', [AuditController::class, 'edit'])->name('audit.edit');
+    Route::post('/audit/update', [AuditController::class, 'update'])->name('audit.update');
 });
 
 require __DIR__.'/auth.php';
