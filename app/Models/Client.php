@@ -20,5 +20,8 @@ class Client extends Model
         'registration_date',
         'karyashetra',
         'society_address',
+        'audit_year',
+        'auditor_id',
+        'client_id',
     ];
 }

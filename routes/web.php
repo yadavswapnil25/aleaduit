@@ -30,7 +30,12 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
     Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
     Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::get('/client/show/{id}', [ClientController::class, 'show'])->name('client.show');
     Route::post('/client/update', [ClientController::class, 'update'])->name('client.update');
+    Route::get('/client/addYear/{id}', [ClientController::class, 'showAddYearForm'])->name('client.addYearForm');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::post('/client/addYear', [ClientController::class, 'addYear'])->name('client.addYear');
+    Route::get('/client/download/{id}', [ClientController::class, 'download'])->name('client.download');
     Route::resource('users', UserController::class);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
