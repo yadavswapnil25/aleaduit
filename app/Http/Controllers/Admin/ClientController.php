@@ -8,12 +8,14 @@ use Carbon\Carbon;
 use App\Models\Year;
 use App\Models\Audit;
 use App\Models\Client;
+use App\Models\MasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreYearRequest;
+use PhpOffice\PhpWord\TemplateProcessor;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-use Illuminate\Support\Facades\File;
 
 class ClientController extends Controller
 {
@@ -192,35 +194,37 @@ class ClientController extends Controller
     public function addYear(StoreYearRequest $request)
     {
         try {
-            $client = Client::find($request->client_id);
-
+            $client = Client::with('audit')->find($request->client_id);
             if (!$client) {
                 return redirect()->back()->withErrors(['error' => 'Client not found.']);
             }
 
             // Handle file upload
             $fileName = null;
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/uploads', $fileName);
-            } else {
-                // Copy master.docs file from public folder to storage folder with the name of the client
-                $masterFilePath = public_path('master.doc');
-                $fileName = $client->name_of_society . '.doc';
-                $storageFilePath = storage_path('app/public/uploads/' . $fileName);
-                if (file_exists($masterFilePath)) {
-                    if (!file_exists(dirname($storageFilePath))) {
-                        mkdir(dirname($storageFilePath), 0777, true);
-                    }
-                    if (!copy($masterFilePath, $storageFilePath)) {
-                        return redirect()->back()->withErrors(['error' => 'Failed to copy master file.']);
-                    }
-                } else {
-                    return redirect()->back()->withErrors(['error' => 'Master file not found.']);
-                }
-            }
 
+            // Copy master.docs file from public folder to storage folder with the name of the client
+            $masterFilePath = public_path('master.docx');
+            $fileName = $client->name_of_society . '.docx';
+            $storageFilePath = storage_path('app/public/uploads/' . $fileName);
+            $templateProcessor = new TemplateProcessor($masterFilePath);
+            $templateProcessor->setValue('name_of_society', $client->name_of_society ?? '');
+            $templateProcessor->setValue('chairman', $client->chairman ?? '');
+            $templateProcessor->setValue('registration_no', $client->registration_no ?? '');
+            $templateProcessor->setValue('society_address', $client->society_address ?? '');
+            $templateProcessor->setValue('taluka', $client->taluka ?? '');
+            $templateProcessor->setValue('district', $client->district ?? '');
+            $templateProcessor->setValue('audit_year', $client->audit_year ?? '');
+            $templateProcessor->setValue('lekha_parikshan_vargwari', $client->lekha_parikshan_vargwari ?? '');
+            $templateProcessor->setValue('audit_name', $client->audit->name ?? '');
+            $templateProcessor->setValue('audit_registration_no', $client->audit->registration_no ?? '');
+            $templateProcessor->setValue('namtalika_vargwari', $client->audit->namtalika_vargwari ?? '');
+            $templateProcessor->setValue('audit_address', $client->audit->address ?? '');
+            $templateProcessor->setValue('audit_email', $client->audit->email ?? '');
+            $templateProcessor->setValue('audit_phone', $client->audit->phone_number ?? '');
+            $templateProcessor->setValue('audit_javak_kramank', $client->audit->javak_kramank ?? '');
+            $templateProcessor->setValue('audit_date', $client->audit->date ?? '');
+            $templateProcessor->saveAs($storageFilePath);
+            // End of file upload handling
             $year = new Year();
             $year->audit_year = $request->audit_year;
             $year->auditor_id = $request->auditor_id;
@@ -228,7 +232,7 @@ class ClientController extends Controller
             $year->file = $fileName;
             $year->save();
 
-            return redirect()->route('admin.clients.show', $year->client_id)->with('success', 'Year added successfully');
+            return redirect()->route('admin.client.show', $year->client_id)->with('success', 'Year added successfully');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'An error occurred while adding the year: ' . $e->getMessage()]);
         }
@@ -247,5 +251,47 @@ class ClientController extends Controller
         $year = Year::find($id);
         $filePath = storage_path('app/public/uploads/' . $year->file);
         return response()->download($filePath);
+    }
+    
+
+    /**
+     * Shows the master view for the given year and menu.
+     *
+     * @param int $id The ID of the year
+     * @param string $menu The menu to show
+     * @return \Illuminate\Http\Response
+     */
+    public function master1($id)
+    {
+        $year = Year::find($id);
+
+        if (!$year) {
+            return redirect()->back()->withErrors(['error' => 'Year not found.']);
+        }
+
+     
+        // Get the current menu's dropdown options
+
+        return view('admin.clients.master1', compact('year'));
+    }
+
+    public function saveMasterData(Request $request)
+    {
+        $yearId = $request->input('year_id');
+        $data = $request->input('data');
+
+        // Save the data to the database (example logic)
+        foreach ($data as $row) {
+            MasterData::create([
+                'year_id' => $yearId,
+                'entity' => $row['entity'],
+                'last_year' => $row['last_year'],
+                'current_year' => $row['current_year'],
+                'difference' => $row['difference'],
+                'result' => $row['result'],
+            ]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }

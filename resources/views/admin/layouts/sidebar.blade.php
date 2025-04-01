@@ -31,15 +31,8 @@
                         </p>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="{{ route('admin.users.index') }}"
-                        class="nav-link @if (route('admin.users.index') == URL::current()) active @endif">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Users
-                        </p>
-                    </a>
-                </li> -->
+                @if (!request()->is('admin/client/*/master1'))
+
                 <li class="nav-item">
                     <a href="{{ route('admin.clients.index') }}"
                         class="nav-link @if (route('admin.clients.index') == URL::current()) active @endif">
@@ -58,32 +51,108 @@
                         </p>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="{{ route('admin.booklets.index') }}"
-                        class="nav-link @if (route('admin.booklets.index') == URL::current()) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>
-                        Booklets
-                        </p>
+                @endif
+                <!-- Menu Items -->
+                @if (request()->is('admin/client/*/master1'))                
+                <li class="nav-item">
+                    <a href="#" 
+                        class="nav-link @if (request()->routeIs('admin.client.master') && request()->menu == 'master1') active @endif">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>वसूल भागभांडवल</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.bookletQuestion.index') }}"
-                        class="nav-link @if (route('admin.bookletQuestion.index') == URL::current()) active @endif">
-                        <i class="nav-icon fas fa-question"></i>
-                        <p>
-                        Booklet Questions
-                        </p>
+                    <a href="#" 
+                        class="nav-link @if (request()->routeIs('admin.client.master') && request()->menu == 'master2') active @endif">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>राखीव निधी</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.examEnrollments.index') }}"
-                        class="nav-link @if (route('admin.examEnrollments.index') == URL::current()) active @endif">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>Exam Enrollments</p>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>इतर सर्व निधी</p>
                     </a>
-                </li> -->
-
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>ठेवी</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>संचित नफा</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>तरतूद</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>देणे कर्ज</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>इतर देणी</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>रोख शिल्लक</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>बँक शिल्लक</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>गुंतवणूक</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>कामगार मासळता</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>येणे कर्ज</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>इतर येणे</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>घेणे व्यज</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>संचित तोटा</p>
+                    </a>
+                </li>
+            @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

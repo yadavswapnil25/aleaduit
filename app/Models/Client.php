@@ -24,4 +24,8 @@ class Client extends Model
         'auditor_id',
         'client_id',
     ];
+
+    public function audit(){
+        return $this->hasOne(Audit::class, 'id', 'auditor_id');
+    }
 }

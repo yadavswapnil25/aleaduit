@@ -36,6 +36,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::post('/client/addYear', [ClientController::class, 'addYear'])->name('client.addYear');
     Route::get('/client/download/{id}', [ClientController::class, 'download'])->name('client.download');
+    Route::get('/client/{id}/master1', [ClientController::class, 'master1'])->name('client.master1');
+    Route::post('/client/save-master-data', [ClientController::class, 'saveMasterData'])->name('client.saveMasterData');
     Route::resource('users', UserController::class);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
@@ -62,6 +64,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('audits', AuditController::class);
     Route::get('/audit/edit/{id}', [AuditController::class, 'edit'])->name('audit.edit');
     Route::post('/audit/update', [AuditController::class, 'update'])->name('audit.update');
+
 });
 
 require __DIR__.'/auth.php';
