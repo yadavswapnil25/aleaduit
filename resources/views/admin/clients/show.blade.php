@@ -39,7 +39,7 @@
                                             <td>{{$index + 1}}</td>
                                             <td>{{$year->audit_year}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#setMasterModal">
+                                                <a href="{{ route('admin.client.master',$year->client_id) }}" class="btn btn-success btn-sm">
                                                     <i class="fa fa-th"></i> Set Master
                                                 </a>
                                                 <a href="{{ route('admin.client.download', $year->id) }}" class="btn btn-primary btn-sm">
@@ -70,41 +70,7 @@
     </div>
 </section>
 
-<!-- Add this modal structure at the end of your Blade file -->
-<div class="modal fade" id="setMasterModal" tabindex="-1" role="dialog" aria-labelledby="setMasterModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="setMasterModalLabel">Set Master</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5>Master 1</h5>
-                                <p>Year: 2025</p>
-                                <button class="btn btn-warning" onclick="window.location.href='{{ route('admin.client.master1', $year->id) }}'">Open</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5>Master 2</h5>
-                                <p>Year: 2025</p>
-                                <button class="btn btn-warning" onclick="window.location.href='{{ route('admin.client.master1', $year->id) }}'">Open</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
 
 @section('head')

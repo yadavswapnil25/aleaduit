@@ -36,7 +36,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
     Route::post('/client/addYear', [ClientController::class, 'addYear'])->name('client.addYear');
     Route::get('/client/download/{id}', [ClientController::class, 'download'])->name('client.download');
+    Route::get('/client/{id}/master', [ClientController::class, 'master'])->name('client.master');
     Route::get('/client/{id}/master1', [ClientController::class, 'master1'])->name('client.master1');
+    Route::get('/client/{id}/master2', [ClientController::class, 'master2'])->name('client.master2');
+
     Route::post('/client/save-master-data', [ClientController::class, 'saveMasterData'])->name('client.saveMasterData');
     Route::resource('users', UserController::class);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');

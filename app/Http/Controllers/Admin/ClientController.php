@@ -253,7 +253,48 @@ class ClientController extends Controller
         return response()->download($filePath);
     }
     
+    /**
+     * Shows the master view for the given year and menu.
+     *
+     * @param int $id The ID of the year
+     * @param string $menu The menu to show
+     * @return \Illuminate\Http\Response
+     */
 
+    public function master($id)
+    {
+        
+        $year = Year::where('client_id', $id)->first();
+
+        if (!$year) {
+            return redirect()->back()->withErrors(['error' => 'Client not found.']);
+        }   
+
+        // Get the current menu's dropdown options
+        $menu = $year->menu; // Assuming you have a 'menu' field in the Year model
+        $dropdownOptions = [];
+
+        switch ($menu) {
+            
+            case 'menu1':
+                $dropdownOptions = [
+                    'option1' => 'Option 1',
+                    'option2' => 'Option 2',
+                    // Add more options as needed
+                ];
+                break;
+            case 'menu2':
+                $dropdownOptions = [
+                    'option3' => 'Option 3',
+                    'option4' => 'Option 4',
+                    // Add more options as needed
+                ];
+                break;
+            // Add more cases for other menus   
+        }
+        // Pass the dropdown options to the view
+        return view('admin.clients.master', compact('year', 'dropdownOptions'));
+    }
     /**
      * Shows the master view for the given year and menu.
      *
@@ -263,16 +304,34 @@ class ClientController extends Controller
      */
     public function master1($id)
     {
-        $year = Year::find($id);
-
+        $year = Year::where('client_id', $id)->first();
         if (!$year) {
-            return redirect()->back()->withErrors(['error' => 'Year not found.']);
+            return redirect()->back()->withErrors(['error' => 'Client not found.']);
         }
 
-     
-        // Get the current menu's dropdown options
+        // Define sidebar menu items for Master 1
+        $sideMenuItems = [
+            ['name' => 'वसूल भागभांडवल', 'route' => 'admin.client.master1'],
+            ['name' => 'राखीव निधी', 'route' => 'admin.client.master1'],
+            ['name' => 'इतर सर्व निधी', 'route' => 'admin.client.master1'],
+            ['name' => 'ठेवी', 'route' => 'admin.client.master1'],
+            ['name' => 'संचित नफा', 'route' => 'admin.client.master1'],
+            ['name' => 'तरतूद', 'route' => 'admin.client.master1'],
+            ['name' => 'देणे कर्ज', 'route' => 'admin.client.master1'],
+            ['name' => 'इतर देणी', 'route' => 'admin.client.master1'],
+            ['name' => 'रोख शिल्लक', 'route' => 'admin.client.master1'],
+            ['name' => 'बँक शिल्लक', 'route' => 'admin.client.master1'],
+            ['name' => 'गुंतवणूक', 'route' => 'admin.client.master1'],
+            ['name' => 'कायम मालमत्ता', 'route' => 'admin.client.master1'],
+            ['name' => 'येणे कर्ज', 'route' => 'admin.client.master1'],
+            ['name' => 'इतर येणे', 'route' => 'admin.client.master1'],
+            ['name' => 'घेणे व्यज', 'route' => 'admin.client.master1'],
+            ['name' => 'संचित तोटा', 'route' => 'admin.client.master1'],
 
-        return view('admin.clients.master1', compact('year'));
+
+        ];
+
+        return view('admin.clients.master1', compact('year', 'sideMenuItems'));
     }
 
     public function saveMasterData(Request $request)
@@ -293,5 +352,31 @@ class ClientController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+
+    public function master2($id)
+    {
+        $year = Year::where('client_id', $id)->first();
+        if (!$year) {
+            return redirect()->back()->withErrors(['error' => 'Client not found.']);
+        }
+
+        // Define sidebar menu items for Master 1
+        $sideMenuItems = [
+            ['name' => 'किरकोळ उत्त्पन्न', 'route' => 'admin.client.master1'],
+            ['name' => 'कर्जावरील व्याज', 'route' => 'admin.client.master1'],
+            ['name' => 'गुंतवणुकीवरील व्याज', 'route' => 'admin.client.master1'],
+            ['name' => 'इतर उत्त्पन्न', 'route' => 'admin.client.master1'],
+            ['name' => 'ठेवीवरील व्याज', 'route' => 'admin.client.master1'],
+            ['name' => 'आस्थापना खर्च', 'route' => 'admin.client.master1'],
+            ['name' => 'प्रशासकीय खर्च', 'route' => 'admin.client.master1'],
+            ['name' => 'तरतुदी', 'route' => 'admin.client.master1'],
+            ['name' => 'इतर खर्च', 'route' => 'admin.client.master1']
+
+
+        ];
+
+        return view('admin.clients.master1', compact('year', 'sideMenuItems'));
     }
 }
