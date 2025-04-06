@@ -1,4 +1,9 @@
-<!-- filepath: resources/views/components/master-table.blade.php -->
+<div class="mb-3">
+    <a href="{{ route('admin.client.master', ['id' => $clientId]) }}" class="btn btn-secondary">
+        <i class="fa fa-arrow-left"></i> Back
+    </a>
+</div>
+
 <div class="table-responsive">
     <table class="table table-bordered" id="masterTable">
         <thead>
@@ -32,6 +37,46 @@
     <button class="btn btn-primary btn-sm" id="addRow"><i class="fa fa-plus"></i> Add Row</button>
     <button class="btn btn-success btn-sm" id="saveData"><i class="fa fa-save"></i> Save Data</button>
 </div>
+
+<div class="table-responsive mt-4">
+    <table class="table table-bordered" id="summaryTable">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>ID</th>
+                <th>ENTITY</th>
+                <th>LAST YEAR</th>
+                <th>CURRENT YEAR</th>
+                <th>DIFF</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be dynamically populated here -->
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive mt-4">
+    <table class="table table-bordered" id="totalsTable">
+        <thead>
+            <tr>
+                <th>TOTAL:</th>
+                <th>PRICE TOTAL</th>
+                <th>QTY TOTAL</th>
+                <th>GRAND TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total:</td>
+                <td id="priceTotal">0.00</td>
+                <td id="qtyTotal">0.00</td>
+                <td id="grandTotal">0.00</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -179,6 +224,10 @@
             options.forEach(option => {
                 $entityDropdown.append(`<option>${option}</option>`);
             });
+            
+            fetchSummaryData(); 
+            calculateTotals();
+
         });
 
         // Add Row functionality
@@ -200,11 +249,184 @@
                 </tr>
             `;
             $('#masterTable tbody').append(newRow);
+            calculateTotals();
         });
 
         // Remove Row functionality
         $(document).on('click', '.remove-row', function() {
             $(this).closest('tr').remove();
+            calculateTotals();
         });
+
+        // Save Data functionality
+        $('#saveData').on('click', function() {
+            let tableData = [];
+            const menuName = $('.sidebar-menu-item.active').data('menu'); // Get the active menu name
+
+            $('#masterTable tbody tr').each(function() {
+                let row = {
+                    menu: menuName, // Include the menu value
+                    entity: $(this).find('.entity-select').val(),
+                    lastYear: $(this).find('.last-year').val(),
+                    currentYear: $(this).find('.current-year').val(),
+                    difference: $(this).find('.difference').val(),
+                    result: $(this).find('.result').val()
+                };
+                tableData.push(row);
+            });
+
+            // Send data to the server
+            $.ajax({
+                url: '/admin/client/save-master-data', // Replace with your server endpoint
+                method: 'POST',
+                data: {
+                    tableData: tableData,
+                    _token: '{{ csrf_token() }}' // Include CSRF token for Laravel
+                },
+                success: function(response) {
+                    alert('Data saved successfully!');
+                    // location.reload(); // Reload the page to fetch updated data
+                },
+                error: function(xhr) {
+                    alert('An error occurred while saving data.');
+                }
+            });
+        });
+
+        // Function to calculate totals
+        function calculateTotals() {
+            let priceTotal = 0; // Sum of LAST YEAR
+            let qtyTotal = 0;   // Sum of CURRENT YEAR
+            let grandTotal = 0; // Sum of DIFFERENCE
+
+            // Iterate through each row in the summary table
+            $('#summaryTable tbody tr').each(function() {
+                const lastYear = parseFloat($(this).find('td:nth-child(3)').text()) || 0; // LAST YEAR column
+                const currentYear = parseFloat($(this).find('td:nth-child(4)').text()) || 0; // CURRENT YEAR column
+                const difference = parseFloat($(this).find('td:nth-child(5)').text()) || 0; // DIFF column
+
+                priceTotal += lastYear;
+                qtyTotal += currentYear;
+                grandTotal += difference;
+            });
+
+            // Update totals in the totals table
+            $('#priceTotal').text(priceTotal.toFixed(2)); // Update PRICE TOTAL
+            $('#qtyTotal').text(qtyTotal.toFixed(2));     // Update QTY TOTAL
+            $('#grandTotal').text(grandTotal.toFixed(2)); // Update GRAND TOTAL
+        }
+
+        // Trigger totals calculation after data is populated
+        fetchSummaryData(); // Ensure data is fetched and totals are calculated on page load
+
+        // Recalculate totals on input change
+        $(document).on('input', '.last-year, .current-year', function() {
+            const $row = $(this).closest('tr');
+            const lastYear = parseFloat($row.find('.last-year').val()) || 0;
+            const currentYear = parseFloat($row.find('.current-year').val()) || 0;
+
+            // Calculate the difference
+            const difference = currentYear - lastYear;
+
+            // Update the difference field
+            $row.find('.difference').val(difference);
+
+            // Update the result field based on the difference
+            if (difference > 0) {
+                $row.find('.result').val('Up');
+            } else if (difference < 0) {
+                $row.find('.result').val('Down');
+            } else {
+                $row.find('.result').val('Neutral');
+            }
+
+            // Recalculate totals
+            calculateTotals();
+        });
+
+        // Initial calculation
+        calculateTotals();
+
+        // Handle delete button in summaryTable
+        $(document).on('click', '.delete-summary-row', function() {
+            if (confirm('Are you sure you want to delete this row?')) {
+                $(this).closest('tr').remove();
+                calculateTotals(); // Recalculate totals after deletion
+            }
+        });
+
+        // Fetch data for summaryTable
+        function fetchSummaryData() {
+            const menuName = $('.sidebar-menu-item.active').data('menu'); // Get the active menu name
+
+            $.ajax({
+                url: '/admin/client/master-data', // Replace with your server endpoint
+                method: 'GET',
+                data: { menu: menuName }, // Pass the menu name as a parameter
+                success: function(response) {
+                    const $tbody = $('#summaryTable tbody');
+                    $tbody.empty(); // Clear existing rows
+
+                    if (response.data.length === 0) {
+                        $tbody.append(`
+                            <tr>
+                                <td colspan="6" class="text-center">No data available</td>
+                            </tr>
+                        `);
+                    } else {
+                        response.data.forEach(row => {
+                            // Ensure valid numeric values for calculation
+                            const lastYear = parseFloat(row.lastYear) || 0;
+                            const currentYear = parseFloat(row.currentYear) || 0;
+                            const difference = currentYear - lastYear;
+
+                            let newRow = `
+                                <tr>
+                                    <td>${row.id}</td>
+                                    <td>${row.entity}</td>
+                                    <td>${lastYear}</td>
+                                    <td>${currentYear}</td>
+                                    <td>${difference}</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm delete-summary-row" data-id="${row.id}">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            `;
+                            $tbody.append(newRow);
+                        });
+                    }
+
+                    // Trigger totals calculation after data is populated
+                    calculateTotals();
+                },
+                error: function(xhr) {
+                    alert('An error occurred while fetching summary data.');
+                }
+            });
+        }
+
+        // Handle delete button in summaryTable
+        $(document).on('click', '.delete-summary-row', function() {
+            const rowId = $(this).data('id');
+            if (confirm('Are you sure you want to delete this row?')) {
+                $.ajax({
+                    url: `/admin/client/master-data/${rowId}`, // Replace with your server endpoint
+                    method: 'DELETE',
+                    data: { _token: '{{ csrf_token() }}' },
+                    success: function(response) {
+                        alert('Row deleted successfully!');
+                        fetchSummaryData(); // Refresh the summary table
+                    },
+                    error: function(xhr) {
+                        alert('An error occurred while deleting the row.');
+                    }
+                });
+            }
+        });
+
+        // Fetch summary data on page load
+        fetchSummaryData();
     });
 </script>

@@ -334,27 +334,46 @@ class ClientController extends Controller
         return view('admin.clients.master1', compact('year', 'sideMenuItems'));
     }
 
-    public function saveMasterData(Request $request)
+    public function getMasterData(Request $request)
     {
-        $yearId = $request->input('year_id');
-        $data = $request->input('data');
-
-        // Save the data to the database (example logic)
-        foreach ($data as $row) {
-            MasterData::create([
-                'year_id' => $yearId,
-                'entity' => $row['entity'],
-                'last_year' => $row['last_year'],
-                'current_year' => $row['current_year'],
-                'difference' => $row['difference'],
-                'result' => $row['result'],
-            ]);
+        try {
+            $masterData = MasterData::where('menu', $request->menu)->get();
+            return response()->json(['success' => true, 'data' => $masterData]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()], 500);
         }
-
-        return response()->json(['success' => true]);
     }
 
 
+    public function saveMasterData(Request $request)
+    {
+        try {
+            foreach ($request->tableData as $data) {
+                MasterData::create([
+                    'master' => 1, // Assuming master is always 1 for this case
+                    'menu' => $data['menu'] ?? null, // Add menu if available
+                    'entity' => $data['entity'],
+                    'lastYear' => $data['lastYear'],
+                    'currentYear' => $data['currentYear'],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+            return response()->json(['success' => true, 'message' => 'Data saved successfully!']);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()], 500);
+        }
+    }
+    /**
+     * Delete the master data.
+     *
+     * @param int $id The ID of the master data to delete
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteMasterData($id){
+        MasterData::where('id', $id)->delete();
+        return response()->json(['success' => true, 'message' => 'Data deleted successfully!']);
+    }
     public function master2($id)
     {
         $year = Year::where('client_id', $id)->first();

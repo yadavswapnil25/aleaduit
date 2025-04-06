@@ -58,7 +58,7 @@
                 @if (!empty($sideMenuItems))
                     @foreach ($sideMenuItems as $item)
                         <li class="nav-item">
-                            <a href="#" class="nav-link sidebar-menu-item" data-menu="{{ $item['name'] }}">
+                            <a href="#" class="nav-link sidebar-menu-item @if (request()->get('menu') == $item['name']) active @endif" data-menu="{{ $item['name'] }}">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>{{ $item['name'] }}</p>
                             </a>
@@ -71,3 +71,19 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add click event listener to sidebar menu items
+        document.querySelectorAll('.sidebar-menu-item').forEach(function (menuItem) {
+            menuItem.addEventListener('click', function () {
+                // Remove active class from all menu items
+                document.querySelectorAll('.sidebar-menu-item').forEach(function (item) {
+                    item.classList.remove('active');
+                });
+                // Add active class to the clicked menu item
+                this.classList.add('active');
+            });
+        });
+    });
+</script>

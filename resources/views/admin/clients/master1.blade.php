@@ -9,7 +9,7 @@
                     <h3 class="card-title">Master1 - Year: {{ $year->audit_year }}</h3>
                 </div>
                 <div class="card-body">
-                    @include('components.master-table')
+                    @include('components.master-table', ['clientId' => $year->client_id])
                 </div>
             </div>
         </div>

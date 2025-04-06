@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('master_data', function (Blueprint $table) {
             $table->id();
+            $table->string('master')->nullable();
+            $table->string('menu')->nullable();
+            $table->string('entity')->nullable();
+            $table->string('lastYear')->nullable();
+            $table->string('currentYear')->nullable();
             $table->timestamps();
         });
     }
