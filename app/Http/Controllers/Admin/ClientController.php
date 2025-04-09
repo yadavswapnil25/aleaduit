@@ -14,8 +14,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreYearRequest;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\IOFactory;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use PhpOffice\PhpWord\Element\TextRun;
+use PhpOffice\PhpWord\Element\Text;
+use PhpOffice\PhpWord\Shared\Html;
 
 class ClientController extends Controller
 {
@@ -397,5 +401,14 @@ class ClientController extends Controller
         ];
 
         return view('admin.clients.master1', compact('year', 'sideMenuItems'));
+    }
+
+
+    public function sheet1($id)
+    {
+        $client = Client::find($id);
+        
+
+        return view('admin.clients.sheet1', compact('client'));
     }
 }

@@ -21,8 +21,9 @@
                 <td>
                     <select class="form-control entity-select" id="entityDropdown">
                         <option>Select Product</option>
-                        <option>Enter custom product</option>
+                        <option value="Other">Other</option>
                     </select>
+                    <input type="text" class="form-control mt-2 custom-entity-input" placeholder="Enter custom product" style="display: none;">
                 </td>
                 <td><input type="text" class="form-control last-year" placeholder="Enter last year value"></td>
                 <td><input type="text" class="form-control current-year" placeholder="Enter current year value"></td>
@@ -86,17 +87,17 @@
             'वसूल भागभांडवल': ['सभासद भांडवल', 'Other'],
             'राखीव निधी': ['राखीव निधी', 'Other'],
             'इतर सर्व निधी': [
-                'इमारत निधि', 'शिक्षण निधि', 'वर्ग फंड', 'घसारा निधि', 'कर्मचारी कल्याण निधि',
-                'सभासद कल्याण निधि', 'संशयित बुडीत कर्जनिधि', 'धर्मदाय निधि', 'कल्याण निधि',
-                'आकस्मिक फंड', 'नाममात्र फी', 'बुडीत कर्ज निधि', 'संगणक झीज फंड', 'टेम्पररी झीज फंड',
-                'संशयित बुडीत कर्ज निधि', 'सभासद देणगी फंड', 'अधिलाभ', 'कर्मचारी भविष्य निर्वाह निधि',
-                'सुरक्षा ठेव निधि', 'भांडवल चढ उतार निधि', 'गुंतवणूक चढ उतार निधि', 'तंत्रज्ञान विकास निधि',
-                'अभिकर्ता विकास निधि', 'Other'
+                'इमारत निधी', 'शिक्षण निधी', 'वर्ग फंड', 'घसारा निधी', 'कर्मचारी कल्याण निधी',
+                'सभासद कल्याण निधी', 'संशयित बुडीत कर्जनिधी', 'धर्मदाय निधी', 'कल्याण निधी',
+                'आकस्मिक फंड', 'नाममात्र फी', 'बुडीत कर्ज निधी', 'संगणक झीज फंड', 'टेम्पररी झीज फंड',
+                'संशयित बुडीत कर्ज निधी', 'सभासद देणगी फंड', 'अधिलाभ', 'कर्मचारी भविष्य निर्वाह निधी',
+                'सुरक्षा ठेव निधी', 'भांडवल चढ उतार निधी', 'गुंतवणूक चढ उतार निधी', 'तंत्रज्ञान विकास निधी',
+                'अभिकर्ता विकास निधी', 'Other'
             ],
             'ठेवी': [
                 'चरण ठेवी', 'मुदत ठेवी', 'मुदत ठेवी 1 वर्ष', 'मुदत ठेवी 2 वर्ष', 'मुदत ठेवी 3 वर्ष',
                 'मुदत ठेवी 4 वर्ष', 'मुदत ठेवी 5 वर्ष', 'आवर्त ठेवी', 'आवर्त ठेवी 1 वर्ष', 'आवर्त ठेवी 2 वर्ष',
-                'आवर्त ठेवी 3 वर्ष', 'आवर्त ठेवी 4 वर्ष', 'आवर्त ठेवी 5 वर्ष', 'नित्यनिधि ठेवी',
+                'आवर्त ठेवी 3 वर्ष', 'आवर्त ठेवी 4 वर्ष', 'आवर्त ठेवी 5 वर्ष', 'नित्यनिधी ठेवी',
                 'कुडुंब निवृत्त मासिक व्याज योजना', 'सुरुक्षा ठेवी योजना', 'शुभमंगल ठेवी', 'अल्पमुदत ठेवी',
                 'लक्ष्मी ठेवी', 'अभिकर्ता सुरक्षा ठेवी', 'संचालक ठेवी', 'नाममात्र सभासद ठेवी',
                 'सदासफळ ठेवी', 'कर्मचारी ठेवी', 'मासिक ठेवी/पेंशन ठेवी योजना', 'कर्ज सुरक्षा ठेवी',
@@ -237,7 +238,9 @@
                     <td>
                         <select class="form-control entity-select">
                             <option>Select Product</option>
+                            <option value="Other">Other</option>
                         </select>
+                        <input type="text" class="form-control mt-2 custom-entity-input" placeholder="Enter custom product" style="display: none;">
                     </td>
                     <td><input type="text" class="form-control last-year" placeholder="Enter last year value"></td>
                     <td><input type="text" class="form-control current-year" placeholder="Enter current year value"></td>
@@ -248,8 +251,8 @@
                     </td>
                 </tr>
             `;
-            $('#masterTable tbody').append(newRow);
-            calculateTotals();
+            $('#masterTable tbody').append(newRow); // Append the new row
+            calculateTotals(); // Recalculate totals after adding a row
         });
 
         // Remove Row functionality
@@ -264,9 +267,11 @@
             const menuName = $('.sidebar-menu-item.active').data('menu'); // Get the active menu name
 
             $('#masterTable tbody tr').each(function() {
+                const entitySelect = $(this).find('.entity-select').val();
+                const customEntity = $(this).find('.custom-entity-input').val();
                 let row = {
                     menu: menuName, // Include the menu value
-                    entity: $(this).find('.entity-select').val(),
+                    entity: entitySelect === 'Other' ? customEntity : entitySelect, // Use custom value if "Other"
                     lastYear: $(this).find('.last-year').val(),
                     currentYear: $(this).find('.current-year').val(),
                     difference: $(this).find('.difference').val(),
@@ -285,8 +290,8 @@
                 },
                 success: function(response) {
                     alert('Data saved successfully!');
-                    // location.reload(); // Reload the page to fetch updated data
-                },
+                    fetchSummaryData();
+                    },
                 error: function(xhr) {
                     alert('An error occurred while saving data.');
                 }
@@ -428,5 +433,16 @@
 
         // Fetch summary data on page load
         fetchSummaryData();
+
+        // Show input field when "Other" is selected
+        $(document).on('change', '.entity-select', function() {
+            const $row = $(this).closest('td');
+            if ($(this).val() === 'Other') {
+                $row.find('.custom-entity-input').show();
+            } else {
+                $row.find('.custom-entity-input').hide().val(''); // Hide and clear input
+            }
+        });
+
     });
 </script>

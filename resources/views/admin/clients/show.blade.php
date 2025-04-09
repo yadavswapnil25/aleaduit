@@ -39,6 +39,9 @@
                                             <td>{{$index + 1}}</td>
                                             <td>{{$year->audit_year}}</td>
                                             <td>
+                                            <a class="btn btn-warning btn-sm edit-sheet-btn" data-year="{{ $year->audit_year }}">
+                                                    <i class="fa fa-edit"></i> Edit Sheet
+                                                </a>
                                                 <a href="{{ route('admin.client.master',$year->client_id) }}" class="btn btn-success btn-sm">
                                                     <i class="fa fa-th"></i> Set Master
                                                 </a>
@@ -70,14 +73,55 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="editSheetModal" tabindex="-1" role="dialog" aria-labelledby="editSheetModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSheetModalLabel">Choose Sheet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalYearText"></p>
+                <div class="d-flex flex-wrap">
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="1">Sheet 1</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="2">Sheet 2</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="3">Sheet 3</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="4">Sheet 4</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="5">Sheet 5</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="6">Sheet 6</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="7">Sheet 7</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-@endsection
 
-@section('head')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-@endsection
-
-@section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        
+        // Handle Edit Sheet button click
+        $(document).on('click', '.edit-sheet-btn', function(e) {
+            e.preventDefault();
+            const year = $(this).data('year'); // Get the year from the button's data attribute
+            $('#modalYearText').text(`Manage sheets for year: ${year}`); // Update modal content
+            $('#editSheetModal').modal('show'); // Show the modal
+        });
+
+        // Handle Sheet button click
+        $(document).on('click', '.sheet-btn', function(e) {
+            e.preventDefault();
+            const sheetNumber = $(this).data('sheet'); // Get the sheet number
+            const clientId = "{{ $client->id }}"; // Get the client ID
+            window.location.href = "{{ url('admin/client/sheet1') }}/" + sheetNumber; // Redirect with sheetNumber and client_id
+        });
+    });
+</script>
 @endsection
