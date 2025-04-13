@@ -14,7 +14,8 @@ class MasterData extends Model
         'entity',
         'lastYear',
         'currentYear',
-        'bankAmount'
+        'bankAmount',
+        'client_id',
     ];
 
     public function client()

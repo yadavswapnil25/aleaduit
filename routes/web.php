@@ -39,9 +39,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/client/{id}/master', [ClientController::class, 'master'])->name('client.master');
     Route::get('/client/{id}/master1', [ClientController::class, 'master1'])->name('client.master1');
     Route::get('/client/{id}/master2', [ClientController::class, 'master2'])->name('client.master2');
-    Route::get('/client/master-data', [ClientController::class, 'getMasterData'])->name('client.getMasterData');
+    Route::get('/client/{id}/master-data', [ClientController::class, 'getMasterData'])->name('client.getMasterData');
     Route::delete('/client/master-data/{id}', [ClientController::class, 'deleteMasterData'])->name('client.deleteMasterData');
-    Route::post('/client/save-master-data', [ClientController::class, 'saveMasterData'])->name('client.saveMasterData');
+    Route::post('/client/{id}/save-master-data', [ClientController::class, 'saveMasterData'])->name('client.saveMasterData');
     Route::get('/client/sheet1', [ClientController::class, 'sheet1'])->name('client.sheet1');
     Route::get('/client/sheet1/{id}', [ClientController::class, 'sheet1']);
     Route::resource('users', UserController::class);

@@ -79,7 +79,7 @@
 
             // Send data to the server via AJAX
             $.ajax({
-                url: '{{ route("admin.client.saveMasterData") }}', // Replace with your route
+                url: '/admin/client/{{ $year->client_id }}/save-master-data', // Replace with your server endpoint
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',

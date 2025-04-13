@@ -182,7 +182,7 @@ class ClientController extends Controller
      */
     public function show(int $id)
     {
-        $years = Year::get();
+        $years = Year::where('client_id', $id)->get();
         $client = Client::find($id);
         return view('admin.clients.show', compact('years', 'client'));
     }
@@ -338,10 +338,11 @@ class ClientController extends Controller
         return view('admin.clients.master1', compact('year', 'sideMenuItems'));
     }
 
-    public function getMasterData(Request $request)
+    public function getMasterData(Request $request,$id)
     {
+        // dd($request->all());
         try {
-            $masterData = MasterData::where('menu', $request->menu)->get();
+            $masterData = MasterData::where('menu', $request->menu)->where('client_id',$id)->get();
             return response()->json(['success' => true, 'data' => $masterData]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()], 500);
@@ -349,8 +350,9 @@ class ClientController extends Controller
     }
 
 
-    public function saveMasterData(Request $request)
+    public function saveMasterData(Request $request, $id)
     {
+  
         try {
             foreach ($request->tableData as $data) {
                 MasterData::create([
@@ -360,6 +362,7 @@ class ClientController extends Controller
                     'lastYear' => $data['lastYear'],
                     'currentYear' => $data['currentYear'],
                     'bankAmount' => $data['bankAmount'] ?? null,
+                    'client_id' => $id,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
