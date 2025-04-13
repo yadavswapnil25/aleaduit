@@ -359,6 +359,7 @@ class ClientController extends Controller
                     'entity' => $data['entity'],
                     'lastYear' => $data['lastYear'],
                     'currentYear' => $data['currentYear'],
+                    'bankAmount' => $data['bankAmount'] ?? null,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
