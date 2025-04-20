@@ -91,7 +91,7 @@
                  'संशयित बुडीत कर्जनिधी', 'धर्मदाय निधी', 'कल्याण निधी',
                  'नाममात्र फी', 'बुडीत कर्ज निधी', 'संगणक झीज फंड', 'टेम्पररी झीज फंड',
                 'संशयित बुडीत कर्ज निधी', 'सभासद देणगी फंड', 'अधिलाभांष', 'कर्मचारी भविष्य निर्वाह निधी',
-                'सुरक्षा ठेव निधी', 'भांडवल चढ उतार निधी', 'गुंतवणूक चढ उतार निधी', 'तंत्रज्ञान विकास निधी','आवर्त', 'Other'
+                'सुरक्षा ठेव निधी', 'भांडवल चढ उतार निधी', 'गुंतवणूक चढ उतार निधी', 'तंत्रज्ञान विकास निधी', 'Other'
             ],
             'ठेवी': [
                 'बचत ठेव','आवर्त ठेव', 'मुदत ठेव', 'मुदत ठेव 1 वर्ष', 'मुदत ठेव 2 वर्ष', 'मुदत ठेव 3 वर्ष',
@@ -117,7 +117,7 @@
                 'बी डी सी बँक', 'अर्बन को ऑप बँक', 'जनता को ऑप बँक', 'Other'
             ],
             'इतर देणी': [
-                'सराफ कमिशन', 'निवडणूक खर्च', 'लाभांश', 'ऑडिट फी', 'विद्युत बिल', 
+                'निवडणूक खर्च', 'लाभांश', 'ऑडिट फी', 'विद्युत बिल', 
                 'एन.पी.ए.तरतूद', 'भविष्य निर्वाह निधी', 'इतर अनामत', 'कर्ज अनामत', 
                 'सुरक्षा ठेव', 'सराफा कमिशन', 'टी डी एस', 
                 'जि एस टी', 'व्यवसाय कर', 'शाखा देणे', 'देय कार्यालय भाडे', 
@@ -179,7 +179,7 @@
                 'घेणे व्याज घर बांधणी कर्ज', 'घेणे व्याज मासिक ठेव तारण कर्ज', 
                 'घेणे व्याज दामदुप्पट तारण कर्ज', 'गुंतवणुकीवरील घेणे व्याज', 'Other'
             ],
-            'संचित तोटा': ['तोटा', 'Other'],
+            'संचित तोटा': ['संचित तोटा', 'Other'],
             'किरकोळ उत्त्पन्न': [
                 'किरकोळ उत्त्पन्न','Other'
             ],
@@ -192,8 +192,8 @@
             'इतर उत्त्पन्न':[
                 'इतर उत्त्पन्न','Other'
             ],
-            'ठेववरील व्याज':[
-                'ठेववरील व्याज','Other'
+            'ठेवीवरील व्याज':[
+                'ठेवीवरील व्याज','Other'
             ],
             'आस्थापना खर्च':[
                 'आस्थापना खर्च','Other'
@@ -342,7 +342,7 @@
                                 <td>
                                     <select class="form-control entity-select">
                                         <option>Select Product</option>
-                                        <option value="Other">Other</option>
+                            ${dropdownOptions[menuName].map(option => `<option>${option}</option>`).join('')}
                                     </select>
                                     <input type="text" class="form-control mt-2 custom-entity-input" placeholder="Enter custom product" style="display: none;">
                                 </td>
@@ -355,8 +355,13 @@
                                 </td>
                             </tr>
                         `);
+                        
 
-                        fetchSummaryData(); // Refresh the summary table
+                        const activeMenu = $('.sidebar-menu-item.active');
+            const entityDropdown = $('#entityDropdown');
+            entityDropdown.val(activeMenu.data('menu')); // Set the dropdown value to the active menu
+            fetchSummaryData(); 
+                        // Refresh the summary table
                     },
                     error: function(xhr) {
                         alert('An error occurred while saving data.');
@@ -394,13 +399,22 @@
         fetchSummaryData(); // Ensure data is fetched and totals are calculated on page load
 
         // Recalculate totals on input change
-        $(document).on('input', '.last-year, .current-year', function() {
+        $(document).on('input', '.last-year, .current-year, .bank-amount', function() {
             const $row = $(this).closest('tr');
             const lastYear = parseFloat($row.find('.last-year').val()) || 0;
             const currentYear = parseFloat($row.find('.current-year').val()) || 0;
+            const bankAmount = parseFloat($row.find('.bank-amount').val()) || 0;
 
-            // Calculate the difference
-            const difference = currentYear - lastYear;
+            // Get the active menu name
+            const menuName = $('.sidebar-menu-item.active').data('menu');
+
+            // Calculate the difference based on the menu
+            let difference;
+            if (menuName === 'बँक शिल्लक' || menuName === 'देणे कर्ज') {
+                difference = bankAmount - currentYear;
+            } else {
+                difference = currentYear - lastYear;
+            }
 
             // Update the difference field
             $row.find('.difference').val(difference);
