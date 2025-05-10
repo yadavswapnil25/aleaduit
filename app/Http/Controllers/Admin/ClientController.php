@@ -410,9 +410,11 @@ class ClientController extends Controller
 
     public function sheet1($id)
     {
-        $client = Client::find($id);
-        
-
+        $client = Client::with('masterData')->find($id);
+        $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
+        $client['वसुल भाग भागभांडवल_sum'] = $client['वसुल भाग भागभांडवल']->sum('lastYear');
+        $totalLastYear = $client['वसुल भाग भागभांडवल_sum']; // Calculate total
+        // dd($totalLastYear);
         return view('admin.clients.sheet1', compact('client'));
     }
 }

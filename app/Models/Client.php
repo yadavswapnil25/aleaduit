@@ -28,4 +28,8 @@ class Client extends Model
     public function audit(){
         return $this->hasOne(Audit::class, 'id', 'auditor_id');
     }
+
+    public function masterData(){
+        return $this->hasMany(MasterData::class);
+    }
 }
