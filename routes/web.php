@@ -43,7 +43,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::delete('/client/master-data/{id}', [ClientController::class, 'deleteMasterData'])->name('client.deleteMasterData');
     Route::post('/client/{id}/save-master-data', [ClientController::class, 'saveMasterData'])->name('client.saveMasterData');
     Route::get('/client/sheet1', [ClientController::class, 'sheet1'])->name('client.sheet1');
-    Route::get('/client/sheet1/{id}', [ClientController::class, 'sheet1']);
+    Route::get('/client/{client_id}/sheet/{id}', [ClientController::class, 'sheet1']);
     Route::resource('users', UserController::class);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');

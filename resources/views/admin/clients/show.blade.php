@@ -120,7 +120,7 @@
             e.preventDefault();
             const sheetNumber = $(this).data('sheet'); // Get the sheet number
             const clientId = "{{ $client->id }}"; // Get the client ID
-            window.location.href = "{{ url('admin/client/sheet1') }}/" + sheetNumber; // Redirect with sheetNumber and client_id
+            window.location.href = "{{ url('admin/client/') }}/" + clientId + "/sheet/" + sheetNumber; // Redirect with client_id and sheetNumber
         });
     });
 </script>

@@ -408,9 +408,10 @@ class ClientController extends Controller
     }
 
 
-    public function sheet1($id)
+    public function sheet1($client_id,$id)
     {
-        $client = Client::with('masterData')->find($id);
+        
+        $client = Client::with('masterData')->find($client_id);
         $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
         $client['वसुल भाग भागभांडवल_sum'] = $client['वसुल भाग भागभांडवल']->sum('lastYear');
         $totalLastYear = $client['वसुल भाग भागभांडवल_sum']; // Calculate total
