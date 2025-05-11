@@ -9,17 +9,18 @@ use App\Models\Year;
 use App\Models\Audit;
 use App\Models\Client;
 use App\Models\MasterData;
+use App\Models\ClientInput;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\Element\Text;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use PhpOffice\PhpWord\Element\TextRun;
 use App\Http\Requests\StoreYearRequest;
 use PhpOffice\PhpWord\TemplateProcessor;
-use PhpOffice\PhpWord\IOFactory;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-use PhpOffice\PhpWord\Element\TextRun;
-use PhpOffice\PhpWord\Element\Text;
-use PhpOffice\PhpWord\Shared\Html;
 
 class ClientController extends Controller
 {
@@ -272,7 +273,7 @@ class ClientController extends Controller
 
         if (!$year) {
             return redirect()->back()->withErrors(['error' => 'Client not found.']);
-        }   
+        }
 
         // Get the current menu's dropdown options
         $menu = $year->menu; // Assuming you have a 'menu' field in the Year model
@@ -338,11 +339,10 @@ class ClientController extends Controller
         return view('admin.clients.master1', compact('year', 'sideMenuItems'));
     }
 
-    public function getMasterData(Request $request,$id)
+    public function getMasterData(Request $request, $id)
     {
-        // dd($request->all());
         try {
-            $masterData = MasterData::where('menu', $request->menu)->where('client_id',$id)->get();
+            $masterData = MasterData::where('menu', $request->menu)->where('client_id', $id)->get();
             return response()->json(['success' => true, 'data' => $masterData]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()], 500);
@@ -378,7 +378,8 @@ class ClientController extends Controller
      * @param int $id The ID of the master data to delete
      * @return \Illuminate\Http\Response
      */
-    public function deleteMasterData($id){
+    public function deleteMasterData($id)
+    {
         MasterData::where('id', $id)->delete();
         return response()->json(['success' => true, 'message' => 'Data deleted successfully!']);
     }
@@ -408,14 +409,52 @@ class ClientController extends Controller
     }
 
 
-    public function sheet1($client_id,$id)
+    public function sheet1($client_id, $sheet_no)
     {
-        
         $client = Client::with('masterData')->find($client_id);
+
+        // Fetch data from client_inputs table for the given client and sheet_no
+        $clientInputs = ClientInput::where('client_id', $client_id)
+            ->pluck('value', 'key');
+    
         $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
-        $client['वसुल भाग भागभांडवल_sum'] = $client['वसुल भाग भागभांडवल']->sum('lastYear');
-        $totalLastYear = $client['वसुल भाग भागभांडवल_sum']; // Calculate total
-        // dd($totalLastYear);
-        return view('admin.clients.sheet1', compact('client'));
+        $client['वसुल भाग भागभांडवल_sum'] = $client['वसुल भाग भागभांडवल']->sum('currentYear');
+        $client['राखीव निधी'] = $client->masterData->where('menu', 'राखीव निधी');
+        $client['राखीव निधी_sum'] = $client['राखीव निधी']->sum('currentYear');
+        $client['ठेवी'] = $client->masterData->where('menu', 'ठेवी');
+        $client['ठेवी_sum'] = $client['ठेवी']->sum('currentYear');
+        $client['गुंतवणूक'] = $client->masterData->where('menu', 'गुंतवणूक');
+        $client['गुंतवणूक_sum'] = $client['गुंतवणूक']->sum('currentYear');
+        $client['संचित नफा'] = $client->masterData->where('menu', 'संचित नफा');
+        $client['संचित नफा_sum'] = $client['संचित नफा']->sum('currentYear');
+        $client['रोख शिल्लक'] = $client->masterData->where('menu', 'रोख शिल्लक');
+        $client['रोख शिल्लक_sum'] = $client['रोख शिल्लक']->sum('currentYear');
+        $client['बँक शिल्लक'] = $client->masterData->where('menu', 'बँक शिल्लक');
+        $client['बँक शिल्लक_sum'] = $client['बँक शिल्लक']->sum('currentYear');
+        return view('admin.clients.sheet1', compact('client', 'clientInputs'));
+    }
+
+
+    public function saveInputs(Request $request, $id)
+    {
+        try {
+            $client = Client::find($id);
+
+            if (!$client) {
+                return redirect()->back()->withErrors(['error' => 'Client not found.']);
+            }
+
+            // Loop through the request data and save each key-value pair
+            foreach ($request->except('_token') as $key => $value) {
+                ClientInput::updateOrCreate(
+                    ['client_id' => $id, 'key' => $key],
+                    ['value' => $value]
+                );
+            }
+
+            return redirect()->back()->with('success', 'Inputs saved successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()]);
+        }
     }
 }
