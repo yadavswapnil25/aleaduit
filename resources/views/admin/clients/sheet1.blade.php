@@ -278,7 +278,6 @@
             <hr>
             <form action="{{ route('admin.client.saveInputs', $client->id) }}" method="POST">
                 @csrf
-                <input type="hidden" name="sheet_no" value="1">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
