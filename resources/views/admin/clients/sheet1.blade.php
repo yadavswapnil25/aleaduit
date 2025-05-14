@@ -295,7 +295,7 @@
                         <tr>
                             <td>2</td>
                             <td>संस्थेचा नोंदणी क्रमांक व दिनांक</td>
-                            <td><b>{{ $client->registration_no }} {{ $client->registration_date }}</b></td>
+                            <td><b>{{ $client->registration_no }} दिनांक :-{{ \Carbon\Carbon::parse($client->registration_date)->format('d/m/Y') }}</b></td>
                         </tr>
                         <tr>
                             <td>3</td>
@@ -314,7 +314,10 @@
                         <tr>
                             <td>5</td>
                             <td>संचालक मंडळाचा कालावधी</td>
-                            <td><b><input type="text" class="form-control" name="board_duration" placeholder="Enter value" value="{{ $clientInputs['board_duration'] ?? '' }}"></b></td>
+                            <td><b>
+                                                                 <input type="date" class="form-control me-2" name="board_duration_start" placeholder="Start Date" value="{{ $clientInputs['board_duration_start'] ?? '' }}">
+                                        <input type="date" class="form-control" name="board_duration_end" placeholder="End Date" value="{{ $clientInputs['board_duration_end'] ?? '' }}">
+                            </b></td>
                         </tr>
                         <tr>
                             <td>6</td>
@@ -365,7 +368,7 @@
                         <tr>
                             <td>15</td>
                             <td>सभासद संख्या</td>
-                            <td><input type="number" class="form-control" name="member_count" placeholder="Enter value" value="{{ $clientInputs['member_count'] ?? '' }}"></td>
+                            <td><input type="number" class="form-control" name="member_count_2" placeholder="Enter value" value="{{ $clientInputs['member_count_2'] ?? '' }}"></td>
                         </tr>
                         <tr>
                             <td>16</td>
@@ -375,7 +378,11 @@
                         <tr>
                             <td>17</td>
                             <td>नफा / तोटा</td>
-                            <td>रु. 173920.00</td>
+                            <td>
+                                <b>
+                                    रु. {{ $client['नफा_तोटा_sum'] < 0 ? '(-) ' . abs($client['नफा_तोटा_sum']) : $client['नफा_तोटा_sum'] }}
+                                </b>
+                            </td>
                         </tr>
                         <tr>
                             <td>18</td>
@@ -385,7 +392,7 @@
                         <tr>
                             <td>19</td>
                             <td>संस्थेने निबंधकाकडे सादर केलेली वसुली प्रकरणे व रक्कम</td>
-                            <td><input type="text" class="form-control" name="recovery_cases" placeholder="निर्लेख" value="{{ $clientInputs['recovery_cases'] ?? '' }}"></td>
+                            <td><input type="text" class="form-control" name="recovery_cases"  value="{{ $clientInputs['recovery_cases'] ?? '' }}"></td>
                         </tr>
                         <tr>
                             <td>20</td>
@@ -415,27 +422,29 @@
                         <tr>
                             <td>23</td>
                             <td>खेळते भागभांडवल</td>
-                            <td><input type="text" class="form-control" name="working_capital" value="{{ $clientInputs['working_capital'] ?? '' }}"></td>
+                            <td><b>रु. {{$client['खेळते भागभांडवल_sum']}}</b></td>
                         </tr>
                         <tr>
                             <td>24</td>
                             <td>संचित नफा/तोटा</td>
-                            <td><input type="text" class="form-control" name="accumulated_profit_loss" value="{{$client['संचित नफा_sum']}}"></td>
+                            <td><b> रु. {{$client['संचित नफा_sum']}} </b></td>
                         </tr>
                         <tr>
                             <td>25</td>
                             <td>रोख शिल्लक</td>
-                            <td><input type="text" class="form-control" name="cash_balance" value="{{$client['रोख शिल्लक_sum']}}"></td>
+                            <td> <b> रु. {{$client['रोख शिल्लक_sum']}}</b></td>
                         </tr>
                         <tr>
                             <td>26</td>
                             <td>बँक शिल्लक</td>
-                            <td><input type="text" class="form-control" name="bank_balance" value="{{$client['बँक शिल्लक_sum']}}"></td>
+                            <td><b> रु. {{$client['बँक शिल्लक_sum']}}</b></td>
                         </tr>
                         <tr>
                             <td>27</td>
                             <td>सभासद संख्या</td>
-                            <td><input type="number" class="form-control" name="member_count" value="{{ $clientInputs['member_count'] ?? '' }}"></td>
+                            <td>
+                                <input type="text" class="form-control" name="member_count" placeholder="Enter value" value="{{ old('member_count', $clientInputs['member_count'] ?? '') }}">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -454,7 +463,7 @@
                                 <td><b>{{$client->society_address}}</b></td>
                             </tr>
                             <tr>
-                                <td>तालुका (गड)</td>
+                                <td>तालुका (गट)</td>
                                 <td><b>{{$client->taluka}}</b></td>
                             </tr>
                             <tr>
@@ -463,7 +472,7 @@
                             </tr>
                             <tr>
                                 <td>नोंदणी दिनांक</td>
-                                <td><b>{{$client->registration_date}}</b></td>
+                                <td><b>{{ \Carbon\Carbon::parse($client->registration_date)->format('d/m/Y') }}</b></td>
                             </tr>
                             <tr>
                                 <td>कार्यक्षेत्र</td>
@@ -471,7 +480,7 @@
                             </tr>
                             <tr>
                                 <td>शाखा व दुकाने यांची संख्या</td>
-                                <td><input type="text" class="form-control" name="branch_count" placeholder="निर्लेख" value="{{ $clientInputs['branch_count'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="branch_count"  value="{{ $clientInputs['branch_count'] ?? '' }}"></td>
                             </tr>
 
                             <tr>
@@ -523,7 +532,7 @@
                             </tr>
                             <tr>
                                 <td>1.सर्वसाधारण नियमित</td>
-                                <td><input type="text" class="form-control" name="regular_members" placeholder="निर्लेख" value="{{ $clientInputs['regular_members'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="regular_members"  value="{{ $clientInputs['regular_members'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>२.नाममात्र</td>
@@ -592,10 +601,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>6)मृत, काढुन ट्राकलेल्या व राजीनामा दिलेल्या सभासदांच्या बाबतीत त्यांच्या नावापुढे वरीलप्रमाणे योग्य
-                                    ती नोंद केली आहे काय?</td>
-                                <td>
-                                    <select class="form-control" name="deceased_resigned_members_recorded">
                                         <option value="होय" {{ (isset($clientInputs['deceased_resigned_members_recorded']) && $clientInputs['deceased_resigned_members_recorded'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['deceased_resigned_members_recorded']) && $clientInputs['deceased_resigned_members_recorded'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -709,14 +714,10 @@
                                 <td colspan="2">4)बाहेरील कर्ज :-</td>
                             </tr>
                             <tr>
-                                <td>1)प्रोटूनियमाप्रमाणे संस्थेने कर्ज घेण्याची मर्यादा काय
+                                <td>1)पोटनियमाप्रमाणे संस्थेने कर्ज घेण्याची मर्यादा काय
                                     होय.</td>
-                                <td>
-                                    <select class="form-control" name="loan_limit_followed">
-                                        <option value="होय" {{ (isset($clientInputs['loan_limit_followed']) && $clientInputs['loan_limit_followed'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['loan_limit_followed']) && $clientInputs['loan_limit_followed'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                </td>
+                                <td><input type="text" class="form-control" name="loan_limit_followed" value="{{ $clientInputs['loan_limit_followed'] ?? '' }}"></td>
+
                             </tr>
                             <tr>
                                 <td>2)ती उल्लंचिली गेली होती काय ?
@@ -733,10 +734,7 @@
                                     प्राधिकाऱ्याकडून आवश्यक ती अनुज्ञा मिळवली आहे
                                     काय?</td>
                                 <td>
-                                    <select class="form-control" name="loan_limit_exceeded_permission">
-                                        <option value="होय" {{ (isset($clientInputs['loan_limit_exceeded_permission']) && $clientInputs['loan_limit_exceeded_permission'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['loan_limit_exceeded_permission']) && $clientInputs['loan_limit_exceeded_permission'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
+                                    <input type="text" class="form-control" name="loan_limit_exceeded_permission" value="{{ $clientInputs['loan_limit_exceeded_permission'] ?? '' }}">
                                 </td>
                             </tr>
                             <tr>
@@ -789,12 +787,7 @@
                                     तसे असल्यास तर सर्व साधारण अभिप्रायात ते नमुद
                                     करा
                                 </td>
-                                <td>
-                                    <select class="form-control" name="previous_audit_issues_ignored">
-                                        <option value="होय" {{ (isset($clientInputs['previous_audit_issues_ignored']) && $clientInputs['previous_audit_issues_ignored'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['previous_audit_issues_ignored']) && $clientInputs['previous_audit_issues_ignored'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                </td>
+                                <td><input type="text" class="form-control" name="previous_audit_issues_ignored" value="{{ $clientInputs['previous_audit_issues_ignored'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td colspan="2">7)लेखापरीक्षा शुल्क :-</td>
@@ -812,12 +805,8 @@
                                     असलेल्या परीक्षा शुल्काचा तपशील व न भरण्याची
                                     कारणे द्या.
                                 </td>
-                                <td>
-                                    <select class="form-control" name="audit_fee_not_paid">
-                                        <option value="होय" {{ (isset($clientInputs['audit_fee_not_paid']) && $clientInputs['audit_fee_not_paid'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['audit_fee_not_paid']) && $clientInputs['audit_fee_not_paid'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                </td>
+                                <td><input type="date" class="form-control" name="audit_fee_not_paid" value="{{ $clientInputs['audit_fee_not_paid'] ?? '' }}"></td>
+
                             </tr>
                             <tr>
                                 <td colspan="2">8) अंतर्गत वा स्थानिक लेखापरीक्षा :-</td>

@@ -431,6 +431,18 @@ class ClientController extends Controller
         $client['रोख शिल्लक_sum'] = $client['रोख शिल्लक']->sum('currentYear');
         $client['बँक शिल्लक'] = $client->masterData->where('menu', 'बँक शिल्लक');
         $client['बँक शिल्लक_sum'] = $client['बँक शिल्लक']->sum('currentYear');
+
+        // Calculate नफा / तोटा
+        $incomeMenus = ['इतर उत्त्पन्न', 'गुंतवणुकीवरील व्याज', 'कर्जावरील व्याज', 'किरकोळ उत्त्पन्न'];
+        $expenseMenus = ['इतर खर्च', 'तरतुदी', 'प्रशासकीय खर्च', 'आस्थापना खर्च','ठेवीवरील व्याज'];
+
+        $totalIncome = $client->masterData->whereIn('menu', $incomeMenus)->sum('currentYear');
+        $totalExpense = $client->masterData->whereIn('menu', $expenseMenus)->sum('currentYear');
+
+        $client['नफा_तोटा_sum'] = $totalIncome - $totalExpense;
+        $incomeTotalMenus = ['रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता','येणे कर्ज','इतर येणे','घेणे व्यज','संचित तोटा'];
+        $client['खेळते भागभांडवल_sum'] = $client->masterData->whereIn('menu', $incomeTotalMenus)->sum('currentYear');
+
         return view('admin.clients.sheet1', compact('client', 'clientInputs'));
     }
 
@@ -446,12 +458,12 @@ class ClientController extends Controller
 
             // Loop through the request data and save each key-value pair
             foreach ($request->except('_token') as $key => $value) {
-                ClientInput::updateOrCreate(
+                $data =ClientInput::updateOrCreate(
                     ['client_id' => $id, 'key' => $key],
                     ['value' => $value]
                 );
             }
-
+            
             return redirect()->back()->with('success', 'Inputs saved successfully!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()]);
