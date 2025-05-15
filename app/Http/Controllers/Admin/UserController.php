@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordMail;
+use App\Models\Audit;
 use App\Models\CmsPage;
 use App\Models\Role;
 use App\Models\User;
@@ -132,7 +133,8 @@ class UserController extends Controller
             ];
            
             $user = User::create($data);
-
+          
+              
             if ($user) {
                 $user['email']        = $user->email;
                 $user['password_new'] = $password;

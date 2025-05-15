@@ -412,6 +412,7 @@ class ClientController extends Controller
     public function sheet1($client_id, $sheet_no)
     {
         $client = Client::with('masterData')->find($client_id);
+        $auditor = Audit::where('user_id', auth()->id())->first();
 
         // Fetch data from client_inputs table for the given client and sheet_no
         $clientInputs = ClientInput::where('client_id', $client_id)
@@ -443,7 +444,7 @@ class ClientController extends Controller
         $incomeTotalMenus = ['रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता','येणे कर्ज','इतर येणे','घेणे व्यज','संचित तोटा'];
         $client['खेळते भागभांडवल_sum'] = $client->masterData->whereIn('menu', $incomeTotalMenus)->sum('currentYear');
 
-        return view('admin.clients.sheet1', compact('client', 'clientInputs'));
+        return view('admin.clients.sheet1', compact('client', 'clientInputs','auditor'));
     }
 
 
@@ -451,7 +452,6 @@ class ClientController extends Controller
     {
         try {
             $client = Client::find($id);
-
             if (!$client) {
                 return redirect()->back()->withErrors(['error' => 'Client not found.']);
             }

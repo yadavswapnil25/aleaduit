@@ -21,6 +21,7 @@ class Audit extends Model
         'phone_number',
         'javak_kramank',
         'date',
+        'user_id',
     ];
 
     protected $casts = [

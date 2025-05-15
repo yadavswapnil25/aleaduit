@@ -14,8 +14,9 @@ class AuditController extends Controller
 {
     public function index(Request $request)
     {
+       
         if ($request->ajax()) {
-            $audits = Audit::latest();
+            $audits = Audit::where('user_id', auth()->id())->latest();
             return Datatables::of($audits)
                 ->addColumn('action', function ($audit) {
                     $btn = '<a href="/admin/audit/edit/' . $audit->id . '" class="" title="Edit"><i class="fa fa-edit"></i></a>';
@@ -41,9 +42,11 @@ class AuditController extends Controller
     public function store(StoreAuditRequest $request)
     {
         try {
-            Audit::create($request->all());
+            
+            Audit::create(array_merge($request->all(), ['user_id' => auth()->id()]));
             return redirect()->route('admin.audits.index')->with('success', 'Audit added successfully');
         } catch (Exception $e) {
+            dd($e);
             return redirect()->back()->withErrors(['error' => 'An error occurred while adding the audit: ' . $e->getMessage()]);
         }
     }
