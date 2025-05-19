@@ -411,6 +411,9 @@ class ClientController extends Controller
 
     public function sheet1($client_id, $sheet_no)
     {
+       
+        if($sheet_no == 1){
+        
         $client = Client::with('masterData')->find($client_id);
         $auditor = Audit::where('user_id', auth()->id())->first();
 
@@ -445,6 +448,12 @@ class ClientController extends Controller
         $client['खेळते भागभांडवल_sum'] = $client->masterData->whereIn('menu', $incomeTotalMenus)->sum('currentYear');
 
         return view('admin.clients.sheet1', compact('client', 'clientInputs','auditor'));
+        }
+        else if($sheet_no == 2){
+            $client = Client::with('masterData')->find($client_id);
+            $auditor = Audit::where('user_id', auth()->id())->first();
+            return view('admin.clients.sheet2', compact('client','auditor'));
+        }
     }
 
 
