@@ -620,7 +620,9 @@
                                     आणि त्याचे नोंद्र 26 व्या नियमाप्रमाणे सभासदांच्या....
                                     नोंदवहीत. यथोचितरीत्या केली आहे काय?</td>
                                 <td>
-                                    <select class="form-control" name="nominee_appointed">
+                                <input type="text" class="form-control" name="nominee_name" value="{{ $clientInputs['nominee_name'] ?? '' }}">
+                                <br>   
+                                <select class="form-control" name="nominee_appointed">
                                         <option value="होय" {{ (isset($clientInputs['nominee_appointed']) && $clientInputs['nominee_appointed'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['nominee_appointed']) && $clientInputs['nominee_appointed'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -768,12 +770,26 @@
                             </tr>
                             <tr>
                                 <td>ब) कार्यकारी वा उप समितिच्या सभा :-</td>
-                                <td><input type="text" class="form-control" name="executive_meetings_count" value="{{ $clientInputs['executive_meetings_count'] ?? '' }}"></td>
+                                <td>
+                                    <input type="text" class="form-control" name="executive_meetings_count" value="{{ $clientInputs['executive_meetings_count'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="executive_meetings_held">
+                                        <option value="होय" {{ (isset($clientInputs['executive_meetings_held']) && $clientInputs['executive_meetings_held'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['executive_meetings_held']) && $clientInputs['executive_meetings_held'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
 
                             </tr>
                             <tr>
                                 <td>क) अन्य अभा :-</td>
-                                <td><input type="text" class="form-control" name="other_meetings_count" value="{{ $clientInputs['other_meetings_count'] ?? '' }}"></td>
+                                <td>
+                                    <input type="text" class="form-control" name="other_meetings_count" value="{{ $clientInputs['other_meetings_count'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="other_meetings_held">
+                                        <option value="होय" {{ (isset($clientInputs['other_meetings_held']) && $clientInputs['other_meetings_held'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['other_meetings_held']) && $clientInputs['other_meetings_held'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
 
                             </tr>
                             <tr>
@@ -791,7 +807,14 @@
                                     तसे असल्यास तर सर्व साधारण अभिप्रायात ते नमुद
                                     करा
                                 </td>
-                                <td><input type="text" class="form-control" name="previous_audit_issues_ignored" value="{{ $clientInputs['previous_audit_issues_ignored'] ?? '' }}"></td>
+                                <td>
+                                    <input type="text" class="form-control" name="previous_audit_issues_ignored" value="{{ $clientInputs['previous_audit_issues_ignored'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="previous_audit_issues_ignored_1">
+                                        <option value="होय" {{ (isset($clientInputs['previous_audit_issues_ignored_1']) && $clientInputs['previous_audit_issues_ignored_1'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['previous_audit_issues_ignored_1']) && $clientInputs['previous_audit_issues_ignored_1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="2">7)लेखापरीक्षा शुल्क :-</td>
@@ -802,14 +825,28 @@
                                     लेखापरीक्षा शुल्क वसुल झाल्याचा दिनांक, कोषागाराचे
                                     नाव आणि भरलेली रक्कम द्या. (कोषागाराच्या
                                     चलनाचाकमांक व दिनांक द्या.) </td>
-                                <td><input type="date" class="form-control" name="last_audit_fee_date" value="{{ $clientInputs['last_audit_fee_date'] ?? '' }}"></td>
+                                <td>
+                                    <input type="date" class="form-control" name="last_audit_fee_date" value="{{ $clientInputs['last_audit_fee_date'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="last_audit_fee_paid">
+                                        <option value="होय" {{ (isset($clientInputs['last_audit_fee_paid']) && $clientInputs['last_audit_fee_paid'] == 'होय') ? 'selected' : '' }} >होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['last_audit_fee_paid']) && $clientInputs['last_audit_fee_paid'] == 'नाही') ? 'selected' : '' }} >नाही</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>2)जर संस्थेने लेखापरीक्षा शुल्क भरली नसेल तर देणे
                                     असलेल्या परीक्षा शुल्काचा तपशील व न भरण्याची
                                     कारणे द्या.
                                 </td>
-                                <td><input type="text" class="form-control" name="audit_fee_not_paid" value="{{ $clientInputs['audit_fee_not_paid'] ?? '' }}"></td>
+                                <td>
+                                    <input type="text" class="form-control" name="audit_fee_not_paid" value="{{ $clientInputs['audit_fee_not_paid'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="audit_fee_not_paid_1">
+                                        <option value="होय" {{ (isset($clientInputs['audit_fee_not_paid_1']) && $clientInputs['audit_fee_not_paid_1'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['audit_fee_not_paid_1']) && $clientInputs['audit_fee_not_paid_1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
 
                             </tr>
                             <tr>
@@ -821,7 +858,14 @@
                                     ती कोणी केली. कोणत्या कालावधीसाठी केली व त्याचा
                                     लेखापरीक्षा अहवाल संस्थेच्या दप्तरी आहे काय? याची
                                     माहीती द्या. </td>
-                                <td><input type="text" class="form-control" name="internal_audit_date" value="{{ $clientInputs['internal_audit_date'] ?? '' }}"></td>
+                                <td>
+                                    <input type="text" class="form-control" name="internal_audit_date" value="{{ $clientInputs['internal_audit_date'] ?? '' }}">
+                                    <br>
+                                    <select class="form-control" name="internal_audit_report">
+                                        <option value="होय" {{ (isset($clientInputs['internal_audit_report']) && $clientInputs['internal_audit_report'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['internal_audit_report']) && $clientInputs['internal_audit_report'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>2) सांविधिक(स्टॅट्युटरी)लेखापरीक्षा व अतर्गत लेखापरीक्षा
