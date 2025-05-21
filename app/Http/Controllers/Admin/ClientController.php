@@ -452,7 +452,9 @@ class ClientController extends Controller
         else if($sheet_no == 2){
             $client = Client::with('masterData')->find($client_id);
             $auditor = Audit::where('user_id', auth()->id())->first();
-            return view('admin.clients.sheet2', compact('client','auditor'));
+                $clientInputs = ClientInput::where('client_id', $client_id)
+            ->pluck('value', 'key');
+            return view('admin.clients.sheet2', compact('client','auditor','clientInputs'));
         }
     }
 
