@@ -455,6 +455,29 @@ class ClientController extends Controller
                 $clientInputs = ClientInput::where('client_id', $client_id)
             ->pluck('value', 'key');
             return view('admin.clients.sheet2', compact('client','auditor','clientInputs'));
+        }else if($sheet_no == 3){
+            $client = Client::with('masterData')->find($client_id);
+            $auditor = Audit::where('user_id', auth()->id())->first();
+                $clientInputs = ClientInput::where('client_id', $client_id)
+            ->pluck('value', 'key');
+            $client['रोख शिल्लक'] = $client->masterData->where('menu', 'रोख शिल्लक');
+            $client['रोख शिल्लक_sum'] = $client['रोख शिल्लक']->sum('currentYear');
+            $client['बँक शिल्लक'] = $client->masterData->where('menu', 'बँक शिल्लक');
+            $client['बँक शिल्लक_sum'] = $client['बँक शिल्लक']->sum('currentYear');
+            $client['गुंतवणूक'] = $client->masterData->where('menu', 'गुंतवणूक');
+            $client['गुंतवणूक_sum'] = $client['गुंतवणूक']->sum('currentYear');
+            $client['कायम मालमत्ता'] = $client->masterData->where('menu', 'कायम मालमत्ता');
+            $client['कायम मालमत्ता_sum'] = $client['कायम मालमत्ता']->sum('currentYear');
+            $client['देणे कर्ज'] = $client->masterData->where('menu', 'देणे कर्ज');
+            $client['देणे कर्ज_sum'] = $client['देणे कर्ज']->sum('currentYear');
+            $client['ठेवी'] = $client->masterData->where('menu', 'ठेवी');
+            $client['ठेवी_sum'] = $client['ठेवी']->sum('currentYear');
+            $client['इतर देणी'] = $client->masterData->where('menu', 'इतर देणी');
+            $client['इतर देणी_sum'] = $client['इतर देणी']->sum('currentYear');
+            return view('admin.clients.sheet3', compact('client','auditor','clientInputs'));
+        }
+        else{
+            return redirect()->back()->withErrors(['error' => 'Invalid sheet number']);
         }
     }
 
