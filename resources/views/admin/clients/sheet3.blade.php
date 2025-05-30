@@ -104,6 +104,18 @@
                     <div class="fw-bold mb-2">दोन रोख शिल्लक व कर्ज रोखे आणि संस्थेचा मालमत्ता व दायीत्वे यांचे मुल्यांकन –</div>
                     <div class="d-flex align-items-center mb-2">
                         <span class="fw-bold">रोख शिल्लक </span>
+                        @php
+                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                        $auditPeriod = '';
+                        $end = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                            $start = $m[1];
+                            $end = $m[2];
+                            $auditPeriod = "01/04/$start - 31/03/$end";
+                        } else {
+                            $auditPeriod = $client->audit_year;
+                        }
+                        @endphp
                         <span class="ms-2">&nbsp; 31/03/{{$end}}</span>
                         <span class="ms-2">{{$client['रोख शिल्लक_sum']}}</span>
                         <span class="ms-2">किर्दी प्रमाणे बरोबर आहे</span>
@@ -190,6 +202,19 @@
                 </div>
 
                 <div class="mt-3">
+                    @php
+                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                    $auditPeriod = '';
+                    $start = '';
+                    $end = '';
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                        $start = $m[1];
+                        $end = $m[2];
+                        $auditPeriod = "01/04/$start - 31/03/$end";
+                    } else {
+                        $auditPeriod = $client->audit_year;
+                    }
+                    @endphp
                     <p>
                         जमा केलेल्या ठेवी व दिलेल्या कर्ज संस्थेच्या सभासंदाच्या हित
                         संबंधाना बाधक ठरणा-या नाहीत असे आढळले.
