@@ -533,7 +533,15 @@ class ClientController extends Controller
             $incomeMenus2 = ['आस्थापना खर्च', 'प्रशासकीय खर्च', 'इतर खर्च'];
 
             return view('admin.clients.sheet4', compact('client', 'auditor', 'clientInputs'));
-        } else {
+        } else if ($sheet_no == 5) {
+                        $client = Client::with('masterData')->find($client_id);
+
+            return view('admin.clients.sheet5', compact('client'));
+
+            
+        }
+        
+        else {
             return redirect()->back()->withErrors(['error' => 'Invalid sheet number']);
         }
     }
