@@ -1319,15 +1319,15 @@
                     <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss" value="{{ $clientInputs['accumulated_loss'] ?? '0' }}"></span>
                 </div>
                 <div class="mb-2">
-                    सदर बाकी दि.<span style="background: yellow;">31/03/{{ $end }}</span> अखेर ताळेबंद प्रमाणे असून मागील वर्षाचा संचीत नफातोटा रु.
+                    सदर बाकी दि.<span style="background: yellow;">31/03/{{ $end }}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा/तोटा  रु.
                     <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_last" value="{{ $clientInputs['accumulated_loss_last'] ?? '0' }}"></span>
                     अधिक/व चालू वर्षाचा नफा/तोटा रु.
                     <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_current" value="{{ $clientInputs['accumulated_loss_current'] ?? '0' }}"></span>
                     एकूण संचीत तोटा रु.
                     <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_total" value="{{ $clientInputs['accumulated_loss_total'] ?? '0' }}"></span>
-                    बरोबर आहे/आहे/आवश्यक तरतूद . न केल्यामुळे संचीत तोटा प्रमाणीत करता येत नाही.
+                    बरोबर आहे. आवष्यक तरतुद न केल्यामुळे संचीत तोटा प्रमाणीत करता येत नाही.
                     <br>
-                    नफा वाटणी करताना कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे कराव्यात.
+                    नफा वाटणी कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे करण्यात यावे. 
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4> </h4>

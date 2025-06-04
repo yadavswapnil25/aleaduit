@@ -534,14 +534,22 @@ class ClientController extends Controller
 
             return view('admin.clients.sheet4', compact('client', 'auditor', 'clientInputs'));
         } else if ($sheet_no == 5) {
-                        $client = Client::with('masterData')->find($client_id);
+            $client = Client::with('masterData')->find($client_id);
 
             return view('admin.clients.sheet5', compact('client'));
+        } else if ($sheet_no == 6) {
+            $client = Client::with('masterData')->find($client_id);
 
-            
-        }
-        
-        else {
+            return view('admin.clients.sheet6', compact('client'));
+        } else if ($sheet_no == 7) {
+            $client = Client::with('masterData')->find($client_id);
+
+            return view('admin.clients.sheet7', compact('client'));
+        } else if ($sheet_no == 8) {
+            $client = Client::with('masterData')->find($client_id);
+
+            return view('admin.clients.sheet8', compact('client'));
+        } else {
             return redirect()->back()->withErrors(['error' => 'Invalid sheet number']);
         }
     }

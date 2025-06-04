@@ -39,7 +39,7 @@
                                             <td>{{$index + 1}}</td>
                                             <td>{{$year->audit_year}}</td>
                                             <td>
-                                            <a class="btn btn-warning btn-sm edit-sheet-btn" data-year="{{ $year->audit_year }}">
+                                                <a class="btn btn-warning btn-sm edit-sheet-btn" data-year="{{ $year->audit_year }}">
                                                     <i class="fa fa-edit"></i> Edit Sheet
                                                 </a>
                                                 <a href="{{ route('admin.client.master',$year->client_id) }}" class="btn btn-success btn-sm">
@@ -93,6 +93,8 @@
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="5">Sheet 5</button>
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="6">Sheet 6</button>
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="7">Sheet 7</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="8">Sheet 8</button>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -106,7 +108,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        
+
         // Handle Edit Sheet button click
         $(document).on('click', '.edit-sheet-btn', function(e) {
             e.preventDefault();
