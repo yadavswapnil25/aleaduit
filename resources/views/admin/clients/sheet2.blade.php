@@ -177,7 +177,7 @@
                             <td>ब) संस्थेची चल संपत्ती आणि सांपत्तिक स्थिती दर्शविणारी
                                 माहिती समक्ष अधिकारी यांना योग्य वेळेत पाठविण्यात आली
                                 नाही.
-                                आहे काय?</td>
+                                </td>
                             <td> <select class="form-control" name="financial_info_timely" required>
                                     <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'होय') ? 'selected' : '' }}>होय</option>
