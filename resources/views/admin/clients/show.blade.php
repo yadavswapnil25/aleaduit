@@ -94,6 +94,7 @@
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="6">Sheet 6</button>
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="7">Sheet 7</button>
                     <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="8">Sheet 8</button>
+                    <button class="btn btn-outline-primary m-1 sheet-btn" data-sheet="9">Sheet 9</button>
 
                 </div>
             </div>
