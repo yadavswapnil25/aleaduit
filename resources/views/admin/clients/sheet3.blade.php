@@ -92,7 +92,7 @@
                                 <td>नियीमत कर्ज व आक्समीक कर्ज</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan" id="loan" value="{{ isset($clientInputs['loan']) ? $clientInputs['loan'] : '' }}"></td>
-                                <td>5</td>
+                                <td><input type="text" class="form-control" name="loan_2" id="loan_2" value="{{ isset($clientInputs['loan_2']) ? $clientInputs['loan_2'] : '' }}"></td>
                                 <td><input type="text" class="form-control" name="loan_1" id="loan_1" value="{{ isset($clientInputs['loan_1']) ? $clientInputs['loan_1'] : '' }}"></td>
                                 <td> <input type="text" class="form-control" id="loan_percentage" name="loan_percentage" value="{{ $clientInputs['loan_percentage'] ?? '' }}" readonly> टक्के</td>
                             </tr>
@@ -109,28 +109,34 @@
                         $auditPeriod = '';
                         $end = '';
                         if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                            $start = $m[1];
-                            $end = $m[2];
-                            $auditPeriod = "01/04/$start - 31/03/$end";
+                        $start = $m[1];
+                        $end = $m[2];
+                        $auditPeriod = "01/04/$start - 31/03/$end";
                         } else {
-                            $auditPeriod = $client->audit_year;
+                        $auditPeriod = $client->audit_year;
                         }
                         @endphp
-                        <span class="ms-2">&nbsp; 31/03/{{$end}}</span>
-                        <span class="ms-2">{{$client['रोख शिल्लक_sum']}}</span>
+                        <span class="ms-2">&nbsp; 31/03/{{$end}}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="ms-2">{{$client['रोख शिल्लक_sum']}}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <span class="ms-2">किर्दी प्रमाणे बरोबर आहे</span>
                     </div>
+                    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     <div class="d-flex align-items-center">
-                        <span class="fw-bold">विमा - समुह विमा</span>
-                        <br>
+                        <span class="fw-bold">विमा - समुह विमा</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+
+                        विमा काढलेला
                         <span class="ms-2">
 
                             <select name="insurance_status" class="form-select d-inline-block w-auto">
-                                <option value="yes" {{ isset($clientInputs['insurance_status']) && $clientInputs['insurance_status'] == 'yes' ? 'selected' : '' }}>विमा काढलेला आहे</option>
-                                <option value="no" {{ isset($clientInputs['insurance_status']) && $clientInputs['insurance_status'] == 'no' ? 'selected' : '' }}>नाही</option>
+                                <option value="" selected>Select</option>
+                                <option value="विमा काढलेला नाही" {{ isset($clientInputs['insurance_status']) && $clientInputs['insurance_status'] == 'विमा काढलेला नाही' ? 'selected' : '' }}>विमा काढलेला नाही</option>
+                                <option value="विमा काढलेला आहे" {{ isset($clientInputs['insurance_status']) && $clientInputs['insurance_status'] == 'विमा काढलेला आहे' ? 'selected' : '' }}>विमा काढलेला आहे</option>
+                                <option value="नाही" {{ isset($clientInputs['insurance_status']) && $clientInputs['insurance_status'] == 'नाही' ? 'selected' : '' }}>नाही</option>
                             </select>
                         </span>
                     </div>
+                    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
                 </div>
                 <!-- END: Content as per provided image -->
 
@@ -162,7 +168,7 @@
                             </tr>
                             <tr>
                                 <td>दिलेली कर्जे</td>
-                                <td>{{$client['देणे कर्ज_sum']}}</td>
+                                <td>{{$client['येणे कर्ज_sum']}}</td>
                                 <td>कायद्याचे आधार सुरक्षित</td>
                             </tr>
                             <tr>
@@ -208,11 +214,11 @@
                     $start = '';
                     $end = '';
                     if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
+                    $start = $m[1];
+                    $end = $m[2];
+                    $auditPeriod = "01/04/$start - 31/03/$end";
                     } else {
-                        $auditPeriod = $client->audit_year;
+                    $auditPeriod = $client->audit_year;
                     }
                     @endphp
                     <p>
