@@ -22,41 +22,52 @@
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">अ. भांडवल व ठेवी बाजू :</span>
-                        <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="capital_deposit_side" value="{{ $clientInputs['capital_deposit_side'] ?? '117339566.2' }}"></span>
+                        <b> <span style="font-weight:bold;">रु. {{$client['totalIncome6'] ?? ''}}</span></b>
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">1. भागभांडवल :</span>
-                        <span style="background: yellow; font-weight:bold;">- रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="share_capital" value="{{ $clientInputs['share_capital'] ?? '5318190.00' }}"></span>
+                        <b> <span style="font-weight:bold;">- रु. {{$client['totalIncome7'] ?? ''}}</span></b>
                     </div>
                     <div class="mb-2">
                         संस्थेचे अधिकृत भागभांडवल रु.
-                        <span style="background: #00ff00;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="authorized_share_capital" value="{{ $clientInputs['authorized_share_capital'] ?? '7000000' }}"></span>
+                        <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="authorized_share_capital" value="{{ $clientInputs['authorized_share_capital'] ?? '' }}"></span>
                         आहे. एका भागाची दर्शनी किंमत रु.
-                        <span style="background: #00ff00;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '100' }}"></span>
+                        <span style="background: #00ff00;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span>
                         आहे. दि.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="last_year_date" value="{{ $clientInputs['last_year_date'] ?? '31/03/2023' }}"></span>
+                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="last_year_date" value="{{ $clientInputs['last_year_date'] ?? '' }}"></span>
                         (गतवर्षी) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_year_share_capital" value="{{ $clientInputs['last_year_share_capital'] ?? '4828470.00' }}"></span>
+                        <b> <span>{{$client['वसुल भाग भागभांडवल_sum_lastYear'] ?? ''}}</span></b>
                         होते. लेखापरीक्षण कालावधीत त्यामध्ये रु.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="share_capital_increase" value="{{ $clientInputs['share_capital_increase'] ?? '489720.00' }}"></span>
+                        <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']}}</span></b>
                         ने वाढ झालेली असून दि.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="current_year_date" value="{{ $clientInputs['current_year_date'] ?? '31/03/2024' }}"></span>
+                        @php
+                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                        $auditPeriod = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                        $start = $m[1];
+                        $end = $m[2];
+                        $auditPeriod = "01/04/$start - 31/03/$end";
+                        } else {
+                        $auditPeriod = $client->audit_year;
+                        }
+                        @endphp
+                        <b> <span>31/03/2025</span></b>
                         (चालूवर्षी) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="current_year_share_capital" value="{{ $clientInputs['current_year_share_capital'] ?? '5318190.00' }}"></span>
-                        झालेले आहे. सदरचे वस्तुम भागभांडवल अधिकृत भागभांडवलाच्या कमी
+                        <b> <span>{{$client['totalIncome7'] ?? ''}}</span></b>
+                        झालेले आहे. सदरचे वस्तुम भागभांडवल अधिकृत भागभांडवलाच्या
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_less_than_authorized">
-                            <option value="आहे" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'आहे') ? 'selected' : '' }}>आहे</option>
-                            <option value="नाही" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            <option value="कमी" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'कमी') ? 'selected' : '' }}>कमी</option>
+                            <option value="जास्त" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'जास्त') ? 'selected' : '' }}>जास्त</option>
                         </select>
-                        आहे / नाही
+                        आहे
                     </div>
 
                     <!-- START: Design as per pasted image -->
                     <div class="mb-2">
-                        <span>लेखापरिक्षण कालावधीत रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '75200' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_capital_returned_percent" value="{{ $clientInputs['share_capital_returned_percent'] ?? '1.55' }}"></span> % आहे. अहवाल वर्षात
-                            भागभांडवल रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="share_capital_increase_amount" value="{{ $clientInputs['share_capital_increase_amount'] ?? '954510.39' }}"></span> ने वाढलेले असुन, भागभांडवल वाढीचे प्रमाण <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_capital_increase_percent" value="{{ $clientInputs['share_capital_increase_percent'] ?? '9.86' }}"></span> % आहे. भागभांडवल यादीची रक्कम
-                            ताळेबंदातील रक्कमेशी जुळती
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="share_capital_matches">
+                        <span>लेखापरिक्षण कालावधीत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span>$clientInputs['share_capital_returned']/$clientInputs['totalIncome7']*100</span> % आहे. अहवाल वर्षात
+                            भागभांडवल रु. <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="share_capital_increase_amount" value="{{ $clientInputs['share_capital_increase_amount'] ?? '' }}"></span> ने वाढलेले असुन, भागभांडवल वाढीचे प्रमाण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_capital_increase_percent" value="{{ $clientInputs['share_capital_increase_percent'] ?? '9.86' }}"></span> % आहे. भागभांडवल यादीची रक्कम
+                            ताळेबंदातील रक्कमेशी जुळत
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_matches">
                                 <option value="आहे" {{ (isset($clientInputs['share_capital_matches']) && $clientInputs['share_capital_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['share_capital_matches']) && $clientInputs['share_capital_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -66,7 +77,7 @@
 
                     <div class="mb-2">
                         <span class="fw-bold">2. राखीव व इतर निधी :</span>
-                        <span style="background: yellow; font-weight:bold;">- रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="reserve_and_other_funds" value="{{ $clientInputs['reserve_and_other_funds'] ?? '7759577.44' }}"></span>
+                        <span style="font-weight:bold;">- रु. {{$client['totalIncome8'] ?? ''}}</span>
                     </div>
 
                     <div class="mb-2">
@@ -101,85 +112,162 @@
                                 <tr>
                                     <td>1</td>
                                     <td>राखीव निधी</td>
-                                    <td>1711061</td>
-                                    <td>1711061</td>
-                                    <td>0-Equal</td>
+                                    <td>{{$client['राखीव निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['राखीव निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['राखीव निधी_sum_currentYear'] ?? 0) - ($client['राखीव निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>बुडीत कर्ज निधी</td>
-                                    <td>644270.44</td>
-                                    <td>644270.44</td>
-                                    <td>0-Equal</td>
+                                    <td>{{$client['बुडीत कर्ज निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['बुडीत कर्ज निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['बुडीत कर्ज निधी_sum_currentYear'] ?? 0) - ($client['बुडीत कर्ज निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>कर्मचारी ग्रॅच्युइटी निधी</td>
-                                    <td>396075</td>
-                                    <td>396075</td>
+                                    <td>?</td>
+                                    <td>?</td>
                                     <td>0-Equal</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>कर्मचारी कल्याण निधी</td>
-                                    <td>329175</td>
-                                    <td>329175</td>
-                                    <td>0-Equal</td>
+                                    <td>{{$client['कल्याण निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['कल्याण निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['कल्याण निधी_sum_currentYear'] ?? 0) - ($client['कल्याण निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>कर्मचारी भविष्य निर्वाह निधी</td>
-                                    <td>102744</td>
-                                    <td>113160</td>
-                                    <td style="background: yellow;">10416-Up</td>
+                                    <td>{{$client['कर्मचारी भविष्य निर्वाह निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['कर्मचारी भविष्य निर्वाह निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['कर्मचारी भविष्य निर्वाह निधी_sum_currentYear'] ?? 0) - ($client['कर्मचारी भविष्य निर्वाह निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>नि.नि.अभिकृती सुरक्षा ठेव</td>
-                                    <td>690191</td>
-                                    <td>771294</td>
-                                    <td style="background: yellow;">81103-Up</td>
+                                    <td>{{$client['सुरक्षा ठेव निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['सुरक्षा ठेव निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['सुरक्षा ठेव निधी_sum_currentYear'] ?? 0) - ($client['सुरक्षा ठेव निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
                                     <td>इमारत निधी</td>
-                                    <td>3085647</td>
-                                    <td>3206697</td>
-                                    <td style="background: yellow;">121050-Up</td>
+                                    <td>{{$client['इमारत निधी_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['इमारत निधी_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['इमारत निधी_sum_currentYear'] ?? 0) - ($client['इमारत निधी_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
                                     <td>संचयी निधी कर्ज</td>
-                                    <td>414866</td>
-                                    <td>414866</td>
+                                    <td>?</td>
+                                    <td>?</td>
                                     <td>0-Equal</td>
                                 </tr>
                                 <tr>
                                     <td>9</td>
                                     <td>संगणक निधी</td>
-                                    <td>104640</td>
-                                    <td>90886</td>
-                                    <td style="background: yellow;">-13754-Down</td>
+                                    <td>?</td>
+                                    <td>?</td>
+                                    <td>-13754-Down</td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
                                     <td>आकस्मिक फंड</td>
-                                    <td>15383</td>
-                                    <td>15383</td>
-                                    <td>0-Equal</td>
+                                    <td>{{$client['आकस्मिक फंड_sum_lastYear'] ?? 0}}</td>
+                                    <td>{{$client['आकस्मिक फंड_sum_currentYear'] ?? 0}}</td>
+                                    @php
+                                    $diff = ($client['आकस्मिक फंड_sum_currentYear'] ?? 0) - ($client['आकस्मिक फंड_sum_lastYear'] ?? 0);
+                                    @endphp
+                                    <td>
+                                        @if($diff > 0)
+                                        <span>{{ $diff }}-Up</span>
+                                        @elseif($diff < 0)
+                                            <span>{{ $diff }}-Down</span>
+                                            @else
+                                            0-Equal
+                                            @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>11</td>
                                     <td>आर्थिक उन्नत सुरक्षा जमा</td>
-                                    <td>50213</td>
-                                    <td>66710</td>
-                                    <td style="background: yellow;">16398-Up</td>
+                                    <td>?</td>
+                                    <td>?</td>
+                                    <td>16398-Up</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="fw-bold">एकूण</td>
-                                    <td>7544364.44</td>
-                                    <td>7759577.44</td>
-                                    <td style="background: yellow;">215213</td>
+                                    <td>{{ $funds_last = $client['राखीव निधी_sum_lastYear'] + $client['बुडीत कर्ज निधी_sum_lastYear'] + $client['कल्याण निधी_sum_lastYear'] +$client['कर्मचारी भविष्य निर्वाह निधी_sum_lastYear'] + $client['सुरक्षा ठेव निधी_sum_lastYear'] + $client['इमारत निधी_sum_lastYear'] + $client['आकस्मिक फंड_sum_lastYear']}}</td>
+                                    <td>{{ $funds_current = $client['राखीव निधी_sum_currentYear'] + $client['बुडीत कर्ज निधी_sum_currentYear'] +  $client['कल्याण निधी_sum_currentYear'] + $client['कर्मचारी भविष्य निर्वाह निधी_sum_currentYear'] + $client['सुरक्षा ठेव निधी_sum_currentYear'] + $client['इमारत निधी_sum_currentYear'] + $client['आकस्मिक फंड_sum_currentYear']}}</td>
+                                    <td>{{ $funds_current - $funds_last }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -199,7 +287,7 @@
                     <!-- 3. ठेवी -->
                     <div class="mb-2">
                         <span class="fw-bold">3. ठेवी :</span>
-                        <span style="background: yellow; font-weight:bold;">- रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="total_deposit" value="{{ $clientInputs['total_deposit'] ?? '100219811.00' }}"></span>
+                        <span style="font-weight:bold;">- रु. {{$client['ठेवी_sum_currentYear'] ?? 0}}</span>
                     </div>
                     <div class="mb-2">
                         <span>वरील सर्व निधींची कलम 70 व नियम 54,55 प्रमाणे संस्थेने स्वतंत्रपणे गुंतवणूक केली आहे. निधी विनियोगांची
@@ -225,7 +313,7 @@
                         $auditPeriod = $client->audit_year;
                         }
                         @endphp
-                        <span>दि. <span>31/03/{{ $end }}</span> अखेर संस्थेने खालीलप्रमाणे ठेवी स्विकारलेल्या आहेत. चालु व मागील आर्थिक वर्षातील तुलनात्मक
+                        <span>दि. <span>31/03/2025</span> अखेर संस्थेने खालीलप्रमाणे ठेवी स्विकारलेल्या आहेत. चालु व मागील आर्थिक वर्षातील तुलनात्मक
                             आकडेवारी खालीलप्रमाणे -</span>
                     </div>
                     <div>
@@ -240,77 +328,50 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php $i = 1; @endphp
+                                @php
+                                $totalCurrentYear = 0;
+                                $totalLastYear = 0;
+
+                                $totalDiff = 0;
+                                @endphp
+                                @foreach($client['ठेवी'] as $c)
+                                @php
+                                $totalCurrentYear += $c->currentYear;
+                                $totalLastYear += $c->lastYear;
+                                $totalDiff += ($c->currentYear - $c->lastYear);
+                                @endphp
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>बचत ठेव</td>
-                                    <td style="background: yellow;">9553428</td>
-                                    <td style="background: yellow;">9638603</td>
-                                    <td style="background: yellow;">85175-Up</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->entity }}</td>
+                                    <td>{{ number_format($c->currentYear, 2) }}</td>
+                                    <td>{{ number_format($c->lastYear, 2) }}</td>
+                                    <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
+                                    <td></td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>कुटुंब निर्मिती ठेव खाते</td>
-                                    <td style="background: yellow;">16972000</td>
-                                    <td style="background: yellow;">19926000</td>
-                                    <td style="background: yellow;">2954000-Up</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>मुदत ठेव</td>
-                                    <td style="background: yellow;">24722104</td>
-                                    <td style="background: yellow;">35108977</td>
-                                    <td style="background: yellow;">10386873-Up</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>नियतिनिधी ठेव</td>
-                                    <td style="background: yellow;">10017284</td>
-                                    <td style="background: yellow;">12978564</td>
-                                    <td style="background: yellow;">2961280-Up</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>दामदिप्पट ठेव</td>
-                                    <td style="background: yellow;">1144500</td>
-                                    <td style="background: yellow;">424500</td>
-                                    <td style="background: yellow;">-720000-Down</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>दामदुप्पट ठेव</td>
-                                    <td style="background: yellow;">17744898</td>
-                                    <td style="background: yellow;">14384085</td>
-                                    <td style="background: yellow;">-3360813-Down</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>दामचौपट ठेव</td>
-                                    <td style="background: yellow;">1038000</td>
-                                    <td style="background: yellow;">779000</td>
-                                    <td style="background: yellow;">-259000-Down</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>आमर्त ठेव</td>
-                                    <td style="background: yellow;">5602966</td>
-                                    <td style="background: yellow;">6980082</td>
-                                    <td style="background: yellow;">1377116-Up</td>
-                                </tr>
+                                @endforeach
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td style="background: yellow;">86795180.00</td>
-                                    <td style="background: yellow;">100219811.00</td>
-                                    <td style="background: yellow;">13424631.00</td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalDiff, 2) }}</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="mb-2">
                         <span>
+                            @php
+                            $funds_last_total =$client['बचत ठेव_sum_lastYear']+ $client['कुटुंबनिर्वाह मासिक व्याज योजना_sum_lastYear'] + $client['मुदत ठेव_sum_lastYear'] + $client['दामतिप्पट ठेव_sum_lastYear'] + $client['दामदुप्पट ठेव_sum_lastYear'] + $client['दामचौपट ठेव_sum_lastYear'] + $client['आवर्त ठेव_sum_lastYear'];
+                            $funds_current_total =$client['बचत ठेव_sum_currentYear'] + $client['कुटुंबनिर्वाह मासिक व्याज योजना_sum_currentYear'] + $client['मुदत ठेव_sum_currentYear'] +$client['दामतिप्पट ठेव_sum_currentYear'] + $client['दामदुप्पट ठेव_sum_currentYear'] + $client['दामचौपट ठेव_sum_currentYear'] + $client['आवर्त ठेव_sum_currentYear'];
+                            $funds_current_total - $funds_last_total;
+                            @endphp
                             लेखापरीक्षण मुदतीत एकूण ठेवीमध्ये रु.
-                            <span style="background: yellow; font-weight:bold;">
-                                <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="deposit_increase_amount" value="{{ $clientInputs['deposit_increase_amount'] ?? '13424631.00' }}">
+                            <span style="font-weight:bold;">
+                                {{ $funds_current_total - $funds_last_total }}
                             </span>
                             लाख इतकी
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_computerized_1">
@@ -318,34 +379,34 @@
                                 <option value="घट" {{ (isset($clientInputs['deposit_list_computerized_1']) && $clientInputs['deposit_list_computerized_1'] == 'नाही') ? 'selected' : '' }}>घट</option>
                             </select>
                             झालेली आहे. वाढीचे प्रमाण
-                            <span style="background: yellow; font-weight:bold;">
-                                <input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="deposit_increase_percent" value="{{ $clientInputs['deposit_increase_percent'] ?? '15.47' }}">
+                            <span style=" font-weight:bold;">
+                                {{ $funds_last_total != 0 ? number_format((($funds_current_total - $funds_last_total) / $funds_last_total) * 100, 2) : 'N/A' }}
+
                             </span>
                             % आहे. लेखापरीक्षण मुदतीत ठेव व्याज दर
-                            <span style="background: yellow; font-weight:bold;">
-                                <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_interest_rate" value="{{ $clientInputs['deposit_interest_rate'] ?? '4 to 9.50' }}">
+                            <span style="font-weight:bold;">
+                                <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_interest_rate" value="{{ $clientInputs['deposit_interest_rate'] ?? '' }}">
                             </span>
                             % पर्यंत आकारलेला आहे. संस्थेचे कामकाज संगणकीकृत
                             असल्याने ठेव यादयासंगणक प्रणालीव्दारे काढलेल्या
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="deposit_list_computerized">
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_computerized">
                                 <option value="आहे" {{ (isset($clientInputs['deposit_list_computerized']) && $clientInputs['deposit_list_computerized'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['deposit_list_computerized']) && $clientInputs['deposit_list_computerized'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                             . ताळेबंदाशी ठेव यादया जुळत
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="deposit_list_matches">
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_matches">
                                 <option value="आहे" {{ (isset($clientInputs['deposit_list_matches']) && $clientInputs['deposit_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['deposit_list_matches']) && $clientInputs['deposit_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
-                            .
-                        </span>
+                            .</span>
                     </div>
                     <div class="mb-2">
                         तसेच संस्थेस प्राप्त झालेल्या ठेवींमध्ये संस्थांच्या ठेवींची विगतवारी स्वतंत्रपणे नमुद करावी.
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">4. देय व्याज तरतूद :-</span>
-                        <span style="background: yellow; font-weight:bold;">
-                            रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="interest_provision" value="{{ $clientInputs['interest_provision'] ?? '292257.00' }}">
+                        <span style="font-weight:bold;">
+                            रु. {{$client['तरतुद_sum_currentYear'] ?? 0}}</span>
                         </span>
                     </div>
                     <div>
@@ -359,45 +420,27 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                 @php $i = 1; @endphp
+                                @php
+                                $totalCurrentYear = 0;
+
+                                $totalDiff = 0;
+                                @endphp
+                                @foreach($client['तरतूद'] as $c)
+                                @php
+                                $totalCurrentYear += $c->currentYear;
+                                @endphp
                                 <tr>
-                                    <td>1</td>
-                                    <td>एफ डी ए तरतूद</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_fda" value="{{ $clientInputs['interest_provision_fda'] ?? '247491' }}"></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->entity }}</td>
+                                    <td>{{ number_format($c->currentYear, 2) }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>कर्मचारी बोनस</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_bonus" value="{{ $clientInputs['interest_provision_bonus'] ?? '00' }}"></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>शिक्षण निधी तरतूद</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_edu" value="{{ $clientInputs['interest_provision_edu'] ?? '00' }}"></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>निवडणूक खर्च तरतूद</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_election" value="{{ $clientInputs['interest_provision_election'] ?? '3071' }}"></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>शिक्षण निधी तरतूद</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_edu2" value="{{ $clientInputs['interest_provision_edu2'] ?? '30068' }}"></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>देणे व्याज कर्ज</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_loan" value="{{ $clientInputs['interest_provision_loan'] ?? '00' }}"></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>ऑडिट फी तरतूद</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_audit" value="{{ $clientInputs['interest_provision_audit'] ?? '11627' }}"></td>
-                                </tr>
+                                @endforeach                              
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="interest_provision_total" value="{{ $clientInputs['interest_provision_total'] ?? '292257.00' }}"></td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -405,7 +448,7 @@
                     <div class="mb-2">
                         संस्थेचे कामकाज संगणकीकृत असल्याने देय व्याजाच्या तरतुदी संगणक प्रणालीद्वारे काढलेल्या. काही देय
                         ठेव खात्यांची व्याजाची आकारणी तपासणी केली असता त्यामध्ये फरक दिसुन
-                        <span style="background: #00ff00;">
+                        <span>
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_diff_found">
                                 <option value="आला" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'आला') ? 'selected' : '' }}>आला</option>
                                 <option value="नाही" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -413,19 +456,19 @@
                         </span>
                         . या ठेवीच्या व्याजाच्या
                         तरतुदी केल्या प्रमाणात केल्या आहेत. त्याचा परिणाम नफा/तोटयावर
-                        <span style="background: #00ff00;">
+                        <span>
                             <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_effect_on_profit" value="{{ $clientInputs['interest_effect_on_profit'] ?? '' }}">
                         </span>
                         झाला.
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">5. इतर देणे :-</span>
-                        <span style="background: yellow; font-weight:bold;">
-                            रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="other_payables" value="{{ $clientInputs['other_payables'] ?? '37363.70' }}">
+                        <span style="font-weight:bold;">
+                            रु. {{ $client['इतर देणी_sum_currentYear'] ?? 0 }}
                         </span>
                     </div>
                     <div class="mb-2">
-                        <span>दि.31/03/{{ $end }} अखेर देणे असलेल्या रकमामध्ये खालील देय रकमांचा समावेश आहे.</span>
+                        <span>दि.31/03/2025 अखेर देणे असलेल्या रकमामध्ये खालील देय रकमांचा समावेश आहे.</span>
                         <table class="table table-bordered text-center align-middle" style="min-width:700px;">
                             <thead>
                                 <tr>
@@ -437,68 +480,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                               
+                                 @php $i = 1; @endphp
+                                @php
+                                $totalCurrentYear = 0;
+                                $totalLastYear =0;
+                                $totalDiff = 0;
+                                @endphp
+                                @foreach( $client['इतर देणी'] as $c)
+                                @php
+                                $totalCurrentYear += $c->currentYear;
+                                $totalLastYear += $c->lastYear;
+                                $totalDiff += ($c->currentYear - $c->lastYear);
+                                @endphp
                                 <tr>
-                                    <td>1</td>
-                                    <td>कर्ज अनामत</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_loan_security" value="{{ $clientInputs['payable_loan_security'] ?? '14000' }}"></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->entity }}</td>
+                                    <td>{{ number_format($c->currentYear, 2) }}</td>
+                                    <td>{{ number_format($c->lastYear, 2) }}</td>
+                                    <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>विशेष वसुली चार्ज</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_special_charge" value="{{ $clientInputs['payable_special_charge'] ?? '1438' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>जी एस टी</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_gst" value="{{ $clientInputs['payable_gst'] ?? '2518.70' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>निवडणूक खर्च</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_election" value="{{ $clientInputs['payable_election'] ?? '400' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>टी डी एस</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_tds" value="{{ $clientInputs['payable_tds'] ?? '15387' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>पत्ता संस्था री. चार्ज</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_address_recharge" value="{{ $clientInputs['payable_address_recharge'] ?? '960' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>पत्ता संस्था प्रो. चार्ज</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_address_procharge" value="{{ $clientInputs['payable_address_procharge'] ?? '155' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>प्रवेश फी</td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_entry_fee" value="{{ $clientInputs['payable_entry_fee'] ?? '2445' }}"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                @endforeach                              
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td style="background: yellow;"><input type="text" class="form-control" name="payable_total" value="{{ $clientInputs['payable_total'] ?? '37363.70' }}"></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalDiff, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -515,7 +523,7 @@
                 <!-- 6. शाखा ठेवी -->
                 <div class="mt-4 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">6. शाखा ठेवी देणे :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="branch_deposit" value="{{ $clientInputs['branch_deposit'] ?? '' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['शाखा ठेवी देणे_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
                     शाखा येणे देणे रक्कमांमध्ये फरक असल्यास या फ़रकाबाबत सखोल तपासणी करुन अभिप्राय नमुद करावेत.
@@ -525,7 +533,7 @@
                 <!-- 7. देय कर्ज -->
                 <div class="mb-2">
                     <span class="fw-bold">7. देय कर्ज :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="payable_loan" value="{{ $clientInputs['payable_loan'] ?? '2800000.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['देणे कर्ज_sum_currentYear']}}</span>
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:600px;">
@@ -542,23 +550,16 @@
                             <tr>
                                 <td>1</td>
                                 <td>को.ऑप. बँक मुदत ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="coop_bank_loan_last" value="{{ $clientInputs['coop_bank_loan_last'] ?? '1550000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="coop_bank_loan_current" value="{{ $clientInputs['coop_bank_loan_current'] ?? '2800000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="coop_bank_loan_diff" value="{{ $clientInputs['coop_bank_loan_diff'] ?? '1250000' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>इतर</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_loan_last" value="{{ $clientInputs['other_loan_last'] ?? '0' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_loan_current" value="{{ $clientInputs['other_loan_current'] ?? '0' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_loan_diff" value="{{ $clientInputs['other_loan_diff'] ?? '0' }}"></td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_lastYear']}}</td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_currentYear']}}</td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_currentYear'] - $client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_lastYear']}}</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="total_loan_last" value="{{ $clientInputs['total_loan_last'] ?? '1550000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="total_loan_current" value="{{ $clientInputs['total_loan_current'] ?? '2800000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="total_loan_diff" value="{{ $clientInputs['total_loan_diff'] ?? '1250000' }}"></td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_lastYear']}}</td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_currentYear']}}</td>
+                                <td>{{$client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_currentYear'] - $client['को.ऑप. बँक मुदत ठेव तारण कर्ज_sum_lastYear']}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -570,13 +571,13 @@
                 <!-- 8. संचीत नफा -->
                 <div class="mb-2">
                     <span class="fw-bold">8. संचीत नफा :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="retained_profit" value="{{ $clientInputs['retained_profit'] ?? '912367.06' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['संचित नफा_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                    सदर बाकी दि.<span style="background: yellow;">31/03/2024</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="retained_profit_last" value="{{ $clientInputs['retained_profit_last'] ?? '510058.97' }}"></span> अधिक/व चालू वर्षाचा नफा/तोटा <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="retained_profit_current" value="{{ $clientInputs['retained_profit_current'] ?? '402308.99' }}"></span> एकूण संचीत नफा <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="retained_profit_total" value="{{ $clientInputs['retained_profit_total'] ?? '912367.06' }}"></span> बरोबर आहे/अधिक/कमी.
+                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे/अधिक/कमी.
                     <br>
                     तरतूद व केल्यामुळ संचीत नफा प्रमाणीत करता आहे /
-                    <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="retained_profit_certified">
+                    <select class="form-control d-inline-block" style="width:80px;display:inline;" name="retained_profit_certified">
                         <option value="आहे" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -587,35 +588,35 @@
 
                 <!-- 9. मालमत्ता व येणे बाजू -->
                 <div class="mb-2">
-                    <span class="fw-bold">९) मालमत्ता व येणे बाजू :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="asset_receivable_side" value="{{ $clientInputs['asset_receivable_side'] ?? '117339566.2' }}"></span>
+                    <span class="fw-bold">ब) मालमत्ता व येणे बाजू :-</span>
+                    <span style="font-weight:bold;">रु. {{$client['मालमत्ता व येणे बाजू']}}</span>
                 </div>
 
                 <!-- 10. रोख शिल्लक -->
                 <div class="mb-2">
                     <span class="fw-bold">रोख शिल्लक :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance" value="{{ $clientInputs['cash_balance'] ?? '1040686.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['रोख शिल्लक_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                    शाखासह एकूण रोख शिल्लक रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_total" value="{{ $clientInputs['cash_balance_total'] ?? '1040686.00' }}"></span> आहे. दैनंदिन पध्दतीने रोखता तरलता रजिस्टर ठेवलेले आहे. रोखता
+                    शाखासह एकूण रोख शिल्लक रु. <span>{{$client['मालमत्ता व येणे बाजू']}}</span> आहे. दैनंदिन पध्दतीने रोखता तरलता रजिस्टर ठेवलेले आहे. रोखता
                     उपविधीतील नियमानुसार मर्यादेत ठेवली
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_register_verified">
                         <option value="आहे" {{ (isset($clientInputs['cash_register_verified']) && $clientInputs['cash_register_verified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_register_verified']) && $clientInputs['cash_register_verified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
-                    . ज्यादाची रोखतेचा परिणाम संस्थेच्या उत्पन्नावर
+                    . ज्यादाची रोखतेचा परिणाम संस्थेच्या उत्पन्नावर होत
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="excess_cash_affects_income">
-                        <option value="होत आहे" {{ (isset($clientInputs['excess_cash_affects_income']) && $clientInputs['excess_cash_affects_income'] == 'होत आहे') ? 'selected' : '' }}>होत आहे</option>
+                        <option value="आहे" {{ (isset($clientInputs['excess_cash_affects_income']) && $clientInputs['excess_cash_affects_income'] == 'आहे') ? 'selected' : '' }}> आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['excess_cash_affects_income']) && $clientInputs['excess_cash_affects_income'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     .
                     <br>
-                    बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '902153.00' }}"></span> मिळाली असून ती रोकडीत जमा करण्यात आलेली आहे. रोख शिल्लक प्रमाणपत्र आहे /
+                    बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मिळाली असून ती रोकडीत जमा करण्यात आलेली आहे. रोख शिल्लक प्रमाणपत्र
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_certificate_available">
                         <option value="आहे" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
-                    . रोख शिल्लकाची सुरक्षिततेची तिजोरी, अलमारी यांची व्यवस्था आहे /
+                    . रोख शिल्लकाची सुरक्षिततेची तिजोरी, अलमारी यांची व्यवस्था
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement">
                         <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -629,7 +630,7 @@
                         तपशील विपद करा.</span>
                     रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेबाबतचा तपशील नमूद करा.
                     रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेल्या
-                    <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="cash_bond_taken">
+                    <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_bond_taken">
                         <option value="आहे" {{ (isset($clientInputs['cash_bond_taken']) && $clientInputs['cash_bond_taken'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_bond_taken']) && $clientInputs['cash_bond_taken'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -689,7 +690,7 @@
                     </table>
                 </div>
                 <div class="mb-2">
-                    <span style="font-weight:bold;background:yellow;">2. बँक शिल्लक :- रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="bank_balance" value="{{ $clientInputs['bank_balance'] ?? '1692346.20' }}"></span>
+                    <span style="font-weight:bold;">2. बँक शिल्लक :- रु. {{$client['बँक शिल्लक_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
                     दि. <span>31/03/{{$end}}</span> अखेर खालीलप्रमाणे बँक शिल्लक आहे.
@@ -707,69 +708,35 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalBankAmount = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['बँक शिल्लक'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalBankAmount += $c->bankAmount;
+                            $totalDiff += ($c->currentYear - $c->lastYear);
+                            @endphp
+
                             <tr>
-                                <td>1</td>
-                                <td>बचत खाते 38 बिडीसीसी बँक कोटा</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_1_balance_tb" value="{{ $clientInputs['bank_1_balance_tb'] ?? '1413346.12' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_1_balance_stmt" value="{{ $clientInputs['bank_1_balance_stmt'] ?? '1413346.12' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_1_diff" value="{{ $clientInputs['bank_1_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_1_remark" value="{{ $clientInputs['bank_1_remark'] ?? '' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{ number_format($c->bankAmount, 2) }}</td>
+                                <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>को.ऑफ बँक खाते शाखा अडुळगाव</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_2_balance_tb" value="{{ $clientInputs['bank_2_balance_tb'] ?? '1000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_2_balance_stmt" value="{{ $clientInputs['bank_2_balance_stmt'] ?? '1000' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_2_diff" value="{{ $clientInputs['bank_2_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_2_remark" value="{{ $clientInputs['bank_2_remark'] ?? '' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>चालू खाते 3 बिडीसीसी बँक कोटा</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_3_balance_tb" value="{{ $clientInputs['bank_3_balance_tb'] ?? '5792.20' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_3_balance_stmt" value="{{ $clientInputs['bank_3_balance_stmt'] ?? '5792.20' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_3_diff" value="{{ $clientInputs['bank_3_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_3_remark" value="{{ $clientInputs['bank_3_remark'] ?? '' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>चालू ठेव खाते 17 को ऑप बँक खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_4_balance_tb" value="{{ $clientInputs['bank_4_balance_tb'] ?? '25175' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_4_balance_stmt" value="{{ $clientInputs['bank_4_balance_stmt'] ?? '25175' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_4_diff" value="{{ $clientInputs['bank_4_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_4_remark" value="{{ $clientInputs['bank_4_remark'] ?? '' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>अर्बन बँक पंढरी चालू खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_5_balance_tb" value="{{ $clientInputs['bank_5_balance_tb'] ?? '6342' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_5_balance_stmt" value="{{ $clientInputs['bank_5_balance_stmt'] ?? '6342' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_5_diff" value="{{ $clientInputs['bank_5_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_5_remark" value="{{ $clientInputs['bank_5_remark'] ?? '' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>ICICI बँक चालू खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_6_balance_tb" value="{{ $clientInputs['bank_6_balance_tb'] ?? '979.40' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_6_balance_stmt" value="{{ $clientInputs['bank_6_balance_stmt'] ?? '979.40' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_6_diff" value="{{ $clientInputs['bank_6_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_6_remark" value="{{ $clientInputs['bank_6_remark'] ?? '' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>बँक ऑफ इंडिया चालू खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_7_balance_tb" value="{{ $clientInputs['bank_7_balance_tb'] ?? '239711.48' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_7_balance_stmt" value="{{ $clientInputs['bank_7_balance_stmt'] ?? '239711.48' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_7_diff" value="{{ $clientInputs['bank_7_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_7_remark" value="{{ $clientInputs['bank_7_remark'] ?? '' }}"></td>
-                            </tr>
+                            @endforeach
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_total_balance_tb" value="{{ $clientInputs['bank_total_balance_tb'] ?? '1692346.20' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="bank_total_balance_stmt" value="{{ $clientInputs['bank_total_balance_stmt'] ?? '1692346.20' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_total_diff" value="{{ $clientInputs['bank_total_diff'] ?? '' }}"></td>
-                                <td><input type="text" class="form-control" name="bank_total_remark" value="{{ $clientInputs['bank_total_remark'] ?? '' }}"></td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalBankAmount, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -795,10 +762,10 @@
                 <!-- START: गुंतवणूक (Investment) Section as per pasted image -->
                 <div class="mt-4 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">३. गुंतवणूक :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="investment_total" value="{{ $clientInputs['investment_total'] ?? '12160685.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['गुंतवणूक_sum']}}</span>
                 </div>
                 <div class="mb-2">
-                    <span style="font-weight:bold;">दि. 31/03/{{ $end }} अखेर संस्थेने खालीलप्रमाणे गुंतवणूक केलेली आहे.</span>
+                    <span style="font-weight:bold;">दि. 31/03/2025 अखेर संस्थेने खालीलप्रमाणे गुंतवणूक केलेली आहे.</span>
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
@@ -813,92 +780,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalLastYear = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['गुंतवणूक'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalLastYear += $c->lastYear;
+                            $totalDiff += ($c->currentYear - $c->lastYear);
+                            @endphp
                             <tr>
-                                <td>1</td>
-                                <td>को ऑप बँक कोटा आवर्तठेव</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_1_2023" value="{{ $clientInputs['inv_1_2023'] ?? '1800000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_1_2024" value="{{ $clientInputs['inv_1_2024'] ?? '00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_1_diff" value="{{ $clientInputs['inv_1_diff'] ?? '-1800000-Down' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_1_percent" value="{{ $clientInputs['inv_1_percent'] ?? '-100%' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->lastYear, 2) }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
+                                <td>
+                                    @if($c->lastYear != 0)
+                                    {{ number_format((($c->currentYear - $c->lastYear) / $c->lastYear) * 100, 2) }}%
+                                    @else
+                                    0%
+                                    @endif
+                                </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>महाराष्ट्र गुंतवणूक</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_2_2023" value="{{ $clientInputs['inv_2_2023'] ?? '200000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_2_2024" value="{{ $clientInputs['inv_2_2024'] ?? '200000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_2_diff" value="{{ $clientInputs['inv_2_diff'] ?? '0-Equal' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_2_percent" value="{{ $clientInputs['inv_2_percent'] ?? '0%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>श्रीराम फिनान्स</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_3_2023" value="{{ $clientInputs['inv_3_2023'] ?? '00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_3_2024" value="{{ $clientInputs['inv_3_2024'] ?? '300000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_3_diff" value="{{ $clientInputs['inv_3_diff'] ?? '300000-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_3_percent" value="{{ $clientInputs['inv_3_percent'] ?? '00.00%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>कर्मचारी कल्याण निधी</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_4_2023" value="{{ $clientInputs['inv_4_2023'] ?? '242749' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_4_2024" value="{{ $clientInputs['inv_4_2024'] ?? '255979' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_4_diff" value="{{ $clientInputs['inv_4_diff'] ?? '13230-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_4_percent" value="{{ $clientInputs['inv_4_percent'] ?? '5.45%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>कर्मचारी ग्रॅच्युइटी निधी</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_5_2023" value="{{ $clientInputs['inv_5_2023'] ?? '366222' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_5_2024" value="{{ $clientInputs['inv_5_2024'] ?? '386181' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_5_diff" value="{{ $clientInputs['inv_5_diff'] ?? '19959-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_5_percent" value="{{ $clientInputs['inv_5_percent'] ?? '5.45%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>नि.नि.एजंट सुरक्षा निधी</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_6_2023" value="{{ $clientInputs['inv_6_2023'] ?? '664410' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_6_2024" value="{{ $clientInputs['inv_6_2024'] ?? '700620' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_6_diff" value="{{ $clientInputs['inv_6_diff'] ?? '36210-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_6_percent" value="{{ $clientInputs['inv_6_percent'] ?? '5.45%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>बीडीसीसी बँक</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_7_2023" value="{{ $clientInputs['inv_7_2023'] ?? '8000000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_7_2024" value="{{ $clientInputs['inv_7_2024'] ?? '8473500' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_7_diff" value="{{ $clientInputs['inv_7_diff'] ?? '473500-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_7_percent" value="{{ $clientInputs['inv_7_percent'] ?? '5.92%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>राखीव निधी गुंतवणूक</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_8_2023" value="{{ $clientInputs['inv_8_2023'] ?? '1711061' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_8_2024" value="{{ $clientInputs['inv_8_2024'] ?? '1804314' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_8_diff" value="{{ $clientInputs['inv_8_diff'] ?? '93253-Up' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_8_percent" value="{{ $clientInputs['inv_8_percent'] ?? '5.45%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>अर्बन बँक पंढरी</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_9_2023" value="{{ $clientInputs['inv_9_2023'] ?? '13091' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_9_2024" value="{{ $clientInputs['inv_9_2024'] ?? '13091' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_9_diff" value="{{ $clientInputs['inv_9_diff'] ?? '0-Equal' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_9_percent" value="{{ $clientInputs['inv_9_percent'] ?? '0%' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>शेअर्स</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_10_2023" value="{{ $clientInputs['inv_10_2023'] ?? '27000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_10_2024" value="{{ $clientInputs['inv_10_2024'] ?? '27000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_10_diff" value="{{ $clientInputs['inv_10_diff'] ?? '0-Equal' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_10_percent" value="{{ $clientInputs['inv_10_percent'] ?? '0%' }}"></td>
-                            </tr>
+                            @endforeach
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_total_2023" value="{{ $clientInputs['inv_total_2023'] ?? '13024533.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_total_2024" value="{{ $clientInputs['inv_total_2024'] ?? '12160685.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="inv_total_diff" value="{{ $clientInputs['inv_total_diff'] ?? '-863848.00' }}"></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -906,7 +820,7 @@
                 </div>
                 <div class="mb-2">
                     <ol class="mb-2" style="padding-left: 20px;">
-                        <li>संस्थेने केलेल्या सर्व गुंतवणूक यादीनुसार गुंतवणूक रक्कम जुळत आहे -
+                        <li>संस्थेने केलेल्या सर्व गुंतवणूक यादीनुसार गुंतवणूक रक्कम जुळत -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_list_matches">
                                 <option value="आहे" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -918,24 +832,25 @@
                                 <option value="नाही" {{ (isset($clientInputs['investment_certificates_available']) && $clientInputs['investment_certificates_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                             . ठेव पावत्या तपासाव्यात
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_available1">
+                                <option value="आहे" {{ (isset($clientInputs['investment_certificates_available1']) && $clientInputs['investment_certificates_available1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                                <option value="नाही" {{ (isset($clientInputs['investment_certificates_available1']) && $clientInputs['investment_certificates_available1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            </select>
                         </li>
-                        <li>राखीव निधी, इमारत निधी व इतर कायदेशीर निधीची स्वतंत्र गुंतवणूक केलेली आहे -
+                        <li>राखीव निधी, इमारत निधी व इतर कायदेशीर निधीची स्वतंत्र गुंतवणूक केलेली -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="statutory_funds_invested">
                                 <option value="आहे" {{ (isset($clientInputs['statutory_funds_invested']) && $clientInputs['statutory_funds_invested'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['statutory_funds_invested']) && $clientInputs['statutory_funds_invested'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
-                        <li>निधीचे व्यवस्थापन योग्यरीत्या केले आहे -
+                        <li>निधीचे व्यवस्थापन योग्यरीत्या केले -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_management_proper">
                                 <option value="आहे" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
                         <li>तत्संबंधित केलेली गुंतवणूक किमती आहे का, ती नियमावली प्रमाणे तपशील नमूद करावा -
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_valued_as_per_rules">
-                                <option value="आहे" {{ (isset($clientInputs['investment_valued_as_per_rules']) && $clientInputs['investment_valued_as_per_rules'] == 'आहे') ? 'selected' : '' }}>आहे</option>
-                                <option value="नाही" {{ (isset($clientInputs['investment_valued_as_per_rules']) && $clientInputs['investment_valued_as_per_rules'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                            </select>
+                            <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="investment_value_compliant" value="{{ $clientInputs['investment_value_compliant'] ?? '' }}">
                         </li>
                         <li>गुंतवणूक प्रमाणपत्रे नियमानुसार पुर्ण प्रमाणात आहेत -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_compliant">
@@ -944,7 +859,12 @@
                             </select>
                         </li>
                         <li>सध्या नागरी सहकारी बँक/सेंट्रल/डिस्ट्रिक्ट बँके व्यतिरिक्त अन्य कुठे गुंतवणूक केली असल्यास/त्याबाबत तपशील नमूद करावा.</li>
-                        <li> गुंतवणूक खेळत्या भांडवलाशी असल्याचे प्रमाण नमूद करावे. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="investment_to_working_capital_ratio" value="{{ $clientInputs['investment_to_working_capital_ratio'] ?? '' }}">
+                        <input type="text" class="form-control d-inline-block" style="width:300px;display:inline;" name="other_investments_details" value="{{ $clientInputs['other_investments_details'] ?? '' }}">
+                        <li> गुंतवणूक खेळत्या भांडवलाशी असल्याचे प्रमाण नमूद करावे. @if($client['totalIncome7'] != 0)
+                            <b>{{ number_format(($client['गुंतवणूक_sum'] / $client['totalIncome7']) * 100, 2) }}% </b>
+                            @else
+                            0%
+                            @endif
                         </li>
                     </ol>
                 </div>
@@ -954,10 +874,10 @@
                 <!-- START: कर्ज (Loan) Section as per pasted image -->
                 <div class="mt-4 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">4. कर्जे :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:160px;display:inline;" name="loan_total" value="{{ $clientInputs['loan_total'] ?? '90779408.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['देणे कर्ज_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                    <span style="font-weight:bold;background:yellow;">दि. 31/03/{{ $end }} अखेर संस्थेस खालीलप्रमाणे कर्ज येणे आहे.</span>
+                    <span style="font-weight:bold;">दि. 31/03/2025 अखेर संस्थेस खालीलप्रमाणे कर्ज येणे आहे.</span>
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
@@ -971,120 +891,57 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalLastYear = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['देणे कर्ज'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalLastYear += $c->lastYear;
+                            $totalDiff += ($c->currentYear - $c->lastYear);
+                            @endphp
                             <tr>
-                                <td>1</td>
-                                <td>मध्यम मुदत कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_1_last" value="{{ $clientInputs['loan_1_last'] ?? '64149472' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_1_current" value="{{ $clientInputs['loan_1_current'] ?? '74024521' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_1_diff" value="{{ $clientInputs['loan_1_diff'] ?? '9875049-Up' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->lastYear, 2) }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>सोने तारण</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_2_last" value="{{ $clientInputs['loan_2_last'] ?? '6467046' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_2_current" value="{{ $clientInputs['loan_2_current'] ?? '7638391' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_2_diff" value="{{ $clientInputs['loan_2_diff'] ?? '1171345-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>आकस्मिक कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_3_last" value="{{ $clientInputs['loan_3_last'] ?? '940495' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_3_current" value="{{ $clientInputs['loan_3_current'] ?? '1041105' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_3_diff" value="{{ $clientInputs['loan_3_diff'] ?? '100610-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>अल्प मुदत कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_4_last" value="{{ $clientInputs['loan_4_last'] ?? '1112011' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_4_current" value="{{ $clientInputs['loan_4_current'] ?? '1244020' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_4_diff" value="{{ $clientInputs['loan_4_diff'] ?? '132009-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>कुटुंब निविदित ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_5_last" value="{{ $clientInputs['loan_5_last'] ?? '490000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_5_current" value="{{ $clientInputs['loan_5_current'] ?? '700000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_5_diff" value="{{ $clientInputs['loan_5_diff'] ?? '210000-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>मुदत ठेव तारण</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_6_last" value="{{ $clientInputs['loan_6_last'] ?? '752610' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_6_current" value="{{ $clientInputs['loan_6_current'] ?? '1664431' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_6_diff" value="{{ $clientInputs['loan_6_diff'] ?? '911821-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>नियमानुसार ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_7_last" value="{{ $clientInputs['loan_7_last'] ?? '1907984' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_7_current" value="{{ $clientInputs['loan_7_current'] ?? '3205950' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_7_diff" value="{{ $clientInputs['loan_7_diff'] ?? '1297966-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>दाम दिप्पट ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_8_last" value="{{ $clientInputs['loan_8_last'] ?? '12000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_8_current" value="{{ $clientInputs['loan_8_current'] ?? '12000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_8_diff" value="{{ $clientInputs['loan_8_diff'] ?? '0-Equal' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>दामदुप्पट ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_9_last" value="{{ $clientInputs['loan_9_last'] ?? '1161000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_9_current" value="{{ $clientInputs['loan_9_current'] ?? '712790' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_9_diff" value="{{ $clientInputs['loan_9_diff'] ?? '-448210-Down' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>दाम चौपट ठेव तारण कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_10_last" value="{{ $clientInputs['loan_10_last'] ?? '46000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_10_current" value="{{ $clientInputs['loan_10_current'] ?? '26000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_10_diff" value="{{ $clientInputs['loan_10_diff'] ?? '-20000-Down' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>इतर कर्जे</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_11_last" value="{{ $clientInputs['loan_11_last'] ?? '0' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_11_current" value="{{ $clientInputs['loan_11_current'] ?? '20000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_11_diff" value="{{ $clientInputs['loan_11_diff'] ?? '20000-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>आवर्त ठेव तारण</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_12_last" value="{{ $clientInputs['loan_12_last'] ?? '129100' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_12_current" value="{{ $clientInputs['loan_12_current'] ?? '310200' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_12_diff" value="{{ $clientInputs['loan_12_diff'] ?? '181100-Up' }}"></td>
-                            </tr>
+                            @endforeach
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_total_last" value="{{ $clientInputs['loan_total_last'] ?? '77167718.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_total_current" value="{{ $clientInputs['loan_total_current'] ?? '90779408.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="loan_total_diff" value="{{ $clientInputs['loan_total_diff'] ?? '13611690.00' }}"></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="mb-2">
                     कर्जाची तुलनात्मक आकडेवारी पाहता अहवाल सालात कर्जात रु.
-                    <span style="background: yellow; font-weight:bold;">
-                        <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="loan_total_diff_text" value="{{ $clientInputs['loan_total_diff_text'] ?? '13611690.00' }}">
+                    <span style="font-weight:bold;">
+                        {{ number_format($totalDiff, 2) }}
                     </span>
                     वाढ झाली आहे. लेखापरीक्षण कालावधीत कर्जाचा व्याजदर
-                    <span style="background: yellow; font-weight:bold;">
-                        <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_interest_rate" value="{{ $clientInputs['loan_interest_rate'] ?? '11 to 13%' }}">
+                    <span style="font-weight:bold;">
+                        <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_interest_rate" value="{{ $clientInputs['loan_interest_rate'] ?? '' }}">
                     </span>
                     आकारला आहे. सेवक कर्जाचा
-                    <span style="background: yellow; font-weight:bold;">
-                        <input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="employee_loan_interest_rate" value="{{ $clientInputs['employee_loan_interest_rate'] ?? '12%' }}">
+                    <span style="font-weight:bold;">
+                        <input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="employee_loan_interest_rate" value="{{ $clientInputs['employee_loan_interest_rate'] ?? '' }}">
                     </span>
                     व्याज आकारणी केली आहे. संस्थेचे कामकाज संगणकीकृत असल्याने कर्जे यादया संगणक प्रणालीद्वारे काढलेल्या
-                    <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="loan_list_computerized">
+                    <select class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_list_computerized">
                         <option value="आहे" {{ (isset($clientInputs['loan_list_computerized']) && $clientInputs['loan_list_computerized'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['loan_list_computerized']) && $clientInputs['loan_list_computerized'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     . ताळेबंदाशी कर्जे यादया जुळत
-                    <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="loan_list_matches">
+                    <select class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_list_matches">
                         <option value="आहे" {{ (isset($clientInputs['loan_list_matches']) && $clientInputs['loan_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['loan_list_matches']) && $clientInputs['loan_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -1102,7 +959,7 @@
                     शाखा येणे देणे रकमांमध्ये फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
                 </div>
                 <div class="mb-2">
-                    <span style="background: yellow; font-weight:bold;">6. स्थावर व जंगम मालमत्ता: <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="fixed_movable_assets_total" value="{{ $clientInputs['fixed_movable_assets_total'] ?? '9301092.00' }}"></span>
+                    <span style="font-weight:bold;">6. स्थावर व जंगम मालमत्ता: {{$client['कायम मालमत्ता_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
                     <span style="font-weight:bold;">दि. 31/03/2024 अखेर संस्थेची मालमत्ता खालीलप्रमाणे आहे.</span>
@@ -1111,48 +968,43 @@
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                                <th style="background: yellow;">अ.क्र.</th>
-                                <th style="background: yellow;">मालमत्तेचा तपशील</th>
-                                <th style="background: yellow;">दि.31/03/2023 अखेर रक्कम रु.</th>
-                                <th style="background: yellow;">दि.31/03/2024 अखेर रक्कम रु.</th>
-                                <th style="background: yellow;">वाढ/घट रक्कम रु.</th>
+                                <th>अ.क्र.</th>
+                                <th>मालमत्तेचा तपशील</th>
+                                <th>दि.31/03/2023 अखेर रक्कम रु.</th>
+                                <th>दि.31/03/2024 अखेर रक्कम रु.</th>
+                                <th>वाढ/घट रक्कम रु.</th>
                             </tr>
                         </thead>
                         <tbody>
+
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalLastYear = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['कायम मालमत्ता'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalLastYear += $c->lastYear;
+                            $totalDiff += ($c->currentYear - $c->lastYear);
+                            @endphp
                             <tr>
-                                <td>1</td>
-                                <td>इमारत खरेदी</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_building_2023" value="{{ $clientInputs['asset_building_2023'] ?? '6530400' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_building_2024" value="{{ $clientInputs['asset_building_2024'] ?? '6692768' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_building_diff" value="{{ $clientInputs['asset_building_diff'] ?? '162368-Up' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->lastYear, 2) }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>मशिनरी व सॉफ्टवेअर</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_machinery_2023" value="{{ $clientInputs['asset_machinery_2023'] ?? '312434' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_machinery_2024" value="{{ $clientInputs['asset_machinery_2024'] ?? '413444' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_machinery_diff" value="{{ $clientInputs['asset_machinery_diff'] ?? '100910-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>स्टेशनरी स्टॉक</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_stationary_2023" value="{{ $clientInputs['asset_stationary_2023'] ?? '42040' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_stationary_2024" value="{{ $clientInputs['asset_stationary_2024'] ?? '42040' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_stationary_diff" value="{{ $clientInputs['asset_stationary_diff'] ?? '0-Equal' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>ऑफिस फर्निचर</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_furniture_2023" value="{{ $clientInputs['asset_furniture_2023'] ?? '1391880' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_furniture_2024" value="{{ $clientInputs['asset_furniture_2024'] ?? '2152940' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_furniture_diff" value="{{ $clientInputs['asset_furniture_diff'] ?? '761060-Up' }}"></td>
-                            </tr>
+                            @endforeach
+
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_total_2023" value="{{ $clientInputs['asset_total_2023'] ?? '8276754.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_total_2024" value="{{ $clientInputs['asset_total_2024'] ?? '9301092.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="asset_total_diff" value="{{ $clientInputs['asset_total_diff'] ?? '1024338.00' }}"></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -1164,14 +1016,14 @@
                     <ol style="padding-left: 20px;">
                         <li>
                             संस्थेने मालमत्तेवर नियमाप्रमाणे घसारा आकारणी केलेली आहे का?
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="depreciation_applied">
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="depreciation_applied">
                                 <option value="आहे" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
                         <li>
                             संस्थेने अद्यावत मालमत्ता रजिस्टर ठेवलेले आहे का?
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="asset_register_maintained">
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="asset_register_maintained">
                                 <option value="आहे" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -1185,7 +1037,7 @@
                         </li>
                         <li>
                             सदस्य विक्रीतून संस्थेस नफाजमा/तथलेख मानांकनानुसार केलेला तोटा झाला असल्यास त्यांचा/लागू
-                            <select class="form-control d-inline-block" style="width:80px;display:inline;background: #00ff00;" name="member_asset_loss_applied">
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="member_asset_loss_applied">
                                 <option value="आहे" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -1194,10 +1046,10 @@
                 </div>
                 <div class="mb-2">
                     <span class="fw-bold">8. इतर येणे :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="other_receivable" value="{{ $clientInputs['other_receivable'] ?? '174945.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{ $client['इतर देणी_sum_currentYear'] ?? 0 }}</span>
                 </div>
                 <div class="mb-2">
-                    दि. <span style="background: yellow;">31/03/{{ $end }}</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम येणे आहे.
+                    दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम येणे आहे.
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
@@ -1211,57 +1063,44 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalLastYear = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['इतर देणी'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalLastYear += $c->lastYear;
+                            $totalDiff += ($c->currentYear - $client->lastYear);
+                            @endphp
                             <tr>
-                                <td>1</td>
-                                <td>कार्यालय घसारा अडव्हान्सेस</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_office_adv" value="{{ $clientInputs['other_receivable_office_adv'] ?? '25000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_office_adv_list" value="{{ $clientInputs['other_receivable_office_adv_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_office_adv_diff" value="{{ $clientInputs['other_receivable_office_adv_diff'] ?? '25000-Up' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->lastYear, 2) }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>अभिकर्ता कमिशन अडव्हान्सेस</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_agent_comm" value="{{ $clientInputs['other_receivable_agent_comm'] ?? '24000' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_agent_comm_list" value="{{ $clientInputs['other_receivable_agent_comm_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_agent_comm_diff" value="{{ $clientInputs['other_receivable_agent_comm_diff'] ?? '24000-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>टेलीफोन अडव्हान्स</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_telephone" value="{{ $clientInputs['other_receivable_telephone'] ?? '545' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_telephone_list" value="{{ $clientInputs['other_receivable_telephone_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_telephone_diff" value="{{ $clientInputs['other_receivable_telephone_diff'] ?? '0-Equal' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>कोर्ट फी खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_court_fee" value="{{ $clientInputs['other_receivable_court_fee'] ?? '125400' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_court_fee_list" value="{{ $clientInputs['other_receivable_court_fee_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_court_fee_diff" value="{{ $clientInputs['other_receivable_court_fee_diff'] ?? '125400-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>ठेवी व्याज ठेव खाते</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_deposit_interest" value="{{ $clientInputs['other_receivable_deposit_interest'] ?? '00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_deposit_interest_list" value="{{ $clientInputs['other_receivable_deposit_interest_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_deposit_interest_diff" value="{{ $clientInputs['other_receivable_deposit_interest_diff'] ?? '-80-Down' }}"></td>
-                            </tr>
+                            @endforeach
+
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_total_tb" value="{{ $clientInputs['other_receivable_total_tb'] ?? '174945.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="other_receivable_total_list" value="{{ $clientInputs['other_receivable_total_list'] ?? '' }}"></td>
-                                <td></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="mb-2">
                     <span class="fw-bold">घेणे व्याज :-</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="interest_receivable" value="{{ $clientInputs['interest_receivable'] ?? '2190404.00' }}"></span>
+                    <span style="font-weight:bold;">रु. {{ $client['घेणे व्यज_sum_currentYear'] ?? 0 }}</span>
                 </div>
                 <div class="mb-2">
-                    दि. <span>31/03/{{ $end }}</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम घेणे आहे.
+                    दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम घेणे आहे.
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
@@ -1275,40 +1114,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i = 1; @endphp
+                            @php
+                            $totalCurrentYear = 0;
+                            $totalLastYear = 0;
+                            $totalDiff = 0;
+                            @endphp
+                            @foreach($client['घेणे व्यज'] as $c)
+                            @php
+                            $totalCurrentYear += $c->currentYear;
+                            $totalLastYear += $c->lastYear;
+                            $totalDiff += ($c->currentYear - $c->lastYear);
+                            @endphp
                             <tr>
-                                <td>1</td>
-                                <td>घेणे व्याज मध्यम मुदत कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_med_term_tb" value="{{ $clientInputs['int_recv_med_term_tb'] ?? '373442' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_med_term_list" value="{{ $clientInputs['int_recv_med_term_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_med_term_diff" value="{{ $clientInputs['int_recv_med_term_diff'] ?? '0-Equal' }}"></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $c->entity }}</td>
+                                <td>{{ number_format($c->lastYear, 2) }}</td>
+                                <td>{{ number_format($c->currentYear, 2) }}</td>
+                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>घेणे व्याज कॅ ऑफ गुंतवणूक</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_investment_tb" value="{{ $clientInputs['int_recv_investment_tb'] ?? '1375087' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_investment_list" value="{{ $clientInputs['int_recv_investment_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_investment_diff" value="{{ $clientInputs['int_recv_investment_diff'] ?? '145974-Up' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>घेणे व्याज आकस्मिक कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_emergency_tb" value="{{ $clientInputs['int_recv_emergency_tb'] ?? '71598' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_emergency_list" value="{{ $clientInputs['int_recv_emergency_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_emergency_diff" value="{{ $clientInputs['int_recv_emergency_diff'] ?? '0-Equal' }}"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>व्याज घेणे अन्य मुदत कर्ज</td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_other_tb" value="{{ $clientInputs['int_recv_other_tb'] ?? '370277' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_other_list" value="{{ $clientInputs['int_recv_other_list'] ?? '' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_other_diff" value="{{ $clientInputs['int_recv_other_diff'] ?? '0-Equal' }}"></td>
-                            </tr>
+                            @endforeach
+
                             <tr>
                                 <td class="fw-bold">एकूण</td>
                                 <td></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_total_tb" value="{{ $clientInputs['int_recv_total_tb'] ?? '2190404.00' }}"></td>
-                                <td style="background: yellow;"><input type="text" class="form-control" name="int_recv_total_list" value="{{ $clientInputs['int_recv_total_list'] ?? '' }}"></td>
-                                <td></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -1316,18 +1149,18 @@
                 <span class="text-muted">(टीप- संस्था विलिनीकरण केली असल्यास विलिनीकृत संस्थांची येणे रक्कम स्वतंत्र दर्शविण्यात यावी)</span>
                 <div class="mt-3 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">9. संचीत तोटा : -</span>
-                    <span style="background: yellow; font-weight:bold;">रु. <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss" value="{{ $clientInputs['accumulated_loss'] ?? '0' }}"></span>
+                    <span style="font-weight:bold;">रु. {{$client['नफा_तोटा_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                    सदर बाकी दि.<span style="background: yellow;">31/03/{{ $end }}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा/तोटा  रु.
-                    <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_last" value="{{ $clientInputs['accumulated_loss_last'] ?? '0' }}"></span>
+                    सदर बाकी दि.<span>31/03/2025</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा/तोटा रु.
+                    <span>{{$client['नफा_तोटा_sum_lastYear']}}</span>
                     अधिक/व चालू वर्षाचा नफा/तोटा रु.
-                    <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_current" value="{{ $clientInputs['accumulated_loss_current'] ?? '0' }}"></span>
-                    एकूण संचीत तोटा रु.
-                    <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="accumulated_loss_total" value="{{ $clientInputs['accumulated_loss_total'] ?? '0' }}"></span>
+                    <span></span>
+                    एकूण संचीत तोटा रु. {{$client['नफा_तोटा_sum_currentYear']}}
+                    <span>{{$client['नफा_तोटा_sum_lastYear']}}</span>
                     बरोबर आहे. आवष्यक तरतुद न केल्यामुळे संचीत तोटा प्रमाणीत करता येत नाही.
                     <br>
-                    नफा वाटणी कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे करण्यात यावे. 
+                    नफा वाटणी कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे करण्यात यावे.
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4> </h4>
