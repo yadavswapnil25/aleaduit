@@ -20,10 +20,23 @@
                     </span>
                 </div>
                 <div class="mb-2">
-                    <span>संस्थेचे नाव : <input type="text" class="form-control d-inline-block" style="width:300px;display:inline;" name="org_name" value="{{ $clientInputs['org_name'] ?? '' }}"></span>
+                    <span>संस्थेचे नाव : <span style="font-weight:bold;">{{$client->name_of_society}}</span></span>
                 </div>
                 <div class="mb-2">
-                    <span>लेखापरीक्षण वर्ष – सन् 20<input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="audit_year_start" value="{{ $clientInputs['audit_year_start'] ?? '' }}"> — 20<input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="audit_year_end" value="{{ $clientInputs['audit_year_end'] ?? '' }}"></span>
+                       @php
+                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                    $auditPeriod = '';
+                    $start = '';
+                    $end = '';
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                    $start = $m[1];
+                    $end = $m[2];
+                    $auditPeriod = "01/04/$start - 31/03/$end";
+                    } else {
+                    $auditPeriod = $client->audit_year;
+                    }
+                    @endphp
+                    <span>लेखापरीक्षण वर्ष – सन् {{$start}} — {{$end}}</span>
                 </div>
                 <form action="{{ route('admin.client.saveInputs', $client->id) }}" method="POST">
                     @csrf
@@ -166,7 +179,7 @@
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
                                 <td style="background: #ffff99;">45</td>
                                 <td style="background: #00e6ff;">
-                                    <input type="text" class="form-control" name="ownfund_total_score" value="{{ $clientInputs['ownfund_total_score'] ?? '0.00' }}">
+                                    <input type="text" class="form-control" name="ownfund_total_score" value="{{ $clientInputs['ownfund_total_score'] ?? '' }}">
                                 </td>
                             </tr>
                             <tr>
@@ -331,7 +344,7 @@
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
                                 <td style="background: #ffff99;">55</td>
                                 <td style="background: #00e6ff;">
-                                    <input type="text" class="form-control" name="assets_total_score" value="{{ $clientInputs['assets_total_score'] ?? '0.00' }}">
+                                    <input type="text" class="form-control" name="assets_total_score" value="{{ $clientInputs['assets_total_score'] ?? '' }}">
                                 </td>
                             </tr>
                             <!-- END: Assets Quality section -->
@@ -359,12 +372,28 @@
                                 <td class="text-start">
                                     सभा कामकाज :<br>
                                     <span style="margin-left: 1em;">अ) सभांना सूचना विहित मुदतीत पाठविली असल्यास</span><br>
-                                    <span style="margin-left: 1em;">ब) वार्षिक सर्वसाधारण सभा सहकार कायदा कलम 75 (2) मध्ये तरतूदीप्रमाणे विहित मुदतीत घेतली असल्यास</span><br>
-                                    <span style="margin-left: 1em;">क) संचालक मंडळाची उपविधीतील तरतूदीप्रमाणे दरमहा किमान एक सभा किंवा सभा कामकाज होत असल्यास</span>
                                 </td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="mgmt_meeting_detail" value="{{ $clientInputs['mgmt_meeting_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    ब) वार्षिक सर्वसाधारण सभा सहकार कायदा कलम 75 (2) मध्ये तरतूदीप्रमाणे विहित मुदतीत घेतली असल्यास
+                                </td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_meeting_2_detail" value="{{ $clientInputs['mgmt_meeting_2_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    क) संचालक मंडळाची उपविधीतील तरतूदीप्रमाणे दरमहा किमान एक सभा किंवा सभा कामकाज होत असल्यास
+                                </td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_meeting_3_detail" value="{{ $clientInputs['mgmt_meeting_3_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -448,7 +477,47 @@
                                 </td>
                                 <td>3</td>
                                 <td></td>
-                                <td><input type="text" class="form-control" name="mgmt_staff_training_detail" value="{{ $clientInputs['mgmt_staff_training_detail'] ?? '' }}"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    1)100% अधिकारी / सेवक प्रशिक्षित असल्यास
+                                </td>
+                                <td>3</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_training_6_detail" value="{{ $clientInputs['mgmt_training_6_detail'] ?? '' }}"></td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    2) 75% व त्यापेक्षा अधिक अधिकारी / सेवक प्रशिक्षित असल्यास
+                                </td>
+                                <td>2</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_training_7_detail" value="{{ $clientInputs['mgmt_training_7_detail'] ?? '' }}"></td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    3)50% ते 75% पर्यंत अधिकारी/ सेवक प्रशिक्षित असल्यास
+                                </td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_training_8_detail" value="{{ $clientInputs['mgmt_training_8_detail'] ?? '' }}"></td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    4)50% पेक्षा कमी अधिकारी / सेवक प्रशिक्षित असल्यास
+                                </td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_training_9_detail" value="{{ $clientInputs['mgmt_training_9_detail'] ?? '' }}"></td>
+
                             </tr>
                             <!-- END: Management section -->
 
@@ -631,21 +700,20 @@
                             <tr>
                                 <td>1</td>
                                 <td>संचालक मंडळ निवडणूक – संचालक मंडळाच्या निवडणुकी संदर्भात कायदा व नियमातील तरतूदीप्रमाणे आवश्यक ती पुर्णता वेळेवर केली असल्यास</td>
+                                <td></td>
                                 <td>2</td>
                                 <td></td>
-                                <td><input type="text" class="form-control" name="board_election_detail" value="{{ $clientInputs['board_election_detail'] ?? '' }}"></td>
                             </tr>
                         </tbody>
-                    </table>
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
-                        <thead>
+                        <tbody>
                             <tr>
-                                <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
-                                    एकूण गुण
-                                    <span style="background: yellow;">38</span>
-                                </th>
+                                <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
+                                <td style="background: #ffff99;">38</td>
+                                <td style="background: #00e6ff;">
+                                    <input type="text" class="form-control" name="sysctrl_total_score1" value="{{ $clientInputs['sysctrl_total_score1'] ?? '' }}">
+                                </td>
                             </tr>
-                        </thead>
+                        </tbody>
                     </table>
                     <!-- END: गतवर्षाच्या तुलनेत ठेवीतील वाढ, सभासद, संचालक मंडळ, निकाल Design -->
 
@@ -667,7 +735,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="5">1</td>
+                                <td rowspan="6">1</td>
                                 <td class="text-start">निव्वळ नफ्याचे सरासरी खेळत्या भांडवलाशी प्रमाण :</td>
                                 <td></td>
                                 <td></td>
@@ -679,6 +747,7 @@
                                 <td></td>
                                 <td><input type="text" class="form-control" name="earnings_net_profit_1_detail" value="{{ $clientInputs['earnings_net_profit_1_detail'] ?? '' }}"></td>
                             </tr>
+
                             <tr>
                                 <td class="text-start">ब) 0.80% पेक्षा अधिक ते 1% असल्यास</td>
                                 <td>8</td>
@@ -697,9 +766,10 @@
                                 <td></td>
                                 <td><input type="text" class="form-control" name="earnings_net_profit_4_detail" value="{{ $clientInputs['earnings_net_profit_4_detail'] ?? '' }}"></td>
                             </tr>
+
                             <tr>
                                 <td class="text-start">इ) 0.20% पर्यंत असल्यास</td>
-                                <td>0</td>
+                                <td>2</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="earnings_net_profit_5_detail" value="{{ $clientInputs['earnings_net_profit_5_detail'] ?? '' }}"></td>
                             </tr>
@@ -729,11 +799,13 @@
                                 <td><input type="text" class="form-control" name="earnings_mgmt_exp_3_detail" value="{{ $clientInputs['earnings_mgmt_exp_3_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
+                                <td></td>
                                 <td class="text-start">ड) 3% पेक्षा अधिक असल्यास</td>
                                 <td>0</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="earnings_mgmt_exp_4_detail" value="{{ $clientInputs['earnings_mgmt_exp_4_detail'] ?? '' }}"></td>
                             </tr>
+
                             <tr>
                                 <td>3</td>
                                 <td class="text-start">
@@ -748,13 +820,180 @@
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
                                 <td style="background: #ffff99;">17</td>
                                 <td style="background: #00e6ff;">
-                                    <input type="text" class="form-control" name="earnings_total_score" value="{{ $clientInputs['earnings_total_score'] ?? '0.00' }}">
+                                    <input type="text" class="form-control" name="earnings_total_score1" value="{{ $clientInputs['earnings_total_score1'] ?? '' }}">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <!-- END: उत्पन्न (Earnings) Design -->
+                    <!-- start -->
+                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                        <thead>
+                            <tr>
+                                <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
+                                    5. तरलता (Liquidity) :- <span style="font-weight:normal;">15 गुण</span>
+                                </th>
+                            </tr>
+                            <!-- <tr>
+                                <th>अ.क्र.</th>
+                                <th>तपशील</th>
+                                <th>लक्ष्य गुण</th>
+                                <th>एकूण गुण</th>
+                                <th>तपशील गुण</th>
+                            </tr> -->
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="5">1</td>
+                                <td class="text-start">1 वैधानिक तरलता निधी प्रमाण (S.L.R – Statutory Liquidity Ratio) :-</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">अ) नियामक मंडळाने निर्धारित केल्यानुसार संस्थेने दैनंदिन पद्धतीने
+                                    वैधानिक तरलता निधी प्रमाण राखून तरलतेपोटी कलम 70 व
+                                    144-10 अ प्रमाणे गुंतवणूक केली असल्यास
+                                </td>
+                                <td>3</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_11_detail" value="{{ $clientInputs['earnings_net_profit_11_detail'] ?? '' }}"></td>
+                            </tr>
 
+                            <tr>
+                                <td class="text-start">अन्यथा</td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_12_detail" value="{{ $clientInputs['earnings_net_profit_12_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">ब)संस्थेने वैधानिक तरलता निधीबाबत दैनंदिन पद्धतीने नोंदी ठेवून
+                                    मुख्य कार्यकारी अधिकारी यानी अशा नोंदी प्रमाणित करून संचालक
+                                    मंडळ सभेत दरमहा नोंद घेतली असल्यास</td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_13_detail" value="{{ $clientInputs['earnings_net_profit_13_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">अन्यथा</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4"></td>
+                                <td class="text-start">क) नियामक मंडळाने निर्धारित केल्यानुसार संस्थेने वैधानिक तरलता
+                                    निधीचे विहित नमुन्यातील तिमाही विवरणपत्र विहित मुदतीत
+                                    निबंधक कार्यलयास सादर केले असल्यास</td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_15_detail" value="{{ $clientInputs['earnings_net_profit_15_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">अन्यथा</td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_16_detail" value="{{ $clientInputs['earnings_net_profit_16_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">रोख राखीव निधी प्रमाण (C.R.R.-Cash Reserve Ratio):—</td>
+                                <td></td>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">अ) नियामक मंडळाने निर्धारित केल्यानुसार संस्थेने दैनंदिन
+                                    पद्धतीने रोख राखीव निधी प्रमाण राखून कलम 70 व 144 -9 अ
+                                    चे पालन केले असल्यास</td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_17_detail" value="{{ $clientInputs['earnings_net_profit_17_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">अन्यथा</td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_18_detail" value="{{ $clientInputs['earnings_net_profit_18_detail'] ?? '' }}"></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    ब)संस्थेने रोख राखीव निधीबाबत दैनंदिन पद्धतीने नोंदी ठेवून
+                                    मुख्य कार्यकारी अधिकारी यांनी अशा नोंदी प्रमाणित करून
+                                    संचालक मंडळ सभेत दरमहा नोंद घेतली असल्यास
+                                </td>
+                                <td>1</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_19_detail" value="{{ $clientInputs['earnings_net_profit_19_detail'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    क) नियामक मंडळाने निर्धारित केल्यानुसार संस्थेने रोख राखीव
+                                    निधीचे विहीत नमुन्यातील तिमाही विवरण विहित मुदतीत निबंधक
+                                    कार्यालयास सादर केले असल्यास
+                                </td>
+                                <td>0</td>
+                                <td></td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_20_detail" value="{{ $clientInputs['earnings_net_profit_20_detail'] ?? '' }}"> </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="text-start">
+                                    एकूण गुंतवणूकीत अनुत्पादक गुंतवणूकीचे प्रमाण :-
+                                </td>
+                                <td></td>
+                                <td>5</td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    अ) 5% पेक्षा कमी असल्यास
+                                </td>
+                                <td>5</td>
+                                <td></td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_21_detail" value="{{ $clientInputs['earnings_net_profit_21_detail'] ?? '' }}"> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    ब) 5% ते 10% पर्यंत असल्यास
+                                </td>
+                                <td>4</td>
+                                <td></td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_22_detail" value="{{ $clientInputs['earnings_net_profit_22_detail'] ?? '' }}"> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    क) 10% पेक्षा अधिक ते 20% पर्यंत असल्यास
+                                </td>
+                                <td>2</td>
+                                <td></td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_23_detail" value="{{ $clientInputs['earnings_net_profit_23_detail'] ?? '' }}"> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    ड) 20% पेक्षा अधिक असल्यास
+                                </td>
+                                <td>0</td>
+                                <td></td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_24_detail" value="{{ $clientInputs['earnings_net_profit_24_detail'] ?? '' }}"> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
+                                <td style="background: #ffff99;">15</td>
+                                <td style="background: #00e6ff;">
+                                    <input type="text" class="form-control" name="earnings_total_score2" value="{{ $clientInputs['earnings_total_score2'] ?? '' }}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- end -->
                     <!-- START: कार्यपद्धती व नियंत्रण (System And Control) Design as per pasted image -->
                     <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
                         <thead>
@@ -984,23 +1223,124 @@
                             </tr>
                         </tbody>
                     </table>
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4> </h4>
-                    <div>
-                        <button type="submit" class="btn btn-success">Save</button>
-                        <a href="{{ url('admin/client/show', $client->id) }}"><button type="button" class="btn btn-secondary">Back</button></a>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4> </h4>
+                        <div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a href="{{ url('admin/client/show', $client->id) }}"><button type="button" class="btn btn-secondary">Back</button></a>
+                        </div>
                     </div>
-                </div>
                 </form>
-                    <div class="mt-2 mb-4">
-                        <span>
-                            वरील प्रमाणे लेखापरीक्षकाने दिलेल्या एकूण गुणांपैकी 200 गुण पैकी 2 ने भागून एकूण प्राप्त गुण काढण्यात यावे.
-                        </span>
-                    </div>
-                    <!-- END: गुणांचे सारांश व अंतिम गणना Design -->
+                <div class="mt-2 mb-4">
+                    <span>
+                        वरील प्रमाणे लेखापरीक्षकाने दिलेल्या एकूण गुणांपैकी 200 गुण पैकी 2 ने भागून एकूण प्राप्त गुण काढण्यात यावे.
+                    </span>
+                </div>
+                <!-- END: गुणांचे सारांश व अंतिम गणना Design -->
             </div>
             <!-- END: सहकारी पतसंस्था लेखापरीक्षण गुणवत्त्ता Design -->
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const inputNames = [
+            'ownfund_1_detail', 'ownfund_2_detail', 'ownfund_3_detail', 'ownfund_4_detail',
+            'ownfund_5_detail', 'ownfund_6_detail', 'ownfund_66_detail', 'ownfund_7_detail',
+            'ownfund_8_detail', 'ownfund_9_detail', 'ownfund_10_detail', 'ownfund_11_detail',
+            'ownfund_12_detail', 'ownfund_13_detail'
+        ];
+
+        const inputNames1 = [
+            'assets_net_npa_1_detail', 'assets_net_npa_2_detail', 'assets_net_npa_3_detail',
+            'assets_gross_npa_1_detail', 'assets_gross_npa_2_detail', 'assets_gross_npa_3_detail', 'assets_gross_npa_4_detail',
+            'assets_npa_recovery_1_detail', 'assets_npa_recovery_2_detail', 'assets_npa_recovery_3_detail',
+            'loan_doc_1_detail', 'loan_doc_2_detail', 'loan_doc_3_detail', 'loan_doc_4_detail', 'loan_doc_5_detail',
+            'loan_doc_6_detail', 'loan_doc_7_detail', 'loan_doc_8_detail', 'loan_doc_9_detail', 'loan_doc_10_detail'
+        ];
+
+        const inputNames2 = [
+            'mgmt_meeting_detail', 'mgmt_meeting_2_detail', 'mgmt_meeting_3_detail', 'mgmt_policy_detail', 'mgmt_receipt_detail', 'mgmt_expert_detail',
+            'mgmt_training_1_detail', 'mgmt_training_2_detail', 'mgmt_training_3_detail', 'mgmt_training_4_detail', 'mgmt_training_5_detail',
+            'mgmt_training_6_detail', 'mgmt_training_7_detail', 'mgmt_training_8_detail', 'mgmt_training_9_detail', 'admin_appoint_detail',
+            'admin_branch_mgr_detail', 'admin_duty_detail', 'recovery_100_detail', 'recovery_75_99_detail', 'recovery_50_74_detail',
+            'recovery_25_49_detail', 'recovery_below_25_detail', 'deposit_growth_above_10_detail', 'deposit_growth_5_10_detail',
+            'deposit_growth_below_5_detail', 'member_admission_detail', 'member_nomination_detail', 'member_loan_share_detail'
+        ];
+        const inputNames3 = [
+            'earnings_net_profit_1_detail', 'earnings_net_profit_2_detail', 'earnings_net_profit_3_detail', 'earnings_net_profit_4_detail',
+            'earnings_net_profit_5_detail', 'earnings_mgmt_exp_1_detail', 'earnings_mgmt_exp_2_detail', 'earnings_mgmt_exp_3_detail', 'earnings_mgmt_exp_4_detail',
+            'earnings_provision_detail'
+        ];
+        const inputNames4 = [
+            'earnings_net_profit_11_detail', 'earnings_net_profit_12_detail', 'earnings_net_profit_13_detail', 'earnings_net_profit_15_detail',
+            'earnings_net_profit_16_detail', 'earnings_net_profit_17_detail', 'earnings_net_profit_18_detail', 'earnings_net_profit_19_detail',
+            'earnings_net_profit_20_detail', 'earnings_net_profit_21_detail', 'earnings_net_profit_22_detail', 'earnings_net_profit_23_detail',
+            'earnings_net_profit_24_detail'
+        ];
+        const inputNames5 = [
+            'sysctrl_deposit_interest_limit', 'sysctrl_stabilization_fund', 'sysctrl_tech_audit_correction', 'sysctrl_tech_audit_fulfilled',
+            'sysctrl_account_audit_fulfilled', 'sysctrl_other_audit_fulfilled', 'sysctrl_books_maintained', 'sysctrl_objective_work',
+            'sysctrl_bank_reconciliation', 'sysctrl_balances_match', 'sysctrl_bank_passbook_match', 'sysctrl_all_books_listed', 'sysctrl_president_certificate',
+            'sysctrl_kyc', 'sysctrl_loan_docs', 'sysctrl_fidelity_guarantee', 'sysctrl_cash_insurance', 'sysctrl_saving_share_limit',
+            'sysctrl_section79_reports', 'sysctrl_medical_auditor', 'sysctrl_tax_certificates', 'sysctrl_all_records', 'sysctrl_branch_control'
+        ];
+
+        function calculateTotal() {
+            let total = 0;
+            let total1 = 0;
+            let total2 = 0;
+            let total3 = 0;
+            let total4 = 0;
+            let total5 = 0;
+
+            inputNames.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total += value;
+            });
+            $('[name="ownfund_total_score"]').val(total.toFixed(2));
+            $('[name="summary_ownfund_score"]').val(total.toFixed(2));
+
+            inputNames1.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total1 += value;
+            });
+            $('[name="assets_total_score"]').val(total1.toFixed(2));
+            $('[name="summary_assets_score"]').val(total1.toFixed(2));
+
+            inputNames2.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total2 += value;
+            });
+            $('[name="sysctrl_total_score1"]').val(total2.toFixed(2));
+            $('[name="summary_mgmt_score"]').val(total2.toFixed(2));
+
+            inputNames3.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total3 += value;
+            });
+            $('[name="earnings_total_score1"]').val(total3.toFixed(2));
+            $('[name="summary_earnings_score"]').val(total3.toFixed(2));
+            inputNames4.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total4 += value;
+            });
+            $('[name="earnings_total_score2"]').val(total4.toFixed(2));
+            $('[name="summary_liquidity_score"]').val(total4.toFixed(2));
+
+            inputNames5.forEach(name => {
+                let value = parseFloat($(`[name="${name}"]`).val()) || 0;
+                total5 += value;
+            });
+            $('[name="sysctrl_total_score"]').val(total5.toFixed(2));
+            $('[name="summary_sysctrl_score"]').val(total5.toFixed(2));
+            $('[name="summary_obtained_score"]').val((total + total1 + total2 + total3 + total4 + total5).toFixed(2));
+        }
+
+        // ✅ Calculate once when page loads
+        calculateTotal();
+    });
+</script>
+
 @endsection

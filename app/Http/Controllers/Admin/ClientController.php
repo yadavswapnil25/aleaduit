@@ -692,8 +692,9 @@ class ClientController extends Controller
             return view('admin.clients.sheet8', compact('client'));
         } else if ($sheet_no == 9) {
             $client = Client::with('masterData')->find($client_id);
+            $clientInputs = ClientInput::where('client_id', $client_id)->pluck('value', 'key');
 
-            return view('admin.clients.sheet9', compact('client'));
+            return view('admin.clients.sheet9', compact('client','clientInputs'));
         } else {
             return redirect()->back()->withErrors(['error' => 'Invalid sheet number']);
         }
