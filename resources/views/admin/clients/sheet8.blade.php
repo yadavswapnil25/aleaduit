@@ -17,14 +17,27 @@
                 <!-- START: लेखा परीक्षकाचा अहवाल Design as per pasted image -->
                 <div class="mb-4">
                     <div class="text-center mb-2">
-                        <span class="fw-bold" style="font-size: 1.1em;">लेखा परीक्षकाचा अहवाल</span><br>
+                        <b><span class="fw-bold" style="font-size: 1.1em;">लेखा परीक्षकाचा अहवाल</span></b><br>
                         <span>(महाराष्ट्र सहकारी संस्थांचा कायदा कलम 81 (5) (ब) आणि महाराष्ट्र सहकारी संस्थांचा नियम 69
                             अन्वेय द्यावयाचा.)</span>
                     </div>
                     <ol style="padding-left: 20px;">
                         <li>
-                            मी, <input type="text" class="form-control d-inline-block" style="width:350px;display:inline;" name="auditor_name" value="{{ $clientInputs['auditor_name'] ?? 'ग्राम विकास समिती कर्मचारी सहकारी पत संस्था मर्या. भंडारा र. नं. 109' }}">
-                            या संस्थेच्या सोबत जोडलेल्या <span style="background: yellow;">31 मार्च 2024</span> या दिनांकाच्या ताळेबंद व वर्ष <span style="background: yellow;">2023-2024</span> या सहकारी वर्षाचे
+                            @php
+                            // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                            $auditPeriod = '';
+                            $start = '';
+                            $end = '';
+                            if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
+                            $start = $m[1];
+                            $end = $m[2];
+                            $auditPeriod = "01/04/$start - 31/03/$end";
+                            } else {
+                            $auditPeriod = $client->year->audit_year;
+                            }
+                            @endphp
+                            मी, <b>{{$client->name_of_society}}</b>
+                            या संस्थेच्या सोबत जोडलेल्या <span>31 मार्च {{$end}}</span> या दिनांकाच्या ताळेबंद व वर्ष <span>{{$start}}-{{$end}}</span> या सहकारी वर्षाचे
                             नफा-तोटा पत्रक तपासले आहे. आणि या आर्थिक पत्रकाची जबाबदारी संस्थेच्या व्यवस्थापक
                             मंडळावर आहे. माझी जबाबदारी या आर्थिक पत्रकावर माझया लेखापरिक्षणाचे आधारे माझे मत
                             प्रगट करणे ऐवढेच राहील.
@@ -48,7 +61,7 @@
                                     माझ्या मते व मला मिळालेली माहिती खुलाश्याच्या आधारे....
                                 </li>
                                 <li>
-                                    ताळेबंद व नफातोटा पत्रक संस्थेने ठेवलेल्या हिशोब पुस्तकांशी जुळते असुन नमुद <span style="background: yellow;">31/03/2024</span> या दिनांकाच्या ताळेबंद व्यवहाराची / कामकाजाची सत्य व वास्तव स्थिती दर्शविते आणि
+                                    ताळेबंद व नफातोटा पत्रक संस्थेने ठेवलेल्या हिशोब पुस्तकांशी जुळते असुन नमुद <span>31/03/{{$end}}</span> या दिनांकाच्या ताळेबंद व्यवहाराची / कामकाजाची सत्य व वास्तव स्थिती दर्शविते आणि
                                     नफा-तोटा पत्रकाचे बाबतीत त्या दिनांकास संपणाऱ्या वर्षातील नफा-तोटयाची सत्य व वास्तव
                                     स्थिती दर्शविते.
                                 </li>
@@ -56,25 +69,36 @@
                                     माझ्या मते संस्थेने महाराष्ट्र सहकारी कायदा नियम व संस्थेचे पोटनियम यानुसार आवश्यक
                                     असणारे हिशोब पुस्तके योग्य रितीने ठेवलेली आहेत.
                                 </li>
-                                <li>
-                                    ५) सन <span style="background: yellow;">2023-2024</span> या वर्षासाठी संस्थेचे लेखापरीक्षण वर्ग "<span style="background: yellow;">अ</span>" मागील प्रमाणे कायम करण्यात येत आहे.
-                                </li>
+                                <span>
+                                    अ) जमाखर्चाच्या ताळेबंदाच्या बाबतीत दि. 31/03/{{$end}} या तारखेपर्यंत संस्थेच्या कारभाराची
+                                    स्थिती दर्शवितो.
+                                </span>
+                                <span>
+                                    ब) नफा-तोटा पत्रकाच्या बाबतीत दि. 31/03/{{$end}} रोजी संपणाऱ्या आर्थिक वर्षातील नफ्याबाबत.
+                                </span><br>
+                                v) सन <span>{{$auditPeriod}}</span> या वर्षासाठी संस्थेचे लेखापरीक्षण वर्ग "<span>{{$client->lekha_parikshan_vargwari}}</span>" मागील प्रमाणे कायम करण्यात येत आहे.
+
                             </ol>
                         </li>
-                        <li>
-                            <div class="mt-3">
-                                <span>स्थळ : <span style="background: yellow;">भंडारा</span></span><br>
-                                <span>दिनांक : <span style="background: yellow;">31/07/2024</span></span>
+
+                        <div class="mt-3 d-flex justify-content-between align-items-start">
+                            <div>
+                                <span>स्थळ : <span>{{$client->district}}</span></span><br>
+                                <span>दिनांक :
+                                    <input type="date" name="date" value="{{ $clientInputs['date'] ?? '' }}">
+                                </span>
                             </div>
-                            <div class="mt-3" style="background: yellow; display: inline-block; padding: 8px 16px;">
-                                वाय. सी. चकलेले<br>
+
+                            <div style="padding: 8px 16px; text-align: right;">
+                                {{$auditor->name}}<br>
                                 प्रमाणित लेखापरीक्षक<br>
                                 सहकारी संस्था भंडारा
                             </div>
-                        </li>
+                        </div>
+
                     </ol>
                 </div>
-                 <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4> </h4>
                     <div>
                         <button type="submit" class="btn btn-success">Save</button>

@@ -16,14 +16,13 @@
                 <div class="text-center mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">
                         सेवक (पगारदार नोकरांच्या) सहकारी पतसंस्था लेखापरीक्षण वर्गवारी गुणतक्ता<br>
-                        <span style="font-size: 1em;">गुणवत्त्ता पत्रक</span>
                     </span>
                 </div>
                 <div class="mb-2">
                     <span>संस्थेचे नाव : <span style="font-weight:bold;">{{$client->name_of_society}}</span></span>
                 </div>
                 <div class="mb-2">
-                       @php
+                    @php
                     // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
                     $auditPeriod = '';
                     $start = '';
@@ -40,13 +39,13 @@
                 </div>
                 <form action="{{ route('admin.client.saveInputs', $client->id) }}" method="POST">
                     @csrf
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th rowspan="2">अ.क्र.</th>
                                 <th rowspan="2">तपशील</th>
-                                <th rowspan="2">लक्ष्य गुण</th>
-                                <th colspan="2">प्राप्त गुण</th>
+                                <th rowspan="2">निकष गुण</th>
+                                <th colspan="2">दिलेले गुण</th>
                             </tr>
                             <tr>
                                 <th>एकूण गुण</th>
@@ -59,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>अ) संस्थेचे स्वनिधी खेळत्या भांडवलाशी 10% पेक्षा जास्त असल्यास</td>
+                                <td class="text-start">अ) संस्थेचे स्वनिधी खेळत्या भांडवलाशी 10% पेक्षा जास्त असल्यास</td>
                                 <td>10</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="ownfund_1_detail" value="{{ $clientInputs['ownfund_1_detail'] ?? '' }}"></td>
@@ -88,7 +87,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>अ) उपविधीतील तरतूदीनुसार कर्ज रकमेतून कर्जाच्या प्रमाणात भाग 2
+                                <td>अ) उपविधीतील तरतूदीनुसार कर्ज रकमेतून कर्जाच्या प्रमाणात भाग
                                     रक्कम कपात करीत असल्यास</td>
                                 <td>2</td>
                                 <td></td>
@@ -96,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>ब) नफ्यातून राखीव निधीस वर्ग करमा</td>
+                                <td>ब) नफ्यातून राखीव निधीस वर्ग रकमा</td>
                                 <td>5</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="ownfund_5_detail" value="{{ $clientInputs['ownfund_5_detail'] ?? '' }}"></td>
@@ -138,7 +137,7 @@
                             </tr>
                             <tr>
                                 <td>अ)</td>
-                                <td> स्वनिधीमध्ये गतवर्षाशी तुलना करता 7.5% व त्योपेक्षा जास्त
+                                <td> स्वनिधीमध्ये गतवर्षाशी तुलना करता 7.5% व त्त्यापेक्षा जास्त
                                     वाढ असल्यास</td>
                                 <td>20</td>
                                 <td></td>
@@ -170,7 +169,7 @@
                             </tr>
                             <tr>
                                 <td>ई)</td>
-                                <td>स्वनिधीमध्ये गतवर्षी तुलना घट / हानी असल्यास</td>
+                                <td>स्वनिधीमध्ये गतवर्षी तुलना घट / हास असल्यास</td>
                                 <td>0</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="ownfund_13_detail" value="{{ $clientInputs['ownfund_13_detail'] ?? '' }}"></td>
@@ -184,7 +183,7 @@
                             </tr>
                             <tr>
                                 <td colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
-                                    2. जिंधांची गुणवत्ता (Assets Quality) :- <span style="font-weight:normal;">55 गुण</span>
+                                    2. जिंदगीची गुणवत्ता (Assets Quality) :- <span style="font-weight:normal;">55 गुण</span>
                                 </td>
                             </tr>
                             <!-- START: Assets Quality section as per pasted image -->
@@ -213,11 +212,11 @@
                                 <td><input type="text" class="form-control" name="assets_net_npa_3_detail" value="{{ $clientInputs['assets_net_npa_3_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td class="fw-bold" colspan="5" style="text-align:left;">2. एकूण अनुत्पादक जिद्दीची (Gross N.P.A.) प्रमाण :-</td>
+                                <td class="fw-bold" colspan="5" style="text-align:left;">2. ढोबळ अनुत्पादक जिंदगीचे (Gross N.P.A.) प्रमाण :-</td>
                             </tr>
                             <tr>
                                 <td>अ)</td>
-                                <td>5% पेक्षा कमी असल्यास</td>
+                                <td>5% व त्यापेक्षा कमी असल्यास</td>
                                 <td>15</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_gross_npa_1_detail" value="{{ $clientInputs['assets_gross_npa_1_detail'] ?? '' }}"></td>
@@ -244,11 +243,11 @@
                                 <td><input type="text" class="form-control" name="assets_gross_npa_4_detail" value="{{ $clientInputs['assets_gross_npa_4_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td class="fw-bold" colspan="5" style="text-align:left;">3. एकूण अनुत्पादक (N.P.A.) कर्जाची वसूलीचे प्रमाण :-</td>
+                                <td class="fw-bold" colspan="5" style="text-align:left;">3. गत वर्षअखेरच्या अनुत्पादक (N.P.A.) कर्जाच्या वसुलीचे प्रमाण :-</td>
                             </tr>
                             <tr>
                                 <td>अ)</td>
-                                <td>एकूण अनुत्पादक कर्जाची 30% व त्यापेक्षा अधिक असल्यास</td>
+                                <td>20% पेक्षा अधिक ते 30% व त्यापेक्षा अधिक असल्यास</td>
                                 <td>11 ते 5</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_npa_recovery_1_detail" value="{{ $clientInputs['assets_npa_recovery_1_detail'] ?? '' }}"></td>
@@ -272,74 +271,77 @@
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>कर्ज प्रकरणी आवश्यक ते दस्तऐवज व कामकाजे ठेवून, कर्ज मागणी अर्ज पूर्णपणे भरलेला असल्यास</td>
+                                <td>कर्ज प्रकरणी आवश्यक ते दस्तऐवज व कागदपत्रे घेउन, कर्ज
+                                    मागणी अर्ज परिपूर्ण भरलेला असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_1_detail" value="{{ $clientInputs['loan_doc_1_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>सर्व कर्जदारांनी आपले उपयोजक कर्जाची हप्त्याची हप्त्याची कपात</td>
+                                <td> सर्व कर्जदारांनी आपले पगारातून कर्जाचा हप्ता कपात
+                                    करणेबाबतचे अधिकारपत्र कलम 49 नुसार संस्थेस दिले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_2_detail" value="{{ $clientInputs['loan_doc_2_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>कर्ज अधिकाऱ्यांकडून क.क. 49 अनुसार संमती दिले असल्यास</td>
+                                <td>मालक संस्थेकडून पगारातून कर्जाचा हप्ता कपात करून वेळेत
+                                    पाठविणेबाबत हमीपत्र घेतले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_3_detail" value="{{ $clientInputs['loan_doc_3_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>कागदपत्रे संकलित प्रमाणपत्र कर्जाची हप्त्याची कपात करून वेळीच संस्थेच्या खात्यात जमा केली असल्यास</td>
+                                <td>मालक संस्थेकडून पगारातून कपात केलेली वर्गणीची रक्कम
+                                    दरमहा नियमित जमा होत असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_4_detail" value="{{ $clientInputs['loan_doc_4_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>कर्जदारांचे संकलित प्रमाणपत्र कर्जाची हप्त्याची कपात करून वेळीच संस्थेच्या खात्यात जमा केली असल्यास</td>
+                                <td>सभासदांना द्यावयाच्या कर्जाबाबत सभासदाचे वेतनमान, कर्ज
+                                    परतफेड क्षमता आणि इतर वैधानिक कपात (वेतन प्रदान
+                                    अधिनियमाप्रमाणे) यांचा विचार करून कर्जाचे हप्ते ठरविले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_5_detail" value="{{ $clientInputs['loan_doc_5_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td>मालमत्ता संकलित प्रमाणपत्र कर्जाची हप्त्याची कपात करून वेळीच संस्थेच्या खात्यात जमा केली असल्यास</td>
+                                <td>उपविधीतील तरतूदी व नियामक मंडळ परिपत्रकीय सूचनांनुसार
+                                    सभासद कमाल कर्ज मर्यादेचे पालन होत असल्यास</td>
                                 <td>2</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_6_detail" value="{{ $clientInputs['loan_doc_6_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td>मालमत्ता संकलित प्रमाणपत्र कर्जाची हप्त्याची कपात करून वेळीच संस्थेच्या खात्यात जमा केली असल्यास</td>
+                                <td>उपविधीतील तरतूदीनुसार पूर्वीचे कर्ज परतफेड झाले नंतरच
+                                    नवीन कर्जे दिली असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_7_detail" value="{{ $clientInputs['loan_doc_7_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td>उपयुक्तीतिल तरतुदीस पूर्वी कर्ज परतफेड झाल्यावर त्वरित प्रमाणपत्र दिले असल्यास</td>
+                                <td>नियामक मंडळ परिपत्रकीय सूचनांनुसार कर्जाचे व्याजदर निश्चित
+                                    केले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_8_detail" value="{{ $clientInputs['loan_doc_8_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td>नियमित मंडळ निर्णयानुसार वचनानुसार कर्जावरील व्याजदर निश्चित केल्यास</td>
+                                <td>कर्जातून पोटनियम बाह्य कपाती केल्या नसल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="loan_doc_9_detail" value="{{ $clientInputs['loan_doc_9_detail'] ?? '' }}"></td>
                             </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>कर्जदारांची प्रॉमिसरी नोट बरोबर ठेवली केल्या असल्यास</td>
-                                <td>1</td>
-                                <td></td>
-                                <td><input type="text" class="form-control" name="loan_doc_10_detail" value="{{ $clientInputs['loan_doc_10_detail'] ?? '' }}"></td>
-                            </tr>
+
                             <tr>
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
                                 <td style="background: #ffff99;">55</td>
@@ -351,7 +353,7 @@
                         </tbody>
                     </table>
                     <!-- START: Management section as per pasted image -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -380,7 +382,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ब) वार्षिक सर्वसाधारण सभा सहकार कायदा कलम 75 (2) मध्ये तरतूदीप्रमाणे विहित मुदतीत घेतली असल्यास
+                                    ब) वार्षिक सर्वसाधारण सभा सहकार कायदा कलम 75 (2) मध्ये तरतूदींनुसार विहित मुदतीत घेतली असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -389,7 +391,8 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    क) संचालक मंडळाची उपविधीतील तरतूदीप्रमाणे दरमहा किमान एक सभा किंवा सभा कामकाज होत असल्यास
+                                    क) संचालक मंडळाची उपविधीतील तरतुदीप्रमाणे दरमहा किमान
+                                    एक सभा घेडुन सभा कामकाज होत असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -398,7 +401,8 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ड) संचालक मंडळ सभेमध्ये आलेल्या वेळच्या विशेष धोरणात्मक बाबींवर निर्णय घेतले असल्यास
+                                    ड) संचालक मंडळ सभेमध्ये आयत्या वेळच्या विषयात धोरणात्मक
+                                    बाबींवर निर्णय घेतले नसल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -407,7 +411,8 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ई) संचालक मंडळ सभेमध्ये उपस्थित प्रत्येक संचालकांना पावती दिली असल्यास
+                                    ई) संचालक मंडळ सभेचे इतिवृत्त प्रत्येक संचालकांना पाठविले
+                                    असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -427,7 +432,7 @@
                                 <td>3</td>
                                 <td class="text-start">
                                     सहकार शिक्षण व प्रशिक्षण :<br>
-                                    <span style="margin-left: 1em;">क) आर्थिक वर्षात एकूण सदस्यांपैकी किमान 1/5 सदस्यांना सहकार प्रशिक्षण केंद्र/मान्यताप्राप्त प्रशिक्षण संस्थेत 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास</span>
+                                    <span style="margin-left: 1em;">अ) एका आर्थिक वर्षात एकूण सदस्यांपैकी किमान 1/5 सदस्यांना सहकार प्रशिक्षण केंद्र/मान्यताप्राप्त प्रशिक्षण संस्थेत 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास</span>
                                 </td>
                                 <td>4</td>
                                 <td></td>
@@ -436,8 +441,8 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ख) संचालकांना शासनाने अधिसूचित केलेल्या प्रशिक्षण संस्थेत दिलेले प्रशिक्षण प्रमाण :<br>
-                                    <span style="margin-left: 2em;">1) 100% संचालक प्रशिक्षण घेतले असल्यास</span>
+                                    ब)संचालकांना शासनाने अधिसुचीत केलेल्या प्रशिक्षण संस्थेत किमा 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास :<br>
+                                    <span style="margin-left: 2em;">1)100% संचालक प्रशिक्षित असल्यास</span>
                                 </td>
                                 <td>3</td>
                                 <td></td>
@@ -446,7 +451,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    <span style="margin-left: 2em;">2) 75% संचालकांनी संचालक प्रशिक्षण घेतले असल्यास</span>
+                                    <span style="margin-left: 2em;">2) 75% व त्यापेक्षा अधिक संचालक प्रशिक्षित असल्यास</span>
                                 </td>
                                 <td>2</td>
                                 <td></td>
@@ -455,7 +460,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    <span style="margin-left: 2em;">3) 50% संचालकांनी संचालक प्रशिक्षण घेतले असल्यास</span>
+                                    <span style="margin-left: 2em;">3)50% ते 75% पेक्षा कमी संचालक प्रशिक्षित असल्यास</span>
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -464,7 +469,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    4) 50% पेक्षा कमी संचालकांनी प्रशिक्षण घेतले असल्यास
+                                    4)50% पेक्षा कमी संचालक प्रशिक्षित असल्यास
                                 </td>
                                 <td>0</td>
                                 <td></td>
@@ -473,7 +478,9 @@
                             <tr>
                                 <td>क</td>
                                 <td class="text-start">
-                                    अधिकारी/सेवक कडून अधिकारी किंवा त्या शासनाने अधिसूचित केलेल्या प्रशिक्षण संस्थेत किमान 2 ते 7 दिवसांचे प्रशिक्षण दिले असल्यास
+                                    अधिकारी/ सेवक वसुली अधिकारी धरून यांना शासनाने
+                                    अधिसुचीत केलेल्या प्रशिक्षण संस्थेत वर्षात किमान 2 ते 7 दिवसांचे
+                                    प्रशिक्षण दिले असल्यास
                                 </td>
                                 <td>3</td>
                                 <td></td>
@@ -502,7 +509,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    3)50% ते 75% पर्यंत अधिकारी/ सेवक प्रशिक्षित असल्यास
+                                    3) 50% ते 75% पर्यंत अधिकारी/सेवक प्रशिक्षित असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -531,7 +538,9 @@
                                 <td>1</td>
                                 <td class="text-start">
                                     व्यवस्थापक/मुख्याधिकारी/कार्यालयीन संचालक/मुख्य कार्यकारी अधिकारी/वरिष्ठ अधिकारी -
-                                    <br>अ) व्यवस्थापक/मुख्याधिकारी/कार्यालयीन संचालक/मुख्य कार्यकारी अधिकारी यांनी शैक्षणिक अर्हता, अनुभव व तांत्रिक ज्ञान विचारात घेऊन समितीनुसार नियुक्त केले असल्यास व तांत्रिक ज्ञान विचारात घेऊन समितीनुसार नेमणूक केली असल्यास
+                                    <br>अ) व्यवस्थापक/महाव्यवस्थापक/कार्यकारी संचालक/मुख्य
+                                    कार्यकारी अधिकारी यांची शैक्षणिक अर्हता, अनुभव व तांत्रित
+                                    क्षमता विचारात घेऊन सेवानियमानुसार नेमणूक केली असलयास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -540,7 +549,9 @@
                             <tr>
                                 <td>2</td>
                                 <td class="text-start">
-                                    ब) वरिष्ठ अधिकारी/शाखा व्यवस्थापक यांची नेमणूक शैक्षणिक अर्हता व तांत्रिक ज्ञान विचारात घेऊन समितीनियमांनुसार नेमणूक केली असल्यास
+                                    ब) वरीष्ट अधिकारी/शाखा व्यवस्थापक यांची शैक्षणिक अर्हता,अनुभव
+                                    व तांत्रित क्षमता विचारात घेऊन सेवानियमानुसार नेमणूक केली
+                                    असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -549,7 +560,9 @@
                             <tr>
                                 <td>3</td>
                                 <td class="text-start">
-                                    क) व्यवस्थापक/मुख्याधिकारी/कार्यालयीन संचालक/मुख्य कार्यकारी अधिकारी यांनी उपविधीनुसार कर्तव्ये पाळत कामकाज केले असल्यास
+                                    क) व्यवस्थापक/महाव्यवस्थापक/कार्यकारी संचालक / मुख्य
+                                    कार्यकारी अधिकारी यांनी उपविधीनुसार कर्तव्याचे पालन करून
+                                    कामकाज केले असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -561,40 +574,40 @@
                             <!-- START: वसूली कार्यक्षमता Design as per pasted image -->
                             <tr>
                                 <td colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
-                                    5. वसूली कार्यक्षमता :- <span style="font-weight:normal;">10 गुण</span>
+                                    5. वसुलीची कायदेशीर कारवाई:- <span style="font-weight:normal;">10 गुण</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td class="text-start">100% थकीत वसुलीकार्यात कार्यवाही पूर्ण असल्यास</td>
+                                <td class="text-start">100% थकबाकीदारांवर कारवाई पूर्ण असल्यास</td>
                                 <td>10</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="recovery_100_detail" value="{{ $clientInputs['recovery_100_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td class="text-start">75% ते 99% पर्यंत थकीत वसुलीकार्यात कार्यवाही पूर्ण असल्यास</td>
+                                <td class="text-start">75% ते 99% पर्यंत थकबाकीदारांवर कारवाई पूर्ण असल्यास</td>
                                 <td>8</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="recovery_75_99_detail" value="{{ $clientInputs['recovery_75_99_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td class="text-start">50% ते 74% पर्यंत थकीत वसुलीकार्यात कार्यवाही पूर्ण असल्यास</td>
+                                <td class="text-start">50% ते 74% पर्यंत थकबाकीदारांवर कारवाई पूर्ण असल्यास</td>
                                 <td>5</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="recovery_50_74_detail" value="{{ $clientInputs['recovery_50_74_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td class="text-start">25% ते 49% पर्यंत थकीत वसुलीकार्यात कार्यवाही पूर्ण असल्यास</td>
+                                <td class="text-start">25% ते 49% पर्यंत थकबाकीदारांवर कारवाई पूर्ण असल्यास</td>
                                 <td>2</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="recovery_25_49_detail" value="{{ $clientInputs['recovery_25_49_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td class="text-start">25% पेक्षा कमी थकीत वसुलीकार्यात कार्यवाही पूर्ण असल्यास</td>
+                                <td class="text-start">25% पेक्षा कमी थकबाकीदारांवर कारवाई पूर्ण असल्यास</td>
                                 <td>0</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="recovery_below_25_detail" value="{{ $clientInputs['recovery_below_25_detail'] ?? '' }}"></td>
@@ -603,7 +616,7 @@
                         </tbody>
                     </table>
                     <!-- START: गतवर्षाच्या तुलनेत ठेवीतील वाढ, सभासद, संचालक मंडळ, निकाल Design as per pasted image -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -642,7 +655,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -667,21 +680,21 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>वर्षभर सभासदांच्या बाबतीत नामनिर्देशन करून घेतले असल्यास</td>
+                                <td>सर्व सभासदांकडून वारसांचे नामनिर्देशन करून घेतले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="member_nomination_detail" value="{{ $clientInputs['member_nomination_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>कर्ज सभासदांचा भाग दाखल केले असल्यास</td>
+                                <td>सर्व सभासदांना भाग दाखले दिले असल्यास</td>
                                 <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="member_loan_share_detail" value="{{ $clientInputs['member_loan_share_detail'] ?? '' }}"></td>
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -718,7 +731,7 @@
                     <!-- END: गतवर्षाच्या तुलनेत ठेवीतील वाढ, सभासद, संचालक मंडळ, निकाल Design -->
 
                     <!-- START: उत्पन्न (Earnings) Design as per pasted image -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -810,7 +823,9 @@
                                 <td>3</td>
                                 <td class="text-start">
                                     तरतुदी :<br>
-                                    क.स. नियम 49 व समिती तरतुदी व विभागक मंडळाकडील परिपत्रक सूचनानुसार उत्पन्न कर्ज व अनुत्पादक कर्ज तुळणूक इतर निधीमध्ये इ.बाबत आवश्यक तरतुदी केल्या असल्यास
+                                    कलम 65, नियम 49 अ मधील तरतूदी व नियामक मंडळाकडील
+                                    परिपत्रकीय सूचनांनुसार उत्पादक कर्ज व अनुत्पादक कर्ज गुंतवणूक,
+                                    इतर जिंदगी इ.बाबत आवश्यक तरतूदी केल्या असल्यास
                                 </td>
                                 <td>2</td>
                                 <td></td>
@@ -827,7 +842,7 @@
                     </table>
                     <!-- END: उत्पन्न (Earnings) Design -->
                     <!-- start -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -995,7 +1010,7 @@
                     </table>
                     <!-- end -->
                     <!-- START: कार्यपद्धती व नियंत्रण (System And Control) Design as per pasted image -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:1000px;">
+                    <table class="table table-bordered" style="min-width:1000px;">
                         <thead>
                             <tr>
                                 <th colspan="4" class="fw-bold" style="text-align:left;background: #f5f5f5;">
@@ -1012,69 +1027,80 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td class="text-start">नियामक मंडळ निर्णयानुसार ठेवीतील चढावाच्या कमाल व्याजदर मर्यादा पाळत केले असल्यास</td>
+                                <td class="text-start">नियामक मंडळ निर्णयाप्रमाणे ठेवीवरील द्यावयाच्या कमाल व्याजदर
+                                    मर्यादित पालन केले असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_deposit_interest_limit" value="{{ $clientInputs['sysctrl_deposit_interest_limit'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td class="text-start">नियामक मंडळाच्या निर्णयानुसार स्थिरिकरण व तरलता सहाय्य निधीस अनुदान मुदतीत प्रमाणाने केले असल्यास</td>
+                                <td class="text-start">नियामक मंडळाच्या निर्णयानुसार स्थिरिकरण व तरलता सहाय्य निधीस अंशदान मुदतीत भरणा केले असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_stabilization_fund" value="{{ $clientInputs['sysctrl_stabilization_fund'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td rowspan="5">3</td>
-                                <td class="text-start">लेखी दोष आढळले :</td>
+                                <td class="text-start">दोष दुरुस्ती अहवाल :-</td>
                                 <td>5</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td class="text-start">अ) तांत्रिक लेखापरीक्षण अहवालाचा दोष दुरुस्ती आढळला असल्यास विशेष मुदतीत सादर केला असल्यास</td>
+                                <td class="text-start">अ) वैधानिक लेखापरीक्षण अहवालाचा दोष दुरुस्ती अहवाल विहित
+                                    मुदतीत सारद केला असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_tech_audit_correction" value="{{ $clientInputs['sysctrl_tech_audit_correction'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td class="text-start">ब) तांत्रिक लेखापरीक्षण अहवालात नमूद दोषांची पूर्तता केली असल्यास</td>
+                                <td class="text-start">ब) वैधानिक लेखापरीक्षण अहवालात नमूद दोषांची पूर्तता केली
+                                    असल्यास</td>
                                 <td>2</td>
                                 <td><input type="text" class="form-control" name="sysctrl_tech_audit_fulfilled" value="{{ $clientInputs['sysctrl_tech_audit_fulfilled'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td class="text-start">क) खात्याच्या तपासणी अहवालात नमूद दोषांची पूर्तता केली असल्यास</td>
+                                <td class="text-start">क) अंतर्गत लेखापरीक्षण अहवालात नमूद दोषांची पूर्तता केली
+                                    असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_account_audit_fulfilled" value="{{ $clientInputs['sysctrl_account_audit_fulfilled'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td class="text-start">ड) इतर लेखापरीक्षण अहवालात नमूद दोषांची पूर्तता केली असल्यास</td>
+                                <td class="text-start">ड) खात्याच्या तपासणी अहवालात नमूद दोषांची पूर्तता केली
+                                    असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_other_audit_fulfilled" value="{{ $clientInputs['sysctrl_other_audit_fulfilled'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td class="text-start">सर्व हिशोबी पुस्तके कायदा नियम व उपविधीनुसार ठेवली असल्यास</td>
+                                <td class="text-start">संस्थेने हिशोबी पुस्तके कायदा नियम व उपविधीनुसार ठेवली
+                                    असल्यास
+                                </td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_books_maintained" value="{{ $clientInputs['sysctrl_books_maintained'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td class="text-start">संस्था उपविधीनुसार नमूद उद्दिष्टानुसार कामकाज केले असल्यास</td>
+                                <td class="text-start">संस्था उपविधीमध्ये नमूद उद्देशाप्रमाणे कामकाज करीत असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_objective_work" value="{{ $clientInputs['sysctrl_objective_work'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td class="text-start">बँक खात्यातील पासबुक/बँक वावच्याची ताळमेळ जुळवला असल्यास अथवा महिन्याच्या अखेरीस ताळमेळ प्रमाण गोठी प्रमाण सादर केला असल्यास</td>
+                                <td class="text-start">शाखा व मुख्यालय खाती जुळतात अथवा जुळत नसल्यास याबाबत
+                                    तयार केलेल्या मेळपत्रकानुसार बाक्या जुळतात व त्यामुध्ये तीन</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_bank_reconciliation" value="{{ $clientInputs['sysctrl_bank_reconciliation'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td class="text-start">वसूली भागभांडवल ठेवी कर्ज, गुंतवणूक व्याज, रोखे–टेपे इ. खात्याची बाकी ताळेबंद रकमेशी जुळत असल्यास</td>
+                                <td class="text-start">वसुल भागभांडवल,ठेवी,कर्जे,गुंतवणूका,व्याज,येणे-देणे इ.याद्याची
+                                    बाकी ताळेबंद रक्कमेशी जुळत असल्यास</td>
                                 <td>2</td>
                                 <td><input type="text" class="form-control" name="sysctrl_balances_match" value="{{ $clientInputs['sysctrl_balances_match'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td class="text-start">बँक खात्यातील पासबुक/बँक वावच्याची ताळमेळ जुळवला असल्यास अथवा महिन्याच्या अखेरीस ताळमेळ प्रमाण गोठी प्रमाण सादर केला असल्यास</td>
+                                <td class="text-start">बँक खाते बाक्या पासबुक/दाखला यांचेशी जुळत असल्यास अथवा
+                                    जुळत नसल्यास याबाबत तयार मेळपत्रकानुसार बाक्या जुळतात व
+                                    त्यामध्ये तीन महिन्यापेक्षा जास्त काळाच्या नोंदी प्रलंबित नसल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_bank_passbook_match" value="{{ $clientInputs['sysctrl_bank_passbook_match'] ?? '' }}"></td>
                             </tr>
@@ -1086,25 +1112,28 @@
                             </tr>
                             <tr>
                                 <td>10</td>
-                                <td class="text-start">अध्यक्षाच्या अध्यादेश खातीउतार/प्रमाणपत्र दिले असल्यास</td>
+                                <td class="text-start">सभासदांना अद्ययावत खातेउतारे/पासबुक दिले असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_president_certificate" value="{{ $clientInputs['sysctrl_president_certificate'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>11</td>
-                                <td class="text-start">केवायसी प्रमाण (KYC-Know Your Customer) निकषानुसार 100% माहितीची पूर्तता केली असल्यास</td>
+                                <td class="text-start">आपला ग्राहक जाणा (KYC-Know Your Customer) निकषांबाबत
+                                    100% सभासदांची पूर्तती केली असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_kyc" value="{{ $clientInputs['sysctrl_kyc'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>12</td>
-                                <td class="text-start">सर्व कर्जदारांकडून कर्जाचे हप्ते वेळेवर दिले असल्यास/त्याचे कागदपत्रे सादर केली असल्यास</td>
+                                <td class="text-start">कर्मचाऱ्यांना कामाचे लेखी आदेश दिले असल्यास/त्यांचे कामात
+                                    नियतमालिका बदल केले जात असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_loan_docs" value="{{ $clientInputs['sysctrl_loan_docs'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td class="text-start">सर्व रक्कम स्वीकारणाऱ्या कर्मचाऱ्यांकडून नियमाप्रमाणे योग्य ते सुरक्षा प्रमाण व हमी पत्र (Fidelity Guarantee) घेतले असल्यास</td>
+                                <td class="text-start">रोख रक्कम हाताळणाऱ्या कर्मचाऱ्यांकडून नियमानुसार योगय ते
+                                    सुरक्षा तारण व हमी पत्र (Fidelity Guarntee) घेतले असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_fidelity_guarantee" value="{{ $clientInputs['sysctrl_fidelity_guarantee'] ?? '' }}"></td>
                             </tr>
@@ -1116,40 +1145,50 @@
                             </tr>
                             <tr>
                                 <td>15</td>
-                                <td class="text-start">बचत/ठेव/शेअर शिल्लक खात्य उपयुक्तीनुसार मर्यादित ठेवली असल्यास</td>
+                                <td class="text-start">हातावरील रोख शिल्लंक सतत उपविधीनुसार मर्यादेत ठेवली
+                                    असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_saving_share_limit" value="{{ $clientInputs['sysctrl_saving_share_limit'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>16</td>
-                                <td class="text-start">कलम 79 (13अ) व (1अ) मध्ये तरतूद प्रमाणे अनिवार्य विवरणपत्र, अ.पा.ए.एस. इतर समिती निगडीत मुदतीत संबंधित निवडणुकांसाठी सादर केली असल्यास</td>
+                                <td class="text-start">कलम 79 (1अ) व (1ब) मधील तरतूदी प्रमाणे अनिवार्य
+                                    विवरणपत्रे,एम.आय.एस., इतर माहिती निर्धारित मुदतीत संबंधित
+                                    निबंधकाकडे सादर केली असल्यास</td>
                                 <td>2</td>
                                 <td><input type="text" class="form-control" name="sysctrl_section79_reports" value="{{ $clientInputs['sysctrl_section79_reports'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>17</td>
-                                <td class="text-start">कलम 75 व 73 मध्ये तरतूद प्रमाणे वैद्यकीय लेखापरीक्षकाची नियुक्ती केली असल्यास</td>
+                                <td class="text-start">क्लम 75 2अ मधील तरतूदी प्रमाणे वैधानिक लेखापरीक्षकाची
+                                    नियुक्ती केली असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_medical_auditor" value="{{ $clientInputs['sysctrl_medical_auditor'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>18</td>
-                                <td class="text-start">आर्थिक पत्रकावर कर व इतर कायद्यानुसार प्राप्त प्रमाणपत्र, अहवाल व विवरणपत्रे सादर केली असल्यास/सर्व आवश्यक विमाधारक प्रमाणपत्रे सादर केली असल्यास</td>
+                                <td class="text-start">आयकर,व्यवसाय कर व इतर कायद्यानुसार लागू असणारी विवरणपत्रे
+                                    विहित मुदतीत संबंधीत विभागाकडे दाखल केली असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_tax_certificates" value="{{ $clientInputs['sysctrl_tax_certificates'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>19</td>
-                                <td class="text-start">सर्व आवश्यक माहिती विलेख नोंदी नोंदवून तयार करून ठेवली असल्यास</td>
+                                <td class="text-start">सेवक सेवानियम व भविष्य निर्वाह निधी नियम तयार करून त्याचे
+                                    पालन होत असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_all_records" value="{{ $clientInputs['sysctrl_all_records'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>20</td>
-                                <td class="text-start">अ) संस्थेच्या मुख्यालयासह सर्व शाखांच्या कामकाजाचे संपूर्ण नियंत्रण ठेवले असल्यास<br>
-                                    ब) सर्व सेवकांना नियमित वापराचे आवश्यक प्रशिक्षण घेतले असल्यास<br>
-                                    क) सर्व शाखांमध्ये सुरक्षा व सुरक्षिततेच्या दृष्टीने योग्य उपाययोजना केल्या असल्यास<br>
-                                    ड) सर्व शाखांमध्ये हिशोबी पुस्तके, हिशोबी नोंदी, हिशोबी प्रमाणपत्रे प्रस्थापित केली असल्यास
+                                <td class="text-start">अ) संस्थेच्या मुख्यालयासह सर्व शाखांचे कामकाज संगणकीकृत
+                                    असल्यास<br>
+                                    ब) संस्थेचे सेवकांनी संगणक वापराचे अद्यावत प्रशिक्षण घेतले
+                                    असल्यास<br>
+                                    क) संस्थेचा संगणकीय डाटा सुरक्षित जतन करणेसाठी प्रभावी
+                                    उपाययोजना केली असल्यास<br>
+                                    ड) ई.डी.पी. व सिस्टीम ऑडीट होऊन त्यातील उणिवांची पूर्तता
+                                    केली असल्यास
                                 </td>
                                 <td>4</td>
                                 <td><input type="text" class="form-control" name="sysctrl_branch_control" value="{{ $clientInputs['sysctrl_branch_control'] ?? '' }}"></td>
@@ -1166,7 +1205,7 @@
                     <!-- END: कार्यपद्धती व नियंत्रण (System And Control) Design -->
 
                     <!-- START: गुणांचे सारांश व अंतिम गणना Design as per pasted image -->
-                    <table class="table table-bordered text-center align-middle" style="min-width:900px;">
+                    <table class="table table-bordered" style="min-width:900px;">
                         <thead>
                             <tr>
                                 <th>अ.क्र.</th>
@@ -1335,7 +1374,10 @@
             });
             $('[name="sysctrl_total_score"]').val(total5.toFixed(2));
             $('[name="summary_sysctrl_score"]').val(total5.toFixed(2));
-            $('[name="summary_obtained_score"]').val((total + total1 + total2 + total3 + total4 + total5).toFixed(2));
+            $('[name="summary_total_score"]').val((total + total1 + total2 + total3 + total4 + total5).toFixed(2));
+            let summary = ((total + total1 + total2 + total3 + total4 + total5) / 200) * 100;
+            $('[name="summary_obtained_score"]').val(summary.toFixed(2) + '%');
+
         }
 
         // ✅ Calculate once when page loads

@@ -32,4 +32,8 @@ class Client extends Model
     public function masterData(){
         return $this->hasMany(MasterData::class);
     }
+
+    public function year(){
+        return $this->hasOne(Year::class,'client_id','id');
+    }
 }
