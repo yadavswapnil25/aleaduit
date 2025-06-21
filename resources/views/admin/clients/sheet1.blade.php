@@ -199,7 +199,7 @@
                         <td>-- ते --</td>
                     </tr>
                     <tr>
-                        <td>9</td>
+                        <td></td>
                         <td><b>विभाग "क"</b></td>
                         <td>-- ते --</td>
                     </tr>
@@ -550,6 +550,7 @@
                             </tr>
                             <tr>
                                 <td>३) हितचिंतक</td>
+                                <td><input type="text" class="form-control" name="minority_members" id="minority_members" value="{{ $clientInputs['minority_members'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>ब) संस्था</td>

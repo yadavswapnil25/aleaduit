@@ -45,11 +45,10 @@
                                 <th rowspan="2">अ.क्र.</th>
                                 <th rowspan="2">तपशील</th>
                                 <th rowspan="2">निकष गुण</th>
-                                <th colspan="2">दिलेले गुण</th>
                             </tr>
                             <tr>
                                 <th>एकूण गुण</th>
-                                <th>तपशील गुण</th>
+                                <th>दिलेले गुण</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -392,7 +391,7 @@
                                 <td></td>
                                 <td class="text-start">
                                     क) संचालक मंडळाची उपविधीतील तरतुदीप्रमाणे दरमहा किमान
-                                    एक सभा घेडुन सभा कामकाज होत असल्यास
+                                    एक सभा घेऊन सभा कामकाज होत असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -422,7 +421,7 @@
                                 <td>2</td>
                                 <td class="text-start">
                                     सहकार तज्ञ संचालक :<br>
-                                    <span style="margin-left: 1em;">अ) उपविधीनुसार सहकारी पतसंस्था/संकल्प पतसंस्था सहकारी बँक/राष्ट्रीयकृत बँक/व्यापारी बँक यामध्ये अनुभव असलेले व्यक्ती/संपत्ती लेखापाल यांची किमान एक तज्ञ संचालक नेमणूक केली असल्यास</span>
+                                    <span style="margin-left: 1em;">अ) उपविधीनुसार सहकारी पतसंस्था/ सेवक पतसंस्था सहकारी बँका/राष्ट्रीयकृत बँक/व्यापारी बँक यामधील अनुभवी व्यक्ती/सनदी लेखापाल यापैकी किमाल एक तज्ञ संचालक नियुक्त केला असल्यास</span>
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -476,11 +475,10 @@
                                 <td><input type="text" class="form-control" name="mgmt_training_5_detail" value="{{ $clientInputs['mgmt_training_5_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                                <td>क</td>
+                                <td>4</td>
                                 <td class="text-start">
-                                    अधिकारी/ सेवक वसुली अधिकारी धरून यांना शासनाने
-                                    अधिसुचीत केलेल्या प्रशिक्षण संस्थेत वर्षात किमान 2 ते 7 दिवसांचे
-                                    प्रशिक्षण दिले असल्यास
+                                    व्यवस्थापक / महाव्यवस्थापक/कार्यकारी संचालक/मुख्य कार्यकारी
+                                    अधिकारी / वरिष्ठ अधिकारीः-
                                 </td>
                                 <td>3</td>
                                 <td></td>
@@ -659,7 +657,7 @@
                         <thead>
                             <tr>
                                 <th colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
-                                    7. सभासद :- <span style="font-weight:normal;">3 गुण</span>
+                                    7. सभासदत्व :- <span style="font-weight:normal;">3 गुण</span>
                                 </th>
                             </tr>
                             <tr>
@@ -1000,6 +998,15 @@
                                 <td> <input type="text" class="form-control" name="earnings_net_profit_24_detail" value="{{ $clientInputs['earnings_net_profit_24_detail'] ?? '' }}"> </td>
                             </tr>
                             <tr>
+                                <td>4</td>
+                                <td class="text-start">
+                                    राखीव निधीची 100% गुंतवणूक कलम 70 प्रमाणे केली असल्यास
+                                </td>
+                                <td></td>
+                                <td>2</td>
+                                <td> </td>
+                            </tr>
+                            <tr>
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
                                 <td style="background: #ffff99;">15</td>
                                 <td style="background: #00e6ff;">
@@ -1085,7 +1092,7 @@
                             <tr>
                                 <td>6</td>
                                 <td class="text-start">शाखा व मुख्यालय खाती जुळतात अथवा जुळत नसल्यास याबाबत
-                                    तयार केलेल्या मेळपत्रकानुसार बाक्या जुळतात व त्यामुध्ये तीन</td>
+                                    तयार केलेल्या मेळपत्रकानुसार बाक्या जुळतात व त्यामुध्ये तीन महिन्यापेशा जास्त काळाच्या नोंदी प्रलबीत नसल्यास </td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_bank_reconciliation" value="{{ $clientInputs['sysctrl_bank_reconciliation'] ?? '' }}"></td>
                             </tr>
@@ -1106,7 +1113,8 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td class="text-start">सर्व हिशोबी पुस्तके व नमूद उद्दिष्ट "ल" नमूद यादी प्रमाणे ठेवली असल्यास</td>
+                                <td class="text-start">सभासद “आय” नमुना नोंदवही व सभासद “जे” नमुना यादी
+                                    अद्ययावत असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_all_books_listed" value="{{ $clientInputs['sysctrl_all_books_listed'] ?? '' }}"></td>
                             </tr>
@@ -1132,7 +1140,7 @@
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td class="text-start">रोख रक्कम हाताळणाऱ्या कर्मचाऱ्यांकडून नियमानुसार योगय ते
+                                <td class="text-start">रोख रक्कम हाताळणाऱ्या कर्मचाऱ्यांकडून नियमानुसार योग्य ते
                                     सुरक्षा तारण व हमी पत्र (Fidelity Guarntee) घेतले असल्यास</td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_fidelity_guarantee" value="{{ $clientInputs['sysctrl_fidelity_guarantee'] ?? '' }}"></td>
@@ -1181,7 +1189,10 @@
                             </tr>
                             <tr>
                                 <td>20</td>
-                                <td class="text-start">अ) संस्थेच्या मुख्यालयासह सर्व शाखांचे कामकाज संगणकीकृत
+                                
+                                <td class="text-start">
+                                    संगणकीकरण :- <br>
+                                    अ) संस्थेच्या मुख्यालयासह सर्व शाखांचे कामकाज संगणकीकृत
                                     असल्यास<br>
                                     ब) संस्थेचे सेवकांनी संगणक वापराचे अद्यावत प्रशिक्षण घेतले
                                     असल्यास<br>
