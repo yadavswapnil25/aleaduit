@@ -42,12 +42,12 @@ $auditPeriod = $client->audit_year;
                                 ठेवी स्विकारणे</li>
                             <li>सभासदांच्या आर्थिक गरजा पूर्ण करण्यासाठी कर्ज पुरवठा करणे यांचा
                                 प्रामुख्याने समावेश आहे</li>
-                            <li>बाहेरिल कर्ज काढणे किंवा निधी उभारणे</li>
+                            <li>बाहेरील कर्ज काढणे किंवा निधी उभारणे</li>
                             <li>संस्थेच्या उपयोगासाठी मालकी हक्काने किंवा भाडयाने जागा किंवा इमारत खरेदी करणे</li>
                             <li>सहकारी कायदा कलम 20 व 20 अ अंतर्गत संस्थाची भागीदारी व संस्थाकडून सहयोग
                                 करता येइल</li>
                             <li>सभासदांचा आर्थीक व सामाजीक उन्नतीसाठी विविध उपक्रम हाती घेणे उपरोक्त सर्व
-                                किंवा एखादा उददेश साधण्यासाठी लागणारी अनुषंगिक सर्व कामे करणे.</li>
+                                किंवा एखादा उददेश साधण्यासाठी लागणारी अनुषगीक सर्व कामे करणे.</li>
                         </ol>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ $auditPeriod = $client->audit_year;
                 <div class="mt-4">
                     <div class="fw-bold mb-2">7) निवडणूक :-</div>
                     <div class="ps-3">
-                        संस्थेच्या संचालक मंडळाची निवडणूक दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="election_date" value="{{ $clientInputs['election_date'] ?? '' }}"></span> ला झालेली असून अध्यक्षांची व समिती निवड दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="committee_election_date" value="{{ $clientInputs['committee_election_date'] ?? '' }}"></span> ला झाली आहे. संचालक संख्या <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="directors_count" value="{{ $clientInputs['directors_count'] ?? '' }}"></span> असून संचालक मंडळाचा कार्यकाल पाच वर्षांचा दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="term_start" value="{{ $clientInputs['term_start'] ?? '' }}"></span> ते <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="term_end" value="{{ $clientInputs['term_end'] ?? '' }}"></span> पर्यंत आहे.
+                        संस्थेच्या संचालक मंडळाची निवडणूक दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="election_date" value="{{ $clientInputs['election_date'] ?? '' }}"></span> ला झालेली असून अध्यक्षांची व कमेठी निवड दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="committee_election_date" value="{{ $clientInputs['committee_election_date'] ?? '' }}"></span> ला झाली आहे. संचालक संख्या <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="directors_count" value="{{ $clientInputs['directors_count'] ?? '' }}"></span> असून संचालक मंडळाचा कार्यकाल पाच वर्षांचा दिनांक <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="term_start" value="{{ $clientInputs['term_start'] ?? '' }}"></span> ते <span><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="term_end" value="{{ $clientInputs['term_end'] ?? '' }}"></span> पर्यंत आहे.
                     </div>
                 </div>
 
@@ -148,13 +148,13 @@ $auditPeriod = $client->audit_year;
                     <div class="fw-bold mb-2">8) सभा व कार्यवाही :-</div>
                     <div class="ps-3">
                         अ) आमसभा :- <br>
-                        संस्थेची सन <span>01/04/{{$start}} ते 31/03/{{$end}}</span> ची आमसभा दिनांक <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="general_meeting_date" value="{{ $clientInputs['general_meeting_date'] ?? '' }}"></span> ला संस्थेचे कार्यालय, <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="meeting_office" value="{{ $clientInputs['meeting_office'] ?? '' }}"></span> येथे संस्थेच्या अध्यक्षतेखाली घेण्यात आली असून सभेला एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="meeting_attendance" value="{{ $clientInputs['meeting_attendance'] ?? '' }}"></span> सभासद उपस्थित होते.
+                        संस्थेची सन <span>01/04/{{$start}} ते 31/03/{{$end}}</span> ची आमसभा दिनांक <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:130px;display:inline;" name="general_meeting_date" value="{{ $clientInputs['general_meeting_date'] ?? '' }}"></span> ला संस्थेचे कार्यालय, <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="meeting_office" value="{{ $clientInputs['meeting_office'] ?? '' }}"></span> येथे संस्थेच्या अध्यक्षतेखाली घेण्यात आली असून सभेला एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="meeting_attendance" value="{{ $clientInputs['meeting_attendance'] ?? '' }}"></span> सभासद हजर होते.
                         <br>
-                        सभासदांमध्ये एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="tarav_ratio" value="{{ $clientInputs['tarav_ratio'] ?? '' }}"></span> ठरावर चर्चा करण्यात आली असून योग्य ते निर्णय घेण्यात आले. सर्व ठराव सभासदांनी एकमताने मंजूर दिल्याचे इतिवृत्त पुस्तकावरून दिसून येते.
+                        सभेमध्ये एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="tarav_ratio" value="{{ $clientInputs['tarav_ratio'] ?? '' }}"></span> ठरारावर चर्चा करण्यात आली असून योग्य ते निर्णय घेण्यात आले. सर्व ठराव सभासदांनी एकमताने मंजूर दिल्याचे इतिवृत्त पुस्तकावरून दिसून येते.
                         <br>
                         ब) संचालक मंडळ सभा :-
                         <br>
-                        आर्थिक वर्षात संचालक मंडळाच्या एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="board_meeting_count" value="{{ $clientInputs['board_meeting_count'] ?? '' }}"></span> सभा घेण्यात आलेल्या असून संस्थेने दर महा एक सभा घेणे आवश्यक आहे. यात नवीन सभासदांना सामाविष्ट करणे, कर्जवाटप मंजूर करणे, जमाबर्च मंजूर करणे इत्यादी व इतर विषयावर चर्चा करण्यात आले आहेत
+                        आर्थिक वर्षात संचालक मंडळाच्या एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="board_meeting_count" value="{{ $clientInputs['board_meeting_count'] ?? '' }}"></span> सभा घेण्यात आलेल्या असून संस्थेने दर माहा एक सभा घेन्यात यावे. यात नवीन सभासदांना सामाविष्ट करणे, कर्जवाटप मंजूर करणे, जमाबर्च मंजूर करणे इत्यादी व इतर विषयावर चर्चा करण्यात आले आहेत
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="board_meeting_held">
                             <option value="">Select</option>
                             <option value="आहेत" {{ (isset($clientInputs['board_meeting_held']) && $clientInputs['board_meeting_held'] == 'आहेत') ? 'selected' : '' }}>आहेत</option>
@@ -361,7 +361,7 @@ $auditPeriod = $client->audit_year;
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>ठेवळ एन. पी. ए. (%)</td>
+                                    <td>ढोबळ एन. पी. ए. (%)</td>
                                     <td style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="gross_npa" value="{{ $clientInputs['gross_npa'] ?? '61' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="gross_npa_auditor" value="{{ $clientInputs['gross_npa_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="gross_npa_diff" value="{{ $clientInputs['gross_npa_diff'] ?? '' }}"></td>
@@ -384,7 +384,7 @@ $auditPeriod = $client->audit_year;
                     <div class="ps-3">
                         <div class="fw-bold mb-2">1. गत वर्षांचे वैधानिक लेखापरीक्षण व दोष दुरुस्ती :</div>
                         <div>
-                            गत वर्षांचे वैधानिक लेखापरीक्षण श्री <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_auditor_name" value="{{ $clientInputs['last_auditor_name'] ?? '' }}"></span> यांनी केले असून त्याचा लेखापरीक्षण अहवाल <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_report_type" value="{{ $clientInputs['last_audit_report_type'] ?? '' }}"></span> दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_report_date" value="{{ $clientInputs['last_audit_report_date'] ?? '' }}"></span> रोजी सादर केलेला आहे. सदर कालावधीसाठी लेखापरीक्षण वर्ष <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_period" value="{{ $clientInputs['last_audit_period'] ?? '' }}"></span> दिलेला आहे. सदर लेखापरीक्षण अहवालाचा दोष दुरुस्ती अहवाल संस्थेने दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="correction_report_date" value="{{ $clientInputs['correction_report_date'] ?? '' }}"></span> रोजी संबंधीत लेखापरीक्षकास सादर केलेला असून त्यांनी त्याचे शेरा नमूद करून दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="correction_report_remark_date" value="{{ $clientInputs['correction_report_remark_date'] ?? '' }}"></span> रोजी सदरचा दोष दुरुस्ती अहवाल निबंधकास सादर केलेला आहे. सदर दोष दुरुस्ती अहवाल मुदतीत सादर केलेला तसेच ज्या दोषांची पुर्तता झालेली नाही अशा दोषांचा तपशील खालीलप्रमाणे नमूद करावा.
+                            गत वर्षांचे वैधानिक लेखापरीक्षण श्री <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_auditor_name" value="{{ $clientInputs['last_auditor_name'] ?? '' }}"></span> यांनी केले असून त्याचा लेखापरीक्षण अहवाल <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_report_type" value="{{ $clientInputs['last_audit_report_type'] ?? '' }}"></span> दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_report_date" value="{{ $clientInputs['last_audit_report_date'] ?? '' }}"></span> रोजी सादर केलेला आहे. सदर कालावधीसाठी लेखापरीक्षण वर्ग <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="last_audit_period" value="{{ $clientInputs['last_audit_period'] ?? '' }}"></span> दिलेला आहे. सदर लेखापरीक्षण अहवालाचा दोष दुरुस्ती अहवाल संस्थेने दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="correction_report_date" value="{{ $clientInputs['correction_report_date'] ?? '' }}"></span> रोजी संबंधीत लेखापरीक्षकास सादर केलेला असून त्यांनी त्याचे शेरा नमूद करून दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="correction_report_remark_date" value="{{ $clientInputs['correction_report_remark_date'] ?? '' }}"></span> रोजी सदरचा दोष दुरुस्ती अहवाल निबंधकास सादर केलेला आहे. सदर दोष दुरुस्ती अहवाल मुदतीत सादर केलेला तसेच ज्या दोषांची पुर्तता झालेली नाही अशा दोषांचा तपशील खालीलप्रमाणे नमूद करावा.
                         </div>
                         <table class="table table-bordered text-center align-middle mt-3" style="min-width:700px;">
                             <thead>
@@ -423,7 +423,7 @@ $auditPeriod = $client->audit_year;
 
                         <div class="fw-bold mt-3 mb-2">2. अंतर्गत लेखापरीक्षण :</div>
                         <div>
-                            सदर कालावधीत अंतर्गत लेखापरीक्षण करण्यात आलेले
+                            सदर कालावधीचे अंतर्गत लेखापरीक्षण करण्यात आलेले
                             <span>
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="internal_audit_done">
                                     <option value="">Select</option>
@@ -448,7 +448,7 @@ $auditPeriod = $client->audit_year;
 
                         <div class="fw-bold mt-3 mb-2">3. कर लेखापरीक्षण :</div>
                         <div>
-                            सदर कालावधीत कर लेखापरीक्षण करण्यात आलेले
+                            सदर कालावधीचे कर लेखापरीक्षण करण्यात आलेले
                             <span>
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="tax_audit_done">
                                     <option value="">Select</option>
@@ -509,14 +509,14 @@ $auditPeriod = $client->audit_year;
                         .
                         <br>
                         अशी तपासणी झाली असल्यास, संस्थेने त्या कालावधीत सहकार खात्याची कलम 89 (अ)(1) अन्वये हुद्दा यांनी तपासणी केली असून त्यांनी संस्थेस दि. <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="section_89a1_report_date" value="{{ $clientInputs['section_89a1_report_date'] ?? '' }}"></span>
-                        रोजी अहवाल सादर केला आहे. अहवालातील दोष दुरुस्ती अहवाल मुदतीत केलेला आहे का?
-                        <span>
+                        रोजी अहवाल सादर केला आहे. सदर अहवालाचा दोष दुरुस्ती अहवाल मुदतीत/ मुदतीनंतर सादर केलेबाबत तसेच अहवालातील पुर्तता न झालेल्या दोषांबाबत अभिप्राय नमूद करावेत. नाही 
+                        <!-- <span>
                             <select class="form-control d-inline-block" style="width:120px;display:inline;" name="section_89a1_correction_done">
                                 <option value="">Select</option>
                                 <option value="होय" {{ (isset($clientInputs['section_89a1_correction_done']) && $clientInputs['section_89a1_correction_done'] == 'होय') ? 'selected' : '' }}>होय</option>
                                 <option value="नाही" {{ (isset($clientInputs['section_89a1_correction_done']) && $clientInputs['section_89a1_correction_done'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
-                        </span>
+                        </span> -->
                         .
                     </div>
                 </div>
@@ -536,11 +536,12 @@ $auditPeriod = $client->audit_year;
                         .
                     </div>
                 </div>
+                लेखापरीक्षण मुदतीत संस्थेची अधिनियमातील कलम 83/88 इ. चौकशी झाली असल्यास शेरे नमूद करावेत.
                 <!-- 15) सहकार शिक्षण व प्रशिक्षण -->
                 <div class="mt-4">
                     <div class="fw-bold mb-2">11) <span style="font-weight:bold;">सहकार शिक्षण व प्रशिक्षण</span> :-</div>
                     <div class="ps-3">
-                        महाराष्ट्र सहकारी संस्था अधिनियम 1960 च्या कलम 24 अ (1) व पोटनियम क्र. नुसार राजपत्रातील अधिसूचनेन्वये विनियुक्त केलेल्या अथवा प्रशिक्षण संस्थेमार्फत सभासद, संचालक सदस्य, अधिकारी व कर्मचारी यांच्या करिता सहकार शिक्षण व प्रशिक्षण आयोजित करीत. यानुसार संस्थेने आपले सभासद <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_members" value="{{ $clientInputs['training_members'] ?? '' }}"></span>, संचालक सदस्य, व अधिकारी व कर्मचारी यांना म. राज्य सहकारी संघ मर्या पुणे या मान्यताप्राप्त प्रशिक्षण संस्थेमार्फत दिनांक <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_from" value="{{ $clientInputs['training_from'] ?? '' }}"></span> ते दिनांक <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_to" value="{{ $clientInputs['training_to'] ?? '' }}"></span> या <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="training_days" value="{{ $clientInputs['training_days'] ?? '' }}"></span> दिवसांच्या कालावधीत प्रशिक्षण घेतले किंवा कसे? तसेच संबंधित संस्थेचा प्रशिक्षण दाखला संस्था दप्तरी आहे का?
+                        महाराष्ट्र सहकारी संस्था अधिनियम 1960 च्या कलम 24 अ (1) व पोटनियम क्र. नुसार राजपत्रातील अधिसूचनेन्वये विनिर्दिष्ट करील अश्या प्रशिक्षण संस्थेमार्फत सभासद, संचालक सदस्य, अधिकारी व कर्मचारी यांच्या करिता सहकार शिक्षण व प्रशिक्षण आयोजित करीत. यानुसार संस्थेने आपले सभासद <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_members" value="{{ $clientInputs['training_members'] ?? '' }}"></span>, संचालक सदस्य, व अधिकारी व कर्मचारी यांना म. राज्य सहकारी संघ मर्या पुणे या मान्यताप्राप्त प्रशिक्षण संस्थेमार्फत दिनांक <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_from" value="{{ $clientInputs['training_from'] ?? '' }}"></span> ते दिनांक <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="training_to" value="{{ $clientInputs['training_to'] ?? '' }}"></span> या <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="training_days" value="{{ $clientInputs['training_days'] ?? '' }}"></span> दिवसांच्या कालावधीत प्रशिक्षण घेतले किंवा कसे? तसेच संबंधित संस्थेचा प्रशिक्षण दाखला संस्था दप्तरी आहे का?
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="training_certificate_available">
                             <option value="">Select</option>
                             <option value="होय" {{ (isset($clientInputs['training_certificate_available']) && $clientInputs['training_certificate_available'] == 'होय') ? 'selected' : '' }}>होय</option>
@@ -561,9 +562,9 @@ $auditPeriod = $client->audit_year;
 
                 <!-- 16) संगणक प्रणाली व ITDP ऑडिट -->
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">12) <span style="font-weight:bold;">संगणक प्रणाली व ITDP ऑडिट</span> :-</div>
+                    <div class="fw-bold mb-2">12) <span style="font-weight:bold;">संगणक प्रणाली व इडिपी  ऑडिट</span> :-</div>
                     <div class="ps-3">
-                        अहवाल वर्षात संस्थेने ITDP ऑडिट केल्याची नोंद
+                        अहवाल वर्षात संस्थेने इडिपी  ऑडिट केल्याची नोंद
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="itdp_audit_done">
                             <option value="">Select</option>
                             <option value="आहे" {{ (isset($clientInputs['itdp_audit_done']) && $clientInputs['itdp_audit_done'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -580,7 +581,7 @@ $auditPeriod = $client->audit_year;
                                 </select>
                             </li>
                             <li>
-                                संगणक डेटा सुरक्षितता आणि नियंत्रण योग्य राहण्यासाठी घेतलेल्या दस्तऐवजांचे अभिप्राय नोंदवा.
+                                संगणक डेटा सुरक्षितता आणि नियंत्रण योग्य राखणेसाठी  घेतलेल्या दक्षतेबाबतचे  अभिप्राय नोंदवा.
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fully_computerized1">
                                     <option value="">Select</option>
                                     <option value="व्यवस्था पुरेशी आहे" {{ (isset($clientInputs['fully_computerized1']) && $clientInputs['fully_computerized1'] == 'व्यवस्था पुरेशी आहे') ? 'selected' : '' }}>व्यवस्था पुरेशी आहे</option>
@@ -588,7 +589,7 @@ $auditPeriod = $client->audit_year;
                                 </select>
                             </li>
                             <li>
-                                संगणकीय खात्यांच्या माहितिचे वेळोवेळी बॅकअप घेतले जात असल्याचे अभिप्राय नोंदवा.
+                                संगणकीय खात्यांच्या माहितीचे  वेळोवेळी बॅकअप घेतले जात असल्याचे अभिप्राय नोंदवा.
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fully_computerized2">
                                     <option value="">Select</option>
                                     <option value="व्यवस्था पुरेशी आहे" {{ (isset($clientInputs['fully_computerized2']) && $clientInputs['fully_computerized2'] == 'व्यवस्था पुरेशी आहे') ? 'selected' : '' }}>व्यवस्था पुरेशी आहे</option>
@@ -600,7 +601,7 @@ $auditPeriod = $client->audit_year;
                                 </select>
                             </li>
                             <li>
-                                संगणक प्रणालीचे ITDP/सिस्टम ऑडिट नियमितपणे झाल्याबाबत कालावधी व अधिकृत फर्म यांचे/नावासह तपशील नोंदवा
+                                संगणक प्रणालीचे ईडीपी/सिस्टम ऑडिट नियमितपणे झाल्याबाबत कालावधी व अधिकृत फर्म यांचे नावासह तपशील नोंदवा
                                 <span><input type="text" class="form-control d-inline-block" style="width:200px;display:inline;" name="itdp_audit_firm" value="{{ $clientInputs['itdp_audit_firm'] ?? '' }}"></span>
                             </li>
                         </ol>
@@ -645,14 +646,14 @@ $auditPeriod = $client->audit_year;
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>गुंतवणूक</td>
+                                    <td>गुतंवणुका</td>
                                     <td>70</td>
                                     <td>54,55</td>
                                     <td>59</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>अंतर्गत हिशोश तपासणीची नियुक्ती</td>
+                                    <td>अंतर्गत हिशोब तपासणीची नियुक्ती</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>43 (6)</td>
@@ -687,7 +688,7 @@ $auditPeriod = $client->audit_year;
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    <td>नफा विनियोजन करणे व त्याचे संविभाजन करणे</td>
+                                    <td>नफा विनिश्चित  जन करणे व त्याचे संविभाजन करणे</td>
                                     <td>65</td>
                                     <td>50,51</td>
                                     <td>-</td>
@@ -706,7 +707,7 @@ $auditPeriod = $client->audit_year;
 
                 <!-- 18) स्वनिधी व भागाचे नकद मूल्य -->
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">14) <span style="font-weight:bold;">स्वनिधी व भागाचे नकद मूल्य</span> :- संस्थेचा स्वनिधी खालील प्रमाणे आहे.</div>
+                    <div class="fw-bold mb-2">14) <span style="font-weight:bold;">स्वनिधी व भागाचे नक्त  मूल्य</span> :- संस्थेचा स्वनिधी खालील प्रमाणे आहे.</div>
                     <div class="ps-3">
                         <table class="table table-bordered text-center align-middle" style="min-width:700px;">
                             <thead>
@@ -821,7 +822,7 @@ $auditPeriod = $client->audit_year;
                             <span>{{ $working_capital_percent }}</span>% आहे. स्वनिधीप्रमाणे सन <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="networth_year_for_loan" value="{{ $clientInputs['networth_year_for_loan'] ?? '' }}"></span> (पुढीलवर्षी) मध्ये कर्ज वाटपाचे धोरण निश्चित करावे.</span>
                         </div>
                         <div class="mt-2">
-                            संस्थेच्या एका भागाची दर्शनी किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span> असून एकूण वस्तुम भागसंख्या <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_total_count" value="{{ $clientInputs['share_total_count'] ?? '' }}"></span> आहे. स्वनिधीनुसार एका भागाची किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_value_by_networth" value="{{ $clientInputs['share_value_by_networth'] ?? '' }}"></span> आहे . सहकारी संस्था नियम क्रमांक महाराष्ट्र . 23 अन्वये भाग रक्कम परत करतांना भागाच्या मूल्यांपेक्षा दर्शनी किंमत यापेक्षा जी कमी असेल ती रक्कम <span>परत केलीकसे</span> .
+                            संस्थेच्या एका भागाची दर्शनी किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span> असून एकूण वस्तुम भागसंख्या <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_total_count" value="{{ $clientInputs['share_total_count'] ?? '' }}"></span> आहे. स्वनिधीनुसार एका भागाची किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_value_by_networth" value="{{ $clientInputs['share_value_by_networth'] ?? '' }}"></span> आहे . महाराष्ट्र सहकारी संस्था नियम क्रमांक महाराष्ट्र . 23 अन्वये भाग रक्कम परत करतांना भागाचे  मूल्यांपेक्षा दर्शनी किंमत यापैकी  जी कमी असेल ती रक्कम <span>परत केलीकसे</span> .
                         </div>
                     </div>
                 </div>
@@ -830,7 +831,7 @@ $auditPeriod = $client->audit_year;
                 <div class="mt-4">
                     <div class="fw-bold mb-2">15) <span style="font-weight:bold;">विमा</span> :- <span>रु. <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="insurance_amount" value="{{ $clientInputs['insurance_amount'] ?? '0.00' }}"></span></div>
                     <div class="ps-3">
-                        संस्थेने या इन्शुरन्स कंपनीकडे <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="insurance_company" value="{{ $clientInputs['insurance_company'] ?? '' }}"></span> मुख्य कार्यालय व शाखांसाठी स्वतंत्रपणे विमा उतरविलेला आहे. यामध्ये इमारत, संगणक, फर्निचर, फिटिंग, वाहन, रोख रक्कम, मार्गस्थ रक्कमेसाठी, सोने कर्जातील तारण जिन्नस, स्टेशनरी तसेच संस्थेने कर्जपोठी जप्त केलेल्या मालमत्तेचा विमा, याशिवाय सेवकांचा फॅसिलिटी व अपघात विम्याचा समावेश आहे. विम्याचा कालावधी दि. <span><input type="text" class="form-control d-inline-block" style="width:180px;display:inline;" name="insurance_period" value="{{ $clientInputs['insurance_period'] ?? '08-09-2023 ते 07-09-2024' }}"></span> अखेर आहे. याशिवाय कर्जदारांचा कर्जरक्कम संरक्षण विमा उतरविलेला
+                        संस्थेने या इन्शुरन्स कंपनीकडे <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="insurance_company" value="{{ $clientInputs['insurance_company'] ?? '' }}"></span> मुख्य कार्यालय व शाखांसाठी स्वतंत्रपणे विमा उतरविलेला आहे. यामध्ये इमारत, संगणक, फर्निचर, फिटिंग, वाहन, रोख रक्कम, मार्गस्थ रक्कमेसाठी, सोने कर्जातील तारण जिन्नस, स्टेशनरी तसेच संस्थेने ककर्जापोटी र्जपोठी जप्त केलेल्या मालमत्तेचा विमा, याव्यतिरिक्त  सेवकांचा फॅडिलिटि  व अपघात विम्याचा समावेश आहे. विम्याचा कालावधी दि. <span><input type="text" class="form-control d-inline-block" style="width:180px;display:inline;" name="insurance_period" value="{{ $clientInputs['insurance_period'] ?? '' }}"></span> अखेर आहे. याशिवाय कर्जदारांचा कर्जरक्कम संरक्षण विमा उतरविलेला
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_insurance_done">
                             <option value="">आहे/नाही</option>
                             <option value="आहे" {{ (isset($clientInputs['loan_insurance_done']) && $clientInputs['loan_insurance_done'] == 'आहे') ? 'selected' : '' }}>आहे</option>

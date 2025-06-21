@@ -15,13 +15,13 @@
 
                 <!-- Financial Statement Analysis Section -->
                 <div>
-                    <h5 class="fw-bold mb-3">व आर्थिक पत्रके विवेचन :</h5>
+                    <h5 class="fw-bold mb-3">ब आर्थिक पत्रके विवेचन :</h5>
                     <div class="mb-2 fw-bold">1. ताळेबंद विवेचन:</div>
                     <div class="ps-3 mb-2">
                         संस्थेचे मुख्यालय व शाखा (असल्यास) यांचे एकत्रित ताळेबंदाचे विवेचन खालीलप्रमाणे -
                     </div>
                     <div class="mb-2">
-                        <span class="fw-bold">अ. भांडवल व ठेवी बाजू :</span>
+                        <span class="fw-bold">अ. भांडवल व देणी बाजू :</span>
                         <b> <span style="font-weight:bold;">रु. {{$client['totalIncome7'] ?? ''}}</span></b>
                     </div>
                     <div class="mb-2">
@@ -35,7 +35,7 @@
                         <span style="background: #00ff00;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span>
                         आहे. दि.
                         <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="last_year_date" value="{{ $clientInputs['last_year_date'] ?? '' }}"></span>
-                        (गतवर्षी) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
+                        (गतवर्ष) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_lastYear'] ?? ''}}</span></b>
                         होते. लेखापरीक्षण कालावधीत त्यामध्ये रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']}}</span></b>
@@ -52,9 +52,9 @@
                         }
                         @endphp
                         <b> <span>31/03/2025</span></b>
-                        (चालूवर्षी) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
+                        (चालूवर्ष) अखेर संस्थेकडून वसूल भागभांडवल रु.
                         <b> <span>{{$client['totalIncome7'] ?? ''}}</span></b>
-                        झालेले आहे. सदरचे वस्तुम भागभांडवल अधिकृत भागभांडवलाच्या
+                        झालेले आहे. सदरचे वसूल भागभांडवल अधिकृत भागभांडवलापेक्षा
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_less_than_authorized">
                             <option value="कमी" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'कमी') ? 'selected' : '' }}>कमी</option>
                             <option value="जास्त" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'जास्त') ? 'selected' : '' }}>जास्त</option>
@@ -64,7 +64,7 @@
 
                     <!-- START: Design as per pasted image -->
                     <div class="mb-2">
-                        <span>लेखापरिक्षण कालावधीत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span>total</span> % आहे. अहवाल वर्षात
+                        <span>लेखापरिक्षण कालावधीत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span>?</span> % आहे. अहवाल वर्षात
                             भागभांडवल रु. <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="share_capital_increase_amount" value="{{ $clientInputs['share_capital_increase_amount'] ?? '' }}"></span> ने वाढलेले असुन, भागभांडवल वाढीचे प्रमाण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_capital_increase_percent" value="{{ $clientInputs['share_capital_increase_percent'] ?? '9.86' }}"></span> % आहे. भागभांडवल यादीची रक्कम
                             ताळेबंदातील रक्कमेशी जुळत
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_matches">
@@ -94,7 +94,7 @@
                         $auditPeriod = $client->audit_year;
                         }
                         @endphp
-                        दि. <span>31/03/{{$end}}</span> अखेर संस्थेचे खालीलप्रमाणे निधी उभा आहे. चालू व मागील आर्थिक वर्षातील तुलनात्मक आकडेवारी खालीलप्रमाणे -
+                        दि. <span>31/03/{{$end}}</span> अखेर संस्थेचे खालीलप्रमाणे निधी उभारलेले आहेत. चालू व मागील आर्थिक वर्षातील तुलनात्मक आकडेवारी खालीलप्रमाणे -
                     </div>
 
                     <div>
@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी. तसेच लेखापरिक्षण कालवधीत काही निर्धीचा
+                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी. तसेच लेखापरिक्षण कालवधीत काही निधींचा 
                             विनियोग झालेला असल्यास तो योग्य पध्द्तीने झालेला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="funds_utilization_proper">
                                 <option value="आहे" {{ (isset($clientInputs['funds_utilization_proper']) && $clientInputs['funds_utilization_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -192,8 +192,8 @@
                                 <tr>
                                     <th>अ.क्र.</th>
                                     <th>ठेवी प्रकार</th>
-                                    <th>गतवर्षी अखेर रु.</th>
-                                    <th>चालूवर्षी अखेर रु.</th>
+                                    <th>गतवर्षे अखेर रु.</th>
+                                    <th>चालूवर्षे अखेर रु.</th>
                                     <th>वाढ/घट</th>
                                 </tr>
                             </thead>
@@ -274,7 +274,7 @@
                         तसेच संस्थेस प्राप्त झालेल्या ठेवींमध्ये संस्थांच्या ठेवींची विगतवारी स्वतंत्रपणे नमुद करावी.
                     </div>
                     <div class="mb-2">
-                        <span class="fw-bold">4. देय व्याज तरतूद :-</span>
+                        <span class="fw-bold">4. देय व्याज तरतुदी  :-</span>
                         <span style="font-weight:bold;">
                             रु. {{$client['तरतुद_sum_currentYear'] ?? 0}}</span>
                         </span>
@@ -392,7 +392,7 @@
 
                 <!-- 6. शाखा ठेवी -->
                 <div class="mt-4 mb-2">
-                    <span class="fw-bold" style="font-size: 1.1em;">6. शाखा ठेवी देणे :-</span>
+                    <span class="fw-bold" style="font-size: 1.1em;">6. शाखा येणे देणे  :-</span>
                     <span style="font-weight:bold;">रु. {{$client['शाखा ठेवी देणे_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
@@ -410,9 +410,9 @@
                         <thead>
                             <tr>
                                 <th>अ.क्र.</th>
-                                <th>ठेवी रकम तपशील</th>
-                                <th>गतवर्षी अखेर रु.</th>
-                                <th>चालू वर्ष अखेर रु.</th>
+                                <th>देणे रक्कम तपसील</th>
+                                <th>गतवर्षे अखेर रू.</th>
+                                <th>चालु वर्षे अखेर रू.</th>
                                 <th>फरक</th>
                             </tr>
                         </thead>
@@ -457,9 +457,9 @@
                         $auditPeriod = $client->year->audit_year;
                         }
                         @endphp
-                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे/अधिक/कमी.
+                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे.आवष्यक 
                     <br>
-                    तरतूद व केल्यामुळ संचीत नफा प्रमाणीत करता आहे /
+                    तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता आहे /
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="retained_profit_certified">
                         <option value="आहे" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -494,12 +494,12 @@
                     </select>
                     .
                     <br>
-                    बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मिळाली असून ती रोकडीत जमा करण्यात आलेली आहे. रोख शिल्लक प्रमाणपत्र
+                    लेखापरीक्षणाचेवेळी दि. 28-05-2024 रोजी अखेर/आरंभीची  बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_certificate_available">
                         <option value="आहे" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
-                    . रोख शिल्लकाची सुरक्षिततेची तिजोरी, अलमारी यांची व्यवस्था
+                    . रोख शिल्लकाची सुरक्षिततेची तिजोरी, लॉकर यांची व्यवस्था
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement">
                         <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -735,7 +735,7 @@
                                 <option value="नाही" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
-                        <li>गुंतवणुकीचे दाखले
+                        <li>गुंतवणूकीचे दाखले/ठेव पावत्या तपासले -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_available">
                                 <option value="आहे" {{ (isset($clientInputs['investment_certificates_available']) && $clientInputs['investment_certificates_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_certificates_available']) && $clientInputs['investment_certificates_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -758,16 +758,16 @@
                                 <option value="नाही" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
-                        <li>तत्संबंधित केलेली गुंतवणूक किमती आहे का, ती नियमावली प्रमाणे तपशील नमूद करावा -
+                        <li>तरलतेपोटी केलेली गुंतवणूक किती आहे? ती नियमानुसार असलेबाबतचा तपशील नमुद करावा. 
                             <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="investment_value_compliant" value="{{ $clientInputs['investment_value_compliant'] ?? '' }}">
                         </li>
-                        <li>गुंतवणूक प्रमाणपत्रे नियमानुसार पुर्ण प्रमाणात आहेत -
+                        <li>गुंतवणूक चढउतार निधीसाठी पुरेशा प्रमाणात केले -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_compliant">
                                 <option value="आहे" {{ (isset($clientInputs['investment_certificates_compliant']) && $clientInputs['investment_certificates_compliant'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_certificates_compliant']) && $clientInputs['investment_certificates_compliant'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
-                        <li>सध्या नागरी सहकारी बँक/सेंट्रल/डिस्ट्रिक्ट बँके व्यतिरिक्त अन्य कुठे गुंतवणूक केली असल्यास/त्याबाबत तपशील नमूद करावा.</li>
+                        <li>अ वर्गातील नागरी सहकारी बँका/राष्ट्रीयकृत बँका वगळता अन्य ठिकाणी गुंतवणूक केली असल्यास त्याबाबतचा तपशील नमूद करावा. </li>
                         <input type="text" class="form-control d-inline-block" style="width:300px;display:inline;" name="other_investments_details" value="{{ $clientInputs['other_investments_details'] ?? '' }}">
                         <li> गुंतवणूक खेळत्या भांडवलाशी असल्याचे प्रमाण नमूद करावे. @if($client['totalIncome7'] != 0)
                             <b>{{ number_format(($client['गुंतवणूक_sum'] / $client['totalIncome7']) * 100, 2) }}% </b>
@@ -782,7 +782,7 @@
 
                 <!-- START: कर्ज (Loan) Section as per pasted image -->
                 <div class="mt-4 mb-2">
-                    <span class="fw-bold" style="font-size: 1.1em;">4. कर्जे :-</span>
+                    <span class="fw-bold" style="font-size: 1.1em;">4. कर्ज  :-</span>
                     <span style="font-weight:bold;">रु. {{$client['देणे कर्ज_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
@@ -794,8 +794,8 @@
                             <tr>
                                 <th>अ. क्र</th>
                                 <th>कर्ज प्रकार</th>
-                                <th>गतवर्षी अखेर रु.</th>
-                                <th>चालू वर्ष अखेर रु.</th>
+                                <th>गतवर्षा अखेर रु.</th>
+                                <th>चालू वर्षा अखेर रु.</th>
                                 <th>वाढ/घट</th>
                             </tr>
                         </thead>
@@ -840,7 +840,7 @@
                     <span style="font-weight:bold;">
                         <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_interest_rate" value="{{ $clientInputs['loan_interest_rate'] ?? '' }}">
                     </span>
-                    आकारला आहे. सेवक कर्जाचा
+                    आकारला आहे. सेवक कर्जास 
                     <span style="font-weight:bold;">
                         <input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="employee_loan_interest_rate" value="{{ $clientInputs['employee_loan_interest_rate'] ?? '' }}">
                     </span>
@@ -865,7 +865,7 @@
                     <span style="font-weight:bold;">0</span>
                 </div>
                 <div class="mb-2">
-                    शाखा येणे देणे रकमांमध्ये फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
+                    शाखा येणे देणे रक्कमांमध्ये  फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
                 </div>
                 <div class="mb-2">
                     <span style="font-weight:bold;">6. स्थावर व जंगम मालमत्ता: {{$client['कायम मालमत्ता_sum_currentYear']}}</span>
@@ -945,7 +945,7 @@
                             मालमत्तांची विक्री विविध कार्यपद्धती अवलंबून झाली.
                         </li>
                         <li>
-                            सदस्य विक्रीतून संस्थेस नफाजमा/तथलेख मानांकनानुसार केलेला तोटा झाला असल्यास त्यांचा/लागू
+                            सदर विक्रीतुन संस्थेस नफा/तोटा झाला असल्यास त्यांचा जमाखर्च लेखे मानांकनाप्रमाणे केलेला लागु
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="member_asset_loss_applied">
                                 <option value="आहे" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -958,7 +958,7 @@
                     <span style="font-weight:bold;">रु. {{ $client['इतर देणी_sum_currentYear'] ?? 0 }}</span>
                 </div>
                 <div class="mb-2">
-                    दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम येणे आहे.
+                    दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कमा येणे आहेत.
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">

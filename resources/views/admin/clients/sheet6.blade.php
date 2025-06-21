@@ -32,7 +32,7 @@
                     $auditPeriod = $client->year->audit_year;
                     }
                     @endphp
-                    संस्थे सत्र दि. <span style="font-weight:bold;">01/04/{{$start}} ते 31/03/{{$end}}</span> या आर्थिक वर्षाचे नफा-तोटा पत्रक विवेचन खालीलप्रमाणे -
+                    संस्थे सन दि. <span style="font-weight:bold;">01/04/{{$start}} ते 31/03/{{$end}}</span> या आर्थिक वर्षाचे नफा-तोटा पत्रक विवेचन खालीलप्रमाणे -
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:900px;">
@@ -128,7 +128,6 @@
                                 <td>{{$totalExpCurrentYear = $client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'] }}</td>
                                 <td>{{$totalExpDiff = $totalExpCurrentYear - $totalExpLastYear}}</td>
                             </tr>
-                            @if($totalIncomeCurrentYear > $totalExpCurrentYear)
                             @php
                             $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear
                             @endphp
@@ -139,7 +138,6 @@
                                 <td>{{$totalExpCurrentYear - $totalIncomeCurrentYear}}</td>
                                 <td>{{ ($totalExpCurrentYear - $totalIncomeCurrentYear) - ($totalExpLastYear - $totalIncomeLastYear)}}</td>
                             </tr>
-                            @else
                             @php
                             $totalLoss = $totalIncomeCurrentYear - $totalExpCurrentYear
                             @endphp
@@ -150,7 +148,6 @@
                                 <td>{{ $totalExpCurrentYear - $totalIncomeCurrentYear}}</td>
                                 <td>{{ ($totalExpCurrentYear - $totalIncomeCurrentYear) - ($totalExpLastYear - $totalIncomeLastYear)}}</td>
                             </tr>
-                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -219,7 +216,7 @@
                             </select>
                             .
                         </li>
-                        <li>गावठाणच्या रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_gaothan" value="{{ $clientInputs['reason_gaothan'] ?? '' }}"> खर्च उत्पन्न अहवाल वर्षात जमा/खर्च केला
+                        <li>गतवर्षीचा  रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_gaothan" value="{{ $clientInputs['reason_gaothan'] ?? '' }}"> खर्च उत्पन्न अहवाल वर्षात/जमाखर्ची केला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="reason_expense_diff5">
                                 <option value="आहे" {{ (isset($clientInputs['reason_expense_diff5']) && $clientInputs['reason_expense_diff5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['reason_expense_diff5']) && $clientInputs['reason_expense_diff5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -238,7 +235,7 @@
                                 <option value="नाही" {{ (isset($clientInputs['reason_expense_diff7']) && $clientInputs['reason_expense_diff7'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>.
                         </li>
-                        <li>वेविधीतिल व्याज रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_misc_interest" value="{{ $clientInputs['reason_misc_interest'] ?? '' }}"> निदर्श खर्चात घेतले
+                        <li>ठेवीवरील  व्याज रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_misc_interest" value="{{ $clientInputs['reason_misc_interest'] ?? '' }}"> निरंक खर्चात घेतले
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="reason_expense_diff8">
                                 <option value="आहे" {{ (isset($clientInputs['reason_expense_diff8']) && $clientInputs['reason_expense_diff8'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['reason_expense_diff8']) && $clientInputs['reason_expense_diff8'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -349,7 +346,7 @@
                             <tr>
                                 <td>4</td>
                                 <td>इतर ठेवी</td>
-                                <td>इतर ठेवी ÷ खेळते भांडवल x 100</td>
+                                <td>इतर देणी  ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 3</td>
                                 <td>{{number_format(( $client['ठेवी_sum'] / $client['खेळते भांडवल']) * 100, 2)}}</td>
                             </tr>
@@ -410,14 +407,20 @@
                                 <td>निव्वळ नफ्याचे</td>
                                 <td>निव्वळ नफा ÷ एकूण उत्पन्न x 100</td>
                                 <td>10</td>
-                                <td>{{number_format(( $totalProfit ?? 0 / $totalIncomeCurrentYear) * 100, 2)}}</td>
+                                <td> {{ $totalIncomeCurrentYear != 0 ? number_format((($totalProfit ?? 0) / $totalIncomeCurrentYear) * 100, 2) : '0.00' }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>व्यवस्थापन खर्चाचे</td>
                                 <td>व्यवस्थापन खर्च ÷ एकूण उत्पन्न x 100</td>
                                 <td>30 ते 35</td>
-                                <td>{{number_format(( $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']  / $totalIncomeCurrentYear) * 100, 2)}}</td>
+                                <td>
+                                    {{ $totalIncomeCurrentYear != 0 
+        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $totalIncomeCurrentYear) * 100, 2) 
+        : '0.00' 
+    }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -438,7 +441,7 @@
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>ठेवीवरील दिलेल्या व्याजाचे प्रमाण</td>
+                                <td>निधीच्या खर्चाचे प्रमाण</td>
                                 <td>ठेवीवरील दिलेले व्याज ÷ कर्जावरील दिलेले व्याज x 100</td>
                                 <td></td>
                                 <td>{{number_format(($client['ठेवीवरील व्याज_sum_currentYear']  / $client['कर्जावरील व्याज_sum_currentYear']) * 100, 2)}}</td>
@@ -452,14 +455,14 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>निव्वळ नफ्याची सरासरी</td>
+                                <td>निव्वळ नफयाचे सरासरी खेळत्या भागभांडवलाशी प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते x 100</td>
                                 <td></td>
                                 <td>{{number_format(( $totalProfit ?? 0  / $client['खेळते भांडवल']/12) * 100, 2)}}</td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>खेळत्या भागभांडवलाशी प्रमाण</td>
+                                <td>व्यवसायातील नफयाचे सरासरी खेळत्या भांगभांडवलाचे प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते भांडवल x 100</td>
                                 <td></td>
                                 <td>{{number_format(( $totalProfit ?? 0  / $client['खेळते भांडवल']/12) * 100, 2)}}</td>
@@ -488,7 +491,7 @@
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td>सरासरी ठेवी वाढीचे प्रमाण</td>
+                                <td>सरासारी ठेव वाढीचे प्रमाण</td>
                                 <td>गतवर्षातील ठेवी ÷ सरासरी ठेवी x 100</td>
                                 <td></td>
                                 <td>{{number_format(( $client['ठेवी_sum_lastYear'] / $client['खेळते भांडवल']/12) * 100, 2)}}</td>
@@ -524,7 +527,7 @@
                             </tr>
                             <tr>
                                 <td>11</td>
-                                <td>एककांची कर्जविषयी प्रमाण</td>
+                                <td>थकबाकीचे कर्जाशी प्रमाण</td>
                                 <td>थकबाकी ÷ एकूण कर्ज x 100</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="ratio_overdue_to_loan" value="{{ $clientInputs['ratio_overdue_to_loan'] ?? '' }}"></td>
@@ -538,7 +541,7 @@
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td>ठेवी अनुज्ञात जिद्दीची प्रमाण</td>
+                                <td>ढोबळ अनुत्पादक जिदंगी प्रमाण</td>
                                 <td>एनपीए झालेल्या सर्व कर्जाची येणे बाकी ÷ एकूण ठेवी x 100</td>
                                 <td></td>
                                 <td style="background: yellow;"><input type="text" class="form-control" name="ratio_npa_to_deposit" value="{{ $clientInputs['ratio_npa_to_deposit'] ?? '61' }}"></td>
@@ -694,7 +697,7 @@
                                     <td class="highlight">0</td>
                                     <td class="highlight">0</td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td rowspan="2">5</td>
                                     <td>संशयीत 3 (60 महिनेपासुन पुढे)<br></td>
                                     <td>36</td>

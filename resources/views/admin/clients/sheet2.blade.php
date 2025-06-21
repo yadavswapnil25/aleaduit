@@ -35,7 +35,7 @@
                             <td>
 
                                 <select class="form-control" name="deposits_deductions_b" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['deposits_deductions_b']) && $clientInputs['deposits_deductions_b'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['deposits_deductions_b']) && $clientInputs['deposits_deductions_b'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -46,7 +46,7 @@
                             <td>(ब) वर्गण्याचे नियमितपणे भागात रूपांतर केले जात आहे काय?</td>
                             <td>
                                 <select class="form-control" name="transformation_regular" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['transformation_regular']) && $clientInputs['transformation_regular'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['transformation_regular']) && $clientInputs['transformation_regular'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -57,7 +57,7 @@
                             <td>(क) ठेवींच्या व्यवहार चालविण्यासाठी स्वतंत्र नियम तयार केले
                                 आहे काय?</td>
                             <td> <select class="form-control" name="separate_rules_deposits" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['separate_rules_deposits']) && $clientInputs['separate_rules_deposits'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['separate_rules_deposits']) && $clientInputs['separate_rules_deposits'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -66,7 +66,7 @@
                             <td></td>
                             <td>(ड) त्याचे योग्य रितीने अनुपालन होत आहे काय ?</td>
                             <td> <select class="form-control" name="compliance_properly" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['compliance_properly']) && $clientInputs['compliance_properly'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['compliance_properly']) && $clientInputs['compliance_properly'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -75,7 +75,7 @@
                             <td></td>
                             <td>(ई) बिगर सभासदांकडुन काही ठेवी स्विकारल्या आहे काय?</td>
                             <td> <select class="form-control" name="deposits_from_non_members" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['deposits_from_non_members']) && $clientInputs['deposits_from_non_members'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['deposits_from_non_members']) && $clientInputs['deposits_from_non_members'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -87,7 +87,7 @@
                             <td>
 
                                 <select class="form-control" name="personal_account_match_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['personal_account_match_2']) && $clientInputs['personal_account_match_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['personal_account_match_2']) && $clientInputs['personal_account_match_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -101,7 +101,7 @@
                             <td>ठेवीची देयु काल नोंदवही ठेवली आहे काय? आणि ठेवीची
                                 परतफेड वक्तशिरपणे करण्यात येत आहे काय?</td>
                             <td> <select class="form-control" name="timely_repayment_deposits" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['timely_repayment_deposits']) && $clientInputs['timely_repayment_deposits'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['timely_repayment_deposits']) && $clientInputs['timely_repayment_deposits'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -117,7 +117,7 @@
                             <td>
 
                                 <select class="form-control" name="loan_disbursement_compliance_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['loan_disbursement_compliance_2']) && $clientInputs['loan_disbursement_compliance_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['loan_disbursement_compliance_2']) && $clientInputs['loan_disbursement_compliance_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -147,7 +147,7 @@
                             <td>
 
                                 <select class="form-control" name="current_assets_1_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['current_assets_1_2']) && $clientInputs['current_assets_1_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['current_assets_1_2']) && $clientInputs['current_assets_1_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -163,7 +163,7 @@
                             <td>
 
                                 <select class="form-control" name="current_assets_2_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['current_assets_2_2']) && $clientInputs['current_assets_2_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['current_assets_2_2']) && $clientInputs['current_assets_2_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -179,7 +179,7 @@
                                 नाही.
                                 </td>
                             <td> <select class="form-control" name="financial_info_timely" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -199,7 +199,7 @@
                             <td>
 
                                 <select class="form-control" name="over_trading" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['over_trading']) && $clientInputs['over_trading'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['over_trading']) && $clientInputs['over_trading'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -222,13 +222,60 @@
                             <td>
 
                                 <select class="form-control" name="external_loan_1_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['external_loan_1_2']) && $clientInputs['external_loan_1_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['external_loan_1_2']) && $clientInputs['external_loan_1_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
                                 <br>
                                 <input type="text" class="form-control" name="external_loan_1" value="{{ isset($clientInputs['external_loan_1']) ? $clientInputs['external_loan_1'] : '' }}">
 
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            
+                            <td></td>
+                            <td>
+                                  <table >
+                        <thead>
+                            <tr>
+                                <th>अ. क.</th>
+                                <th>पतमयादेचे प्रकार</th>
+                                <th>कारण</th>
+                                <th>मंजूर रक्कम</th>
+                                <th>परतफेडीचा निधारीत दि.</th>
+                                <th>उचललेली बाकी</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td class="green-cell">1</td>
+                                <td class="green-cell">2</td>
+                                <td class="green-cell">3</td>
+                                <td class="green-cell">4</td>
+                                <td class="green-cell">5</td>
+                                <td class="green-cell">6</td>
+                            </tr>
+                            <tr>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row1_col1" value="{{ isset($clientInputs['annex11_row1_col1']) ? $clientInputs['annex11_row1_col1'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row1_col2" value="{{ isset($clientInputs['annex11_row1_col2']) ? $clientInputs['annex11_row1_col2'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row1_col3" value="{{ isset($clientInputs['annex11_row1_col3']) ? $clientInputs['annex11_row1_col3'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row1_col4" value="{{ isset($clientInputs['annex11_row1_col4']) ? $clientInputs['annex11_row1_col4'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex1_row1_col5" value="{{ isset($clientInputs['annex11_row1_col5']) ? $clientInputs['annex11_row1_col5'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row1_col6" value="{{ isset($clientInputs['annex11_row1_col6']) ? $clientInputs['annex11_row1_col6'] : '' }}"></td>
+                            </tr>
+                            <tr>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col1" value="{{ isset($clientInputs['annex11_row2_col1']) ? $clientInputs['annex11_row2_col1'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col2" value="{{ isset($clientInputs['annex11_row2_col2']) ? $clientInputs['annex11_row2_col2'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col3" value="{{ isset($clientInputs['annex11_row2_col3']) ? $clientInputs['annex11_row2_col3'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col4" value="{{ isset($clientInputs['annex11_row2_col4']) ? $clientInputs['annex11_row2_col4'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col5" value="{{ isset($clientInputs['annex11_row2_col5']) ? $clientInputs['annex11_row2_col5'] : '' }}"></td>
+                                <td class="green-cell"><input type="text" class="form-control" name="annex11_row2_col6" value="{{ isset($clientInputs['annex11_row2_col6']) ? $clientInputs['annex11_row2_col6'] : '' }}"></td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
                             </td>
                         </tr>
                         <tr>
@@ -237,7 +284,7 @@
                             <td>
 
                                 <select class="form-control" name="external_loan_2_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['external_loan_2_2']) && $clientInputs['external_loan_2_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['external_loan_2_2']) && $clientInputs['external_loan_2_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -250,7 +297,7 @@
                             <td>3)</td>
                             <td>कर्ज वेळेवर परत केले जातात काय ?</td>
                             <td> <select class="form-control" name="repayment_timeliness" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['repayment_timeliness']) && $clientInputs['repayment_timeliness'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['repayment_timeliness']) && $clientInputs['repayment_timeliness'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -259,7 +306,7 @@
                             <td>4)</td>
                             <td>कर्जाकरीता दिलेले नियम व्यवस्थित वाचलेले आहेत काय?</td>
                             <td> <select class="form-control" name="loan_terms_read" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -669,7 +716,7 @@
                             <td>
 
                                 <select class="form-control" name="investments_1_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['investments_1_2']) && $clientInputs['investments_1_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['investments_1_2']) && $clientInputs['investments_1_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -706,7 +753,7 @@
                             <td>
 
                                 <select class="form-control" name="investments_4_2" required>
-                                    <option value="" selected >Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="होय" {{ (isset($clientInputs['investments_4_2']) && $clientInputs['investments_4_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['investments_4_2']) && $clientInputs['investments_4_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
@@ -953,7 +1000,7 @@
                                     तपशिल</th>
                                 <th>मिळावयास
                                     पाहीजे असलेली रक्कम</th>
-                                <th>कमी जमा झालेली अगर हिशोबात</th>
+                                <th>कमी जमा झालेली अगर हिशोबात न घेतलेली रक्कम</th>
                                 <th>उपस्थित केलेल्या
                                     आक्षेपांचे
                                     स्वरूप</th>
@@ -1023,7 +1070,7 @@
                     <p class="text-center fw-bold">परिशिष्ट पाहावे</p>
                 </div>
                 <div class="container mt-4">
-                    <h5 class="text-center">परशिष्ठ क्रमांक 3 (तिन)</h5>
+                    <h5 class="text-center">परिशिष्ठ  क्रमांक 3 (तिन)</h5>
                     <h6 class="text-center">अयोग्य व अनियमित दिलेल्या रक्कमा.</h6>
 
                     <table class="table table-bordered">

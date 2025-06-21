@@ -199,7 +199,7 @@
                         <td>-- ते --</td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>9</td>
                         <td><b>विभाग "क"</b></td>
                         <td>-- ते --</td>
                     </tr>
@@ -276,11 +276,6 @@
                 </tbody>
             </table>
             <hr>
-            <center>
-                प्राथमिक माहिती अहवाल
-                (पगारदार व नागरी पत संस्था)
-                ग्राम विकास समिती कर्मचारी सहकारी पत संस्था मर्या. शहापूर र. नं. 109
-                वर्ष 2023- 2024</center>
             <form action="{{ route('admin.client.saveInputs', $client->id) }}" method="POST">
                 @csrf
                 <table class="table table-bordered">
@@ -352,7 +347,7 @@
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td>राखीव निधि</td>
+                            <td>निधि</td>
                             <td><b>रु. {{$client['राखीव निधी_sum']}}</b></td>
                         </tr>
                         <tr>
@@ -423,7 +418,7 @@
                         </tr>
                         <tr>
                             <td>22</td>
-                            <td>संस्थेकडे असलेले एकुण कर्मचारी</td>
+                            <td>संस्थेकडे असलेले एकुन कर्मचारी</td>
                             <td><input type="number" class="form-control" name="total_employees" value="{{ $clientInputs['total_employees'] ?? '' }}"></td>
                         </tr>
                         <tr>
@@ -517,7 +512,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>1.लेखापरीक्षा सुरू केल्याचे व चालु ठेवल्याचे दि.</td>
+                                <td>1.लेखापरीक्षा सुरू केल्याचे व चालु ठेवल्याचेदि.</td>
                                 <td><input type="date" class="form-control" name="audit_start_date" value="{{ $clientInputs['audit_start_date'] ?? '' }}"></td>
                             </tr>
                             <tr>
@@ -550,7 +545,6 @@
                             </tr>
                             <tr>
                                 <td>३) हितचिंतक</td>
-                                <td><input type="text" class="form-control" name="minority_members" id="minority_members" value="{{ $clientInputs['minority_members'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>ब) संस्था</td>
@@ -568,22 +562,23 @@
                             </tr>
 
                             <tr>
-                                <td>२.नवे सभासद यथोचितरित्या करून घेतले आहेत काय?
-                                    त्यांनी प्रवेश शुल्क दिले आहेत काय?</td>
+                                <td>२.नवे सभासद यथोचितरित्या कुऊन घेतले आहेत काय?
+                                    ज्यांनी प्रवेश शुल्क दिले आहेत काय?</td>
                                 <td>
                                     <select class="form-control" name="new_members_fee_paid" required>
-                                        <option value="" selected>Select</option>
+                                        <option value="" selected disabled>Select</option>
                                         <option value="होय" {{ (isset($clientInputs['new_members_fee_paid']) && $clientInputs['new_members_fee_paid'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['new_members_fee_paid']) && $clientInputs['new_members_fee_paid'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td>3) त्यांचे लेखी अर्ज घेण्यात आलेले असुन ते योग्य
-                                    रीतीने नियत कमात केले आहेत काय?</td>
+                                <td>3) त्यांचे लेखी अर्ज घेण्यात आलेले असून ते योग्य
+                                    होय.
+                                    रीतीने नियत क्रमात केले आहेत काय?</td>
                                 <td>
                                     <select class="form-control" name="written_applications_received" required>
-                                        <option value="" selected>Select</option>
+                                        <option value="" selected disabled>Select</option>
                                         <option value="होय" {{ (isset($clientInputs['written_applications_received']) && $clientInputs['written_applications_received'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['written_applications_received']) && $clientInputs['written_applications_received'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -591,7 +586,7 @@
                             </tr>
                             <tr>
                                 <td>४)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातील
-                                    नियम 32 आणि 65 (1) अन्वेय ठरविलेल्या 'आय' या
+                                    नियम 32 आणि 65 (1) अन्वेय द्ररविलेल्या 'आय' या
                                     नमुन्यात सभासदांची नोंदवही ठेवली आहे काय?</td>
                                 <td>
                                     <select class="form-control" name="member_register_maintained">
@@ -603,7 +598,9 @@
                             </tr>
                             <tr>
                                 <td>5)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातील
-                                    नियम 33 अन्वेय' जे ' या नमुन्यात सभासदांची
+                                    नियम 33 अन्वेय' जे आा नमुन्यात सभासदांची
+                                    होय.
+                                    होय.
                                     नोंदवही ठेवली आहे काय?</td>
                                 <td>
                                     <select class="form-control" name="member_register_maintained_rule_33">
@@ -613,18 +610,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>6)मृत, काढुन टाकलेल्या व राजीनामा दिलेल्या
-                                    सभासदांच्या बाबतीत त्यांच्या नावापुढे वरीलप्रमाणे योग्य
-                                    ती नोंद केली आहे काय?</td>
-                                <td>
-                                    <select class="form-control" name="resignations_properly_accepted_1">
-                                        <option value="">Select</option>
-                                        <option value="होय" {{ (isset($clientInputs['resignations_properly_accepted_1']) && $clientInputs['resignations_properly_accepted_1'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['resignations_properly_accepted_1']) && $clientInputs['resignations_properly_accepted_1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td>7)राजीनामे रीतसर आहेत काय आणि ते यथोचितरीत्या
                                     स्वीकारले आहेत काय?</td>
@@ -638,9 +624,9 @@
                             </tr>
                             <tr>
                                 <td>8)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातीलनियम
-                                    25 अन्वेय वारस (नॉमिनी) नेमुन दिले आहते काय?
-                                    आणि त्याचे नोंद 26 व्या नियमाप्रमाणे सभासदांच्या
-                                    नोंदवहीत यथोचितरीत्या केली आहे काय?</td>
+                                    25 अन्वेय वारस (नॉमिनी) नेमुन दिले आहूते काय?
+                                    आणि त्याचे नोंद्र 26 व्या नियमाप्रमाणे सभासदांच्या....
+                                    नोंदवहीत. यथोचितरीत्या केली आहे काय?</td>
                                 <td>
                                     <select class="form-control" name="nominee_appointed">
                                         <option value="">Select</option>
@@ -706,7 +692,8 @@
                             </tr>
                             <tr>
                                 <td>5)भागाची एकुण खतावणी बाकी ताळेबंदातील
-                                    भागभांडवलाच्या आकडयाशी जुळते काय?
+                                    नाही.
+                                    आगभांडवलाच्या आकड्याशी जुळते काय?
                                 </td>
                                 <td>
                                     <select class="form-control" name="share_ledger_balance_matches">
@@ -717,7 +704,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>6)भागधारकांना त्यानी घेतलेल्या सर्व भागाबदल भागपत्रे
+                                <td>6)भागधारकांना ज्यानी घेतलेल्या सर्व भागाबदल भगपत्रे
+                                    होय.
                                     दिली आहेत काय?
                                 </td>
                                 <td>
@@ -731,8 +719,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>7)भागाचे हस्तांतरण (ट्रान्स्फर) अगर त्यांची किंमत परत
-                                    देणे या गोष्टी कायदा कानुन व पोटनियम यातील
+                                <td>7)भागाची हस्तांतरण (ट्रान्स्फर) अगर त्यांची किंमत परत
+                                    नाही.
+                                    द्वेणे.या गोष्टी कायद्रा कानून व प्रोटुनियम यातील
                                     तरतुदीप्रमाणे झाल्या आहेत काय?
                                 </td>
                                 <td>
@@ -752,7 +741,7 @@
                             </tr>
                             <tr>
                                 <td>1)पोटनियमाप्रमाणे संस्थेने कर्ज घेण्याची मर्यादा काय
-                                    ठरविली आहे?</td>
+                                    होय.</td>
                                 <td>
                                     <select class="form-control" name="loan_limit_followed_opt1">
                                         <option value="">Select</option>
@@ -764,26 +753,28 @@
 
                             </tr>
                             <tr>
-                                <td>2)ती उल्लंघिली गेली होती काय ?</td>
+                                <td>2)ती उल्लंचिली गेली होती काय ?
+                                    प्रश्न उद्भवत नाही.</td>
                                 <td>
                                     <select class="form-control" name="loan_limit_exceeded_opt1">
                                         <option value="">Select</option>
                                         <option value="प्रश्न उत्पन्न नहीं" {{ (isset($clientInputs['loan_limit_exceeded_opt1']) && $clientInputs['loan_limit_exceeded_opt1'] == 'प्रश्न उत्पन्न नहीं') ? 'selected' : '' }}>प्रश्न उत्पन्न नहीं</option>
+                                    </select>
+                                    <br>
+                                    <select class="form-control" name="loan_limit_exceeded">
+                                        <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
-                                    <br>
-                                    <input type="text" class="form-control" name="loan_limit_exceeded" value="{{ $clientInputs['loan_limit_exceeded'] ?? '' }}">
                                 </td>
                             </tr>
                             <tr>
-                                <td>3)जर ती उल्लंघिली गेली असेल तर सक्षम
-                                    प्राधिकाऱ्याकडुन आवश्यक ती अनुज्ञा मिळवली आहे
+                                <td>3)जर ती उल्लंचिली गेली असेल तर सक्षम
+                                    प्राधिकाऱ्याकडून आवश्यक ती अनुज्ञा मिळवली आहे
                                     काय?</td>
                                 <td>
                                     <select class="form-control" name="loan_limit_exceeded_permission_opt1">
                                         <option value="">Select</option>
-                                        <option value="प्रश्न उत्पन्न नहीं" {{ (isset($clientInputs['loan_limit_exceeded_opt1']) && $clientInputs['loan_limit_exceeded_opt1'] == 'प्रश्न उत्पन्न नहीं') ? 'selected' : '' }}>प्रश्न उत्पन्न नहीं</option>
 
                                         <option value="होय" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -811,43 +802,34 @@
                                     संख्या द्यावी. :-</td>
                             </tr>
                             <tr>
-                                <td>अ) व्यवस्थापक समितीच्या वा संचालक मंडळाच्या सभा :-</td>
-                                <select class="form-control" name="board_meetings_opt">
-                                    <option value="">Select</option>
-                                    <option value="होय" {{ (isset($clientInputs['board_meetings_opt']) && $clientInputs['board_meetings_opt'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                    <option value="नाही" {{ (isset($clientInputs['board_meetings_opt']) && $clientInputs['board_meetings_opt'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                </select>
-                                <br>
+                                <td>अ) व्यवस्थापक समितीच्या वा संचालक मंडळाच्या प्रभा
+                                    कार्यकारी वा उप समितिच्या सभा :-</td>
                                 <td><input type="text" class="form-control" name="board_meetings_count" value="{{ $clientInputs['board_meetings_count'] ?? '' }}"></td>
 
                             </tr>
                             <tr>
                                 <td>ब) कार्यकारी वा उप समितिच्या सभा :-</td>
                                 <td>
+                                    <input type="text" class="form-control" name="executive_meetings_count" value="{{ $clientInputs['executive_meetings_count'] ?? '' }}">
+                                    <br>
                                     <select class="form-control" name="executive_meetings_held">
                                         <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['executive_meetings_held']) && $clientInputs['executive_meetings_held'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['executive_meetings_held']) && $clientInputs['executive_meetings_held'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
-                                    <br>
-                                    <input type="text" class="form-control" name="executive_meetings_count" value="{{ $clientInputs['executive_meetings_count'] ?? '' }}">
-
-
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>क) अन्य अभा :-</td>
                                 <td>
+                                    <input type="text" class="form-control" name="other_meetings_count" value="{{ $clientInputs['other_meetings_count'] ?? '' }}">
+                                    <br>
                                     <select class="form-control" name="other_meetings_held">
                                         <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['other_meetings_held']) && $clientInputs['other_meetings_held'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['other_meetings_held']) && $clientInputs['other_meetings_held'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
-                                    <br>
-                                    <input type="text" class="form-control" name="other_meetings_count" value="{{ $clientInputs['other_meetings_count'] ?? '' }}">
-                                    <br>
-
                                 </td>
 
                             </tr>
@@ -873,8 +855,6 @@
                                 <td>
                                     <select class="form-control" name="previous_audit_issues_ignored_1">
                                         <option value="">Select</option>
-                                        <option value="सामान्य शेरे पहावे" {{ (isset($clientInputs['previous_audit_issues_ignored_1']) && $clientInputs['previous_audit_issues_ignored_1'] == 'सामान्य शेरे पहावे') ? 'selected' : '' }}>सामान्य शेरे पहावे</option>
-
                                         <option value="होय" {{ (isset($clientInputs['previous_audit_issues_ignored_1']) && $clientInputs['previous_audit_issues_ignored_1'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['previous_audit_issues_ignored_1']) && $clientInputs['previous_audit_issues_ignored_1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -892,11 +872,9 @@
                                     कोणता कालावधी करीता आहे तो कालावधी लिहा.
                                     लेखापरीक्षा शुल्क वसुल झाल्याचा दिनांक, कोषागाराचे
                                     नाव आणि भरलेली रक्कम द्या. (कोषागाराच्या
-                                    चलनाचाकमांक व दिनांक द्या.)</td>
+                                    चलनाचाकमांक व दिनांक द्या.) </td>
                                 <td>
-                                    <span>:-रोखीने अदाकरण्यात आलेत.ऑडीट फी दि. </span>
                                     <input type="date" class="form-control" name="last_audit_fee_date" value="{{ $clientInputs['last_audit_fee_date'] ?? '' }}">
-                                    <span>रोजी रू.</span>
                                     <br>
                                     <select class="form-control" name="last_audit_fee_paid">
                                         <option value="">Select</option>
@@ -917,7 +895,6 @@
                                     </select>
                                     <br>
                                     <input type="text" class="form-control" name="last_audit_fee_paid_details" value="{{ $clientInputs['last_audit_fee_paid_details'] ?? '' }}">
-                                    दिले
                                 </td>
                             </tr>
                             <tr>
@@ -945,20 +922,18 @@
                             </tr>
                             <tr>
                                 <td>1)
-                                    जर अंतर्गत वा स्थानिक लेखापरीक्षा झाली असेल तर
+                                    जर अतर्गत वा स्थानिक लेखापरीक्षा झाली असेल तर
                                     ती कोणी केली. कोणत्या कालावधीसाठी केली व त्याचा
                                     लेखापरीक्षा अहवाल संस्थेच्या दप्तरी आहे काय? याची
                                     माहीती द्या. </td>
                                 <td>
+                                    <input type="text" class="form-control" name="internal_audit_date" value="{{ $clientInputs['internal_audit_date'] ?? '' }}">
+                                    <br>
                                     <select class="form-control" name="internal_audit_report">
                                         <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['internal_audit_report']) && $clientInputs['internal_audit_report'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['internal_audit_report']) && $clientInputs['internal_audit_report'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
-                                    <br>
-                                    <input type="text" class="form-control" name="internal_audit_date" value="{{ $clientInputs['internal_audit_date'] ?? '' }}">
-
-
                                 </td>
                             </tr>
                             <tr>
@@ -995,9 +970,6 @@
                                 <td>
                                     <select class="form-control" name="other_allowances_1">
                                         <option value="">Select</option>
-                                        <option value="होय" {{ (isset($clientInputs['other_allowances_1']) && $clientInputs['other_allowances_1'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['other_allowances_1']) && $clientInputs['other_allowances_1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-
                                         <option value="निरंक" {{ (isset($clientInputs['other_allowances_1']) && $clientInputs['other_allowances_1'] == 'निरंक') ? 'selected' : '' }}>निरंक</option>
                                     </select>
                                     <br>
@@ -1031,9 +1003,6 @@
                                 <td>
                                     <select class="form-control" name="other_amounts_due_from_manager_opt1">
                                         <option value="">Select</option>
-                                        <option value="होय" {{ (isset($clientInputs['other_amounts_due_from_manager_opt1']) && $clientInputs['other_amounts_due_from_manager_opt1'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['other_amounts_due_from_manager_opt1']) && $clientInputs['other_amounts_due_from_manager_opt1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-
                                         <option value="निरंक" {{ (isset($clientInputs['other_amounts_due_from_manager_opt1']) && $clientInputs['other_amounts_due_from_manager_opt1'] == 'निरंक') ? 'selected' : '' }}>निरंक</option>
                                     </select>
                                     <br>
@@ -1049,8 +1018,7 @@
                                 <td>
                                     <select class="form-control" name="employee_details_opt1">
                                         <option value="">Select</option>
-                                        <option value="यादी पुरविण्यात आले नाही" {{ (isset($clientInputs['employee_details_opt1']) && $clientInputs['employee_details_opt1'] == 'यादी पुरविण्यात आले नाही') ? 'selected' : '' }}>यादी पुरविण्यात आले नाही</option>
-                                        <option value="यादी प्रमाणे" {{ (isset($clientInputs['employee_details_opt1']) && $clientInputs['employee_details_opt1'] == 'यादी प्रमाणे') ? 'selected' : '' }}>यादी प्रमाणे</option>
+                                        <option value="यादी प्रमाणे"  {{ (isset($clientInputs['employee_details_opt1']) && $clientInputs['employee_details_opt1'] == 'यादी प्रमाणे') ? 'selected' : '' }}>यादी प्रमाणे</option>
                                     </select>
                                     <input type="text" class="form-control" name="employee_details" value="{{ $clientInputs['employee_details'] ?? '' }}">
                                 </td>
@@ -1071,29 +1039,29 @@
 
                             </tr>
                             <tr>
-                                <td>2)कायदा, कानुन व पोटनियम, यांचे उल्लंघन झाल्याच्या
+                                <td>2) कायदा, कानू व पोनियम, यांचे उल्लंघन झाल्याच्या
                                     नोंदी द्या.
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="violations_record" value="{{ $clientInputs['violations_record'] ?? '' }}">
                                 </td>
-
+                               
                             </tr>
                             <tr>
-                                <td> 1) कायदा कलम कमांक</td>
+                                 <td> 1) कायदा कलम कमांक</td>
 
                                 <td><input type="text" class="form-control" name="total_violations_record" value="{{ $clientInputs['total_violations_record'] ?? '' }}">
                                 </td>
                             </tr>
-                            <tr>
-                                <td> 2)
+                             <tr>
+                                 <td> 2)
                                     कानुन कमांक</td>
 
                                 <td><input type="text" class="form-control" name="total_bylaws_record" value="{{ $clientInputs['total_bylaws_record'] ?? '' }}">
                                 </td>
                             </tr>
-                            <tr>
-                                <td> 3)
+                             <tr>
+                                 <td> 3)
                                     पोटनियम कमांक</td>
 
                                 <td><input type="text" class="form-control" name="total_bylaws_record_2" value="{{ $clientInputs['total_bylaws_record_2'] ?? '' }}">
@@ -1138,46 +1106,11 @@
                                         <option value="नाही" {{ (isset($clientInputs['profit_distribution_opt1']) && $clientInputs['profit_distribution_opt1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
                                     <input type="text" class="form-control" name="profit_distribution" value="{{ $clientInputs['profit_distribution'] ?? '' }}">
-                                    <br>
-                                    <select class="form-control" name="profit_distribution_opt2">
-                                        <option value="">Select</option>
-                                        <option value="नियमाप्रमाणे केले आहे" {{ (isset($clientInputs['profit_distribution_opt2']) && $clientInputs['profit_distribution_opt2'] == 'नियमाप्रमाणे केले आहे') ? 'selected' : '' }}>नियमाप्रमाणे केले आहे</option>
-                                        <option value="होय" {{ (isset($clientInputs['profit_distribution_opt2']) && $clientInputs['profit_distribution_opt2'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['profit_distribution_opt2']) && $clientInputs['profit_distribution_opt2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                    <input type="text" class="form-control" name="profit_distribution" value="{{ $clientInputs['profit_distribution2'] ?? '' }}">
-                                    <br>
-                                    <select class="form-control" name="profit_distribution_opt3">
-                                        <option value="">Select</option>
-                                        <option value="नियमाप्रमाणे केले आहे" {{ (isset($clientInputs['profit_distribution_opt3']) && $clientInputs['profit_distribution_opt3'] == 'नियमाप्रमाणे केले आहे') ? 'selected' : '' }}>नियमाप्रमाणे केले आहे</option>
-                                        <option value="होय" {{ (isset($clientInputs['profit_distribution_opt3']) && $clientInputs['profit_distribution_opt3'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['profit_distribution_opt3']) && $clientInputs['profit_distribution_opt3'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                    <input type="text" class="form-control" name="profit_distribution" value="{{ $clientInputs['profit_distribution3'] ?? '' }}">
-                                    <br>
-                                    <select class="form-control" name="profit_distribution_opt4">
-                                        <option value="">Select</option>
-                                        <option value="नियमाप्रमाणे केले आहे" {{ (isset($clientInputs['profit_distribution_opt4']) && $clientInputs['profit_distribution_opt4'] == 'नियमाप्रमाणे केले आहे') ? 'selected' : '' }}>नियमाप्रमाणे केले आहे</option>
-                                        <option value="होय" {{ (isset($clientInputs['profit_distribution_opt4']) && $clientInputs['profit_distribution_opt4'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['profit_distribution_opt4']) && $clientInputs['profit_distribution_opt4'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                    <input type="text" class="form-control" name="profit_distribution" value="{{ $clientInputs['profit_distribution4'] ?? '' }}">
-                                    <br>
-                                    <select class="form-control" name="profit_distribution_opt5">
-                                        <option value="">Select</option>
-                                        <option value="नियमाप्रमाणे केले आहे" {{ (isset($clientInputs['profit_distribution_opt5']) && $clientInputs['profit_distribution_opt5'] == 'नियमाप्रमाणे केले आहे') ? 'selected' : '' }}>नियमाप्रमाणे केले आहे</option>
-                                        <option value="होय" {{ (isset($clientInputs['profit_distribution_opt5']) && $clientInputs['profit_distribution_opt5'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['profit_distribution_opt5']) && $clientInputs['profit_distribution_opt5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                    </select>
-                                    <input type="text" class="form-control" name="profit_distribution" value="{{ $clientInputs['profit_distribution5'] ?? '' }}">
                                 </td>
-
-
 
                             </tr>
                             <tr>
                                 <td colspan="2">11) रोकड रकमा, बँकेतील शिल्लक, आणि गुंतवणुकी (सेक्युरिटीज) :-
-                                    <br>
                                     (अ) रोकड जमा :-
                                 </td>
                             </tr>
@@ -1218,8 +1151,6 @@
                                 <td>
                                     <select class="form-control" name="cash_security_arrangements">
                                         <option value="">Select</option>
-                                        <option value="व्यवस्था पुरेशी नाही" {{ (isset($clientInputs['cash_security_arrangements']) && $clientInputs['cash_security_arrangements'] == 'व्यवस्था पुरेशी नाही') ? 'selected' : '' }}>व्यवस्था पुरेशी नाही</option>
-
                                         <option value="होय" {{ (isset($clientInputs['cash_security_arrangements']) && $clientInputs['cash_security_arrangements'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['cash_security_arrangements']) && $clientInputs['cash_security_arrangements'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -1227,15 +1158,14 @@
 
                             </tr>
                             <tr>
-                                <td>(ब) बँकेतील पास पुस्तकातील त्यानी पाठविलेल्या पत्रकातील
+                                <td>(ब) बँकेतील शिल्लका :-
+                                    बँकेतील पास पुस्तकातील त्यानी पाठविलेल्या पत्रकातील
                                     बँकेने दिलेल्या दाखल्यातील शिल्लक रकमा संस्थेच्या
                                     जमाखर्चाच्या बाक्याशी जुळतात काय? जर त्या जुळत
                                     नसतील, तर मेळ पत्रके तपासा.</td>
                                 <td>
                                     <select class="form-control" name="bank_balance_correct_option">
                                         <option value="">Select</option>
-                                        <option value="मेळ जूळते" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'मेळ जूळते') ? 'selected' : '' }}>मेळ जूळते</option>
-                                        <option value="मेळ जूळत नाही" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'मेळ जूळत नाही') ? 'selected' : '' }}>मेळ जूळत नाही</option>
                                         <option value="होय" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -1278,7 +1208,6 @@
                                 <td>
                                     <select class="form-control" name="investment_certificates_obtained_opt1">
                                         <option value="">Select</option>
-                                        <option value="अशी बाब नाही" {{ (isset($clientInputs['investment_certificates_obtained_opt1']) && $clientInputs['investment_certificates_obtained_opt1'] == 'अशी बाब नाही') ? 'selected' : '' }}>अशी बाब नाही</option>
                                         <option value="होय" {{ (isset($clientInputs['investment_certificates_obtained_opt1']) && $clientInputs['investment_certificates_obtained_opt1'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['investment_certificates_obtained_opt1']) && $clientInputs['investment_certificates_obtained_opt1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -1333,13 +1262,9 @@
                                 <td>
                                     <select class="form-control" name="property_deeds_in_name_of_society">
                                         <option value="">Select</option>
-                                        <option value="स्थायी मालमता नाही" {{ (isset($clientInputs['property_deeds_in_name_of_society']) && $clientInputs['property_deeds_in_name_of_society'] == 'स्थायी मालमता नाही') ? 'selected' : '' }}>स्थायी मालमता नाही</option>
-
                                         <option value="होय" {{ (isset($clientInputs['property_deeds_in_name_of_society']) && $clientInputs['property_deeds_in_name_of_society'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['property_deeds_in_name_of_society']) && $clientInputs['property_deeds_in_name_of_society'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
-                                    <br>
-                                    <input type="text" class="form-control" name="property_deeds_details" value="{{ $clientInputs['property_deeds_details'] ?? '' }}">
                                 </td>
 
                             </tr>
@@ -1378,17 +1303,14 @@
                                 <td>2) वेगवेगळ्या मालमत्तेवर आकारलेले घसाऱ्याचे दर नमुद
                                     करा </td>
                                 <td>
-
-
                                     <input type="text" class="form-control" name="depreciation_rates" value="{{ $clientInputs['depreciation_rates'] ?? '' }}">
                                     <br>
                                     <select class="form-control" name="depreciation_rates_opt2">
                                         <option value="">Select</option>
                                         <option value="नियमाप्रमाणे घसारा आकारन्यात आले आहे" {{ (isset($clientInputs['depreciation_rates_opt2']) && $clientInputs['depreciation_rates_opt2'] == 'नियमाप्रमाणे घसारा आकारन्यात आले आहे') ? 'selected' : '' }}>नियमाप्रमाणे घसारा आकारन्यात आले आहे</option>
                                         <option value="होय" {{ (isset($clientInputs['depreciation_rates_opt2']) && $clientInputs['depreciation_rates_opt2'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                        <option value="नाही" {{ (isset($clientInputs['depreciation_rates_opt2']) && $clientInputs['depreciation_rates_opt2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                        <option value="नाही" {{ (isset($clientInputs['depreciation_rates_opt2']) && $clientInputs['depreciation_rates_opt2'] == 'नाही') ? 'selected' : '' }}>नाही</option>                                    
                                     </select>
-
                                 </td>
 
                             </tr>
