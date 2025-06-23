@@ -42,15 +42,15 @@
                     <p>
                         <span>{{$client->name_of_society}}.</span> (यानंतर संस्था असा उल्लेख करण्यात येईल) ही संस्था
                         महाराष्ट्र सहकारी संस्था अधिनियम 1960 व नियम 1961 अंतर्गत नोंदणीकृत सहकारी संस्था असून संस्थेचा नोंदणी
-                        क्रमांक 405 दिनांक आहे. संस्थेच्या मुख्यालया व्यतिरिक्त <span>{{$client->total_shakha}}</span> शाखा आहेत. संस्थेच्या दिनांक <span>{{ $auditPeriod }}</span>
-                        या कालावधीच्या वैधानिक लेखापरीक्षणासाठी संस्थेने त्यांचे दिनांक <span><input type="date" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_date" value="{{ isset($clientInputs['tarav_date']) ? $clientInputs['tarav_date'] : '' }}"></span> रोजी पार पडलेल्या वार्षिक सर्वसाधारण
+                        क्रमांक {{$client->registration_no}} दिनांक <b> {{$client->registration_date}}</b> आहे. संस्थेच्या मुख्यालया व्यतिरिक्त <span><b>{{$client->total_shakha}}</b></span> शाखा आहेत. संस्थेच्या दिनांक <span>{{ $auditPeriod }}</span>
+                        या कालावधीच्या वैधानिक लेखापरीक्षणासाठी संस्थेने त्यांचे दिनांक <span><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="tarav_date" value="{{ isset($clientInputs['tarav_date']) ? $clientInputs['tarav_date'] : '' }}"></span> रोजी पार पडलेल्या वार्षिक सर्वसाधारण
                         सभेतील ठराव क्रमांक <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number" value="{{ isset($clientInputs['tarav_number']) ? $clientInputs['tarav_number'] : '' }}"></span> {{$client->district}} <span>
                             <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number_1" value="{{ isset($clientInputs['tarav_number_1']) ? $clientInputs['tarav_number_1'] : '' }}"></span> अन्वये अथवा निबंधक यांचे <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number_2" value="{{ isset($clientInputs['tarav_number_2']) ? $clientInputs['tarav_number_2'] : '' }}"></span>
                         आदेशानुसार वैधानिक लेखापरीक्षक म्हणून
                         आमची नियुक्ती केलेली आहे. संस्थेच्या उक्त कालावधीचे लेखापरीक्षण, संस्थेने पुरवलेल्या लेखी दस्तऐवज व तोंडी
                         माहिती व खुलाशाच्या आधारे पूर्ण केलेले आहे. लेखापरीक्षणासाठी आवश्यक असणारे सर्व रेकॉर्ड व माहिती संस्थेने
                         लेखापरीक्षणावेळी आम्हास उपलब्ध करून दिलेले आहे. लेखापरीक्षण कालावधीत संस्थेचे चेअरमन म्हणून <span>{{$client->chairman}}</span> यांनी व व्हाईस चेअरमन म्हणून श्री. <span>{{$client->vice_chairman}}</span> कार्यकारी अधिकारी म्हणून <span>{{$client->manager}}</span> यांनी कामकाज केले आहे. तसेच संस्थेचे मॅनेजर/मुख्य कार्यकारी अधिकारी म्हणून
-                        <span>{{$client->manager}}</span> यांनी कामकाज  केलेले आहे.
+                        <span>{{$client->manager}}</span> यांनी कामकाज केलेले आहे.
                     </p>
                 </div>
 
@@ -59,12 +59,12 @@
                     <h6 class="fw-bold mt-4">परिशिष्ट – "अ"</h6>
                     <ol>
                         <li>
-                            <span class="fw-bold">1) संशयीत व अफरातफरीचे व्यवहारः-</span>
+                            <span class="fw-bold">संशयीत व अफरातफरीचे व्यवहारः-</span>
                             संस्थचे सन <span>{{$auditPeriod}}</span> या
                             कालावधीचे लेखापरिक्षण केले असता संशयीत व अफरातफरीचे व्यवहार आढळलेले नाहीत.
                         </li>
                         <li>
-                            1. महाराष्ट्र सहकारी संस्था अधिनियम 1960 चे कलम 81 अन्वये खालील बाबीची तपासणी व
+                            महाराष्ट्र सहकारी संस्था अधिनियम 1960 चे कलम 81 अन्वये खालील बाबीची तपासणी व
                             पडताळणी करून खालील प्रमाणे माहीती देत आहे
                         </li>
                     </ol>
@@ -72,7 +72,7 @@
 
                 <!-- START: Content as per provided image -->
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">एक. कोणतेही ऋणे असल्यास त्यांचा बराच काळ थकलेल्या रकमा-</div>
+                    <div class="fw-bold mb-2">एक.:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; कोणतेही ऋणे असल्यास त्यांचा बराच काळ थकलेल्या रकमा-</div>
                     <table class="table table-bordered text-center align-middle" style="width:auto;min-width:700px;">
                         <thead>
                             <tr>
@@ -89,21 +89,22 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td> <input type="text" class="form-control" name="loan_amt" id="loan_amt" value="{{ isset($clientInputs['loan_amt']) ? $clientInputs['loan_amt'] : '' }}"></td>
                                 <td>नियीमत कर्ज व आक्समीक कर्ज</td>
-                                <td></td>
+
                                 <td><input type="text" class="form-control" name="loan" id="loan" value="{{ isset($clientInputs['loan']) ? $clientInputs['loan'] : '' }}"></td>
                                 <td><input type="text" class="form-control" name="loan_2" id="loan_2" value="{{ isset($clientInputs['loan_2']) ? $clientInputs['loan_2'] : '' }}"></td>
                                 <td><input type="text" class="form-control" name="loan_1" id="loan_1" value="{{ isset($clientInputs['loan_1']) ? $clientInputs['loan_1'] : '' }}"></td>
-                                <td> <input type="text" class="form-control" id="loan_percentage" name="loan_percentage" value="{{ $clientInputs['loan_percentage'] ?? '' }}" readonly> टक्के</td>
+                                <td> <input type="text" class="form-control" id="loan_percentage" name="loan_percentage" value="{{ $clientInputs['loan_percentage'] ?? '' }}" readonly></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">दोन रोख शिल्लक व कर्ज रोखे आणि संस्थेचा मालमत्ता व दायीत्वे यांचे मुल्यांकन –</div>
+                    <div class="fw-bold mb-2">दोन. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; रोख शिल्लक व कर्ज रोखे आणि संस्थेचा मालमत्ता व दायीत्वे यांचे मुल्यांकन –</div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="fw-bold">रोख शिल्लक </span>
+                        <span class="fw-bold">रोख शिल्लक :- </span>
                         @php
                         // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
                         $auditPeriod = '';
@@ -122,9 +123,9 @@
                     </div>
                     --------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     <div class="d-flex align-items-center">
-                        <span class="fw-bold">विमा - समुह विमा</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                        <span class="fw-bold">विमा - समुह विमा</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 
-                        विमा काढलेला
+                        
                         <span class="ms-2">
 
                             <select name="insurance_status" class="form-select d-inline-block w-auto">
@@ -186,7 +187,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">तीन सभासदाकडुन ठेवीच्या रूपाने जमा केलेल्या रकमातुन व स्वनिधीतुन कर्ज वाटप केले-</div>
+                    <div class="fw-bold mb-2">तीन :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;सभासदाकडुन ठेवीच्या रूपाने जमा केलेल्या रकमातुन व स्वनिधीतुन कर्ज वाटप केले-</div>
                     <table class="table table-bordered text-center align-middle" style="width:auto;min-width:700px;">
                         <thead>
                             <tr>
@@ -224,13 +225,20 @@
                     <p>
                         जमा केलेल्या ठेवी व दिलेल्या कर्ज संस्थेच्या सभासंदाच्या हित
                         संबंधाना बाधक ठरणा-या नाहीत असे आढळले.
-                        चार. केवळ पुस्तकी नोंदीद्वारे झालेले व्यवहार आढळुन आले नाहीत.
-                        पाच. संस्थेने दिलेली कर्ज व आगाउ रकमा ठेवी म्हणून दाखविण्यात आल्याचे व्यवहार
+                        <br>
+                        चार. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;केवळ पुस्तकी नोंदीद्वारे झालेले व्यवहार आढळुन आले नाहीत.
+                        <br>
+                        पाच. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;संस्थेने दिलेली कर्ज व आगाउ रकमा ठेवी म्हणून दाखविण्यात आल्याचे व्यवहार
                         आढळुन आल्या नाहीत.
-                        सहा. वैयक्तीक खात्यावरील खर्च महसुली खर्च दाखविल्याचे आढळुन आले नाही.
-                        सात. आपल्या उद्येशा पुर्ती करीता जाहीराती वर खर्च नाही
-                        आठ शासना कडुन अर्थ सहाय मिळाले नाही.
-                        नउ संस्था सदस्या बाबतची आपली उदिष्टे व आबधंने योग्य प्रकारे पार पाडीत आहे.
+                        <br>
+                        सहा. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;वैयक्तीक खात्यावरील खर्च महसुली खर्च दाखविल्याचे आढळुन आले नाही.
+                        <br>
+                        सात. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपल्या उद्येशा पुर्ती करीता जाहीराती वर खर्च नाही
+                        <br>
+                        आठ :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;शासना कडुन अर्थ सहाय मिळाले नाही.
+                        <br>
+                        नउ :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;संस्था सदस्या बाबतची आपली उदिष्टे व आबधंने योग्य प्रकारे पार पाडीत आहे.
+                        <br>
                         संस्थेचे सन {{$start}}-{{$end}} चे अंकेक्षणा दरम्यान गंभीर स्वरूपाचे दोष आढळून आले नाहीत.
                         त्यामुळे माहीती निरंक आहे.
                     </p>
@@ -253,7 +261,7 @@
     function calcTotalMembers() {
         let reg = parseInt(document.getElementById('loan').value) || 0;
         let nom = parseInt(document.getElementById('loan_1').value) || 0;
-        document.getElementById('loan_percentage').value = reg ? ((nom / reg) * 100).toFixed(2) : '';
+        document.getElementById('loan_percentage').value = reg ? (((reg - nom)/reg*100).toFixed(2) + '%') : '';
     }
     document.addEventListener('DOMContentLoaded', function() {
         // Calculate once on load using existing values

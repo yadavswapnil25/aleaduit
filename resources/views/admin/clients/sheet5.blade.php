@@ -34,8 +34,19 @@
                         आहे. एका भागाची दर्शनी किंमत रु.
                         <span style="background: #00ff00;"><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span>
                         आहे. दि.
-                        <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="last_year_date" value="{{ $clientInputs['last_year_date'] ?? '' }}"></span>
-                        (गतवर्ष) अखेर संस्थेकडून वस्तुम भागभांडवल रु.
+                        @php
+                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                        $auditPeriod = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                        $start = $m[1];
+                        $end = $m[2];
+                        $auditPeriod = "01/04/$start - 31/03/$end";
+                        } else {
+                        $auditPeriod = $client->audit_year;
+                        }
+                        @endphp
+                        <span><b>31/03/{{$start}}</b></span>
+                        (गतवर्ष) अखेर संस्थेकडून वसुल भागभांडवल रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_lastYear'] ?? ''}}</span></b>
                         होते. लेखापरीक्षण कालावधीत त्यामध्ये रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']}}</span></b>
@@ -53,7 +64,7 @@
                         @endphp
                         <b> <span>31/03/2025</span></b>
                         (चालूवर्ष) अखेर संस्थेकडून वसूल भागभांडवल रु.
-                        <b> <span>{{$client['totalIncome7'] ?? ''}}</span></b>
+                        <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear']}}</span></b>
                         झालेले आहे. सदरचे वसूल भागभांडवल अधिकृत भागभांडवलापेक्षा
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_less_than_authorized">
                             <option value="कमी" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'कमी') ? 'selected' : '' }}>कमी</option>
@@ -64,8 +75,12 @@
 
                     <!-- START: Design as per pasted image -->
                     <div class="mb-2">
-                        <span>लेखापरिक्षण कालावधीत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span>?</span> % आहे. अहवाल वर्षात
-                            भागभांडवल रु. <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="share_capital_increase_amount" value="{{ $clientInputs['share_capital_increase_amount'] ?? '' }}"></span> ने वाढलेले असुन, भागभांडवल वाढीचे प्रमाण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="share_capital_increase_percent" value="{{ $clientInputs['share_capital_increase_percent'] ?? '9.86' }}"></span> % आहे. भागभांडवल यादीची रक्कम
+                        <span>लेखापरिक्षण कालावधीत रु. <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned" value="{{ $clientInputs['share_capital_returned'] ?? '' }}"></span> भागभांडवल परत केले असून त्याचे प्रमाण <span><input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_returned_percent" value="{{ $clientInputs['share_capital_returned_percent'] ?? '' }}"></span> % आहे. अहवाल वर्षात
+                            भागभांडवल रु. <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']}}</span> ने वाढलेले असुन, भागभांडवल वाढीचे प्रमाण <span>{{ $client['वसुल भाग भागभांडवल_sum_lastYear'] != 0 
+    ? number_format((($client['भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']) / $client['वसुल भाग भागभांडवल_sum_lastYear']) * 100, 2) 
+    : '0.00' 
+}}
+                            </span> % आहे. भागभांडवल यादीची रक्कम
                             ताळेबंदातील रक्कमेशी जुळत
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_matches">
                                 <option value="आहे" {{ (isset($clientInputs['share_capital_matches']) && $clientInputs['share_capital_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -144,7 +159,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी. तसेच लेखापरिक्षण कालवधीत काही निधींचा 
+                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी. तसेच लेखापरिक्षण कालवधीत काही निधींचा
                             विनियोग झालेला असल्यास तो योग्य पध्द्तीने झालेला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="funds_utilization_proper">
                                 <option value="आहे" {{ (isset($clientInputs['funds_utilization_proper']) && $clientInputs['funds_utilization_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -153,7 +168,7 @@
                         </span>
                     </div>
                     <!-- END: Design as per pasted image -->
- <div class="mb-2">
+                    <div class="mb-2">
                         <span>वरील सर्व निधींची कलम 70 व नियम 54,55 प्रमाणे संस्थेने स्वतंत्रपणे गुंतवणूक केली आहे. निधी विनियोगांची
                             नियमावली तयार करण्यात आली
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared">
@@ -168,7 +183,7 @@
                         <span class="fw-bold">3. ठेवी :</span>
                         <span style="font-weight:bold;">- रु. {{$client['ठेवी_sum_currentYear'] ?? 0}}</span>
                     </div>
-                   
+
                     <div class="mb-2">
                         @php
                         // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
@@ -274,7 +289,7 @@
                         तसेच संस्थेस प्राप्त झालेल्या ठेवींमध्ये संस्थांच्या ठेवींची विगतवारी स्वतंत्रपणे नमुद करावी.
                     </div>
                     <div class="mb-2">
-                        <span class="fw-bold">4. देय व्याज तरतुदी  :-</span>
+                        <span class="fw-bold">4. देय व्याज तरतुदी :-</span>
                         <span style="font-weight:bold;">
                             रु. {{$client['तरतुद_sum_currentYear'] ?? 0}}</span>
                         </span>
@@ -392,7 +407,7 @@
 
                 <!-- 6. शाखा ठेवी -->
                 <div class="mt-4 mb-2">
-                    <span class="fw-bold" style="font-size: 1.1em;">6. शाखा येणे देणे  :-</span>
+                    <span class="fw-bold" style="font-size: 1.1em;">6. शाखा येणे देणे :-</span>
                     <span style="font-weight:bold;">रु. {{$client['शाखा ठेवी देणे_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
@@ -444,20 +459,20 @@
                     <span style="font-weight:bold;">रु. {{$client['संचित नफा_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                     @php
-                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                        $auditPeriod = '';
-                        $start = '';
-                        $end = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->year->audit_year;
-                        }
-                        @endphp
-                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे.आवष्यक 
+                    @php
+                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                    $auditPeriod = '';
+                    $start = '';
+                    $end = '';
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
+                    $start = $m[1];
+                    $end = $m[2];
+                    $auditPeriod = "01/04/$start - 31/03/$end";
+                    } else {
+                    $auditPeriod = $client->year->audit_year;
+                    }
+                    @endphp
+                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे.आवष्यक
                     <br>
                     तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता आहे /
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="retained_profit_certified">
@@ -494,7 +509,7 @@
                     </select>
                     .
                     <br>
-                    लेखापरीक्षणाचेवेळी दि. 28-05-2024 रोजी अखेर/आरंभीची  बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
+                    लेखापरीक्षणाचेवेळी दि. 28-05-2024 रोजी अखेर/आरंभीची बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_certificate_available">
                         <option value="आहे" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -649,37 +664,37 @@
                 </div>
                 <div class="mb-2">
                     @php
-                // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                $auditPeriod = '';
-                $start = '';
-                $end = '';
-                if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                $start = $m[1];
-                $end = $m[2];
-                $auditPeriod = "01/04/$start - 31/03/$end";
-                } else {
-                $auditPeriod = $client->year->audit_year;
-                }
-                @endphp
+                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                    $auditPeriod = '';
+                    $start = '';
+                    $end = '';
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
+                    $start = $m[1];
+                    $end = $m[2];
+                    $auditPeriod = "01/04/$start - 31/03/$end";
+                    } else {
+                    $auditPeriod = $client->year->audit_year;
+                    }
+                    @endphp
                     <span style="font-weight:bold;">दि. 31/03/{{$end}} अखेर संस्थेने खालीलप्रमाणे गुंतवणूक केलेली आहे.</span>
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                                 @php
-                // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                $auditPeriod = '';
-                $start = '';
-                $end = '';
-                if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                $start = $m[1];
-                $end = $m[2];
-                $auditPeriod = "01/04/$start - 31/03/$end";
-                } else {
-                $auditPeriod = $client->year->audit_year;
-                }
-                @endphp
+                                @php
+                                // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                                $auditPeriod = '';
+                                $start = '';
+                                $end = '';
+                                if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
+                                $start = $m[1];
+                                $end = $m[2];
+                                $auditPeriod = "01/04/$start - 31/03/$end";
+                                } else {
+                                $auditPeriod = $client->year->audit_year;
+                                }
+                                @endphp
                                 <th>अ. क्र</th>
                                 <th>गुंतवणूक तपशील</th>
                                 <th>दि. 31/03/{{$start}}</th>
@@ -758,7 +773,7 @@
                                 <option value="नाही" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
-                        <li>तरलतेपोटी केलेली गुंतवणूक किती आहे? ती नियमानुसार असलेबाबतचा तपशील नमुद करावा. 
+                        <li>तरलतेपोटी केलेली गुंतवणूक किती आहे? ती नियमानुसार असलेबाबतचा तपशील नमुद करावा.
                             <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="investment_value_compliant" value="{{ $clientInputs['investment_value_compliant'] ?? '' }}">
                         </li>
                         <li>गुंतवणूक चढउतार निधीसाठी पुरेशा प्रमाणात केले -
@@ -782,7 +797,7 @@
 
                 <!-- START: कर्ज (Loan) Section as per pasted image -->
                 <div class="mt-4 mb-2">
-                    <span class="fw-bold" style="font-size: 1.1em;">4. कर्ज  :-</span>
+                    <span class="fw-bold" style="font-size: 1.1em;">4. कर्ज :-</span>
                     <span style="font-weight:bold;">रु. {{$client['देणे कर्ज_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
@@ -840,7 +855,7 @@
                     <span style="font-weight:bold;">
                         <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_interest_rate" value="{{ $clientInputs['loan_interest_rate'] ?? '' }}">
                     </span>
-                    आकारला आहे. सेवक कर्जास 
+                    आकारला आहे. सेवक कर्जास
                     <span style="font-weight:bold;">
                         <input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="employee_loan_interest_rate" value="{{ $clientInputs['employee_loan_interest_rate'] ?? '' }}">
                     </span>
@@ -865,7 +880,7 @@
                     <span style="font-weight:bold;">0</span>
                 </div>
                 <div class="mb-2">
-                    शाखा येणे देणे रक्कमांमध्ये  फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
+                    शाखा येणे देणे रक्कमांमध्ये फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
                 </div>
                 <div class="mb-2">
                     <span style="font-weight:bold;">6. स्थावर व जंगम मालमत्ता: {{$client['कायम मालमत्ता_sum_currentYear']}}</span>
@@ -964,11 +979,11 @@
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                                <th >अ.क्र.</th>
-                                <th >तपशील</th>
-                                <th >ताळेबंदानुसार रक्कम</th>
-                                <th >यादीप्रमाणे रक्कम</th>
-                                <th >फरक</th>
+                                <th>अ.क्र.</th>
+                                <th>तपशील</th>
+                                <th>ताळेबंदानुसार रक्कम</th>
+                                <th>यादीप्रमाणे रक्कम</th>
+                                <th>फरक</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1012,7 +1027,7 @@
                     दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम घेणे आहे.
                 </div>
                 <div>
-            
+
                 </div>
                 <span class="text-muted">(टीप- संस्था विलिनीकरण केली असल्यास विलिनीकृत संस्थांची येणे रक्कम स्वतंत्र दर्शविण्यात यावी)</span>
                 <div class="mt-3 mb-2">
