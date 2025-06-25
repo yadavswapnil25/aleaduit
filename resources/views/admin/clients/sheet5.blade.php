@@ -37,12 +37,14 @@
                         @php
                         // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
                         $auditPeriod = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                        $start = '';
+                        $end = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
                         $start = $m[1];
                         $end = $m[2];
                         $auditPeriod = "01/04/$start - 31/03/$end";
                         } else {
-                        $auditPeriod = $client->audit_year;
+                        $auditPeriod = $client->year->audit_year;
                         }
                         @endphp
                         <span><b>31/03/{{$start}}</b></span>
@@ -51,18 +53,7 @@
                         होते. लेखापरीक्षण कालावधीत त्यामध्ये रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']}}</span></b>
                         ने वाढ झालेली असून दि.
-                        @php
-                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                        $auditPeriod = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->audit_year;
-                        }
-                        @endphp
-                        <b> <span>31/03/2025</span></b>
+                        <b> <span>31/03/{{$end}}</span></b>
                         (चालूवर्ष) अखेर संस्थेकडून वसूल भागभांडवल रु.
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear']}}</span></b>
                         झालेले आहे. सदरचे वसूल भागभांडवल अधिकृत भागभांडवलापेक्षा
@@ -96,19 +87,6 @@
                     </div>
 
                     <div class="mb-2">
-                        @php
-                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                        $auditPeriod = '';
-                        $start = '';
-                        $end = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->audit_year;
-                        }
-                        @endphp
                         दि. <span>31/03/{{$end}}</span> अखेर संस्थेचे खालीलप्रमाणे निधी उभारलेले आहेत. चालू व मागील आर्थिक वर्षातील तुलनात्मक आकडेवारी खालीलप्रमाणे -
                     </div>
 
@@ -137,6 +115,14 @@
                                 $totalLastYear += $c->lastYear;
                                 $totalDiff += ($c->currentYear - $c->lastYear);
                                 @endphp
+                                <!-- <tr>
+                                    <td>1</td>
+                                    <td>{{$client['राखीव निधी']}}</td>
+                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalDiff, 2) }}</td>
+                                    <td></td>
+                                </tr> -->
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $c->entity }}</td>
@@ -146,6 +132,7 @@
                                     <td></td>
                                 </tr>
                                 @endforeach
+
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
@@ -159,7 +146,9 @@
                     </div>
 
                     <div class="mb-2">
-                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी. तसेच लेखापरिक्षण कालवधीत काही निधींचा
+                        <span>सदर निधींच्या वाढ/घटीबाबत कारणमिमांसा नमुद करावी.
+                            <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="funds_increase_reason" value="{{ $clientInputs['funds_increase_reason'] ?? '' }}">
+                            तसेच लेखापरिक्षण कालवधीत काही निधींचा
                             विनियोग झालेला असल्यास तो योग्य पध्द्तीने झालेला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="funds_utilization_proper">
                                 <option value="आहे" {{ (isset($clientInputs['funds_utilization_proper']) && $clientInputs['funds_utilization_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -185,19 +174,6 @@
                     </div>
 
                     <div class="mb-2">
-                        @php
-                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                        $auditPeriod = '';
-                        $start = '';
-                        $end = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->audit_year;
-                        }
-                        @endphp
                         <span>दि. <span>31/03/2025</span> अखेर संस्थेने खालीलप्रमाणे ठेवी स्विकारलेल्या आहेत. चालु व मागील आर्थिक वर्षातील तुलनात्मक
                             आकडेवारी खालीलप्रमाणे -</span>
                     </div>
@@ -216,15 +192,15 @@
                                 @php $i = 1; @endphp
                                 @php
                                 $totalCurrentYear = 0;
-                                $totalLastYear = 0;
+                                $totalLastYear_ठेवी = 0;
 
-                                $totalDiff = 0;
+                                $totalDiff_ठेवी = 0;
                                 @endphp
                                 @foreach($client['ठेवी'] as $c)
                                 @php
                                 $totalCurrentYear += $c->currentYear;
-                                $totalLastYear += $c->lastYear;
-                                $totalDiff += ($c->currentYear - $c->lastYear);
+                                $totalLastYear_ठेवी += $c->lastYear;
+                                $totalDiff_ठेवी += ($c->currentYear - $c->lastYear);
                                 @endphp
 
                                 <tr>
@@ -239,9 +215,9 @@
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalLastYear_ठेवी, 2) }}</td>
                                     <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                    <td>{{ number_format($totalDiff, 2) }}</td>
+                                    <td>{{ number_format($totalDiff_ठेवी, 2) }}</td>
                                     <td></td>
                                 </tr>
                             </tbody>
@@ -256,7 +232,7 @@
                             @endphp
                             लेखापरीक्षण मुदतीत एकूण ठेवीमध्ये रु.
                             <span style="font-weight:bold;">
-                                {{ $funds_current_total - $funds_last_total }}
+                                {{ number_format($totalDiff_ठेवी, 2) }}
                             </span>
                             लाख इतकी
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_computerized_1">
@@ -265,7 +241,7 @@
                             </select>
                             झालेली आहे. वाढीचे प्रमाण
                             <span style=" font-weight:bold;">
-                                {{ $funds_last_total != 0 ? number_format((($funds_current_total - $funds_last_total) / $funds_last_total) * 100, 2) : 'N/A' }}
+                                {{ number_format(($totalDiff_ठेवी  / $totalLastYear_ठेवी) * 100, 2) }}
 
                             </span>
                             % आहे. लेखापरीक्षण मुदतीत ठेव व्याज दर
@@ -286,12 +262,15 @@
                             .</span>
                     </div>
                     <div class="mb-2">
-                        तसेच संस्थेस प्राप्त झालेल्या ठेवींमध्ये संस्थांच्या ठेवींची विगतवारी स्वतंत्रपणे नमुद करावी.
+                        तसेच संस्थेस प्राप्त झालेल्या ठेवींमध्ये संस्थांच्या ठेवींची विगतवारी स्वतंत्रपणे नमुद करावी. <br>
+                        <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="deposit_details" value="{{ $clientInputs['deposit_details'] ?? '' }}"> <br><br>
+                        <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="deposit_details_2" value="{{ $clientInputs['deposit_details_2'] ?? '' }}"><br><br>
+                        <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="deposit_details_3" value="{{ $clientInputs['deposit_details_3'] ?? '' }}"><br>
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">4. देय व्याज तरतुदी :-</span>
                         <span style="font-weight:bold;">
-                            रु. {{$client['तरतुद_sum_currentYear'] ?? 0}}</span>
+                            रु. {{$client['तरतूद_sum_currentYear'] ?? 0}}</span>
                         </span>
                     </div>
                     <div>
@@ -301,50 +280,67 @@
                                 <tr>
                                     <th>अ.क्र</th>
                                     <th>ठेवी देय व्याज</th>
-                                    <th>रक्कम</th>
+                                    <th>गतवर्षे अखेर रु.</th>
+                                    <th>चालूवर्षे अखेर रु.</th>
+                                    <th>वाढ/घट</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @php $i = 1; @endphp
                                 @php
-                                $totalCurrentYear = 0;
+                                $totalCurrentYear_तरतूद = 0;
+                                $totalLastYear_तरतूद = 0;
 
-                                $totalDiff = 0;
+                                $totalDiff_तरतूद = 0;
                                 @endphp
                                 @foreach($client['तरतूद'] as $c)
                                 @php
-                                $totalCurrentYear += $c->currentYear;
+                                $totalCurrentYear_तरतूद += $c->currentYear;
+                                $totalLastYear_तरतूद += $c->lastYear;
+                                $totalDiff_तरतूद += ($c->currentYear - $c->lastYear);
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $c->entity }}</td>
+                                    <td>{{ number_format($c->lastYear, 2) }}</td>
                                     <td>{{ number_format($c->currentYear, 2) }}</td>
+                                    <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
+
                                 </tr>
                                 @endforeach
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalLastYear_तरतूद, 2) }}</td>
+                                    <td>{{ number_format($totalCurrentYear_तरतूद, 2) }}</td>
+                                    <td>{{ number_format($totalDiff_तरतूद, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="mb-2">
-                        संस्थेचे कामकाज संगणकीकृत असल्याने देय व्याजाच्या तरतुदी संगणक प्रणालीद्वारे काढलेल्या. काही देय
+                        संस्थेचे कामकाज संगणकीकृत असल्याने देय व्याजाच्या तरतुदी संगणक प्रणालीद्वारे काढलेल्या.
+                          <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement1">
+                        <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                        <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                    </select>
+                         काही देय
                         ठेव खात्यांची व्याजाची आकारणी तपासणी केली असता त्यामध्ये फरक दिसुन
                         <span>
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_diff_found">
-                                <option value="आला" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'आला') ? 'selected' : '' }}>आला</option>
+                                <option value="आहे" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </span>
                         . या ठेवीच्या व्याजाच्या
-                        तरतुदी केल्या प्रमाणात केल्या आहेत. त्याचा परिणाम नफा/तोटयावर
-                        <span>
-                            <input type="text" class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_effect_on_profit" value="{{ $clientInputs['interest_effect_on_profit'] ?? '' }}">
+                        तरतुदी प्रमाणात केल्या आहेत. त्याचा परिणाम नफा/तोटयावर
+                        झाला.  <span>
+                            <select class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_diff_found1">
+                                <option value="आहे" {{ (isset($clientInputs['interest_diff_found1']) && $clientInputs['interest_diff_found1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                                <option value="नाही" {{ (isset($clientInputs['interest_diff_found1']) && $clientInputs['interest_diff_found1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            </select>
                         </span>
-                        झाला.
                     </div>
                     <div class="mb-2">
                         <span class="fw-bold">5. इतर देणे :-</span>
@@ -400,6 +396,7 @@
                         संस्थेने विविध खर्चासाठी वरिल प्रमाणे तरतुद केलेले आहे. प्रत्याक्षात संभासदानां लाभांष देय नसल्यास ती रक्कम
                         राखीव निधीला स्थांलातरित करून बाकी निरंक करण्यात यावे. संस्पेन्स खात्याचे शाहनिषा करून बाकी निरंक
                         करण्यात यावे इतर देणे देउन बाकी निरंक करावे. फरक असल्यास याबाबत अभिप्राय नमुद करावेत.
+                        <input type="text" class="form-control" style="width:1000px;display:inline;" name="other_payables_comments" value="{{ $clientInputs['other_payables_comments'] ?? '' }}">
                     </div>
                 </div>
 
@@ -459,22 +456,9 @@
                     <span style="font-weight:bold;">रु. {{$client['संचित नफा_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
-                    @php
-                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                    $auditPeriod = '';
-                    $start = '';
-                    $end = '';
-                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                    $start = $m[1];
-                    $end = $m[2];
-                    $auditPeriod = "01/04/$start - 31/03/$end";
-                    } else {
-                    $auditPeriod = $client->year->audit_year;
-                    }
-                    @endphp
-                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span>{{$client['संचित नफा_sum_lastYear']}}</span> अधिक/व चालू वर्षाचा नफा/तोटा <span>{{$client['totalIncome7']}}</span> एकूण संचीत नफा <span>{{$client['संचित नफा_sum_currentYear']}}</span> बरोबर आहे.आवष्यक
+                    सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span><b>{{$client['संचित नफा_sum_lastYear']}}</b></span> अधिक/व चालू वर्षाचा नफा/तोटा <span><b>{{$client['नफा_तोटा_sum_currentYear']}}</b></span> एकूण संचीत नफा <span><b>{{$client['संचित नफा_sum_currentYear']}}</b></span> बरोबर आहे.आवष्यक
                     <br>
-                    तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता आहे /
+                    तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता 
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="retained_profit_certified">
                         <option value="आहे" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -492,7 +476,7 @@
 
                 <!-- 10. रोख शिल्लक -->
                 <div class="mb-2">
-                    <span class="fw-bold">रोख शिल्लक :-</span>
+                    <span class="fw-bold">1) रोख शिल्लक :-</span>
                     <span style="font-weight:bold;">रु. {{$client['रोख शिल्लक_sum_currentYear']}}</span>
                 </div>
                 <div class="mb-2">
@@ -509,7 +493,7 @@
                     </select>
                     .
                     <br>
-                    लेखापरीक्षणाचेवेळी दि. 28-05-2024 रोजी अखेर/आरंभीची बँकशाखेतील रोख शिल्लक दि. <span style="background: yellow;"><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '2024-05-22' }}"></span> रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
+                    लेखापरीक्षणाचेवेळी दि. <input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '' }}"> रोजी अखेर/आरंभीची रोख शिल्लक  रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_certificate_available">
                         <option value="आहे" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -525,7 +509,9 @@
                 <!-- START: Design as per pasted image -->
                 <div class="mt-4 mb-2">
                     <span style="font-weight:bold;"> रोख शिल्लक रक्कम जवळ बाळगणेबाबत रोखपालास अधिकार दिलेबाबतचा
-                        तपशील विपद करा.</span>
+                        तपशील विपद करा.
+                    <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="cash_keeper_details" value="{{ $clientInputs['cash_keeper_details'] ?? '' }}">
+                    </span>
                     रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेबाबतचा तपशील नमूद करा.
                     रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेल्या
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_bond_taken">
@@ -536,6 +522,7 @@
                 </div>
                 <div class="mb-2">
                     तपासणी मुदती रोख शिल्लकचे उल्लंघन झाले असल्यास खालीलप्रमाणे तपशील नमूद करावा.
+                    <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="cash_balance_violation_details" value="{{ $clientInputs['cash_balance_violation_details'] ?? '' }}">
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:700px;">
@@ -644,57 +631,18 @@
                     नमूद करावा. बँक खात्यावर अनावश्यक जादा रक्कमा पडून असल्यास त्याबाबतचा तपशील नमूद करावा.</p>
                 <!-- END: Design as per pasted image -->
                 <!-- existing content -->
-                @php
-                // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                $auditPeriod = '';
-                $start = '';
-                $end = '';
-                if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                $start = $m[1];
-                $end = $m[2];
-                $auditPeriod = "01/04/$start - 31/03/$end";
-                } else {
-                $auditPeriod = $client->audit_year;
-                }
-                @endphp
                 <!-- START: गुंतवणूक (Investment) Section as per pasted image -->
                 <div class="mt-4 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">३. गुंतवणूक :-</span>
                     <span style="font-weight:bold;">रु. {{$client['गुंतवणूक_sum']}}</span>
                 </div>
                 <div class="mb-2">
-                    @php
-                    // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                    $auditPeriod = '';
-                    $start = '';
-                    $end = '';
-                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                    $start = $m[1];
-                    $end = $m[2];
-                    $auditPeriod = "01/04/$start - 31/03/$end";
-                    } else {
-                    $auditPeriod = $client->year->audit_year;
-                    }
-                    @endphp
                     <span style="font-weight:bold;">दि. 31/03/{{$end}} अखेर संस्थेने खालीलप्रमाणे गुंतवणूक केलेली आहे.</span>
                 </div>
                 <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                                @php
-                                // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                                $auditPeriod = '';
-                                $start = '';
-                                $end = '';
-                                if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
-                                $start = $m[1];
-                                $end = $m[2];
-                                $auditPeriod = "01/04/$start - 31/03/$end";
-                                } else {
-                                $auditPeriod = $client->year->audit_year;
-                                }
-                                @endphp
                                 <th>अ. क्र</th>
                                 <th>गुंतवणूक तपशील</th>
                                 <th>दि. 31/03/{{$start}}</th>
@@ -744,7 +692,7 @@
                 </div>
                 <div class="mb-2">
                     <ol class="mb-2" style="padding-left: 20px;">
-                        <li>संस्थेने केलेल्या सर्व गुंतवणूक यादीनुसार गुंतवणूक रक्कम जुळत -
+                        <li>संस्थेने सादर केलेल्या सर्व गुंतवणूक यादीनुसार गुंतवणूक रक्कम जुळत -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_list_matches">
                                 <option value="आहे" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -798,7 +746,7 @@
                 <!-- START: कर्ज (Loan) Section as per pasted image -->
                 <div class="mt-4 mb-2">
                     <span class="fw-bold" style="font-size: 1.1em;">4. कर्ज :-</span>
-                    <span style="font-weight:bold;">रु. {{$client['देणे कर्ज_sum_currentYear']}}</span>
+                    <span style="font-weight:bold;">रु. {{ $client['येणे कर्ज_sum']}}</span>
                 </div>
                 <div class="mb-2">
                     <span style="font-weight:bold;">दि. 31/03/2025 अखेर संस्थेस खालीलप्रमाणे कर्ज येणे आहे.</span>
@@ -821,7 +769,7 @@
                             $totalLastYear = 0;
                             $totalDiff = 0;
                             @endphp
-                            @foreach($client['देणे कर्ज'] as $c)
+                            @foreach($client['येणे कर्ज'] as $c)
                             @php
                             $totalCurrentYear += $c->currentYear;
                             $totalLastYear += $c->lastYear;
@@ -870,6 +818,9 @@
                         <option value="नाही" {{ (isset($clientInputs['loan_list_matches']) && $clientInputs['loan_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     याबाबत अभिप्राय नमुद करावेत. कर्जाबाबतचा सविस्तर तपशील स्वतंत्रपणे नमुद केलेला आहे. कृपया अवलोकन व्हावे.
+                    <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="loan_details" value="{{ $clientInputs['loan_details'] ?? '' }}"><br><br>
+                    <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="loan_details_additional" value="{{ $clientInputs['loan_details_additional'] ?? '' }}"><br><br>
+                    <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="loan_details_additional2" value="{{ $clientInputs['loan_details_additional2'] ?? '' }}"><br><br>
                 </div>
 
                 <!-- END: कर्ज (Loan) Section -->
@@ -894,8 +845,8 @@
                             <tr>
                                 <th>अ.क्र.</th>
                                 <th>मालमत्तेचा तपशील</th>
-                                <th>दि.31/03/2023 अखेर रक्कम रु.</th>
-                                <th>दि.31/03/2024 अखेर रक्कम रु.</th>
+                                <th>दि.31/03/{{$start}} अखेर रक्कम रु.</th>
+                                <th>दि.31/03/{{$end}} अखेर रक्कम रु.</th>
                                 <th>वाढ/घट रक्कम रु.</th>
                             </tr>
                         </thead>
@@ -941,7 +892,7 @@
                         <li>
                             संस्थेने मालमत्तेवर नियमाप्रमाणे घसारा आकारणी केलेली आहे का?
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="depreciation_applied">
-                                <option value="आहे" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                                <option value="होय" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'होय') ? 'selected' : '' }}>होय</option>
                                 <option value="नाही" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
@@ -981,9 +932,9 @@
                             <tr>
                                 <th>अ.क्र.</th>
                                 <th>तपशील</th>
-                                <th>ताळेबंदानुसार रक्कम</th>
-                                <th>यादीप्रमाणे रक्कम</th>
-                                <th>फरक</th>
+                                  <th>गतवर्षा अखेर रु.</th>
+                                <th>चालू वर्षा अखेर रु.</th>
+                                <th>वाढ/घट</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1036,11 +987,11 @@
                 </div>
                 <div class="mb-2">
                     सदर बाकी दि.<span>31/03/2025</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा/तोटा रु.
-                    <span>{{$client['नफा_तोटा_sum_lastYear']}}</span>
-                    अधिक/व चालू वर्षाचा नफा/तोटा रु.
+                    <span><b>{{$client['नफा/तोटा_sum_currentYear']}}</b></span>
+                    अधिक/व चालू वर्षाचा नफा/तोटा रु. <span><b>{{$client['नफा/तोटा_sum_currentYear']}}</b></span>
                     <span></span>
-                    एकूण संचीत तोटा रु. {{$client['नफा_तोटा_sum_currentYear']}}
-                    <span>{{$client['नफा_तोटा_sum_lastYear']}}</span>
+                    एकूण संचीत तोटा रु. <b>{{$client['नफा/तोटा_sum_currentYear']}}</b>
+                   
                     बरोबर आहे. आवष्यक तरतुद न केल्यामुळे संचीत तोटा प्रमाणीत करता येत नाही.
                     <br>
                     नफा वाटणी कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे करण्यात यावे.
