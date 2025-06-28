@@ -393,7 +393,7 @@ class ClientController extends Controller
 
         // Define sidebar menu items for Master 1
         $sideMenuItems = [
-            ['name' => 'किरकोळ उत्त्पन्न', 'route' => 'admin.client.master1'],
+            // ['name' => 'किरकोळ उत्त्पन्न', 'route' => 'admin.client.master1'],
             ['name' => 'कर्जावरील व्याज', 'route' => 'admin.client.master1'],
             ['name' => 'गुंतवणुकीवरील व्याज', 'route' => 'admin.client.master1'],
             ['name' => 'इतर उत्त्पन्न', 'route' => 'admin.client.master1'],
@@ -720,14 +720,17 @@ class ClientController extends Controller
             $client['प्रशासकीय खर्च'] = $client->masterData->where('menu', 'प्रशासकीय खर्च');
             $client['प्रशासकीय खर्च_sum_currentYear'] = $client['प्रशासकीय खर्च']->sum('currentYear');
             $client['प्रशासकीय खर्च_sum_lastYear'] = $client['प्रशासकीय खर्च']->sum('lastYear');
-            $client['तरतूद'] = $client->masterData->where('menu', 'तरतूद');
-            $client['तरतूद_sum_currentYear'] = $client['तरतूद']->sum('currentYear');
-            $client['तरतूद_sum_lastYear'] = $client['तरतूद']->sum('lastYear');
+            $client['तरतूद खर्च'] = $client->masterData->where('menu', 'तरतूद खर्च');
+            $client['तरतूद खर्च_sum_currentYear'] = $client['तरतूद खर्च']->sum('currentYear');
+            $client['तरतूद खर्च_sum_lastYear'] = $client['तरतूद खर्च']->sum('lastYear');
             $client['इतर खर्च'] = $client->masterData->where('menu', 'इतर खर्च');
             $client['इतर खर्च_sum_currentYear'] = $client['इतर खर्च']->sum('currentYear');
             $client['इतर खर्च_sum_lastYear'] = $client['इतर खर्च']->sum('lastYear');   
             $incomeMenu3 = ['वसूल भागभांडवल', 'राखीव निधी', 'इतर सर्व निधी', 'ठेवी', 'संचित नफा', 'तरतूद', 'देणे कर्ज', 'इतर देणी', 'शाखा ठेवी देणे'];
             $client['खेळते भांडवल'] = $client->masterData->whereIn('menu', $incomeMenu3)->sum('currentYear');
+            $client['संचित तोटा'] = $client->masterData->where('menu', 'संचित तोटा');
+            $client['संचित तोटा_sum_currentYear'] = $client['संचित तोटा']->sum('currentYear');
+            $client['खेळते भांडवल_sum'] = $client['खेळते भांडवल'] - $client['संचित तोटा_sum_currentYear'];
             $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
             $client['वसुल भाग भागभांडवल_sum_currentYear'] = $client['वसुल भाग भागभांडवल']->sum('currentYear');
             $client['निधी'] = $client->masterData->where('menu', 'राखीव निधी');
@@ -750,7 +753,13 @@ class ClientController extends Controller
              $client['घेणे व्यज'] = $client->masterData->where('menu', 'घेणे व्यज');
             $client['घेणे व्यज_sum_currentYear'] = $client['घेणे व्यज']->sum('currentYear');
             $client['शाखा ठेवी देणे'] = $client->masterData->where('menu', 'शाखा ठेवी देणे');
-
+            $incomeMenus = ['इतर उत्त्पन्न', 'गुंतवणुकीवरील व्याज', 'कर्जावरील व्याज'];
+            $expenseMenus = ['इतर खर्च', 'तरतूद खर्च', 'प्रशासकीय खर्च', 'आस्थापना खर्च', 'ठेवीवरील व्याज'];
+            $totalIncome = $client->masterData->whereIn('menu', $incomeMenus)->sum('currentYear');
+            // dd($totalIncome);
+            $totalExpense = $client->masterData->whereIn('menu', $expenseMenus)->sum('currentYear');
+            $totalIncome1 = $client->masterData->whereIn('menu', $incomeMenus)->sum('lastYear');
+            $totalExpense1 = $client->masterData->whereIn('menu', $expenseMenus)->sum('lastYear');
             return view('admin.clients.sheet6', compact('client'));
         } else if ($sheet_no == 7) {
             $client = Client::with('masterData')->find($client_id);

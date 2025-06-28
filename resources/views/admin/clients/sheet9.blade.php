@@ -95,9 +95,9 @@
                             <tr>
                                 <td></td>
                                 <td>ब) नफ्यातून राखीव निधीस वर्ग रकमा</td>
-                                <td>5</td>
                                 <td></td>
-                                <td><input type="text" class="form-control" name="ownfund_5_detail" value="{{ $clientInputs['ownfund_5_detail'] ?? '' }}"></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -192,21 +192,21 @@
                             <tr>
                                 <td>अ)</td>
                                 <td>0% ते 5% पर्यंत असल्यास</td>
-                                <td>15 ते 10</td>
+                                <td>10 ते 15</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_net_npa_1_detail" value="{{ $clientInputs['assets_net_npa_1_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>ब)</td>
                                 <td>5% पेक्षा अधिक ते 10% पर्यंत असल्यास</td>
-                                <td>9 ते 5</td>
+                                <td>5 ते 9</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_net_npa_2_detail" value="{{ $clientInputs['assets_net_npa_2_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>क)</td>
                                 <td>10% पेक्षा अधिक ते 15% पर्यंत असल्यास</td>
-                                <td>4 ते 0</td>
+                                <td>0 ते 4</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_net_npa_3_detail" value="{{ $clientInputs['assets_net_npa_3_detail'] ?? '' }}"></td>
                             </tr>
@@ -427,20 +427,40 @@
                                 <td></td>
                                 <td><input type="text" class="form-control" name="mgmt_expert_detail" value="{{ $clientInputs['mgmt_expert_detail'] ?? '' }}"></td>
                             </tr>
+                              <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    <span style="margin-left: 1em;">अन्यथा</span>
+                                </td>
+                                <td>0</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             <tr>
                                 <td>3</td>
                                 <td class="text-start">
                                     सहकार शिक्षण व प्रशिक्षण :<br>
                                     <span style="margin-left: 1em;">अ) एका आर्थिक वर्षात एकूण सदस्यांपैकी किमान 1/5 सदस्यांना सहकार प्रशिक्षण केंद्र/मान्यताप्राप्त प्रशिक्षण संस्थेत 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास</span>
                                 </td>
-                                <td>4</td>
                                 <td></td>
-                                <td><input type="text" class="form-control" name="mgmt_training_1_detail" value="{{ $clientInputs['mgmt_training_1_detail'] ?? '' }}"></td>
+                                <td></td>
+                                <td></td>
                             </tr>
+                             <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    <br>
+                                    <span>ब)संचालकांना शासनाने अधिसुचीत केलेल्या प्रशिक्षण संस्थेत किमान 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास :</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ब)संचालकांना शासनाने अधिसुचीत केलेल्या प्रशिक्षण संस्थेत किमा 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास :<br>
+                                    <br>
                                     <span style="margin-left: 2em;">1)100% संचालक प्रशिक्षित असल्यास</span>
                                 </td>
                                 <td>3</td>
@@ -468,7 +488,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    4)50% पेक्षा कमी संचालक प्रशिक्षित असल्यास
+                                    <span style="margin-left: 2em;">4)50% पेक्षा कमी संचालक प्रशिक्षित असल्यास</span>
                                 </td>
                                 <td>0</td>
                                 <td></td>
@@ -480,7 +500,7 @@
                                     व्यवस्थापक / महाव्यवस्थापक/कार्यकारी संचालक/मुख्य कार्यकारी
                                     अधिकारी / वरिष्ठ अधिकारीः-
                                 </td>
-                                <td>3</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -532,10 +552,20 @@
                                     4. कार्यकारी/प्रशासकीय कार्यक्षमता :- <span style="font-weight:normal;">3 गुण</span>
                                 </td>
                             </tr>
+                             <tr>
+                                <td></td>
+                                <td class="text-start">
+                                    <br>
+                                    <span>व्यवस्थापक/मुख्याधिकारी/कार्यकारी संचालक/मुख्य कार्यकारी अधिकारी/वरिष्ठ अधिकारी -</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             <tr>
                                 <td>1</td>
                                 <td class="text-start">
-                                    व्यवस्थापक/मुख्याधिकारी/कार्यालयीन संचालक/मुख्य कार्यकारी अधिकारी/वरिष्ठ अधिकारी -
+                                    
                                     <br>अ) व्यवस्थापक/महाव्यवस्थापक/कार्यकारी संचालक/मुख्य
                                     कार्यकारी अधिकारी यांची शैक्षणिक अर्हता, अनुभव व तांत्रित
                                     क्षमता विचारात घेऊन सेवानियमानुसार नेमणूक केली असलयास
@@ -883,13 +913,13 @@
                                 <td class="text-start">ब)संस्थेने वैधानिक तरलता निधीबाबत दैनंदिन पद्धतीने नोंदी ठेवून
                                     मुख्य कार्यकारी अधिकारी यानी अशा नोंदी प्रमाणित करून संचालक
                                     मंडळ सभेत दरमहा नोंद घेतली असल्यास</td>
-                                <td>0</td>
+                                <td>1</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="earnings_net_profit_13_detail" value="{{ $clientInputs['earnings_net_profit_13_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td class="text-start">अन्यथा</td>
-                                <td></td>
+                                <td>0</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -991,7 +1021,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-start">
-                                    ड) 20% पेक्षा अधिक असल्यास
+                                    ड) 10% पेक्षा अधिक असल्यास
                                 </td>
                                 <td>0</td>
                                 <td></td>
@@ -1234,7 +1264,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><span style="font-weight:bold;">जिंधांची गुणवत्ता (Assets Quality)</span></td>
+                                <td><span style="font-weight:bold;">जिंदगीची गुणवत्ता (Assets Quality)</span></td>
                                 <td>55</td>
                                 <td><input type="text" class="form-control" name="summary_assets_score" value="{{ $clientInputs['summary_assets_score'] ?? '' }}"></td>
                             </tr>
