@@ -199,9 +199,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="background: yellow;">207472724.00</td>
+                            @php
+                            $totalIncomeCurrentYear = $client['कर्जावरील व्याज_sum_currentYear'] + $client['गुंतवणुकीवरील व्याज_sum_currentYear'] + $client['इतर उत्त्पन्न_sum_currentYear'] ;
+                            $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
+                            $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear;
+                            $totalLoss = $totalExpCurrentYear - $totalIncomeCurrentYear;
+                            $client['स्वनिधी'] = $client['स्वनिधी'] + $totalProfit;
+                            $client['स्वनिधी'] = $client['स्वनिधी'] - $totalLoss;
+                            @endphp
+                                <td>{{$client['स्वनिधी']}}</td>
                                 <td>{{$client['ठेवी_sum']}}</td>
-                                <td style="background: yellow;">924770015.00</td>
+                                <td>{{$client['स्वनिधी'] + $client['ठेवी_sum']}}</td>
                                 <td>{{$client['देणे कर्ज_sum']}}</td>
                             </tr>
                         </tbody>

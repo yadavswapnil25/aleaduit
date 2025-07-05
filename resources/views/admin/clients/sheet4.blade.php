@@ -332,44 +332,52 @@ $auditPeriod = $client->audit_year;
                             </thead>
                             <tbody>
                                 <tr>
+                                    @php
+                                    $totalIncomeCurrentYear = $client['कर्जावरील व्याज_sum_currentYear'] + $client['गुंतवणुकीवरील व्याज_sum_currentYear'] + $client['इतर उत्त्पन्न_sum_currentYear'] ;
+                                    $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
+                                    $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear;
+                                    $totalLoss = $totalExpCurrentYear - $totalIncomeCurrentYear;
+                                    $client['स्वनिधी'] = $client['स्वनिधी'] + $totalProfit;
+                                    $client['स्वनिधी'] = $client['स्वनिधी'] - $totalLoss;
+                                    @endphp
                                     <td>1</td>
                                     <td>स्वनिधी (नेटवर्थ)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth" value="{{ $clientInputs['networth'] ?? '10638256.99' }}"></td>
+                                    <td>{{$client['स्वनिधी']}}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_auditor" value="{{ $clientInputs['networth_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_diff" value="{{ $clientInputs['networth_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>भांडवल पर्याप्तता प्रमाण (CRAR)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar" value="{{ $clientInputs['crar'] ?? '16.08' }}"></td>
+                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar" value="{{ $clientInputs['crar'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_auditor" value="{{ $clientInputs['crar_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_diff" value="{{ $clientInputs['crar_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>कर्ज/ठेवी प्रमाण (CD Ratio)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio" value="{{ $clientInputs['cd_ratio'] ?? '88.19' }}"></td>
+                                    <td>{{ number_format((($client['येणे कर्ज_sum_currentYear'] - $client['total1']) / $client['ठेवी_sum_currentYear']) * 100, 2) }}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_auditor" value="{{ $clientInputs['cd_ratio_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_diff" value="{{ $clientInputs['cd_ratio_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>थकीत कर्ज प्रमाण (%)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="overdue_loan_ratio" value="{{ $clientInputs['overdue_loan_ratio'] ?? '0-00' }}"></td>
+                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="overdue_loan_ratio" value="{{ $clientInputs['overdue_loan_ratio'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="overdue_loan_ratio_auditor" value="{{ $clientInputs['overdue_loan_ratio_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="overdue_loan_ratio_diff" value="{{ $clientInputs['overdue_loan_ratio_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>ढोबळ एन. पी. ए. (%)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa" value="{{ $clientInputs['gross_npa'] ?? '61' }}"></td>
+                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa" value="{{ $clientInputs['gross_npa'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa_auditor" value="{{ $clientInputs['gross_npa_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa_diff" value="{{ $clientInputs['gross_npa_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>निव्वळ एन. पी. ए. (%)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa" value="{{ $clientInputs['net_npa'] ?? '61' }}"></td>
+                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa" value="{{ $clientInputs['net_npa'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa_auditor" value="{{ $clientInputs['net_npa_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa_diff" value="{{ $clientInputs['net_npa_diff'] ?? '' }}"></td>
                                 </tr>
@@ -819,13 +827,13 @@ $auditPeriod = $client->audit_year;
                             </tbody>
                         </table>
                         <div class="mt-2">
-                            <span>दि. (गतवर्षी) अखेर स्वनिधी रु. <span>{{$total_networth_last}}</span> असून दि. <span>31/03/{{$end}}</span> (चालूवर्षी) अखेरचा स्वनिधी रु. <span>{{$total_networth_current}}</span> आहे. स्वनिधीत गतवर्षीपेक्षा रु. <span>{{ $total_networth_current - $total_networth_last }}</span> 
-                            <select name="networth_diff" class="form-control d-inline-block" style="width:100px;display:inline;">
-                                <option value="">Select</option>
-                                <option value="वाढ" {{ (isset($clientInputs['networth_diff']) && $clientInputs['networth_diff'] == 'वाढ') ? 'selected' : '' }} >वाढ</option>
-                                <option value="घट" {{ (isset($clientInputs['networth_diff']) && $clientInputs['networth_diff'] == 'घट') ? 'selected' : '' }}>घट</option>
-                            </select>
-                             झाली आहे.
+                            <span>दि. (गतवर्षी) अखेर स्वनिधी रु. <span>{{$total_networth_last}}</span> असून दि. <span>31/03/{{$end}}</span> (चालूवर्षी) अखेरचा स्वनिधी रु. <span>{{$total_networth_current}}</span> आहे. स्वनिधीत गतवर्षीपेक्षा रु. <span>{{ $total_networth_current - $total_networth_last }}</span>
+                                <select name="networth_diff" class="form-control d-inline-block" style="width:100px;display:inline;">
+                                    <option value="">Select</option>
+                                    <option value="वाढ" {{ (isset($clientInputs['networth_diff']) && $clientInputs['networth_diff'] == 'वाढ') ? 'selected' : '' }}>वाढ</option>
+                                    <option value="घट" {{ (isset($clientInputs['networth_diff']) && $clientInputs['networth_diff'] == 'घट') ? 'selected' : '' }}>घट</option>
+                                </select>
+                                झाली आहे.
                                 @php
                                 $networth_diff = $total_networth_current - $total_networth_last;
                                 $networth_increase_percent = $total_networth_last != 0 ? round(($networth_diff / $total_networth_last) * 100, 2) : 0;

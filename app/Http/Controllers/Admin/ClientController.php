@@ -469,6 +469,13 @@ class ClientController extends Controller
             $client['ठेवी_sum'] = $client['ठेवी']->sum('currentYear');
             $client['इतर देणी'] = $client->masterData->where('menu', 'इतर देणी');
             $client['इतर देणी_sum'] = $client['इतर देणी']->sum('currentYear');
+            $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
+            $client['वसुल भाग भागभांडवल_sum_currentYear'] = $client['वसुल भाग भागभांडवल']->sum('currentYear');
+            $client['राखीव निधी'] = $client->masterData->where('menu', 'राखीव निधी');
+            $client['राखीव निधी_sum_currentYear'] = $client['राखीव निधी']->sum('currentYear');
+            $totalExpense3 = $client->masterData->whereIn('menu', 'इतर सर्व निधी')->where('entity', 'इमारत निधी')->sum('currentYear');
+            $totalExpense5 = $client->masterData->whereIn('menu', 'इतर सर्व निधी')->where('entity', 'लाभांश समीकरण')->sum('currentYear');
+            $client['स्वनिधी'] = $client['वसुल भाग भागभांडवल_sum_currentYear'] + $client['राखीव निधी_sum_currentYear'] + $totalExpense3 + $totalExpense5;
             return view('admin.clients.sheet3', compact('client', 'auditor', 'clientInputs'));
         } else if ($sheet_no == 4) {
             $client = Client::with('masterData')->find($client_id);
@@ -549,7 +556,7 @@ class ClientController extends Controller
             $incomeMenu3 = ['वसूल भागभांडवल', 'राखीव निधी', 'इतर सर्व निधी', 'ठेवी', 'संचित नफा', 'तरतूद', 'देणे कर्ज', 'इतर देणी', 'शाखा ठेवी देणे'];
             $totalIncome6 = $client->masterData->whereIn('menu', $incomeMenu3)->sum('lastYear');
             $client['totalIncome6'] = $totalIncome6;
-
+            $client['total1'] =$client['कायम मालमत्ता_sum_currentYear'] + $client['वसुल भाग भागभांडवल_sum_currentYear'] + $client['राखीव निधी_sum_currentYear'];
             return view('admin.clients.sheet4', compact('client', 'auditor', 'clientInputs', 'totalIncome2', 'totalExpense2'));
         } else if ($sheet_no == 5) {
             $client = Client::with('masterData', 'year')->find($client_id);
