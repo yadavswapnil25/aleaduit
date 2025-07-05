@@ -23,7 +23,8 @@
                         <option>Select Product</option>
                         <option value="Other">Other</option>
                     </select>
-                    <input type="text" class="form-control mt-2 custom-entity-input" placeholder="Enter custom product" style="display: none;">
+                    <input type="text" class="form-control mt-2 custom-entity-input"
+                        placeholder="Enter custom product" style="display: none;">
                 </td>
                 <td><input type="text" class="form-control last-year" placeholder="Enter last year value"></td>
                 <td><input type="text" class="form-control current-year" placeholder="Enter current year value"></td>
@@ -90,17 +91,23 @@
             'वसूल भागभांडवल': ['सभासद भांडवल', 'Other'],
             'राखीव निधी': ['राखीव निधी', 'Other'],
             'इतर सर्व निधी': [
-                'इमारत निधी', 'लाभांश समीकरण', 'आकस्मिक फंड', 'सभासद कल्याण निधी', 'शिक्षण निधी', 'घसारा निधी', 'कर्मचारी कल्याण निधी',
+                'इमारत निधी', 'लाभांश समीकरण', 'आकस्मिक फंड', 'सभासद कल्याण निधी', 'शिक्षण निधी',
+                'घसारा निधी', 'कर्मचारी कल्याण निधी',
                 'संशयित बुडीत कर्जनिधी', 'धर्मदाय निधी', 'कल्याण निधी',
                 'नाममात्र फी', 'बुडीत कर्ज निधी', 'संगणक झीज फंड', 'टेम्पररी झीज फंड',
-                'संशयित बुडीत कर्ज निधी', 'सभासद देणगी फंड', 'अधिलाभांष', 'कर्मचारी भविष्य निर्वाह निधी',
-                'सुरक्षा ठेव निधी', 'भांडवल चढ उतार निधी', 'गुंतवणूक चढ उतार निधी', 'तंत्रज्ञान विकास निधी', 'Other'
+                'संशयित बुडीत कर्ज निधी', 'सभासद देणगी फंड', 'अधिलाभांष',
+                'कर्मचारी भविष्य निर्वाह निधी',
+                'सुरक्षा ठेव निधी', 'भांडवल चढ उतार निधी', 'गुंतवणूक चढ उतार निधी',
+                'तंत्रज्ञान विकास निधी', 'Other'
             ],
             'ठेवी': [
-                'बचत ठेव', 'आवर्त ठेव', 'मुदत ठेव', 'मुदत ठेव 1 वर्ष', 'मुदत ठेव 2 वर्ष', 'मुदत ठेव 3 वर्ष',
-                'मुदत ठेव 4 वर्ष', 'मुदत ठेव 5 वर्ष', 'दामदुप्पट ठेव', 'दामतिप्पट ठेव', 'दामचौपट ठेव', 'आवर्त ठेव 1 वर्ष', 'आवर्त ठेव 2 वर्ष',
+                'बचत ठेव', 'आवर्त ठेव', 'मुदत ठेव', 'मुदत ठेव 1 वर्ष', 'मुदत ठेव 2 वर्ष',
+                'मुदत ठेव 3 वर्ष',
+                'मुदत ठेव 4 वर्ष', 'मुदत ठेव 5 वर्ष', 'दामदुप्पट ठेव', 'दामतिप्पट ठेव', 'दामचौपट ठेव',
+                'आवर्त ठेव 1 वर्ष', 'आवर्त ठेव 2 वर्ष',
                 'आवर्त ठेव 3 वर्ष', 'आवर्त ठेव 4 वर्ष', 'आवर्त ठेव 5 वर्ष',
-                'कुटुंबनिर्वाह मासिक व्याज योजना', 'सुकन्या ठेव योजना', 'सुरुक्षा ठेव योजना', 'शुभमंगल ठेव', 'अल्पमुदती ठेव', 'लक्षावधी ठेव',
+                'कुटुंबनिर्वाह मासिक व्याज योजना', 'सुकन्या ठेव योजना', 'सुरुक्षा ठेव योजना',
+                'शुभमंगल ठेव', 'अल्पमुदती ठेव', 'लक्षावधी ठेव',
                 'लक्ष्मी ठेव', 'सुरक्षा ठेव', 'संचालक ठेव', 'नाममात्र सभासद ठेव', 'सभासद ठेव',
                 'सदाफुली ठेव', 'कर्मचारी ठेव', 'मासिक ठेव/पेंशन ठेव योजना', 'कर्ज सुरक्षा ठेव',
                 'सभासद मासिक उत्पन्न ठेव', 'Other'
@@ -108,9 +115,11 @@
             'संचित नफा': ['संचित नफा', 'Other'],
             'तरतूद खर्च': [
                 'कर्मचारी बोनस', 'परिश्रमिक',
-                'इमारत घसारा फंड', 'ऑडिट फी तरतूद', 'शिक्षण निधी तरतूद', 'आयकर तरतूद', 'टॅक्स ऑडिट तरतूद',
+                'इमारत घसारा फंड', 'ऑडिट फी तरतूद', 'शिक्षण निधी तरतूद', 'आयकर तरतूद',
+                'टॅक्स ऑडिट तरतूद',
                 'अध्यक्ष मानधन तरतूद', 'सचिव मानधन तरतूद', 'अपघात विमा तरतूद', 'एन पी ए तरतूद',
-                'निवडणूक खर्च तरतूद', 'सभासद कल्याण तरतूद', 'ठेवी वरील देय व्याज तरतूद', 'कर्मचारी मानधन तरतूद',
+                'निवडणूक खर्च तरतूद', 'सभासद कल्याण तरतूद', 'ठेवी वरील देय व्याज तरतूद',
+                'कर्मचारी मानधन तरतूद',
                 'ऑफिस भाडे तरतूद', 'विदुयत बिल तरतूद', 'जी. एस. टी. तरतूद', 'Other'
             ],
             'देणे कर्ज': [
@@ -130,13 +139,14 @@
                 'कर्मचारी व्यवसाय कर', 'ठेववरील देय व्याज', 'Other'
             ],
             'शाखा ठेवी देणे': [
-                'शाखा १','शाखा २', 'शाखा ३','Other'
+                'शाखा १', 'शाखा २', 'शाखा ३', 'Other'
             ],
             'रोख शिल्लक': [
                 'रोख शिल्लक', 'शाखा क्रमांक १', 'शाखा क्रमांक २', 'Other'
             ],
             'बँक शिल्लक': [
-                'चालू बँक खाते', 'बचत बँक खाते', 'बँक ऑफ बडोदा', 'बँक ऑफ इंडिया', 'बँक ऑफ महाराष्ट्र', 'कॅनरा बँक',
+                'चालू बँक खाते', 'बचत बँक खाते', 'बँक ऑफ बडोदा', 'बँक ऑफ इंडिया', 'बँक ऑफ महाराष्ट्र',
+                'कॅनरा बँक',
                 'सेंट्रल बँक ऑफ इंडिया', 'इंडियन बँक', 'इंडियन ओव्हरसीज बँक', 'पंजाब अँड सिंध बँक',
                 'पंजाब नॅशनल बँक', 'स्टेट बँक ऑफ इंडिया', 'युको बँक', 'युनियन बँक ऑफ इंडिया',
                 'बी डी सी बँक', 'अर्बन को ऑप बँक', 'जनता को ऑप बँक', 'चालू खाते', 'Other'
@@ -145,7 +155,8 @@
                 'मुदत ठेव', 'बँक भाग हिस्से', 'राखीव निधी गुंतवणूक', 'इमारत निधी गुंतवणूक',
                 'इतर निधी गुंतवणूक', 'दि को-ऑप बँक भाग हिस्से', 'पत संस्था भाग हिस्से',
                 'महा राज्य भाग हिस्से', 'कर्मचारी कल्याण निधी', 'कर्मचारी भविष्य निधी',
-                'एजन्ट सुरक्षा निधी', 'महावितरण मुदत ठेव', 'तंत्रज्ञ विकास निधी', 'कर्मचारी ग्रॅच्युटी निधी', 'सुरक्षा ठेव निधी',
+                'एजन्ट सुरक्षा निधी', 'महावितरण मुदत ठेव', 'तंत्रज्ञ विकास निधी',
+                'कर्मचारी ग्रॅच्युटी निधी', 'सुरक्षा ठेव निधी',
                 'अपघात सुरक्षा निधी', 'महागुंतवणूक मुदत ठेव', 'बँक आवर्त ठेव',
                 'बुडीत कर्ज निधी गुंतवणूक', 'घसारा निधी गुंतवणूक', 'धर्मदाय निधी गुंतवणूक',
                 'सभासद कल्याण निधी',
@@ -319,10 +330,12 @@
                 const customEntity = $(this).find('.custom-entity-input').val();
                 let row = {
                     menu: menuName, // Include the menu value
-                    entity: entitySelect === 'Other' ? customEntity : entitySelect, // Use custom value if "Other"
+                    entity: entitySelect === 'Other' ? customEntity :
+                    entitySelect, // Use custom value if "Other"
                     lastYear: $(this).find('.last-year').val(),
                     currentYear: $(this).find('.current-year').val(),
-                    bankAmount: $(this).find('.bank-amount').val(), // Include bank account amount if applicable
+                    bankAmount: $(this).find('.bank-amount')
+                        .val(), // Include bank account amount if applicable
                     difference: $(this).find('.difference').val(),
                     result: $(this).find('.result').val()
                 };
@@ -365,7 +378,8 @@
 
                         const activeMenu = $('.sidebar-menu-item.active');
                         const entityDropdown = $('#entityDropdown');
-                        entityDropdown.val(activeMenu.data('menu')); // Set the dropdown value to the active menu
+                        entityDropdown.val(activeMenu.data(
+                            'menu')); // Set the dropdown value to the active menu
                         fetchSummaryData();
                         // Refresh the summary table
                     },
@@ -384,11 +398,16 @@
             let qtyTotal = 0; // Sum of CURRENT YEAR
             let grandTotal = 0; // Sum of DIFFERENCE
 
+
             // Iterate through each row in the summary table
             $('#summaryTable tbody tr').each(function() {
-                const lastYear = parseFloat($(this).find('td:nth-child(3)').text()) || 0; // LAST YEAR column
-                const currentYear = parseFloat($(this).find('td:nth-child(4)').text()) || 0; // CURRENT YEAR column
-                const difference = parseFloat($(this).find('td:nth-child(5)').text()) || 0; // DIFF column
+                // alert("4")
+                const lastYear = parseFloat($(this).find('td:nth-child(3)').text()) ||
+                    0; // LAST YEAR column
+                const currentYear = parseFloat($(this).find('td:nth-child(4)').text()) ||
+                    0; // CURRENT YEAR column
+                const difference = parseFloat($(this).find('td:nth-child(5)').text()) ||
+                    0; // DIFF column
 
                 priceTotal += lastYear;
                 qtyTotal += currentYear;
@@ -451,57 +470,89 @@
 
         // Fetch data for summaryTable
         function fetchSummaryData() {
-            const menuName = $('.sidebar-menu-item.active').data('menu'); // Get the active menu name
+            const menuName = $('.sidebar-menu-item.active').data('menu');
 
+            // Rebuild the summaryTable header
+            const $theadRow = $('#summaryTable thead tr');
+            $theadRow.empty();
+            $theadRow
+                .append('<th>ID</th>')
+                .append('<th>ENTITY</th>')
+                .append('<th>LAST YEAR</th>')
+                .append('<th>CURRENT YEAR</th>');
+
+            if (menuName === 'देणे कर्ज' || menuName === 'बँक शिल्लक') {
+                $theadRow.append('<th>बँक दाखल्याप्रमाणे रक्कम</th>');
+            }
+
+            $theadRow
+                .append('<th>DIFF</th>')
+                .append('<th>DELETE</th>');
+
+            // Count how many columns we now have
+            const colCount = $theadRow.find('th').length;
+
+            // Fetch data via AJAX
             $.ajax({
-                url: `/admin/client/{{ $clientId }}/master-data`, // Dynamically include clientId in the URL
+                url: `/admin/client/{{ $clientId }}/master-data`,
                 method: 'GET',
                 data: {
                     menu: menuName
-                }, // Pass the menu name as a parameter
+                },
                 success: function(response) {
                     const $tbody = $('#summaryTable tbody');
-                    $tbody.empty(); // Clear existing rows
+                    $tbody.empty();
 
                     if (response.data.length === 0) {
+                        // 2a. No data → single row with correct colspan
                         $tbody.append(`
-                            <tr>
-                                <td colspan="6" class="text-center">No data available</td>
-                            </tr>
-                        `);
+                    <tr>
+                        <td colspan="${colCount}" class="text-center">No data available</td>
+                    </tr>
+                `);
                     } else {
+                        // 2b. Populate each data row
                         response.data.forEach(row => {
-                            // Ensure valid numeric values for calculation
                             const lastYear = parseFloat(row.lastYear) || 0;
                             const currentYear = parseFloat(row.currentYear) || 0;
                             const difference = currentYear - lastYear;
 
                             let newRow = `
-                                <tr>
-                                    <td>${row.id}</td>
-                                    <td>${row.entity}</td>
-                                    <td>${lastYear}</td>
-                                    <td>${currentYear}</td>
-                                    <td>${difference}</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm delete-summary-row" data-id="${row.id}">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            `;
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.entity}</td>
+                            <td>${lastYear}</td>
+                            <td>${currentYear}</td>
+                    `;
+
+                            if (menuName === 'देणे कर्ज' || menuName === 'बँक शिल्लक') {
+                                const bankAmt = parseFloat(row.bankAmount) || 0;
+                                newRow += `<td>${bankAmt.toFixed(2)}</td>`;
+                            }
+
+                            newRow += `
+                            <td>${difference}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm delete-summary-row" data-id="${row.id}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+
                             $tbody.append(newRow);
                         });
                     }
 
-                    // Trigger totals calculation after data is populated
+                    // Recalculate totals
                     calculateTotals();
                 },
-                error: function(xhr) {
+                error: function() {
                     alert('An error occurred while fetching summary data.');
                 }
             });
         }
+
 
         // Handle delete button in summaryTable
         $(document).on('click', '.delete-summary-row', function() {
