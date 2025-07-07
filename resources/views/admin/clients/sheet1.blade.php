@@ -56,10 +56,7 @@
                     <tr>
                         <td></td>
                         <td>
-
-                            <ol>
-                                <li>अ) गैरव्यहार, अफरातफर फसवणुक, बनावट कागदपत्रांद्वारे लेखापरीक्षणात निर्देशनास आलेला अपहार :-</li>
-                            </ol>
+                            अ) गैरव्यहार, अफरातफर फसवणुक, बनावट कागदपत्रांद्वारे लेखापरीक्षणात निर्देशनास आलेला अपहार :-
                         </td>
                         <td>-- ते --</td>
                     </tr>
@@ -278,6 +275,29 @@
             <hr>
             <form action="{{ route('admin.client.saveInputs', $client->id) }}" method="POST">
                 @csrf
+                    <div class="text-center mb-3">
+                    <h5 class="fw-bold" style="text-decoration: underline;">प्राथमिक माहीती अहवाल</h5>
+                    <br><h5>(पगारदार व नागरी पत संस्था)</h5>
+                    
+                    <div>
+                        <span>{{$client->name_of_society}} र. न. {{ $client->registration_no }}</span>
+                    </div>
+                    <div>
+                        लेखापरीक्षण कालावधी<br>
+                        @php
+                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
+                        $auditPeriod = '';
+                        $start = '';
+                        $end = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
+                        $start = $m[1];
+                        $end = $m[2];
+                        $auditPeriod = $client->year->audit_year;
+                        }
+                        @endphp
+                        <span style="font-weight: bold;">वर्ष {{ $auditPeriod }}</span>
+                    </div>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -358,12 +378,12 @@
                         <tr>
                             <td>13</td>
                             <td>घेतलेले कर्ज</td>
-                            <td><input type="number" class="form-control" name="loans_taken" placeholder="Enter value" value="{{ $clientInputs['loans_taken'] ?? '' }}"></td>
+                            <td><b>रु. {{$client['देणे कर्ज_sum_currentYear']}}</b></td>
                         </tr>
                         <tr>
                             <td>14</td>
                             <td>सभासदांना दिलेले कर्ज</td>
-                            <td><input type="number" class="form-control" name="loans_given" placeholder="Enter value" value="{{ $clientInputs['loans_given'] ?? '' }}"></td>
+                            <td><b>रु. {{$client['येणे कर्ज_sum_currentYear']}}</b></td>
                         </tr>
                         <tr>
                             <td>15</td>
@@ -396,7 +416,7 @@
                         </tr>
                         <tr>
                             <td>20</td>
-                            <td>संस्थेची स्वतची इमारत आहे काय?</td>
+                            <td>संस्थेची स्वतःची इमारत आहे काय?</td>
                             <td>
                                 <select class="form-control" name="own_building">
                                     <option value="">Select</option>
@@ -525,7 +545,7 @@
                             </tr>
 
                             <tr>
-                                <th colspan="2">२) सभासद</th>
+                                <th colspan="2">२) सभासदत्व</th>
                             </tr>
                             <tr>
                                 <td>1.सभासद संख्या</td>
@@ -545,6 +565,7 @@
                             </tr>
                             <tr>
                                 <td>३) हितचिंतक</td>
+                                <td><input type="text" class="form-control" name="minority_members" id="minority_members" value="{{ $clientInputs['minority_members'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>ब) संस्था</td>
@@ -562,11 +583,11 @@
                             </tr>
 
                             <tr>
-                                <td>२.नवे सभासद यथोचितरित्या कुऊन घेतले आहेत काय?
-                                    ज्यांनी प्रवेश शुल्क दिले आहेत काय?</td>
+                                <td>२) नवे सभासद यथोचितरित्या करुन घेतले आहेत काय?
+                                    त्यांनी प्रवेश शुल्क दिले आहेत काय?</td>
                                 <td>
                                     <select class="form-control" name="new_members_fee_paid" >
-                                        <option value="" selected disabled>Select</option>
+                                        <option value="" selected>Select</option>
                                         <option value="होय" {{ (isset($clientInputs['new_members_fee_paid']) && $clientInputs['new_members_fee_paid'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['new_members_fee_paid']) && $clientInputs['new_members_fee_paid'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -578,7 +599,7 @@
                                     रीतीने नियत क्रमात केले आहेत काय?</td>
                                 <td>
                                     <select class="form-control" name="written_applications_received" >
-                                        <option value="" selected disabled>Select</option>
+                                        <option value="" selected>Select</option>
                                         <option value="होय" {{ (isset($clientInputs['written_applications_received']) && $clientInputs['written_applications_received'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['written_applications_received']) && $clientInputs['written_applications_received'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -586,7 +607,7 @@
                             </tr>
                             <tr>
                                 <td>४)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातील
-                                    नियम 32 आणि 65 (1) अन्वेय द्ररविलेल्या 'आय' या
+                                    नियम 32 आणि 65 (1) अन्वेय ठरविलेल्या या
                                     नमुन्यात सभासदांची नोंदवही ठेवली आहे काय?</td>
                                 <td>
                                     <select class="form-control" name="member_register_maintained">
@@ -599,7 +620,6 @@
                             <tr>
                                 <td>5)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातील
                                     नियम 33 अन्वेय' जे आा नमुन्यात सभासदांची
-                                    होय.
                                     होय.
                                     नोंदवही ठेवली आहे काय?</td>
                                 <td>
@@ -624,8 +644,8 @@
                             </tr>
                             <tr>
                                 <td>8)महाराष्ट्र सहकारी संस्थेच्या 1961 च्या कानुनातीलनियम
-                                    25 अन्वेय वारस (नॉमिनी) नेमुन दिले आहूते काय?
-                                    आणि त्याचे नोंद्र 26 व्या नियमाप्रमाणे सभासदांच्या....
+                                    25 अन्वेय वारस (नॉमिनी) नेमुन दिले आहेत काय?
+                                    आणि त्याचे नोंद 26 व्या नियमाप्रमाणे सभासदांच्या....
                                     नोंदवहीत. यथोचितरीत्या केली आहे काय?</td>
                                 <td>
                                     <select class="form-control" name="nominee_appointed">
@@ -692,8 +712,7 @@
                             </tr>
                             <tr>
                                 <td>5)भागाची एकुण खतावणी बाकी ताळेबंदातील
-                                    नाही.
-                                    आगभांडवलाच्या आकड्याशी जुळते काय?
+                                    भाग भांडवलाच्या आकड्याशी जुळते काय?
                                 </td>
                                 <td>
                                     <select class="form-control" name="share_ledger_balance_matches">
@@ -705,7 +724,6 @@
                             </tr>
                             <tr>
                                 <td>6)भागधारकांना ज्यानी घेतलेल्या सर्व भागाबदल भगपत्रे
-                                    होय.
                                     दिली आहेत काय?
                                 </td>
                                 <td>
@@ -720,8 +738,7 @@
                             </tr>
                             <tr>
                                 <td>7)भागाची हस्तांतरण (ट्रान्स्फर) अगर त्यांची किंमत परत
-                                    नाही.
-                                    द्वेणे.या गोष्टी कायद्रा कानून व प्रोटुनियम यातील
+                                    देणे.या गोष्टी कायदा कानून व पोटनियम यातील
                                     तरतुदीप्रमाणे झाल्या आहेत काय?
                                 </td>
                                 <td>
@@ -753,7 +770,8 @@
 
                             </tr>
                             <tr>
-                                <td>2)ती उल्लंचिली गेली होती काय ?</td>
+                                <td>2)ती उल्लंधिली
+                                    गेली होती काय ?</td>
                                 <td>
                                     <!-- <select class="form-control" name="loan_limit_exceeded_opt1">
                                         <option value="">Select</option>
@@ -769,7 +787,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>3)जर ती उल्लंचिली गेली असेल तर सक्षम
+                                <td>3)जर ती उल्लंधिली गेली असेल तर सक्षम
                                     प्राधिकाऱ्याकडून आवश्यक ती अनुज्ञा मिळवली आहे
                                     काय?</td>
                                 <td>
@@ -802,8 +820,7 @@
                                     संख्या द्यावी. :-</td>
                             </tr>
                             <tr>
-                                <td>अ) व्यवस्थापक समितीच्या वा संचालक मंडळाच्या प्रभा
-                                    कार्यकारी वा उप समितिच्या सभा :-</td>
+                                <td>अ) व्यवस्थापक समितीच्या वा संचालक मंडळाच्या सभा :-</td>
                                 <td><input type="text" class="form-control" name="board_meetings_count" value="{{ $clientInputs['board_meetings_count'] ?? '' }}"></td>
 
                             </tr>
@@ -939,7 +956,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>2) सांविधिक (स्टॅट्युटरी) लेखापरीक्षा व अतर्गत लेखापरीक्षा
+                                <td>2) सांविधिक (स्टॅट्युटरी) लेखापरीक्षा व अतर्गत लेखापरीक्षा यांच्यात सममन्व आहे काय ?
                                 </td>
                                 <td>
                                     <select class="form-control" name="statutory_internal_audit">
@@ -952,7 +969,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">9) कार्यकारी संचालक/व्यवस्थापक/चिटणीस-</td>कर्मचाऱ्यासंबधी त्यांची नावे
+                                <td colspan="2">9) कार्यकारी संचालक/व्यवस्थापक/चिटणीस-</td>
                             </tr>
                             <tr>
                                 <td>1)अधिकाऱ्याचे नाव </td>
@@ -1044,7 +1061,7 @@
 
                             </tr>
                             <tr>
-                                <td>2) कायदा, कानू व पोनियम, यांचे उल्लंघन झाल्याच्या
+                                <td>2) कायदा, कानून व पोटनियम, यांचे उल्लंघन झाल्याच्या
                                     नोंदी द्या.
                                 </td>
                                 <td>
@@ -1175,6 +1192,9 @@
                                         <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                        <option value="मेळ जुळते" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'मेळ जुळते') ? 'selected' : '' }}>मेळ जुळते</option>
+                                        <option value="मेळ जुळते नाही" {{ (isset($clientInputs['bank_balance_correct_option']) && $clientInputs['bank_balance_correct_option'] == 'मेळ जुळते नाही') ? 'selected' : '' }}>मेळ जुळते नाही</option>
+
                                     </select>
                                     <input type="text" class="form-control" name="bank_balance_correct" value="{{ $clientInputs['bank_balance_correct'] ?? '' }}">
                                 </td>

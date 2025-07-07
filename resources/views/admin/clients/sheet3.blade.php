@@ -23,12 +23,12 @@
                         @php
                         // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
                         $auditPeriod = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                        $start = '';
+                        $end = '';
+                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
                         $start = $m[1];
                         $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->audit_year;
+                        $auditPeriod = $client->year->audit_year;
                         }
                         @endphp
                         <span style="font-weight: bold;">{{ $auditPeriod }}</span>
