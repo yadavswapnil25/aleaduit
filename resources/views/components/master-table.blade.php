@@ -451,53 +451,84 @@
 
         // Fetch data for summaryTable
         function fetchSummaryData() {
-            const menuName = $('.sidebar-menu-item.active').data('menu'); // Get the active menu name
+            const menuName = $('.sidebar-menu-item.active').data('menu');
 
+            // Rebuild the summaryTable header
+            const $theadRow = $('#summaryTable thead tr');
+            $theadRow.empty();
+            $theadRow
+                .append('<th>ID</th>')
+                .append('<th>ENTITY</th>')
+                .append('<th>LAST YEAR</th>')
+                .append('<th>CURRENT YEAR</th>');
+
+            if (menuName === 'देणे कर्ज' || menuName === 'बँक शिल्लक') {
+                $theadRow.append('<th>बँक दाखल्याप्रमाणे रक्कम</th>');
+            }
+
+            $theadRow
+                .append('<th>DIFF</th>')
+                .append('<th>DELETE</th>');
+
+            // Count how many columns we now have
+            const colCount = $theadRow.find('th').length;
+
+            // Fetch data via AJAX
             $.ajax({
-                url: `/admin/client/{{ $clientId }}/master-data`, // Dynamically include clientId in the URL
+                url: `/admin/client/{{ $clientId }}/master-data`,
                 method: 'GET',
                 data: {
                     menu: menuName
-                }, // Pass the menu name as a parameter
+                },
                 success: function(response) {
                     const $tbody = $('#summaryTable tbody');
-                    $tbody.empty(); // Clear existing rows
+                    $tbody.empty();
 
                     if (response.data.length === 0) {
+                        // 2a. No data → single row with correct colspan
                         $tbody.append(`
-                            <tr>
-                                <td colspan="6" class="text-center">No data available</td>
-                            </tr>
-                        `);
+                    <tr>
+                        <td colspan="${colCount}" class="text-center">No data available</td>
+                    </tr>
+                `);
                     } else {
+                        // 2b. Populate each data row
                         response.data.forEach(row => {
-                            // Ensure valid numeric values for calculation
                             const lastYear = parseFloat(row.lastYear) || 0;
                             const currentYear = parseFloat(row.currentYear) || 0;
                             const difference = currentYear - lastYear;
 
                             let newRow = `
-                                <tr>
-                                    <td>${row.id}</td>
-                                    <td>${row.entity}</td>
-                                    <td>${lastYear}</td>
-                                    <td>${currentYear}</td>
-                                    <td>${difference}</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm delete-summary-row" data-id="${row.id}">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            `;
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.entity}</td>
+                            <td>${lastYear}</td>
+                            <td>${currentYear}</td>
+                    `;
+
+                            if (menuName === 'देणे कर्ज' || menuName === 'बँक शिल्लक') {
+                                const bankAmt = parseFloat(row.bankAmount) || 0;
+                                newRow += `<td>${bankAmt.toFixed(2)}</td>`;
+                            }
+
+                            newRow += `
+                            <td>${difference}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm delete-summary-row" data-id="${row.id}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+
                             $tbody.append(newRow);
                         });
                     }
 
-                    // Trigger totals calculation after data is populated
+                    // Recalculate totals
                     calculateTotals();
                 },
-                error: function(xhr) {
+                error: function() {
                     alert('An error occurred while fetching summary data.');
                 }
             });
