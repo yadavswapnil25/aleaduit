@@ -31,7 +31,7 @@
                         $auditPeriod = $client->year->audit_year;
                         }
                         @endphp
-                        <span style="font-weight: bold;">{{ $auditPeriod }}</span>
+                        <span style="font-weight: bold;">01/04/{{ $start }} - 31/03/{{ $end }}</span>
                     </div>
                 </div>
                 <hr>
@@ -42,9 +42,9 @@
                     <p>
                         <span>{{$client->name_of_society}}.</span> (यानंतर संस्था असा उल्लेख करण्यात येईल) ही संस्था
                         महाराष्ट्र सहकारी संस्था अधिनियम 1960 व नियम 1961 अंतर्गत नोंदणीकृत सहकारी संस्था असून संस्थेचा नोंदणी
-                        क्रमांक {{$client->registration_no}} दिनांक <b> {{$client->registration_date}}</b> आहे. संस्थेच्या मुख्यालया व्यतिरिक्त <span><b>{{$client->total_shakha}}</b></span> शाखा आहेत. संस्थेच्या दिनांक <span>{{ $auditPeriod }}</span>
+                        क्रमांक {{$client->registration_no}} दिनांक <b> {{ \Carbon\Carbon::parse($client->registration_date)->format('d-m-Y') }}</b> आहे. संस्थेच्या मुख्यालया व्यतिरिक्त <span><b>{{$client->total_shakha}}</b></span> शाखा आहेत. संस्थेच्या दिनांक <span><b>01/04/{{ $start }} - 31/03/{{ $end }}</b></span>
                         या कालावधीच्या वैधानिक लेखापरीक्षणासाठी संस्थेने त्यांचे दिनांक <span><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="tarav_date" value="{{ isset($clientInputs['tarav_date']) ? $clientInputs['tarav_date'] : '' }}"></span> रोजी पार पडलेल्या वार्षिक सर्वसाधारण
-                        सभेतील ठराव क्रमांक <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number" value="{{ isset($clientInputs['tarav_number']) ? $clientInputs['tarav_number'] : '' }}"></span> {{$client->district}} <span>
+                        सभेतील ठराव क्रमांक <span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number" value="{{ isset($clientInputs['tarav_number']) ? $clientInputs['tarav_number'] : '' }}"></span> <b>{{$client->district}}</b> <span>
                             <input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number_1" value="{{ isset($clientInputs['tarav_number_1']) ? $clientInputs['tarav_number_1'] : '' }}"></span> अन्वये अथवा निबंधक यांचे <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="tarav_number_2" value="{{ isset($clientInputs['tarav_number_2']) ? $clientInputs['tarav_number_2'] : '' }}"></span>
                         आदेशानुसार वैधानिक लेखापरीक्षक म्हणून
                         आमची नियुक्ती केलेली आहे. संस्थेच्या उक्त कालावधीचे लेखापरीक्षण, संस्थेने पुरवलेल्या लेखी दस्तऐवज व तोंडी
@@ -60,7 +60,7 @@
                     <ol>
                         <li>
                             <span class="fw-bold">संशयीत व अफरातफरीचे व्यवहारः-</span>
-                            संस्थचे सन <span>{{$auditPeriod}}</span> या
+                            संस्थचे सन <span><b>01/04/{{ $start }} - 31/03/{{ $end }}</b></span> या
                             कालावधीचे लेखापरिक्षण केले असता संशयीत व अफरातफरीचे व्यवहार आढळलेले नाहीत.
                         </li>
                         <li>
@@ -105,19 +105,7 @@
                     <div class="fw-bold mb-2">दोन. :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; रोख शिल्लक व कर्ज रोखे आणि संस्थेचा मालमत्ता व दायीत्वे यांचे मुल्यांकन –</div>
                     <div class="d-flex align-items-center mb-2">
                         <span class="fw-bold">रोख शिल्लक :- </span>
-                        @php
-                        // If audit_year is in format "YYYY-YYYY", show as "01/04/YYYY - 31/03/YYYY+1"
-                        $auditPeriod = '';
-                        $end = '';
-                        if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
-                        $start = $m[1];
-                        $end = $m[2];
-                        $auditPeriod = "01/04/$start - 31/03/$end";
-                        } else {
-                        $auditPeriod = $client->audit_year;
-                        }
-                        @endphp
-                        <span class="ms-2">&nbsp; 31/03/{{$end}}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span class="ms-2">&nbsp; 31/03/{{ $end }}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <span class="ms-2">{{$client['रोख शिल्लक_sum']}}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <span class="ms-2">किर्दी प्रमाणे बरोबर आहे</span>
                     </div>
