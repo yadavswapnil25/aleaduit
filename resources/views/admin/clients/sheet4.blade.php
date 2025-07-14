@@ -319,17 +319,9 @@ $auditPeriod = $client->year->audit_year;
                             </thead>
                             <tbody>
                                 <tr>
-                                    @php
-                                    $totalIncomeCurrentYear = $client['कर्जावरील व्याज_sum_currentYear'] + $client['गुंतवणुकीवरील व्याज_sum_currentYear'] + $client['इतर उत्त्पन्न_sum_currentYear'] ;
-                                    $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
-                                    $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear;
-                                    $totalLoss = $totalExpCurrentYear - $totalIncomeCurrentYear;
-                                    $client['स्वनिधी'] = $client['स्वनिधी'] + $totalProfit;
-                                    $client['स्वनिधी'] = $client['स्वनिधी'] - $totalLoss;
-                                    @endphp
                                     <td>1</td>
                                     <td>स्वनिधी (नेटवर्थ)</td>
-                                    <td>{{$client['स्वनिधी']}}</td>
+                                    <td>{{$client['स्वनिधी_sum']}}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_auditor" value="{{ $clientInputs['networth_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_diff" value="{{ $clientInputs['networth_diff'] ?? '' }}"></td>
                                 </tr>

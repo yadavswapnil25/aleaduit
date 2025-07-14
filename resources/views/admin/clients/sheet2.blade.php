@@ -176,12 +176,10 @@
                         <tr>
                             <td></td>
                             <td>ब) संस्थेची चल संपत्ती आणि सांपत्तिक स्थिती दर्शविणारी
-                                माहिती समक्ष अधिकारी यांना योग्य वेळेत पाठविण्यात आली
+                                माहिती समक्ष अधिकारी यांना योग्य वेळेत पाठविण्यात आली आहे काय?
                             </td>
                             <td> <select class="form-control" name="financial_info_timely" >
                                     <option value="" selected >Select</option>
-                                    <option value="आहे काय?" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'आहे काय?') ? 'selected' : '' }}>आहे काय?</option>
-
                                     <option value="होय" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['financial_info_timely']) && $clientInputs['financial_info_timely'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
@@ -314,8 +312,7 @@
                             <td>कर्जाकरीता दिलेले नियम व्यवस्थित वाचलेले आहेत काय?</td>
                             <td> <select class="form-control" name="loan_terms_read" >
                                     <option value="" selected >Select</option>
-                                    <option value="लागु नाही" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'लागु नाही') ? 'selected' : '' }}>लागु नाही</option
-                                    <option value="होय" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                    <option value="लागु नाही" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'लागु नाही') ? 'selected' : '' }}>लागु नाही</option>                                    <option value="होय" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['loan_terms_read']) && $clientInputs['loan_terms_read'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select></td>
                         </tr>
@@ -738,11 +735,15 @@
                         <tr>
                             <td>2)</td>
                             <td>गुंतवणुकी अवमुल्यंनासाठी पुरेशी तरतुद केली आहे. काय?</td>
-                            <td> <select class="form-control" name="investments_2">
+                            <td> 
+                                
+                            <select class="form-control" name="investments_2">
                                     <option value="">Select</option>
                                     <option value="होय" {{ (isset($clientInputs['investments_2']) && $clientInputs['investments_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['investments_2']) && $clientInputs['investments_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                </select></td>
+                                </select>
+                            <input type="text" class="form-control"  name="investments_2_2" value="{{ $clientInputs['investments_2_2'] ?? '' }}">
+                            </td>
                             </td>
                         </tr>
                         <tr>
@@ -780,7 +781,10 @@
                                     <option value="">Select</option>
                                     <option value="होय" {{ (isset($clientInputs['investments_5']) && $clientInputs['investments_5'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['investments_5']) && $clientInputs['investments_5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                </select></td>
+                                </select>
+                            </td>
+                            <input type="text" class="form-control" name="investments_5_2" value="{{ $clientInputs['investments_5_2'] ?? '' }}">
+
                         </tr>
                         <tr>
                             <td>6.</td>
