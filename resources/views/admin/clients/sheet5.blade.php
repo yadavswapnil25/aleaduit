@@ -102,46 +102,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i = 1; @endphp
+                            @php
+                                $totalCurrentYear = $client['राखीव निधी_sum_currentYear'];
+                                $totalLastYear = $client['राखीव निधी_sum_lastYear'];
+                                $totalDiff = $client['राखीव निधी_sum_currentYear'] - $client['राखीव निधी_sum_lastYear'];
+                                $i = 2;
+                            @endphp
+                            <tr>
+                                <td>1</td>
+                                <td>राखीव निधी</td>
+                                <td>{{ number_format($client['राखीव निधी_sum_lastYear'], 2) }}</td>
+                                <td>{{ number_format($client['राखीव निधी_sum_currentYear'], 2) }}</td>
+                                <td>{{ number_format($client['राखीव निधी_sum_currentYear'] - $client['राखीव निधी_sum_lastYear'], 2) }}</td>
+                                <td></td>
+                            </tr>
+                            @foreach($client['इतर सर्व निधी'] as $c)
                                 @php
-                                $totalCurrentYear = 0;
-                                $totalLastYear = 0;
-
-                                $totalDiff = 0;
+                                    $totalCurrentYear += $c->currentYear;
+                                    $totalLastYear += $c->lastYear;
+                                    $totalDiff += ($c->currentYear - $c->lastYear);
                                 @endphp
-                                @foreach($client['इतर सर्व निधी'] as $c)
-                                @php
-                                $totalCurrentYear += $c->currentYear;
-                                $totalLastYear += $c->lastYear;
-                                $totalDiff += ($c->currentYear - $c->lastYear);
-                                @endphp
-                                <!-- <tr>
-                                    <td>1</td>
-                                    <td>{{$client['राखीव निधी']}}</td>
-                                    <td>{{ number_format($totalLastYear, 2) }}</td>
-                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                    <td>{{ number_format($totalDiff, 2) }}</td>
-                                    <td></td>
-                                </tr> -->
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $c->entity }}</td>
                                     <td>{{ number_format($c->lastYear, 2) }}</td>
                                     <td>{{ number_format($c->currentYear, 2) }}</td>
                                     <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
                                     <td></td>
                                 </tr>
-                                @endforeach
-
-                                <tr>
-                                    <td class="fw-bold">एकूण</td>
-                                    <td></td>
-                                    <td>{{ number_format($totalLastYear, 2) }}</td>
-                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                    <td>{{ number_format($totalDiff, 2) }}</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+                            @endforeach
+                            <tr>
+                                <td class="fw-bold">एकूण</td>
+                                <td></td>
+                                <td>{{ number_format($totalLastYear, 2) }}</td>
+                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                <td>{{ number_format($totalDiff, 2) }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
                         </table>
                     </div>
 

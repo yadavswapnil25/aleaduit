@@ -328,14 +328,14 @@ $auditPeriod = $client->year->audit_year;
                                 <tr>
                                     <td>2</td>
                                     <td>भांडवल पर्याप्तता प्रमाण (CRAR)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar" value="{{ $clientInputs['crar'] ?? '' }}"></td>
+                                    <td>{{number_format($client['CRAR_sum'],2)}}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_auditor" value="{{ $clientInputs['crar_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_diff" value="{{ $clientInputs['crar_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>कर्ज/ठेवी प्रमाण (CD Ratio)</td>
-                                    <td>{{ number_format((($client['येणे कर्ज_sum_currentYear'] - $client['total1']) / $client['ठेवी_sum_currentYear']) * 100, 2) }}</td>
+                                    <td>{{ number_format(($client['CR_ratio']), 2) }}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_auditor" value="{{ $clientInputs['cd_ratio_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_diff" value="{{ $clientInputs['cd_ratio_diff'] ?? '' }}"></td>
                                 </tr>
