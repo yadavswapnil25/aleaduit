@@ -135,6 +135,7 @@
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">निव्वळ नफा</td>
                                 <td></td>
+                                <td>{{$client['नफा_तोटा_sum_lastYear']}}</td>
                                 @if($totalIncomeLastYear - $totalExpLastYear > 0)
                                 <td>{{ $totalIncomeLastYear - $totalExpLastYear}}</td>
                                 @else
