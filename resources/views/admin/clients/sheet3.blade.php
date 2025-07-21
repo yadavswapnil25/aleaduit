@@ -237,6 +237,8 @@
                         <br>
                         संस्थेचे सन {{$start}}-{{$end}} चे अंकेक्षणा दरम्यान गंभीर स्वरूपाचे दोष आढळून आले नाहीत.
                         त्यामुळे माहीती निरंक आहे.
+                        <br>
+                        <input type="text" class="form-control d-inline-block" style="width:200px;display:inline;" name="audit_date" value="{{ isset($clientInputs['audit_date']) ? $clientInputs['audit_date'] : '' }}">
                     </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">

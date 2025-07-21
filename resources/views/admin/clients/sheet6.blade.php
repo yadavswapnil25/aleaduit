@@ -124,17 +124,15 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">एकूण खर्च</td>
-                                <td>{{$totalExpLastYear = $client['ठेवीवरील व्याज_sum_lastYear'] + $client['आस्थापना खर्च_sum_lastYear'] +  $client['प्रशासकीय खर्च_sum_lastYear'] + $client['तरतूद_sum_lastYear'] + $client['इतर खर्च_sum_lastYear']}}</td>
-                                <td>{{$totalExpCurrentYear = $client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'] }}</td>
+                                <td>{{$totalExpLastYear = $client['ठेवीवरील व्याज_sum_lastYear'] + $client['आस्थापना खर्च_sum_lastYear'] +  $client['प्रशासकीय खर्च_sum_lastYear'] + $client['तरतूद खर्च_sum_lastYear'] + $client['इतर खर्च_sum_lastYear']}}</td>
+                                <td>{{$totalExpCurrentYear = $client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'] }}</td>
                                 <td>{{$totalExpDiff = $totalExpLastYear - $totalExpCurrentYear}}</td>
                             </tr>
                             @php
                             $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear
                             @endphp
-
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">निव्वळ नफा</td>
-                                <td></td>
                                 <td>{{$client['नफा_तोटा_sum_lastYear']}}</td>
                                 @if($totalIncomeLastYear - $totalExpLastYear > 0)
                                 <td>{{ $totalIncomeLastYear - $totalExpLastYear}}</td>
@@ -159,7 +157,6 @@
                             @endphp
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">निव्वळ तोटा</td>
-                                <td></td>
                                 @if($totalIncomeLastYear - $totalExpLastYear < 0)
                                     <td>{{$totalIncomeLastYear - $totalExpLastYear}}</td>
                                     @else
@@ -174,7 +171,7 @@
                                             <td>{{ ($totalIncomeCurrentYear - $totalExpCurrentYear) - ($totalIncomeLastYear - $totalExpLastYear)}}</td>
                                             @else
                                             <td>0</td>
-                                            @endif
+                                        @endif
                             </tr>
                         </tbody>
                     </table>
@@ -263,7 +260,7 @@
                                 <option value="नाही" {{ (isset($clientInputs['reason_expense_diff7']) && $clientInputs['reason_expense_diff7'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>.
                         </li>
-                        <li>ठेवीवरील व्याज रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_misc_interest" value="{{ $clientInputs['reason_misc_interest'] ?? '' }}"> खर्चात घेतले
+                        <li>ठेवीवरील देय व्याज रु. <input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="reason_misc_interest" value="{{ $clientInputs['reason_misc_interest'] ?? '' }}"> खर्चात घेतले
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="reason_expense_diff8">
                                 <option value="आहे" {{ (isset($clientInputs['reason_expense_diff8']) && $clientInputs['reason_expense_diff8'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['reason_expense_diff8']) && $clientInputs['reason_expense_diff8'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -289,15 +286,22 @@
                             मागील आर्थिक वर्षातील निव्वळ नफयाची कलम ६५ नियम ४९ नुसार पोटनियमाप्रमाणे विविध निधीमध्ये विभागणी करुन लाभांश देण्या इतपत निव्वळ नफा झालेबाबतचा तपशील विषद करा
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion1">
+                                    <option value="">Select</option>
+                                    <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion1']) && $clientInputs['legal_provisions_profit_opinion1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                                    <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion1']) && $clientInputs['legal_provisions_profit_opinion1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     <option value="लागू आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion1']) && $clientInputs['legal_provisions_profit_opinion1'] == 'लागू आहे') ? 'selected' : '' }}>लागू आहे</option>
                                     <option value="लागू नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion1']) && $clientInputs['legal_provisions_profit_opinion1'] == 'लागू नाही') ? 'selected' : '' }}>लागू नाही</option>
                                 </select>
+                                <br>
+                                <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="legal_provisions_profit_opinion1_text" value="{{ $clientInputs['legal_provisions_profit_opinion1_text'] ?? '' }}">
                             </span>
                         </li>
                         <li>
                             संस्थेने लाभांश जर निव्वळ नफ्याच्या १५% पेक्षा जास्त दिलेला असल्यास, त्यास निबंधकाची परवानगी घेतले किंवा कसे याबाबत शेरे नमूद करा -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion2">
+                                                                        <option value="">Select</option>
+
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion2']) && $clientInputs['legal_provisions_profit_opinion2'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion2']) && $clientInputs['legal_provisions_profit_opinion2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
 
@@ -305,12 +309,16 @@
                                     <option value="लागू आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion2']) && $clientInputs['legal_provisions_profit_opinion2'] == 'लागू आहे') ? 'selected' : '' }}>लागू आहे</option>
 
                                 </select>
+                                <br>
+                                <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="legal_provisions_profit_opinion2_text" value="{{ $clientInputs['legal_provisions_profit_opinion2_text'] ?? '' }}">
                             </span>
                         </li>
                         <li>
                             चुकीचा नफा दर्शवून अतिरिक्त लाभांश वाटप केलेबाबतचे अभिप्राय द्या. -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion3">
+                                                                        <option value="">Select</option>
+
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion3']) && $clientInputs['legal_provisions_profit_opinion3'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion3']) && $clientInputs['legal_provisions_profit_opinion3'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     <option value="लागू आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion3']) && $clientInputs['legal_provisions_profit_opinion3'] == 'लागू आहे') ? 'selected' : '' }}>लागू आहे</option>
@@ -318,30 +326,42 @@
 
 
                                 </select>
+                                <br>
+                                <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="legal_provisions_profit_opinion3_text" value="{{ $clientInputs['legal_provisions_profit_opinion3_text'] ?? '' }}">
                             </span>
                         </li>
                         <li>
                             संस्थेस तोटा झालेला आहे काय? असल्यास तोट्यांची कारणमिमांसा नमुद करा -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion4">
+                                                                        <option value="">Select</option>
+
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     <option value="लागू आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'लागू आहे') ? 'selected' : '' }}>लागू आहे</option>
                                     <option value="लागू नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'लागू नाही') ? 'selected' : '' }}>लागू नाही</option>
 
 
-                                </select></span>
+                                </select>
+                                <br>
+                                <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="legal_provisions_profit_opinion4_text" value="{{ $clientInputs['legal_provisions_profit_opinion4_text'] ?? '' }}">
+                            </span>
                         </li>
                         <li>
                             संस्थेने सभासदांना निबंधकाच्या परवानगीशिवाय भेट वस्तु दिल्यास त्याबाबत अभिप्राय नमूद करावेत -
                             <span> <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion5">
+                                                                    <option value="">Select</option>
+
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     <option value="लागू आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'लागू आहे') ? 'selected' : '' }}>लागू आहे</option>
                                     <option value="लागू नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'लागू नाही') ? 'selected' : '' }}>लागू नाही</option>
 
 
-                                </select></span>
+                                </select>
+                                <br>
+                                <input type="text" class="form-control d-inline-block" style="width:1000px;display:inline;" name="legal_provisions_profit_opinion5_text" value="{{ $clientInputs['legal_provisions_profit_opinion5_text'] ?? '' }}">
+                            </span>
                         </li>
                     </ol>
                 </div>
@@ -372,29 +392,49 @@
                                 <td>वसूल भागभांडवल</td>
                                 <td>वसूल भाग भांडवल ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 4</td>
-                                <td>{{ number_format(($client['वसुल भाग भागभांडवल_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2) }}</td>
-
+                                    <td>
+                                        {{ $client['खेळते भांडवल_sum'] != 0 
+                                            ? number_format(($client['निधी_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                            : '0.00' 
+                                        }}
+                                    </td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>निधी</td>
                                 <td>एकूण निधी ÷ खेळते भांडवल x 100</td>
                                 <td>4 ते 6</td>
-                                <td>{{number_format(($client['निधी_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
+
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>ठेवी</td>
                                 <td>एकूण ठेवी ÷ खेळते भांडवल x 100</td>
                                 <td>80 ते 85</td>
-                                <td>{{number_format(( $client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                               <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>इतर ठेवी</td>
                                 <td>इतर देणी ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 3</td>
-                                <td>{{number_format(( $client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                               <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
 
                             <tr>
@@ -402,7 +442,12 @@
                                 <td>निव्वळ नफा</td>
                                 <td>निव्वळ नफा ÷ खेळते भांडवल x 100</td>
                                 <td>1 ते 2</td>
-                                <td>{{number_format(( $totalProfit/ $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($totalProfit / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
                             
                             <tr>
@@ -410,42 +455,73 @@
                                 <td>रोख व बँकेतील शिल्लक</td>
                                 <td>रोख व बँकेतील शिल्लक ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 4</td>
-                                <td>{{number_format(( ($client['रोख शिल्लक_sum'] + $client['बँक शिल्लक_sum']) / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format((($client['रोख शिल्लक_sum'] + $client['बँक शिल्लक_sum']) / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>गुंतवणूक</td>
                                 <td>गुंतवणूक ÷ खेळते भांडवल x 100</td>
                                 <td>25</td>
-                                <td>{{number_format(( $client['गुंतवणूक_sum'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                {{ $client['खेळते भांडवल_sum'] != 0 
+                                    ? number_format(($client['गुंतवणूक_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    : '0.00' 
+                                }}
+                            </td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>कर्ज</td>
                                 <td>एकूण कर्ज ÷ खेळते भांडवल x 100</td>
                                 <td>60 ते 65</td>
-                                <td>{{number_format(( $client['येणे कर्ज_sum'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                               <td>
+                                {{ $client['खेळते भांडवल_sum'] != 0 
+                                    ? number_format(($client['येणे कर्ज_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    : '0.00' 
+                                }}
+                            </td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>इतर येणे</td>
                                 <td>इतर येणे ÷ खेळते भांडवल x 100</td>
                                 <td>6</td>
-                                <td>{{number_format(( $client['इतर येणे_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($client['इतर येणे_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>                            
+                            
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>एकूण उत्पन्न</td>
                                 <td>एकूण उत्पन्न ÷ खेळते भांडवल x 100</td>
                                 <td>10 ते 12</td>
-                                <td>{{number_format(( $totalProfit / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format(($totalProfit / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>11</td>
                                 <td>व्यवस्थापन खर्च</td>
                                 <td>व्यवस्थापन खर्च ÷ खेळते भांडवल x 100</td>
                                 <td>2</td>
-                                <td>{{number_format(( ($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'])  / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>
+                                    {{ $client['खेळते भांडवल_sum'] != 0 
+                                        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
                             </tr>
                             <tr class="fw-bold">
                                 <td colspan="5" style="text-align:left;">ब) एकूण उत्पन्नाशी प्रमाण</td>
@@ -503,14 +579,26 @@
                                 <td>निव्वळ नफयाचे सरासरी खेळत्या भागभांडवलाशी प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते x 100</td>
                                 <td></td>
-                                <td>{{number_format(( $totalProfit  / $client['खेळते भांडवल_sum']/12) * 100, 2)}}</td>
+                              <td>
+    {{ $client['खेळते भांडवल_sum'] != 0 
+        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
+        : '0.00' 
+    }}
+</td>
+
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>व्यवसायातील नफयाचे सरासरी खेळत्या भांगभांडवलाचे प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते भांडवल x 100</td>
                                 <td></td>
-                                <td>{{number_format(( $totalProfit  / $client['खेळते भांडवल_sum']/12) * 100, 2)}}</td>
+                              <td>
+    {{ $client['खेळते भांडवल_sum'] != 0 
+        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
+        : '0.00' 
+    }}
+</td>
+
                             </tr>
                             <!-- START: Additional Ratios as per pasted image -->
                             <tr>
@@ -518,14 +606,24 @@
                                 <td>नफााचे कर्ज + गुंतवणूकशी प्रमाण</td>
                                 <td></td>
                                 <td></td>
-                                <td>{{number_format(( $totalProfit   / $client['खेळते भांडवल_sum']/12) * 100, 2)}}</td>
+                               <td>
+    {{ $client['खेळते भांडवल_sum'] != 0 
+        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
+        : '0.00' 
+    }}
+</td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>व्यवस्थापन खर्चाचे खेळत्या भांडवलाशी प्रमाण</td>
                                 <td>व्यवस्थापन खर्च ÷ खेळते भांडवल x 100</td>
                                 <td></td>
-                                <td>{{number_format(( ($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'])  / $client['खेळते भांडवल_sum']/12) * 100, 2)}}</td>
+                                <td>
+    {{ $client['खेळते भांडवल_sum'] != 0 
+        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भांडवल_sum'] / 12) * 100, 2) 
+        : '0.00' 
+    }}
+</td>
                             </tr>
                             <tr>
                                 <td>7</td>
@@ -539,8 +637,12 @@
                                 <td>सरासारी ठेव वाढीचे प्रमाण</td>
                                 <td>गतवर्षातील ठेवी ÷ सरासरी ठेवी x 100</td>
                                 <td></td>
-                                <td>{{number_format(( $client['ठेवी_sum_lastYear'] / $client['खेळते भांडवल_sum']/12) * 100, 2)}}</td>
-                            </tr>
+<td>
+    {{ $client['खेळते भांडवल_sum'] != 0 
+        ? number_format((($client['ठेवी_sum_lastYear'] / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
+        : '0.00' 
+    }}
+</td>                            </tr>
                             <tr>
                                 <td>9</td>
                                 <td>स्वनिधीचे खेळत्या भांडवलाशी प्रमाण</td>
@@ -797,19 +899,19 @@
                                     <td>4</td>
                                     <td>तरतूद</td>
                                     <td></td>
-                                    <td>{{$client['तरतूद_sum_currentYear']}}</td>
+                                    <td>{{$client['तरतूद खर्च_sum_currentYear']}}</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>निव्वळ कर्ज (1-3-4)</td>
                                     <td></td>
-                                    <td>{{$totalIncomeCurrentYear - $client['घेणे व्यज_sum_currentYear'] - $client['तरतूद_sum_currentYear']}}</td>
+                                    <td>{{$totalIncomeCurrentYear - $client['घेणे व्यज_sum_currentYear'] - $client['तरतूद खर्च_sum_currentYear']}}</td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>निव्वळ एनपीए (2-3-4)</td>
                                     <td></td>
-                                    <td>{{$client['घेणे व्यज_sum_currentYear'] - $client['तरतूद_sum_currentYear']}}</td>
+                                    <td>{{$client['घेणे व्यज_sum_currentYear'] - $client['तरतूद खर्च_sum_currentYear']}}</td>
                                 </tr>
                                 <tr>
                                     <td>7</td>

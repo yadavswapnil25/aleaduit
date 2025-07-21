@@ -782,8 +782,10 @@
                                     <option value="होय" {{ (isset($clientInputs['investments_5']) && $clientInputs['investments_5'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['investments_5']) && $clientInputs['investments_5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                 </select>
+                                <br>
+                                <input type="text" class="form-control" name="investments_5_2" value="{{ $clientInputs['investments_5_2'] ?? '' }}">
+
                             </td>
-                            <input type="text" class="form-control" name="investments_5_2" value="{{ $clientInputs['investments_5_2'] ?? '' }}">
 
                         </tr>
                         <tr>

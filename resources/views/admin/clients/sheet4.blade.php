@@ -57,7 +57,7 @@ $auditPeriod = $client->year->audit_year;
                     <div class="fw-bold mb-2">2) हिशोब पध्दती व अंतर्गत नियंत्रण :-</div>
                     <div class="ps-3">
                         संस्थेच्या तपासणी कालावधीत संस्थेकडे नियमित कर्मचारी वर्ग नेमल्याचे दिसून येत
-                        आहे. संस्थेचा संपूर्ण हिशोब हे संस्थेचे सचिव {{$client->vice_chairman}} यांनी संस्थेचे दैनंदिन हिशोब
+                        आहे. संस्थेचा संपूर्ण हिशोब हे संस्थेचे सचिव <b>{{$client->vice_chairman}}</b> यांनी संस्थेचे दैनंदिन हिशोब
                         चांगल्या प्रकारे लिहिले आहेत. त्यांना दरमहा रु. <span><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="mandanadhan" value="{{ isset($clientInputs['mandanadhan']) ? $clientInputs['mandanadhan'] : '' }}"></span> मानधन देण्यात येत आहे. संस्थेला
                         संपूर्ण सभासंदानी केलेल्या सहकार्याने संस्था नियमीत प्रगतीपथाकडे वाटचाल करीत आहे. हे
                         संस्थेच्या आर्थिक परिस्थितीवरून दिसून येते याकडे संचालक मंडळाने विशेष लक्ष देणे गरजेचे

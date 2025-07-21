@@ -746,7 +746,7 @@
                                         <option value="">Select</option>
                                         <option value="होय" {{ (isset($clientInputs['share_transfers_legal']) && $clientInputs['share_transfers_legal'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['share_transfers_legal']) && $clientInputs['share_transfers_legal'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                        <option value="अभी बाब नहीं" {{ (isset($clientInputs['share_transfers_legal']) && $clientInputs['share_transfers_legal'] == 'अभी बाब नहीं') ? 'selected' : '' }}>अभी बाब नहीं</option>
+                                        <option value="अशी बाब नहीं" {{ (isset($clientInputs['share_transfers_legal']) && $clientInputs['share_transfers_legal'] == 'अशी बाब नहीं') ? 'selected' : '' }}>अशी बाब नहीं</option>
 
                                     </select>
                                     <br>
@@ -1292,7 +1292,10 @@
                                         <option value="होय" {{ (isset($clientInputs['property_deeds_in_name_of_society']) && $clientInputs['property_deeds_in_name_of_society'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['property_deeds_in_name_of_society']) && $clientInputs['property_deeds_in_name_of_society'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
+                                                        <br>
+                                <input type="text" class="form-control" name="property_deeds_in_name_of_society_details" value="{{ $clientInputs['property_deeds_in_name_of_society_details'] ?? '' }}">
                                 </td>
+            
 
                             </tr>
                             <tr>

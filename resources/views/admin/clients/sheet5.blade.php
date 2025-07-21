@@ -156,9 +156,18 @@
                     </div>
                     <!-- END: Design as per pasted image -->
                     <div class="mb-2">
-                        <span>वरील सर्व निधींची कलम 70 व नियम 54,55 प्रमाणे संस्थेने स्वतंत्रपणे गुंतवणूक केली आहे. निधी विनियोगांची
+                        <span>वरील सर्व निधींची कलम 70 व नियम 54,55 प्रमाणे संस्थेने स्वतंत्रपणे गुंतवणूक केली
+                        </span>
+                          <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared1">
+                                <option value="">Select</option>
+                                <option value="आहे" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                                <option value="नाही" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            </select>
+                            <span>
+                        निधी विनियोगांची
                             नियमावली तयार करण्यात आली
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared">
+                                                                <option value="">Select</option>
                                 <option value="आहे" {{ (isset($clientInputs['fund_investment_policy_prepared']) && $clientInputs['fund_investment_policy_prepared'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['fund_investment_policy_prepared']) && $clientInputs['fund_investment_policy_prepared'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -292,7 +301,7 @@
 
                                 $totalDiff_तरतूद = 0;
                                 @endphp
-                                @foreach($client['तरतुदी'] as $c)
+                                @foreach($client['तरतूद'] as $c)
                                 @php
                                 $totalCurrentYear_तरतूद += $c->currentYear;
                                 $totalLastYear_तरतूद += $c->lastYear;
@@ -486,8 +495,16 @@
                     </table>
                 </div>
                 <div class="mb-2">
-                    पुरविण्यात आलेले बँक स्टेटमेंट चे ताळेबंदाशी मेळ जुळते -
-                </div>
+                    पुरविण्यात आलेले बँक स्टेटमेंट चे ताळेबंदाशी
+                    <select class="form-control" name="bank_balance_correct_option1">
+                        <option value="">Select</option>
+                        <option value="होय" {{ (isset($clientInputs['bank_balance_correct_option1']) && $clientInputs['bank_balance_correct_option1'] == 'होय') ? 'selected' : '' }}>होय</option>
+                        <option value="नाही" {{ (isset($clientInputs['bank_balance_correct_option1']) && $clientInputs['bank_balance_correct_option1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                        <option value="मेळ जुळते" {{ (isset($clientInputs['bank_balance_correct_option1']) && $clientInputs['bank_balance_correct_option1'] == 'मेळ जुळते') ? 'selected' : '' }}>मेळ जुळते</option>
+                        <option value="मेळ जुळते नाही" {{ (isset($clientInputs['bank_balance_correct_option1']) && $clientInputs['bank_balance_correct_option1'] == 'मेळ जुळते नाही') ? 'selected' : '' }}>मेळ जुळते नाही</option>
+
+                    </select>
+                    </div>
 
                 <!-- 8. संचीत नफा -->
                 <div class="mb-2">
@@ -1000,7 +1017,7 @@
                 </div>
                 <div class="mb-2">
                     <span class="fw-bold">8. इतर येणे :-</span>
-                    <span style="font-weight:bold;">रु. {{ $client['इतर देणी_sum_currentYear'] ?? 0 }}</span>
+                    <span style="font-weight:bold;">रु. {{ $client['इतर येणे_sum_currentYear'] ?? 0 }}</span>
                 </div>
                 <div class="mb-2">
                     दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कमा येणे आहेत.
