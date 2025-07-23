@@ -128,9 +128,6 @@
                                 <td>{{$totalExpCurrentYear = $client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'] }}</td>
                                 <td>{{$totalExpDiff = $totalExpLastYear - $totalExpCurrentYear}}</td>
                             </tr>
-                            @php
-                            $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear
-                            @endphp
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">निव्वळ नफा</td>
                                 <td>{{$client['नफा_तोटा_sum_lastYear']}}</td>
@@ -407,7 +404,7 @@
                                 <td>4 ते 6</td>
                                 <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
-                                        ? number_format(($client['निधी_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
+                                        ? number_format((($client['राखीव निधी_sum_currentYear'] + $client['इतर सर्व निधी_sum_currentYear']) / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -507,7 +504,7 @@
                                 <td>10 ते 12</td>
                                 <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
-                                        ? number_format(($totalProfit / $client['खेळते भागभांडवल_sum']) * 100, 2) 
+                                        ? number_format(($client['एकूण उत्पन्न_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -532,7 +529,7 @@
                                 <td>निव्वळ नफ्याचे</td>
                                 <td>निव्वळ नफा ÷ एकूण उत्पन्न x 100</td>
                                 <td>10</td>
-                                <td> {{ $totalIncomeCurrentYear != 0 ? number_format((($totalProfit ?? 0) / $totalIncomeCurrentYear) * 100, 2) : '0.00' }}
+                                <td> {{ $client['एकूण उत्पन्न_sum_currentYear'] != 0 ? number_format((($totalProfit ?? 0) / $client['एकूण उत्पन्न_sum_currentYear']) * 100, 2) : '0.00' }}
                                 </td>
                             </tr>
                             <tr>
@@ -541,7 +538,7 @@
                                 <td>व्यवस्थापन खर्च ÷ एकूण उत्पन्न x 100</td>
                                 <td>30 ते 35</td>
                                 <td>
-                                    {{number_format(( $totalProfit / $totalIncomeCurrentYear) * 100, 2)}}
+                                    {{number_format(( $client['व्यवस्थापन खर्च_sum_currentYear'] / $totalIncomeCurrentYear) * 100, 2)}}
                                 </td>
                             </tr>
                             <tr>
@@ -556,7 +553,7 @@
                                 <td>दिलेल्या व्याजाचे</td>
                                 <td>दिलेल्या व्याज ÷ एकूण उत्पन्न x 100</td>
                                 <td>50 ते 55</td>
-                                <td>{{number_format(( $client['आस्थापना खर्च_sum_currentYear']  / $totalIncomeCurrentYear) * 100, 2)}}</td>
+                                <td>{{number_format(( $client['ठेवीवरील व्याज_sum_currentYear']  / $totalIncomeCurrentYear) * 100, 2)}}</td>
                             </tr>
                             <tr class="fw-bold">
                                 <td colspan="5" style="text-align:left;">क) अन्य प्रमाणके</td>
@@ -581,8 +578,12 @@
                                 <td>निव्वळ नफा ÷ सरासरी खेळते x 100</td>
                                 <td></td>
                               <td>
+                                <?php
+                                $client['सरासरी खेळते_sum'] = $client['खेळते भागभांडवल_sum']/12;
+                                // Calculate the average working capital
+                                ?>
                                 {{ $client['खेळते भागभांडवल_sum'] != 0 
-                                    ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                    ? number_format((($totalProfit / $client['सरासरी खेळते_sum'])) * 100, 2) 
                                     : '0.00' 
                                 }}
                                 </td>
@@ -595,7 +596,7 @@
                                 <td></td>
                               <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
-                                        ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                        ? number_format((($totalProfit / $client['सरासरी खेळते_sum'])) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -605,11 +606,11 @@
                             <tr>
                                 <td>5</td>
                                 <td>नफााचे कर्ज + गुंतवणूकशी प्रमाण</td>
-                                <td></td>
+                                <td> खर्च ÷ गुंतवणूक x 100</td>
                                 <td></td>
                                <td>
     {{ $client['खेळते भागभांडवल_sum'] != 0 
-        ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+        ? number_format((($totalProfit / $client['गुंतवणूकशी प्रमाण'])) * 100, 2) 
         : '0.00' 
     }}
 </td>
@@ -621,7 +622,7 @@
                                 <td></td>
                                 <td>
     {{ $client['खेळते भागभांडवल_sum'] != 0 
-        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भागभांडवल_sum'] / 12) * 100, 2) 
+        ? number_format((($client['व्यवस्थापन खर्च_sum_currentYear']) / $client['खेळते भागभांडवल_sum'] / 12) * 100, 2) 
         : '0.00' 
     }}
 </td>
@@ -640,7 +641,7 @@
                                 <td></td>
                                 <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
-                                        ? number_format((($client['ठेवी_sum_lastYear'] / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                        ? number_format((($client['गतवर्षातील ठेवी'] / $client['ठेवी_sum_lastYear'])) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>                            
@@ -650,22 +651,22 @@
                                 <td>स्वनिधीचे खेळत्या भांडवलाशी प्रमाण</td>
                                 <td>स्वनिधी ÷ खेळते भांडवल x 100</td>
                                 <td></td>
-                                @php
-                                $sum_last =
-                                ($client['वसुल भाग भागभांडवल_sum_lastYear'] ?? 0) +
-                                ($client['राखीव निधी_sum_lastYear'] ?? 0) +
-                                ($client['इमारत निधी_sum_lastYear'] ?? 0) +
-                                ($client['गुंतवणूक चढ उतार निधी_sum_lastYear'] ?? 0) +
-                                ($client['लाभांश समीकरण_sum_lastYear'] ?? 0) +
-                                ($client['नफा_तोटा_sum_lastYear'] ?? 0);
+                                 @php
+                                        $sum_current =
+                                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
 
-                                $minus_last =
-                                ($client['संचित तोटा_sum_lastYear'] ?? 0) +
-                                (is_numeric($clientInputs['networth_tax_last'] ?? null) ? $clientInputs['networth_tax_last'] : 0);
+                                        $minus_current =
+                                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
 
-                                $total_networth_last = $sum_last - $minus_last;
-                                @endphp
-                                <td>{{number_format(( $total_networth_last ?? 0 / $client['खेळते भागभांडवल_sum']) * 100, 2)}}</td>
+                                        $total_networth_current = $sum_current - $minus_current;
+                                        @endphp
+                                <td>{{number_format(( $total_networth_current / $client['खेळते भागभांडवल_sum']) * 100, 2)}}</td>
                             </tr>
                             <tr>
                                 <td>10</td>
@@ -686,7 +687,7 @@
                                 <td>सी डी रेशो</td>
                                 <td>एकूण कर्ज - उपलब्ध निधी ÷ ठेवी x 100</td>
                                 <td>65 ते 70</td>
-                                <td>{{number_format(( $client['येणे कर्ज_sum'] - $client['निधी_sum_currentYear'] / $client['ठेवी_sum']) * 100, 2)}}</td>
+                                <td>{{number_format(( ($client['येणे कर्ज_sum'] - $client['निधी_sum_currentYear']) / $client['ठेवी_sum']) * 100, 2)}}</td>
                             </tr>
                             <tr>
                                 <td>13</td>
