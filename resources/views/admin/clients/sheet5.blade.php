@@ -277,7 +277,7 @@
                     <div class="mb-2">
                         <span class="fw-bold">4. देय व्याज व इतर तरतुदी :-</span>
                         <span style="font-weight:bold;">
-                            रु. {{$client['तरतूद_sum_currentYear'] ?? 0}}</span>
+                            रु. {{$client['तरतुदी_sum_currentYear'] ?? 0}}</span>
                         </span>
                     </div>
                     <div>
@@ -296,16 +296,16 @@
 
                                 @php $i = 1; @endphp
                                 @php
-                                $totalCurrentYear_तरतूद = 0;
-                                $totalLastYear_तरतूद = 0;
+                                $totalCurrentYear_तरतुदी = 0;
+                                $totalLastYear_तरतुदी = 0;
 
-                                $totalDiff_तरतूद = 0;
+                                $totalDiff_तरतुदी = 0;
                                 @endphp
-                                @foreach($client['तरतूद'] as $c)
+                                @foreach($client['तरतुदी'] as $c)
                                 @php
-                                $totalCurrentYear_तरतूद += $c->currentYear;
-                                $totalLastYear_तरतूद += $c->lastYear;
-                                $totalDiff_तरतूद += ($c->currentYear - $c->lastYear);
+                                $totalCurrentYear_तरतुदी += $c->currentYear;
+                                $totalLastYear_तरतुदी += $c->lastYear;
+                                $totalDiff_तरतुदी += ($c->currentYear - $c->lastYear);
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -319,9 +319,9 @@
                                 <tr>
                                     <td class="fw-bold">एकूण</td>
                                     <td></td>
-                                    <td>{{ number_format($totalLastYear_तरतूद, 2) }}</td>
-                                    <td>{{ number_format($totalCurrentYear_तरतूद, 2) }}</td>
-                                    <td>{{ number_format($totalDiff_तरतूद, 2) }}</td>
+                                    <td>{{ number_format($totalLastYear_तरतुदी, 2) }}</td>
+                                    <td>{{ number_format($totalCurrentYear_तरतुदी, 2) }}</td>
+                                    <td>{{ number_format($totalDiff_तरतुदी, 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>

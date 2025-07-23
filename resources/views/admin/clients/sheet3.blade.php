@@ -189,7 +189,7 @@
                             <tr>
                             @php
                             $totalIncomeCurrentYear = $client['कर्जावरील व्याज_sum_currentYear'] + $client['गुंतवणुकीवरील व्याज_sum_currentYear'] + $client['इतर उत्त्पन्न_sum_currentYear'] ;
-                            $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतूद_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
+                            $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतुदी_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
                             $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear;
                             $totalLoss = $totalExpCurrentYear - $totalIncomeCurrentYear;
                             $client['स्वनिधी'] = $client['स्वनिधी'] + $totalProfit;
