@@ -727,7 +727,16 @@ class ClientController extends Controller
              $client['घेणे व्यज'] = $client->masterData->where('menu', 'घेणे व्यज');
             $client['घेणे व्यज_sum_currentYear'] = $client['घेणे व्यज']->sum('currentYear');
             $client['शाखा ठेवी देणे'] = $client->masterData->where('menu', 'शाखा ठेवी देणे');
+            $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
+            $client['वसुल भाग भागभांडवल_sum_lastYear'] = $client['वसुल भाग भागभांडवल']->sum('lastYear');
+            $client['वसुल भाग भागभांडवल'] = $client->masterData->where('menu', 'वसूल भागभांडवल');
+            $client['वसुल भाग भागभांडवल_sum_currentYear'] = $client['वसुल भाग भागभांडवल']->sum('currentYear');
 
+            $incomeTotalMenus = ['रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता', 'येणे कर्ज', 'इतर येणे', 'घेणे व्यज', 'संचित तोटा'];
+            $client['खेळते भागभांडवल_sum'] = $client->masterData->whereIn('menu', $incomeTotalMenus)->sum('currentYear');
+            $client['इतर देणी'] = $client->masterData->where('menu', 'इतर देणी');
+            $client['इतर देणी_sum_currentYear'] = $client['इतर देणी']->sum('currentYear');
+            // dd($client['वसुल भाग भागभांडवल_sum_currentYear']/$client['खेळते भागभांडवल_sum']);
             return view('admin.clients.sheet6', compact('client'));
         } else if ($sheet_no == 7) {
             $client = Client::with('masterData')->find($client_id);

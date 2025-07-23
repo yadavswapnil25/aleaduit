@@ -387,14 +387,15 @@
                             <tr>
                                 <td class="fw-bold" colspan="5" style="text-align:left;">अ) खेळत्या भागभांडवलाशी प्रमाण</td>
                             </tr>
+                          
                             <tr>
                                 <td>1</td>
                                 <td>वसूल भागभांडवल</td>
                                 <td>वसूल भाग भांडवल ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 4</td>
                                     <td>
-                                        {{ $client['खेळते भांडवल_sum'] != 0 
-                                            ? number_format(($client['निधी_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                        {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                            ? number_format(($client['वसुल भाग भागभांडवल_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                             : '0.00' 
                                         }}
                                     </td>
@@ -405,8 +406,8 @@
                                 <td>एकूण निधी ÷ खेळते भांडवल x 100</td>
                                 <td>4 ते 6</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($client['निधी_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -418,20 +419,20 @@
                                 <td>एकूण ठेवी ÷ खेळते भांडवल x 100</td>
                                 <td>80 ते 85</td>
                                <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>इतर ठेवी</td>
+                                <td>इतर देणी</td>
                                 <td>इतर देणी ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 3</td>
                                <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($client['ठेवी_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($client['इतर देणी_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -443,8 +444,8 @@
                                 <td>निव्वळ नफा ÷ खेळते भांडवल x 100</td>
                                 <td>1 ते 2</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($totalProfit / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($totalProfit / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -456,8 +457,8 @@
                                 <td>रोख व बँकेतील शिल्लक ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 4</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format((($client['रोख शिल्लक_sum'] + $client['बँक शिल्लक_sum']) / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format((($client['रोख शिल्लक_sum'] + $client['बँक शिल्लक_sum']) / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -468,8 +469,8 @@
                                 <td>गुंतवणूक ÷ खेळते भांडवल x 100</td>
                                 <td>25</td>
                                 <td>
-                                {{ $client['खेळते भांडवल_sum'] != 0 
-                                    ? number_format(($client['गुंतवणूक_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                    ? number_format(($client['गुंतवणूक_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                     : '0.00' 
                                 }}
                             </td>
@@ -480,8 +481,8 @@
                                 <td>एकूण कर्ज ÷ खेळते भांडवल x 100</td>
                                 <td>60 ते 65</td>
                                <td>
-                                {{ $client['खेळते भांडवल_sum'] != 0 
-                                    ? number_format(($client['येणे कर्ज_sum'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                    ? number_format(($client['येणे कर्ज_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                     : '0.00' 
                                 }}
                             </td>
@@ -492,8 +493,8 @@
                                 <td>इतर येणे ÷ खेळते भांडवल x 100</td>
                                 <td>6</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($client['इतर येणे_sum_currentYear'] / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($client['इतर येणे_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>                            
@@ -505,8 +506,8 @@
                                 <td>एकूण उत्पन्न ÷ खेळते भांडवल x 100</td>
                                 <td>10 ते 12</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format(($totalProfit / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format(($totalProfit / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -517,8 +518,8 @@
                                 <td>व्यवस्थापन खर्च ÷ खेळते भांडवल x 100</td>
                                 <td>2</td>
                                 <td>
-                                    {{ $client['खेळते भांडवल_sum'] != 0 
-                                        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भांडवल_sum']) * 100, 2) 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
                                 </td>
@@ -580,11 +581,11 @@
                                 <td>निव्वळ नफा ÷ सरासरी खेळते x 100</td>
                                 <td></td>
                               <td>
-    {{ $client['खेळते भांडवल_sum'] != 0 
-        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
-        : '0.00' 
-    }}
-</td>
+                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                    ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                    : '0.00' 
+                                }}
+                                </td>
 
                             </tr>
                             <tr>
@@ -593,11 +594,11 @@
                                 <td>निव्वळ नफा ÷ सरासरी खेळते भांडवल x 100</td>
                                 <td></td>
                               <td>
-    {{ $client['खेळते भांडवल_sum'] != 0 
-        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
-        : '0.00' 
-    }}
-</td>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>
 
                             </tr>
                             <!-- START: Additional Ratios as per pasted image -->
@@ -607,8 +608,8 @@
                                 <td></td>
                                 <td></td>
                                <td>
-    {{ $client['खेळते भांडवल_sum'] != 0 
-        ? number_format((($totalProfit / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
+    {{ $client['खेळते भागभांडवल_sum'] != 0 
+        ? number_format((($totalProfit / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
         : '0.00' 
     }}
 </td>
@@ -619,8 +620,8 @@
                                 <td>व्यवस्थापन खर्च ÷ खेळते भांडवल x 100</td>
                                 <td></td>
                                 <td>
-    {{ $client['खेळते भांडवल_sum'] != 0 
-        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भांडवल_sum'] / 12) * 100, 2) 
+    {{ $client['खेळते भागभांडवल_sum'] != 0 
+        ? number_format((($client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['इतर खर्च_sum_currentYear']) / $client['खेळते भागभांडवल_sum'] / 12) * 100, 2) 
         : '0.00' 
     }}
 </td>
@@ -637,12 +638,13 @@
                                 <td>सरासारी ठेव वाढीचे प्रमाण</td>
                                 <td>गतवर्षातील ठेवी ÷ सरासरी ठेवी x 100</td>
                                 <td></td>
-<td>
-    {{ $client['खेळते भांडवल_sum'] != 0 
-        ? number_format((($client['ठेवी_sum_lastYear'] / $client['खेळते भांडवल_sum']) / 12) * 100, 2) 
-        : '0.00' 
-    }}
-</td>                            </tr>
+                                <td>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                        ? number_format((($client['ठेवी_sum_lastYear'] / $client['खेळते भागभांडवल_sum']) / 12) * 100, 2) 
+                                        : '0.00' 
+                                    }}
+                                </td>                            
+                            </tr>
                             <tr>
                                 <td>9</td>
                                 <td>स्वनिधीचे खेळत्या भांडवलाशी प्रमाण</td>
@@ -663,7 +665,7 @@
 
                                 $total_networth_last = $sum_last - $minus_last;
                                 @endphp
-                                <td>{{number_format(( $total_networth_last ?? 0 / $client['खेळते भांडवल_sum']) * 100, 2)}}</td>
+                                <td>{{number_format(( $total_networth_last ?? 0 / $client['खेळते भागभांडवल_sum']) * 100, 2)}}</td>
                             </tr>
                             <tr>
                                 <td>10</td>
@@ -708,45 +710,183 @@
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                                <th>अ. क्र</th>
-                                <th>कर्ज प्रकार</th>
-                                <th>गतवर्षी अखेर रु.</th>
-                                <th>चालू वर्ष अखेर रु.</th>
-                                <th>वाढ/घट</th>
+                            <th>अ.क्र.</th>
+                            <th>विवरण</th>
+                            <th>राशी</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php $i = 1; @endphp
-                            @php
-                            $totalCurrentYear = 0;
-                            $totalLastYear = 0;
-                            $totalDiff = 0;
-                            @endphp
-                            @foreach($client['शाखा ठेवी देणे'] as $c)
-                            @php
-                            $totalCurrentYear += $c->currentYear;
-                            $totalLastYear += $c->lastYear;
-                            $totalDiff += ($c->currentYear - $c->lastYear);
-                            @endphp
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c->entity }}</td>
-                                <td>{{ number_format($c->lastYear, 2) }}</td>
-                                <td>{{ number_format($c->currentYear, 2) }}</td>
-                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
+                            <td>1</td>
+                            <td>स्वनिधी ₹</td>
+                            <td>10638256.99</td>
                             </tr>
-                            @endforeach
                             <tr>
-                                <td class="fw-bold">एकूण</td>
-                                <td></td>
-                                <td>{{ number_format($totalLastYear, 2) }}</td>
-                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                <td>{{ number_format($totalDiff, 2) }}</td>
-
+                            <td>2</td>
+                            <td>वजा राखीव निधी</td>
+                            <td>1711061.00</td>
+                            </tr>
+                            <tr>
+                            <td>3</td>
+                            <td>मालमता</td>
+                            <td>8276754.00</td>
+                            </tr>
+                            <tr>
+                            <td>4</td>
+                            <td>इतर भाग</td>
+                            <td>27000</td>
+                            </tr>
+                            <tr>
+                            <td>5</td>
+                            <td>उपलब्ध निधी</td>
+                            <td>6048516.44</td>
+                            </tr>
+                            <tr>
+                            <td>6</td>
+                            <td>एकूण कर्ज - उपलब्ध निधी ÷ ठेव ४००</td>
+                            <td>
+                                90779408.00 - 3200896.01 ÷ 100219811.00 x100
+                            </td>
                             </tr>
                         </tbody>
+                        </table>
+
+                  <div class="mb-2">
+                        <span style="font-weight:bold;">2. कालनिहाय थकबाकी पुढीलप्रमाणे : </span>
+                    </div>
+                    <table class="table table-bordered table-striped text-center">
+                    <thead>
+                        <tr>
+                        <th>अ.क्र.</th>
+                        <th>कालावधीत थकबाकी</th>
+                        <th>थकबाकीदार संख्या</th>
+                        <th>रक्कम</th>
+                        <th>एकूण येणे कर्जाची प्रमाण</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>1</td>
+                        <td>एक वर्षाच्या आतली</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td>2</td>
+                        <td>एक ते तीन वर्षांच्या आतली</td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa1" value="{{ $clientInputs['npa_summary_overdue_npa1'] ?? '' }}"></td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa1_amount" value="{{ $clientInputs['npa_summary_overdue_npa1_amount'] ?? '' }}"></td>
+                        <td>21.21</td>
+                        </tr>
+                        <tr>
+                        <td>3</td>
+                        <td>तीन ते पाच वर्षांच्या आतली</td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa2" value="{{ $clientInputs['npa_summary_overdue_npa2'] ?? '' }}"></td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa2_amount" value="{{ $clientInputs['npa_summary_overdue_npa2_amount'] ?? '' }}"></td>
+                        <td>14.99</td>
+                        </tr>
+                        <tr>
+                        <td>4</td>
+                        <td>पाच वर्षांच्या वरील</td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa3" value="{{ $clientInputs['npa_summary_overdue_npa3'] ?? '' }}"></td>
+                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa3_amount" value="{{ $clientInputs['npa_summary_overdue_npa3_amount'] ?? '' }}"></td>
+                        <td>25.25</td>
+                        </tr>
+                    </tbody>
                     </table>
-                </div>
+
+                    <!-- Summary Row -->
+                    <table class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                        <th>एकूण</th>
+                        <td>181</td>
+                        <td>55782120</td>
+                        <td>61.45</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <div class="mb-2">
+                        <span style="font-weight:bold;">3.थकबाकीदारांवर पुढील प्रमाणे कायदेशीर कारवाई करण्यात आली आहे . </span>
+                    </div>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                            <tr>
+                            <th>अ.क्र.</th>
+                            <th>तपशील</th>
+                            <th>थकबाकीदार संख्या</th>
+                            <th>रक्कम</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>1</td>
+                            <td>थकबाकी वसूलिच्या नोटीस</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>2</td>
+                            <td>कलम 101 अंतर्गत दाखल केलेले दावे</td>
+                            <td><input type="text" class="form-control" name="npa_summary_overdue_npa4" value="{{ $clientInputs['npa_summary_overdue_npa4'] ?? '' }}"></td>
+                            <td><input type="text" class="form-control" name="npa_summary_overdue_npa4_amount" value="{{ $clientInputs['npa_summary_overdue_npa4_amount'] ?? '' }}"></td>
+                            </tr>
+                            <tr>
+                            <td>3</td>
+                            <td>कलम 101 अंतर्गत प्राप्त वसुली दावे</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>4</td>
+                            <td>कलम 156 अंतर्गत पाठविलेल्या जप्ती नोटीस</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>5</td>
+                            <td>जप्ती केलेली प्रकरणे</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>6</td>
+                            <td>लिलावात काढलेली प्रकरणे</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>7</td>
+                            <td>कलम 100 व नियम 85 अंतर्गत संस्थेच्या नावे हस्तांतरीत केलेली मालमता प्रकरणे</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td>8</td>
+                            <td>निगोशिएबल इन्स्ट्रुमेंट ॲक्ट अंतर्गत कलम 138 अंतर्गत दाखल केलेले दावे</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <span> लेखापरीक्षण कालावधीत नव्याने दावे दाखल केलेले 
+                            <select name="npa_summary_overdue_npa5"
+                                class="form-control d-inline-block" style="width:80px;display:inline;">
+                                <option value="">Select</option>
+                                <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                            </select>
+                            . एकूण थकबाकीदारांची संख्या पहाता वसूलीसाठी कायदेशीर कारवाई केल्याचे प्रमाण कमी आहे. सर्व थकबाकीदारांवर संचालक मंडळाने योग्य त्या कायदयांतर्गत वसूली बाबतची कारवाई करुन पाठपुरावा करावा. थकबाकी वसूलीची संपूर्ण जबाबदारी वैयक्तिक व सामुहिकरित्या संचालक मंडळ व व्यवस्थापकावर आहे याची नोंद घ्यावी. कारवाई केलेल्या थकबाकिदारांची यादी अहवालासोबत जोडली
+                            <select name="npa_summary_overdue_npa6"
+                                class="form-control d-inline-block" style="width:80px;display:inline;">
+                                <option value="">Select</option>
+                                <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+
+                            </select>
+                        </span>
+                    </div>
                 <!-- END: आर्थिक प्रमाणके Design -->
 
                 <!-- START: NPA सारांश व प्रमाणे Design as per pasted image -->
