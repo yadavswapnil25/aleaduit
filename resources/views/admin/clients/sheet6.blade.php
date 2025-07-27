@@ -168,7 +168,7 @@
                                             <td>{{ ($totalIncomeCurrentYear - $totalExpCurrentYear) - ($totalIncomeLastYear - $totalExpLastYear)}}</td>
                                             @else
                                             <td>0</td>
-                                        @endif
+                                            @endif
                             </tr>
                         </tbody>
                     </table>
@@ -297,7 +297,7 @@
                             संस्थेने लाभांश जर निव्वळ नफ्याच्या १५% पेक्षा जास्त दिलेला असल्यास, त्यास निबंधकाची परवानगी घेतले किंवा कसे याबाबत शेरे नमूद करा -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion2">
-                                                                        <option value="">Select</option>
+                                    <option value="">Select</option>
 
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion2']) && $clientInputs['legal_provisions_profit_opinion2'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion2']) && $clientInputs['legal_provisions_profit_opinion2'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -314,7 +314,7 @@
                             चुकीचा नफा दर्शवून अतिरिक्त लाभांश वाटप केलेबाबतचे अभिप्राय द्या. -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion3">
-                                                                        <option value="">Select</option>
+                                    <option value="">Select</option>
 
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion3']) && $clientInputs['legal_provisions_profit_opinion3'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion3']) && $clientInputs['legal_provisions_profit_opinion3'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -331,7 +331,7 @@
                             संस्थेस तोटा झालेला आहे काय? असल्यास तोट्यांची कारणमिमांसा नमुद करा -
                             <span>
                                 <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion4">
-                                                                        <option value="">Select</option>
+                                    <option value="">Select</option>
 
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion4']) && $clientInputs['legal_provisions_profit_opinion4'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -347,7 +347,7 @@
                         <li>
                             संस्थेने सभासदांना निबंधकाच्या परवानगीशिवाय भेट वस्तु दिल्यास त्याबाबत अभिप्राय नमूद करावेत -
                             <span> <select class="form-control d-inline-block" style="width:100px;display:inline;" name="legal_provisions_profit_opinion5">
-                                                                    <option value="">Select</option>
+                                    <option value="">Select</option>
 
                                     <option value="आहे" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                     <option value="नाही" {{ (isset($clientInputs['legal_provisions_profit_opinion5']) && $clientInputs['legal_provisions_profit_opinion5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
@@ -384,18 +384,18 @@
                             <tr>
                                 <td class="fw-bold" colspan="5" style="text-align:left;">अ) खेळत्या भागभांडवलाशी प्रमाण</td>
                             </tr>
-                          
+
                             <tr>
                                 <td>1</td>
                                 <td>वसूल भागभांडवल</td>
                                 <td>वसूल भाग भांडवल ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 4</td>
-                                    <td>
-                                        {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                <td>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
                                             ? number_format(($client['वसुल भाग भागभांडवल_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                             : '0.00' 
                                         }}
-                                    </td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -415,7 +415,7 @@
                                 <td>ठेवी</td>
                                 <td>एकूण ठेवी ÷ खेळते भांडवल x 100</td>
                                 <td>80 ते 85</td>
-                               <td>
+                                <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
                                         ? number_format(($client['ठेवी_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
@@ -427,7 +427,7 @@
                                 <td>इतर देणी</td>
                                 <td>इतर देणी ÷ खेळते भांडवल x 100</td>
                                 <td>2 ते 3</td>
-                               <td>
+                                <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
                                         ? number_format(($client['इतर देणी_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
@@ -447,7 +447,7 @@
                                     }}
                                 </td>
                             </tr>
-                            
+
                             <tr>
                                 <td>6</td>
                                 <td>रोख व बँकेतील शिल्लक</td>
@@ -466,23 +466,23 @@
                                 <td>गुंतवणूक ÷ खेळते भांडवल x 100</td>
                                 <td>25</td>
                                 <td>
-                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
                                     ? number_format(($client['गुंतवणूक_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                     : '0.00' 
                                 }}
-                            </td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>कर्ज</td>
                                 <td>एकूण कर्ज ÷ खेळते भांडवल x 100</td>
                                 <td>60 ते 65</td>
-                               <td>
-                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                <td>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
                                     ? number_format(($client['येणे कर्ज_sum'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                     : '0.00' 
                                 }}
-                            </td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>9</td>
@@ -494,8 +494,8 @@
                                         ? number_format(($client['इतर येणे_sum_currentYear'] / $client['खेळते भागभांडवल_sum']) * 100, 2) 
                                         : '0.00' 
                                     }}
-                                </td>                            
-                            
+                                </td>
+
                             </tr>
                             <tr>
                                 <td>10</td>
@@ -577,12 +577,12 @@
                                 <td>निव्वळ नफयाचे सरासरी खेळत्या भागभांडवलाशी प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते x 100</td>
                                 <td></td>
-                              <td>
-                                <?php
-                                $client['सरासरी खेळते_sum'] = $client['खेळते भागभांडवल_sum']/12;
-                                // Calculate the average working capital
-                                ?>
-                                {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                <td>
+                                    <?php
+                                    $client['सरासरी खेळते_sum'] = $client['खेळते भागभांडवल_sum'] / 12;
+                                    // Calculate the average working capital
+                                    ?>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
                                     ? number_format((($totalProfit / $client['सरासरी खेळते_sum'])) * 100, 2) 
                                     : '0.00' 
                                 }}
@@ -594,7 +594,7 @@
                                 <td>व्यवसायातील नफयाचे सरासरी खेळत्या भांगभांडवलाचे प्रमाण</td>
                                 <td>निव्वळ नफा ÷ सरासरी खेळते भांडवल x 100</td>
                                 <td></td>
-                              <td>
+                                <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
                                         ? number_format((($totalProfit / $client['सरासरी खेळते_sum'])) * 100, 2) 
                                         : '0.00' 
@@ -608,12 +608,12 @@
                                 <td>नफााचे कर्ज + गुंतवणूकशी प्रमाण</td>
                                 <td> खर्च ÷ गुंतवणूक x 100</td>
                                 <td></td>
-                               <td>
-    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                <td>
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
         ? number_format((($totalProfit / $client['गुंतवणूकशी प्रमाण'])) * 100, 2) 
         : '0.00' 
     }}
-</td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>6</td>
@@ -621,11 +621,11 @@
                                 <td>व्यवस्थापन खर्च ÷ खेळते भांडवल x 100</td>
                                 <td></td>
                                 <td>
-    {{ $client['खेळते भागभांडवल_sum'] != 0 
+                                    {{ $client['खेळते भागभांडवल_sum'] != 0 
         ? number_format((($client['व्यवस्थापन खर्च_sum_currentYear']) / $client['खेळते भागभांडवल_sum'] / 12) * 100, 2) 
         : '0.00' 
     }}
-</td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>7</td>
@@ -644,28 +644,28 @@
                                         ? number_format((($client['गतवर्षातील ठेवी'] / $client['ठेवी_sum_lastYear'])) * 100, 2) 
                                         : '0.00' 
                                     }}
-                                </td>                            
+                                </td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>स्वनिधीचे खेळत्या भांडवलाशी प्रमाण</td>
                                 <td>स्वनिधी ÷ खेळते भांडवल x 100</td>
                                 <td></td>
-                                 @php
-                                        $sum_current =
-                                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
-                                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
-                                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
-                                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
-                                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
-                                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
+                                @php
+                                $sum_current =
+                                ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                                ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                                ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                                ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                                ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                                ($client['नफा_तोटा_sum_currentYear'] ?? 0);
 
-                                        $minus_current =
-                                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
-                                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
+                                $minus_current =
+                                ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                                (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
 
-                                        $total_networth_current = $sum_current - $minus_current;
-                                        @endphp
+                                $total_networth_current = $sum_current - $minus_current;
+                                @endphp
                                 <td>{{number_format(( $total_networth_current / $client['खेळते भागभांडवल_sum']) * 100, 2)}}</td>
                             </tr>
                             <tr>
@@ -711,102 +711,117 @@
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
-                            <th>अ.क्र.</th>
-                            <th>विवरण</th>
-                            <th>राशी</th>
+                                <th>अ.क्र.</th>
+                                <th>विवरण</th>
+                                <th>राशी</th>
+                            </tr>
+                        </thead>
+                        @php
+                        $sum_current =
+                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
+                        $minus_current =
+                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
+
+                        $total_networth_current = $sum_current - $minus_current;
+                        @endphp
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>स्वनिधी ₹</td>
+                                <td>{{$total_networth_current}}</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>वजा राखीव निधी</td>
+                                <td> {{$client['राखीव निधी_sum_currentYear']}}</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>मालमता</td>
+                                <td>{{$client['कायम मालमत्ता_sum_currentYear']}}</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>इतर भाग</td>
+                                <td>{{$client['इतर भाग']}}</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>उपलब्ध निधी</td>
+                                <td>{{$client['उपलब्ध निधी']= ($total_networth_current - $client['राखीव निधी_sum_currentYear'] -$client['कायम मालमत्ता_sum_currentYear']- $client['इतर भाग'])}}</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>एकूण कर्ज - उपलब्ध निधी ÷ ठेव ४००</td>
+                                <td>
+                                    {{ number_format( ( ($client['येणे कर्ज_sum'] - $client['उपलब्ध निधी']) / $client['ठेवी_sum'] ) * 100, 2) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mb-2">
+                        <span style="font-weight:bold;">2. कालनिहाय थकबाकी पुढीलप्रमाणे : </span>
+                    </div>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>अ.क्र.</th>
+                                <th>कालावधीत थकबाकी</th>
+                                <th>थकबाकीदार संख्या</th>
+                                <th>रक्कम</th>
+                                <th>एकूण येणे कर्जाची प्रमाण</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                            <td>1</td>
-                            <td>स्वनिधी ₹</td>
-                            <td>10638256.99</td>
+                                <td>1</td>
+                                <td>एक वर्षाच्या आतली</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa0" value="{{ $clientInputs['npa_summary_overdue_npa0'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa0_amount" value="{{ $clientInputs['npa_summary_overdue_npa0_amount'] ?? '' }}"></td>
+                                <td>{{ number_format((($clientInputs['npa_summary_overdue_npa0_amount'] ?? 0) / $client['येणे कर्ज_sum']) * 100, 2) }}</td>
                             </tr>
                             <tr>
-                            <td>2</td>
-                            <td>वजा राखीव निधी</td>
-                            <td>1711061.00</td>
+                                <td>2</td>
+                                <td>एक ते तीन वर्षांच्या आतली</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa1" value="{{ @$clientInputs['npa_summary_overdue_npa1'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa1_amount" value="{{ @$clientInputs['npa_summary_overdue_npa1_amount'] ?? '' }}"></td>
+                                <td>{{ number_format((($clientInputs['npa_summary_overdue_npa1_amount'] ?? 0) / $client['येणे कर्ज_sum']) * 100, 2) }}</td>
                             </tr>
                             <tr>
-                            <td>3</td>
-                            <td>मालमता</td>
-                            <td>8276754.00</td>
+                                <td>3</td>
+                                <td>तीन ते पाच वर्षांच्या आतली</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa2" value="{{ $clientInputs['npa_summary_overdue_npa2'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa2_amount" value="{{ $clientInputs['npa_summary_overdue_npa2_amount'] ?? '' }}"></td>
+                                <td>{{ number_format((($clientInputs['npa_summary_overdue_npa2_amount'] ?? 0) / $client['येणे कर्ज_sum']) * 100, 2) }}</td>
                             </tr>
                             <tr>
-                            <td>4</td>
-                            <td>इतर भाग</td>
-                            <td>27000</td>
-                            </tr>
-                            <tr>
-                            <td>5</td>
-                            <td>उपलब्ध निधी</td>
-                            <td>6048516.44</td>
-                            </tr>
-                            <tr>
-                            <td>6</td>
-                            <td>एकूण कर्ज - उपलब्ध निधी ÷ ठेव ४००</td>
-                            <td>
-                                90779408.00 - 3200896.01 ÷ 100219811.00 x100
-                            </td>
+                                <td>4</td>
+                                <td>पाच वर्षांच्या वरील</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa3" value="{{ $clientInputs['npa_summary_overdue_npa3'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa3_amount" value="{{ $clientInputs['npa_summary_overdue_npa3_amount'] ?? '' }}"></td>
+                                <td>{{ number_format((($clientInputs['npa_summary_overdue_npa3_amount'] ?? 0) / $client['येणे कर्ज_sum']) * 100, 2) }}</td>
                             </tr>
                         </tbody>
-                        </table>
-
-                  <div class="mb-2">
-                        <span style="font-weight:bold;">2. कालनिहाय थकबाकी पुढीलप्रमाणे : </span>
-                    </div>
-                    <table class="table table-bordered table-striped text-center">
-                    <thead>
-                        <tr>
-                        <th>अ.क्र.</th>
-                        <th>कालावधीत थकबाकी</th>
-                        <th>थकबाकीदार संख्या</th>
-                        <th>रक्कम</th>
-                        <th>एकूण येणे कर्जाची प्रमाण</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>1</td>
-                        <td>एक वर्षाच्या आतली</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        <td>एक ते तीन वर्षांच्या आतली</td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa1" value="{{ $clientInputs['npa_summary_overdue_npa1'] ?? '' }}"></td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa1_amount" value="{{ $clientInputs['npa_summary_overdue_npa1_amount'] ?? '' }}"></td>
-                        <td>21.21</td>
-                        </tr>
-                        <tr>
-                        <td>3</td>
-                        <td>तीन ते पाच वर्षांच्या आतली</td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa2" value="{{ $clientInputs['npa_summary_overdue_npa2'] ?? '' }}"></td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa2_amount" value="{{ $clientInputs['npa_summary_overdue_npa2_amount'] ?? '' }}"></td>
-                        <td>14.99</td>
-                        </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>पाच वर्षांच्या वरील</td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa3" value="{{ $clientInputs['npa_summary_overdue_npa3'] ?? '' }}"></td>
-                        <td><input type="text" class="form-control" name="npa_summary_overdue_npa3_amount" value="{{ $clientInputs['npa_summary_overdue_npa3_amount'] ?? '' }}"></td>
-                        <td>25.25</td>
-                        </tr>
-                    </tbody>
                     </table>
 
                     <!-- Summary Row -->
                     <table class="table table-bordered text-center">
-                    <tbody>
-                        <tr>
-                        <th>एकूण</th>
-                        <td>181</td>
-                        <td>55782120</td>
-                        <td>61.45</td>
-                        </tr>
-                    </tbody>
+                        <tbody>
+                            <tr>
+                                <th>एकूण</th>
+                                <td>{{($clientInputs['npa_summary_overdue_npa0'] ?? 0 + @$clientInputs['npa_summary_overdue_npa1'] ?? 0 + $clientInputs['npa_summary_overdue_npa2'] ?? 0 + $clientInputs['npa_summary_overdue_npa3'] ?? 0)}}</td>
+                                <td>{{($clientInputs['npa_summary_overdue_npa0_amount'] ?? 0 + @$clientInputs['npa_summary_overdue_npa1_amount'] ?? 0 + $clientInputs['npa_summary_overdue_npa2_amount'] ?? 0 + $clientInputs['npa_summary_overdue_npa3_amount'] ?? 0)}}</td>
+                                <td>61.45</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <div class="mb-2">
                         <span style="font-weight:bold;">3.थकबाकीदारांवर पुढील प्रमाणे कायदेशीर कारवाई करण्यात आली आहे . </span>
@@ -814,95 +829,90 @@
                     <table class="table table-bordered table-striped text-center">
                         <thead>
                             <tr>
-                            <th>अ.क्र.</th>
-                            <th>तपशील</th>
-                            <th>थकबाकीदार संख्या</th>
-                            <th>रक्कम</th>
+                                <th>अ.क्र.</th>
+                                <th>तपशील</th>
+                                <th>थकबाकीदार संख्या</th>
+                                <th>रक्कम</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                            <td>1</td>
-                            <td>थकबाकी वसूलिच्या नोटीस</td>
-                            <td></td>
-                            <td></td>
+                                <td>1</td>
+                                <td>थकबाकी वसूलिच्या नोटीस</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa41" value="{{ $clientInputs['npa_summary_overdue_npa41'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa41_amount" value="{{ $clientInputs['npa_summary_overdue_npa41_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>2</td>
-                            <td>कलम 101 अंतर्गत दाखल केलेले दावे</td>
-                            <td><input type="text" class="form-control" name="npa_summary_overdue_npa4" value="{{ $clientInputs['npa_summary_overdue_npa4'] ?? '' }}"></td>
-                            <td><input type="text" class="form-control" name="npa_summary_overdue_npa4_amount" value="{{ $clientInputs['npa_summary_overdue_npa4_amount'] ?? '' }}"></td>
+                                <td>2</td>
+                                <td>कलम 101 अंतर्गत दाखल केलेले दावे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa4" value="{{ $clientInputs['npa_summary_overdue_npa4'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa4_amount" value="{{ $clientInputs['npa_summary_overdue_npa4_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>3</td>
-                            <td>कलम 101 अंतर्गत प्राप्त वसुली दावे</td>
-                            <td></td>
-                            <td></td>
+                                <td>3</td>
+                                <td>कलम 101 अंतर्गत प्राप्त वसुली दावे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa51" value="{{ $clientInputs['npa_summary_overdue_npa51'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa51_amount" value="{{ $clientInputs['npa_summary_overdue_npa51_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>4</td>
-                            <td>कलम 156 अंतर्गत पाठविलेल्या जप्ती नोटीस</td>
-                            <td></td>
-                            <td></td>
+                                <td>4</td>
+                                <td>कलम 156 अंतर्गत पाठविलेल्या जप्ती नोटीस</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa52" value="{{ $clientInputs['npa_summary_overdue_npa52'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa52_amount" value="{{ $clientInputs['npa_summary_overdue_npa52_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>5</td>
-                            <td>जप्ती केलेली प्रकरणे</td>
-                            <td></td>
-                            <td></td>
+                                <td>5</td>
+                                <td>जप्ती केलेली प्रकरणे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa53" value="{{ $clientInputs['npa_summary_overdue_npa53'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa53_amount" value="{{ $clientInputs['npa_summary_overdue_npa53_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>6</td>
-                            <td>लिलावात काढलेली प्रकरणे</td>
-                            <td></td>
-                            <td></td>
+                                <td>6</td>
+                                <td>लिलावात काढलेली प्रकरणे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa54" value="{{ $clientInputs['npa_summary_overdue_npa54'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa54_amount" value="{{ $clientInputs['npa_summary_overdue_npa54_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>7</td>
-                            <td>कलम 100 व नियम 85 अंतर्गत संस्थेच्या नावे हस्तांतरीत केलेली मालमता प्रकरणे</td>
-                            <td></td>
-                            <td></td>
+                                <td>7</td>
+                                <td>कलम 100 व नियम 85 अंतर्गत संस्थेच्या नावे हस्तांतरीत केलेली मालमता प्रकरणे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa55" value="{{ $clientInputs['npa_summary_overdue_npa55'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa55_amount" value="{{ $clientInputs['npa_summary_overdue_npa55_amount'] ?? '' }}"></td>
                             </tr>
                             <tr>
-                            <td>8</td>
-                            <td>निगोशिएबल इन्स्ट्रुमेंट ॲक्ट अंतर्गत कलम 138 अंतर्गत दाखल केलेले दावे</td>
-                            <td></td>
-                            <td></td>
+                                <td>8</td>
+                                <td>निगोशिएबल इन्स्ट्रुमेंट ॲक्ट अंतर्गत कलम 138 अंतर्गत दाखल केलेले दावे</td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa56" value="{{ $clientInputs['npa_summary_overdue_npa56'] ?? '' }}"></td>
+                                <td><input type="text" class="form-control" name="npa_summary_overdue_npa56_amount" value="{{ $clientInputs['npa_summary_overdue_npa56_amount'] ?? '' }}"></td>
                             </tr>
                         </tbody>
-                        </table>
-                        <span> लेखापरीक्षण कालावधीत नव्याने दावे दाखल केलेले 
-                            <select name="npa_summary_overdue_npa5"
-                                class="form-control d-inline-block" style="width:80px;display:inline;">
-                                <option value="">Select</option>
-                                <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
-                            </select>
-                            . एकूण थकबाकीदारांची संख्या पहाता वसूलीसाठी कायदेशीर कारवाई केल्याचे प्रमाण कमी आहे. सर्व थकबाकीदारांवर संचालक मंडळाने योग्य त्या कायदयांतर्गत वसूली बाबतची कारवाई करुन पाठपुरावा करावा. थकबाकी वसूलीची संपूर्ण जबाबदारी वैयक्तिक व सामुहिकरित्या संचालक मंडळ व व्यवस्थापकावर आहे याची नोंद घ्यावी. कारवाई केलेल्या थकबाकिदारांची यादी अहवालासोबत जोडली
-                            <select name="npa_summary_overdue_npa6"
-                                class="form-control d-inline-block" style="width:80px;display:inline;">
-                                <option value="">Select</option>
-                                <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                                <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                    </table>
+                    <span> लेखापरीक्षण कालावधीत नव्याने दावे दाखल केलेले
+                        <select name="npa_summary_overdue_npa5"
+                            class="form-control d-inline-block" style="width:80px;display:inline;">
+                            <option value="">Select</option>
+                            <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa5']) && $clientInputs['npa_summary_overdue_npa5'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                        </select>
+                        . एकूण थकबाकीदारांची संख्या पहाता वसूलीसाठी कायदेशीर कारवाई केल्याचे प्रमाण कमी आहे. सर्व थकबाकीदारांवर संचालक मंडळाने योग्य त्या कायदयांतर्गत वसूली बाबतची कारवाई करुन पाठपुरावा करावा. थकबाकी वसूलीची संपूर्ण जबाबदारी वैयक्तिक व सामुहिकरित्या संचालक मंडळ व व्यवस्थापकावर आहे याची नोंद घ्यावी. कारवाई केलेल्या थकबाकिदारांची यादी अहवालासोबत जोडली
+                        <select name="npa_summary_overdue_npa6"
+                            class="form-control d-inline-block" style="width:80px;display:inline;">
+                            <option value="">Select</option>
+                            <option value="नाही" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                            <option value="आहे" {{ (isset($clientInputs['npa_summary_overdue_npa6']) && $clientInputs['npa_summary_overdue_npa6'] == 'आहे') ? 'selected' : '' }}>आहे</option>
 
-                            </select>
-                        </span>
-                    </div>
+                        </select>
+                    </span>
+                </div>
                 <!-- END: आर्थिक प्रमाणके Design -->
 
                 <!-- START: NPA सारांश व प्रमाणे Design as per pasted image -->
                 <div class="mb-4">
-                    <span class="fw-bold">5. एन.पी.ए. सारांश व प्रमाणे :</span>
-                    <div class="mb-2">
-                        अहवाल वर्षअखेर एकूण <span>{{$totalIncomeCurrentYear}}</span> कर्जे त्यातील एनपीएमध्ये असलेली कर्जे येणे बाकी <span style="background: yellow;">{{ $clientInputs['npa_total_loan'] ?? '55782120' }}</span> आहे. व त्यावरील संस्थेने रु. <span style="background: yellow;">{{ $clientInputs['npa_total_prov_amt'] ?? '39349726.5' }}</span> तरतूद करणे आवश्यक असताना प्रत्यक्षात रु. <span style="background: yellow;">{{ $clientInputs['npa_total_inst_prov'] ?? '661335' }}</span> तरतूद केली आहे. म्हणजेच रु. <span style="background: yellow;">{{ $clientInputs['npa_total_less_more'] ?? '38688391.5' }}</span> कमी तरतूद केली आहे.
-                    </div>
-                    <div class="mb-2">
-                        (टिप - लेखापरीक्षकाने संस्थेने दिलेले अनुत्पादक कर्जाचे जंबोली तपासून प्रमाणित करून स्वतंत्र रित्या लेखापरीक्षण अहवालासोबत जोडण्यात यावी)
-                    </div>
+
                     <div class="mb-2">
                         <span class="fw-bold">4. एन.पी.ए. प्रमाण ए ची तरतूद केले. सी.एल.एन -
                             <span style="font-weight:bold;">
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="npa_provision_cln">
+                                    <option value="">Select</option>
                                     <option value="नाही" {{ (isset($clientInputs['npa_provision_cln']) && $clientInputs['npa_provision_cln'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     <option value="आहे" {{ (isset($clientInputs['npa_provision_cln']) && $clientInputs['npa_provision_cln'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 </select>
@@ -930,82 +940,187 @@
                                 <tr>
                                     <td>1</td>
                                     <td>स्टँडर्ड कर्ज (9 महिने पर्यंत)</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa7" value="{{ $clientInputs['npa_summary_overdue_npa7'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa7_amount" value="{{ $clientInputs['npa_summary_overdue_npa7_amount'] ?? '' }}"></td>
                                     <td>0.25</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
+                                    <td>{{$total7=number_format(@$clientInputs['npa_summary_overdue_npa7_amount']*0.25/100,2)}}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa71_amount" value="{{ $clientInputs['npa_summary_overdue_npa71_amount'] ?? '' }}"></td>
+                                    <td>{{$total7 - @$clientInputs['npa_summary_overdue_npa71_amount']}}</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>अनियमित कर्ज (थकीत महिने 10 ते 24)</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa8" value="{{ $clientInputs['npa_summary_overdue_npa8'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa8_amount" value="{{ $clientInputs['npa_summary_overdue_npa8_amount'] ?? '' }}"></td>
                                     <td>0.50</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
+                                    <td>{{
+        $total8 = number_format((@$clientInputs['npa_summary_overdue_npa8_amount'] ?? 0) * 0.50 / 100, 2) 
+    }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa81_amount" value="{{ $clientInputs['npa_summary_overdue_npa81_amount'] ?? '' }}"></td>
+                                    <td>{{ $total8 - (@$clientInputs['npa_summary_overdue_npa81_amount'] ?? 0) }}</td>
+
                                 </tr>
                                 <tr>
                                     <td rowspan="2">3</td>
                                     <td>संशयीत 1 (25 ते 48 महिन्ये पर्यंत)<br><small>तारण नसलेले</small></td>
-                                    <td>61</td>
-                                    <td>19259952</td>
-                                    <td>10</td>
-                                    <td class="highlight">9629976</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">9629976</td>
-                                </tr>
-                                <tr>
-                                    <td>तारण असलेले</td>
                                     <td></td>
                                     <td></td>
-                                    <td>10</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <td rowspan="2">4</td>
+                                    @php
+                                        $amount9 = floatval($clientInputs['npa_summary_overdue_npa9_amount'] ?? 0);
+                                        $calcTotal9 = $amount9 * 10 / 100;
+
+                                        $recovered9 = floatval($clientInputs['npa_summary_overdue_npa91_amount'] ?? 0);
+                                        $final9 = $calcTotal9 - $recovered9;
+                                    @endphp
+
+                                    <td>तारणी</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa9" value="{{ $clientInputs['npa_summary_overdue_npa9'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa9_amount" value="{{ $clientInputs['npa_summary_overdue_npa9_amount'] ?? '' }}"></td>
+                                    <td>10</td>
+                                    <td>{{ number_format($calcTotal9, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa91_amount" value="{{ $clientInputs['npa_summary_overdue_npa91_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final9, 2) }}</td>
+
+                                </tr>
+                                   <tr>
+                                    @php
+                                        $amount14 = floatval($clientInputs['npa_summary_overdue_npa14_amount'] ?? 0);
+                                        $calcTotal14 = $amount14 * 50 / 100;
+
+                                        $recovered14 = floatval($clientInputs['npa_summary_overdue_npa141_amount'] ?? 0);
+                                        $final14 = $calcTotal14 - $recovered14;
+                                    @endphp
+                                    <td></td>
+                                    <td>विनातारणी</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa14" value="{{ $clientInputs['npa_summary_overdue_npa14'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa14_amount" value="{{ $clientInputs['npa_summary_overdue_npa14_amount'] ?? '' }}"></td>
+                                    <td>50</td>
+                                    <td>{{ number_format($calcTotal14, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa141_amount" value="{{ $clientInputs['npa_summary_overdue_npa141_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final14, 2) }}</td>
+
+                                </tr>
+                                 <tr>
+                                    <td rowspan="2">3</td>
                                     <td>संशयीत 2 (49 ते 60 महिन्ये पर्यंत)<br><small>तारण नसलेले</small></td>
-                                    <td>36</td>
-                                    <td>13604835</td>
-                                    <td>15</td>
-                                    <td class="highlight">6802417.5</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">6802417.5</td>
-                                </tr>
-                                <tr>
-                                    <td>तारण असलेले</td>
                                     <td></td>
                                     <td></td>
-                                    <td>15</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
+                                    @php
+                                        $amount10 = floatval($clientInputs['npa_summary_overdue_npa10_amount'] ?? 0);
+                                        $calcTotal10 = $amount10 * 15 / 100;
+
+                                        $recovered10 = floatval($clientInputs['npa_summary_overdue_npa101_amount'] ?? 0);
+                                        $final10 = $calcTotal10 - $recovered10;
+                                    @endphp
+                                    <td>तारणी</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa10" value="{{ $clientInputs['npa_summary_overdue_npa10'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa10_amount" value="{{ $clientInputs['npa_summary_overdue_npa10_amount'] ?? '' }}"></td>
+                                    <td>15</td>
+                                    <td>{{ number_format($calcTotal10, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa101_amount" value="{{ $clientInputs['npa_summary_overdue_npa101_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final10, 2) }}</td>
+                                </tr>
+                                <tr>
+                                         @php
+                                        $amount11 = floatval($clientInputs['npa_summary_overdue_npa11_amount'] ?? 0);
+                                        $calcTotal11 = $amount11 * 50 / 100;
+
+                                        $recovered11 = floatval($clientInputs['npa_summary_overdue_npa111_amount'] ?? 0);
+                                        $final11 = $calcTotal11 - $recovered11;
+                                    @endphp
+                                    <td></td>
+                                    <td>विनातारणी</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa11" value="{{ $clientInputs['npa_summary_overdue_npa11'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa11_amount" value="{{ $clientInputs['npa_summary_overdue_npa11_amount'] ?? '' }}"></td>
+                                    <td>50</td>
+                                    <td>{{ number_format($calcTotal11, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa111_amount" value="{{ $clientInputs['npa_summary_overdue_npa111_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final11, 2) }}</td>
+                                </tr>
+                                <tr>
+                                     @php
+                                        $amount12 = floatval($clientInputs['npa_summary_overdue_npa12_amount'] ?? 0);
+                                        $calcTotal12 = $amount12 * 100 / 100;
+
+                                        $recovered12 = floatval($clientInputs['npa_summary_overdue_npa121_amount'] ?? 0);
+                                        $final12 = $calcTotal12 - $recovered12;
+                                    @endphp
                                     <td rowspan="2">5</td>
                                     <td>संशयीत 3 (60 महिनेपासुन पुढे)<br></td>
-                                    <td>36</td>
-                                    <td>13604835</td>
-                                    <td>15</td>
-                                    <td class="highlight">6802417.5</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">6802417.5</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa12" value="{{ $clientInputs['npa_summary_overdue_npa12'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa12_amount" value="{{ $clientInputs['npa_summary_overdue_npa12_amount'] ?? '' }}"></td>
+                                    <td>100</td>
+                                    <td>{{ number_format($calcTotal12, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa121_amount" value="{{ $clientInputs['npa_summary_overdue_npa121_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final12, 2) }}</td>
                                 </tr>
                                 <tr>
+                                    @php
+                                        $amount13 = floatval($clientInputs['npa_summary_overdue_npa13_amount'] ?? 0);
+                                        $calcTotal13 = $amount13 * 100 / 100;
+
+                                        $recovered13 = floatval($clientInputs['npa_summary_overdue_npa131_amount'] ?? 0);
+                                        $final13 = $calcTotal13 - $recovered13;
+                                    @endphp
                                     <td>तारण असलेले</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa13" value="{{ $clientInputs['npa_summary_overdue_npa13'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa13_amount" value="{{ $clientInputs['npa_summary_overdue_npa13_amount'] ?? '' }}"></td>
+                                    <td>100</td>
+                                    <td>{{ number_format($calcTotal13, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa131_amount" value="{{ $clientInputs['npa_summary_overdue_npa131_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final13, 2) }}</td>
+                                </tr>
+                                 <tr>
+                                    @php
+                                        $amount15 = floatval($clientInputs['npa_summary_overdue_npa15_amount'] ?? 0);
+                                        $calcTotal15 = $amount15 * 100 / 100;
+
+                                        $recovered15 = floatval($clientInputs['npa_summary_overdue_npa151_amount'] ?? 0);
+                                        $final15 = $calcTotal15 - $recovered15;
+                                    @endphp
+                                    <td>6</td>
+                                    <td>बुडीत कर्ज</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa15" value="{{ $clientInputs['npa_summary_overdue_npa15'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa15_amount" value="{{ $clientInputs['npa_summary_overdue_npa15_amount'] ?? '' }}"></td>
+                                    <td>100</td>
+                                    <td>{{ number_format($calcTotal15, 2) }}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa151_amount" value="{{ $clientInputs['npa_summary_overdue_npa151_amount'] ?? '' }}"></td>
+                                    <td>{{ number_format($final15, 2) }}</td>
+                                </tr>
+                                <tr>
                                     <td></td>
+                                    <td><b>एकूण अनुत्पादीत कर्जे</b></td>
+                                    <td>{{@$clientInputs['npa_summary_overdue_npa7'] +@$clientInputs['npa_summary_overdue_npa8'] + @$clientInputs['npa_summary_overdue_npa9'] + @$clientInputs['npa_summary_overdue_npa14'] + @$clientInputs['npa_summary_overdue_npa11'] + @$clientInputs['npa_summary_overdue_npa12'] + @$clientInputs['npa_summary_overdue_npa13'] + @$clientInputs['npa_summary_overdue_npa15'] }}</td>
+                                    <td>{{@$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</td>
                                     <td></td>
-                                    <td>15</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
-                                    <td class="highlight">0</td>
+                                    <td>{{ number_format($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15, 2) }}</td>
+                                    <td>{{ number_format(@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount'], 2) }}</td>
+                                    <td>{{ number_format(($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15) - (@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount']), 2) }}</td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <span class="fw-bold">एन.पी.ए. सारांश व प्रमाणे :</span>
+                    <div class="mb-2">
+                        अहवाल वर्षअखेर एकूण <span><b>{{$client['येणे कर्ज_sum']}}</b></span> कर्जे त्यातील एनपीएमध्ये असलेली कर्जे येणे बाकी <span><b>{{@$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</b></span> आहे. व त्यावरील संस्थेने रु. 
+                        <span><b>{{ number_format($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15, 2) }}</b></span> तरतूद करणे आवश्यक असताना प्रत्यक्षात रु. 
+                        <span><b>{{ number_format(@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount'], 2) }}</b></span> तरतूद केली आहे. म्हणजेच रु. 
+                        <span><b>{{ number_format(($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15) - (@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount']), 2) }}</b></span> कमी तरतूद केली आहे.
+                    </div>
+                    <div class="mb-2">
+                        (टिप - लेखापरीक्षकाने संस्थेने दिलेले अनुत्पादक कर्जाचे जंबोली तपासून प्रमाणित करून स्वतंत्र रित्या लेखापरीक्षण अहवालासोबत जोडण्यात यावी)
                     </div>
                     <div class="mb-2">
                         <table class="table table-bordered text-center align-middle" style="min-width:900px;">
@@ -1021,60 +1136,62 @@
                                 <tr>
                                     <td>1</td>
                                     <td>एकूण कर्ज</td>
-                                    <td></td>
-                                    <td>{{$totalIncomeCurrentYear}}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa_sum" value="{{ $clientInputs['npa_summary_overdue_npa_sum'] ?? '' }}"></td>
+                                    <td>{{$client['येणे कर्ज_sum']}}</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>ढोबळ एनपीए</td>
-                                    <td></td>
-                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa" value="{{ $clientInputs['npa_summary_overdue_npa'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa5_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa5_sum_currentYear'] ?? '' }}"></td>
+                                    <td>{{$total2=  @$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>येणे व्याज</td>
-                                    <td></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_net_npa_sum_currentYear" value="{{ $clientInputs['npa_summary_net_npa_sum_currentYear'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control" name="npa_summary_net_npa" value="{{ $clientInputs['npa_summary_net_npa'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>तरतूद</td>
-                                    <td></td>
-                                    <td>{{$client['तरतूद खर्च_sum_currentYear']}}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa6_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa6_sum_currentYear'] ?? '' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa_value" value="{{ $clientInputs['npa_summary_overdue_npa_value'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>निव्वळ कर्ज (1-3-4)</td>
-                                    <td></td>
-                                    <td>{{$totalIncomeCurrentYear - $client['घेणे व्यज_sum_currentYear'] - $client['तरतूद खर्च_sum_currentYear']}}</td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa1_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa1_sum_currentYear'] ?? '' }}"></td>
+                                    <td>{{$client['येणे कर्ज_sum'] - @$clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']}}</td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>निव्वळ एनपीए (2-3-4)</td>
-                                    <td></td>
-                                    <td>{{$client['घेणे व्यज_sum_currentYear'] - $client['तरतूद खर्च_sum_currentYear']}}</td>
-                                </tr>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa2_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa2_sum_currentYear'] ?? '' }}"></td>
+<td>{{$total6=$total2 - $clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']}}</td>                                </tr>
                                 <tr>
                                     <td>7</td>
                                     <td>थकबाकी एनपीए टक्केवारी (2/1x100)</td>
-                                    <td></td>
-                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa_percent" value="{{ $clientInputs['npa_summary_overdue_npa_percent'] ?? '61.45' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa3_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa3_sum_currentYear'] ?? '' }}"></td>
+                                    <td>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
                                     <td>निव्वळ एनपीए टक्केवारी (6/5x100)</td>
-                                    <td></td>
-                                    <td><input type="text" class="form-control" name="npa_summary_net_npa_percent" value="{{ $clientInputs['npa_summary_net_npa_percent'] ?? '61.17' }}"></td>
+                                    <td><input type="text" class="form-control" name="npa_summary_overdue_npa4_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa4_sum_currentYear'] ?? '' }}"></td>
+                                    <td>{{number_format(($total6 /$client['येणे कर्ज_sum'])*100, 2)}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="mb-2">
                         <span>
-                            दि. 31/03/{{$start}} (गतवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>{{ $clientInputs['npa_last_year_overdue_percent'] ?? '' }}</span> % व निव्वळ एनपीए प्रमाण <span style="background: yellow;">{{ $clientInputs['npa_last_year_net_percent'] ?? '' }}</span> % होते. तर दि. 31/03/{{$end}} (चालूवर्षी)अखेर थकबाकी एनपीए प्रमाण <span style="background: yellow;">{{ $clientInputs['npa_this_year_overdue_percent'] ?? '' }}</span> % व निव्वळ एनपीए प्रमाण <span style="background: yellow;">{{ $clientInputs['npa_this_year_net_percent'] ?? '' }}</span> % आहे. सदरचे प्रमाण आहे.
+                            दि. 31/03/{{$start}} (गतवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>{{ $clientInputs['npa_last_year_overdue_percent'] ?? '' }}</span><span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_overdue_percent_input" value="{{ $clientInputs['npa_last_year_overdue_percent_input'] ?? '' }}"></span> % व निव्वळ एनपीए प्रमाण <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_net_percent_input" value="{{ $clientInputs['npa_last_year_net_percent_input'] ?? '' }}"></span> % होते. तर दि. 31/03/{{$end}} (चालूवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>
+                                <b>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</b></span> % व निव्वळ एनपीए प्रमाण 
+                            <span><b>{{number_format(($total6 /$client['येणे कर्ज_sum'])*100, 2)}}</b></span> % आहे. सदरचे प्रमाण आहे.
                         </span>
                     </div>
                 </div>
+
                 <div class="mb-4">
                     <span class="fw-bold">ऑडिट वर्गवारी :</span>
                     <div class="mb-2">
