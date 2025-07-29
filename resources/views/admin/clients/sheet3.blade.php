@@ -61,7 +61,12 @@
                         <li>
                             <span class="fw-bold">संशयीत व अफरातफरीचे व्यवहारः-</span>
                             संस्थचे सन <span><b>01/04/{{ $start }} - 31/03/{{ $end }}</b></span> या
-                            कालावधीचे लेखापरिक्षण केले असता संशयीत व अफरातफरीचे व्यवहार आढळलेले नाहीत.
+                            कालावधीचे लेखापरिक्षण केले असता संशयीत व अफरातफरीचे व्यवहार आढळलेले
+                            <select class="form-control" name="member_register_maintained_rule_35">
+                                        <option value="">Select</option>
+                                        <option value="आहेत" {{ (isset($clientInputs['member_register_maintained_rule_35']) && $clientInputs['member_register_maintained_rule_35'] == 'आहेत') ? 'selected' : '' }}>आहेत</option>
+                                        <option value="नाहीत" {{ (isset($clientInputs['member_register_maintained_rule_35']) && $clientInputs['member_register_maintained_rule_35'] == 'नाहीत') ? 'selected' : '' }}>नाहीत</option>
+                            </select>
                         </li>
                         <li>
                             महाराष्ट्र सहकारी संस्था अधिनियम 1960 चे कलम 81 अन्वये खालील बाबीची तपासणी व
@@ -188,17 +193,23 @@
                         <tbody>
                             <tr>
                             @php
-                            $totalIncomeCurrentYear = $client['कर्जावरील व्याज_sum_currentYear'] + $client['गुंतवणुकीवरील व्याज_sum_currentYear'] + $client['इतर उत्त्पन्न_sum_currentYear'] ;
-                            $totalExpCurrentYear =$client['ठेवीवरील व्याज_sum_currentYear'] + $client['आस्थापना खर्च_sum_currentYear'] + $client['प्रशासकीय खर्च_sum_currentYear'] + $client['तरतुदी_sum_currentYear'] + $client['इतर खर्च_sum_currentYear'];
-                            $totalProfit = $totalIncomeCurrentYear - $totalExpCurrentYear;
-                            $totalLoss = $totalExpCurrentYear - $totalIncomeCurrentYear;
-                            $client['स्वनिधी'] = $client['स्वनिधी'] + $totalProfit;
-                            $client['स्वनिधी'] = $client['स्वनिधी'] - $totalLoss;
-                            @endphp
-                                <td>{{$client['स्वनिधी']}}</td>
+                        $sum_current =
+                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
+                        $minus_current =
+                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
+
+                        $total_networth_current = $sum_current - $minus_current;
+                        @endphp
+                                <td>{{$total_networth_current}}</td>
                                 <td>{{$client['ठेवी_sum']}}</td>
-                                <td>{{$client['स्वनिधी'] + $client['ठेवी_sum']}}</td>
-                                <td>{{$client['देणे कर्ज_sum']}}</td>
+                                <td>{{$total_networth_current + $client['ठेवी_sum']}}</td>
+                                <td>{{ $client['येणे कर्ज_sum_currentYear']}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -210,12 +221,12 @@
                     $auditPeriod = '';
                     $start = '';
                     $end = '';
-                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
                     $start = $m[1];
                     $end = $m[2];
                     $auditPeriod = "01/04/$start - 31/03/$end";
                     } else {
-                    $auditPeriod = $client->audit_year;
+                    $auditPeriod = $client->year->audit_year;
                     }
                     @endphp
                     <p>
@@ -259,7 +270,7 @@
     function calcTotalMembers() {
         let reg = parseInt(document.getElementById('loan').value) || 0;
         let nom = parseInt(document.getElementById('loan_1').value) || 0;
-        document.getElementById('loan_percentage').value = reg ? (((reg - nom)/reg*100).toFixed(2) + '%') : '';
+        document.getElementById('loan_percentage').value = reg ? (((nom/reg)*100).toFixed(2) + '%') : '';
     }
     document.addEventListener('DOMContentLoaded', function() {
         // Calculate once on load using existing values

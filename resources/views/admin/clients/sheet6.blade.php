@@ -605,8 +605,8 @@
                             <!-- START: Additional Ratios as per pasted image -->
                             <tr>
                                 <td>5</td>
-                                <td>नफााचे कर्ज + गुंतवणूकशी प्रमाण</td>
-                                <td> खर्च ÷ गुंतवणूक x 100</td>
+                                <td>नफयाचे कर्ज + गुंतवणूकशी प्रमाण</td>
+                                <td> कर्ज ÷ गुंतवणूक x 100</td>
                                 <td></td>
                                 <td>
                                     {{ $client['खेळते भागभांडवल_sum'] != 0 
@@ -962,7 +962,7 @@
                                 </tr>
                                 <tr>
                                     <td rowspan="2">3</td>
-                                    <td>संशयीत 1 (25 ते 48 महिन्ये पर्यंत)<br><small>तारण नसलेले</small></td>
+                                    <td>संशयीत 1 (25 ते 48 महिन्ये पर्यंत)<br></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1008,7 +1008,7 @@
                                 </tr>
                                  <tr>
                                     <td rowspan="2">3</td>
-                                    <td>संशयीत 2 (49 ते 60 महिन्ये पर्यंत)<br><small>तारण नसलेले</small></td>
+                                    <td>संशयीत 2 (49 ते 60 महिन्ये पर्यंत)<br></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1074,7 +1074,7 @@
                                         $recovered13 = floatval($clientInputs['npa_summary_overdue_npa131_amount'] ?? 0);
                                         $final13 = $calcTotal13 - $recovered13;
                                     @endphp
-                                    <td>तारण असलेले</td>
+                                    <td></td>
                                     <td><input type="text" class="form-control" name="npa_summary_overdue_npa13" value="{{ $clientInputs['npa_summary_overdue_npa13'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control" name="npa_summary_overdue_npa13_amount" value="{{ $clientInputs['npa_summary_overdue_npa13_amount'] ?? '' }}"></td>
                                     <td>100</td>
@@ -1114,13 +1114,13 @@
                     </div>
                     <span class="fw-bold">एन.पी.ए. सारांश व प्रमाणे :</span>
                     <div class="mb-2">
-                        अहवाल वर्षअखेर एकूण <span><b>{{$client['येणे कर्ज_sum']}}</b></span> कर्जे त्यातील एनपीएमध्ये असलेली कर्जे येणे बाकी <span><b>{{@$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</b></span> आहे. व त्यावरील संस्थेने रु. 
+                        अहवाल वर्षअखेर एकूण <span><b>{{$client['येणे कर्ज_sum']}}</b></span> कर्जे त्यातील एनपीएमध्ये असलेली कर्जे येणे बाकी <span><b>{{@$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</b></span> आहे. व त्यापोटी संस्थेने रु. 
                         <span><b>{{ number_format($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15, 2) }}</b></span> तरतूद करणे आवश्यक असताना प्रत्यक्षात रु. 
                         <span><b>{{ number_format(@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount'], 2) }}</b></span> तरतूद केली आहे. म्हणजेच रु. 
                         <span><b>{{ number_format(($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15) - (@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount']), 2) }}</b></span> कमी तरतूद केली आहे.
                     </div>
                     <div class="mb-2">
-                        (टिप - लेखापरीक्षकाने संस्थेने दिलेले अनुत्पादक कर्जाचे जंबोली तपासून प्रमाणित करून स्वतंत्र रित्या लेखापरीक्षण अहवालासोबत जोडण्यात यावी)
+                        (टिप - लेखापरीक्षकाने संस्थेने दिलेले अनुत्पादक कर्जाचे जिंदगी तपासून प्रमाणित करून स्वतंत्र रित्या लेखापरीक्षण अहवालासोबत जोडण्यात यावी)
                     </div>
                     <div class="mb-2">
                         <table class="table table-bordered text-center align-middle" style="min-width:900px;">
@@ -1170,7 +1170,7 @@
 <td>{{$total6=$total2 - $clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']}}</td>                                </tr>
                                 <tr>
                                     <td>7</td>
-                                    <td>थकबाकी एनपीए टक्केवारी (2/1x100)</td>
+                                    <td>टोबळ एनपीए टक्केवारी (2/1x100)</td>
                                     <td><input type="text" class="form-control" name="npa_summary_overdue_npa3_sum_currentYear" value="{{ $clientInputs['npa_summary_overdue_npa3_sum_currentYear'] ?? '' }}"></td>
                                     <td>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</td>
                                 </tr>
@@ -1185,7 +1185,7 @@
                     </div>
                     <div class="mb-2">
                         <span>
-                            दि. 31/03/{{$start}} (गतवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>{{ $clientInputs['npa_last_year_overdue_percent'] ?? '' }}</span><span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_overdue_percent_input" value="{{ $clientInputs['npa_last_year_overdue_percent_input'] ?? '' }}"></span> % व निव्वळ एनपीए प्रमाण <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_net_percent_input" value="{{ $clientInputs['npa_last_year_net_percent_input'] ?? '' }}"></span> % होते. तर दि. 31/03/{{$end}} (चालूवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>
+                            दि. 31/03/{{$start}} (गतवर्षी)अखेर टोबळ एनपीए प्रमाण <span>{{ $clientInputs['npa_last_year_overdue_percent'] ?? '' }}</span><span><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_overdue_percent_input" value="{{ $clientInputs['npa_last_year_overdue_percent_input'] ?? '' }}"></span> % व निव्वळ एनपीए प्रमाण <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="npa_last_year_net_percent_input" value="{{ $clientInputs['npa_last_year_net_percent_input'] ?? '' }}"></span> % होते. तर दि. 31/03/{{$end}} (चालूवर्षी)अखेर थकबाकी एनपीए प्रमाण <span>
                                 <b>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</b></span> % व निव्वळ एनपीए प्रमाण 
                             <span><b>{{number_format(($total6 /$client['येणे कर्ज_sum'])*100, 2)}}</b></span> % आहे. सदरचे प्रमाण आहे.
                         </span>
@@ -1197,7 +1197,8 @@
                     <div class="mb-2">
                         संस्थेची आर्थीक स्थिती, केलेले व्यवहार, केलेली गुंतवणुक, ठेवलेले रेकॉर्ड व
                         कायदा व नियम व पोटनियमाचे उल्लंघन आणि मॅन्युअल गुण आदि बाबींचा विचार करून संस्थेला
-                        सन 2023-2024 या वर्षाकरिता ऑडिट वर्ग "{{ $clientInputs['audit_class'] ?? 'अ' }}" कायम करण्यात येत आहे.
+                        सन {{$start}}-{{$end}} या वर्षाकरिता ऑडिट वर्ग "{{ $clientInputs['audit_class'] ?? 'अ' }}" कायम करण्यात येत आहे.
+                        <br>
                         आभार :-
                         अंकेक्षणाच्या वेळी संस्थेचे पदाधिकारी व कर्मचारी यांनी दिलेल्या सहकार्याबद्धल त्यांचे
                         आभार मानुन संस्था प्रगती करिता सुयश चिंतितो व हा अहवाल विभाग अ,ब,क सह पुर्ण करतो.

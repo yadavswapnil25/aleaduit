@@ -27,12 +27,12 @@
                     $auditPeriod = '';
                     $start = '';
                     $end = '';
-                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->audit_year, $m)) {
+                    if (preg_match('/^(\d{4})-(\d{4})$/', $client->year->audit_year, $m)) {
                     $start = $m[1];
                     $end = $m[2];
                     $auditPeriod = "01/04/$start - 31/03/$end";
                     } else {
-                    $auditPeriod = $client->audit_year;
+                    $auditPeriod = $client->year->audit_year;
                     }
                     @endphp
                     <span>लेखापरीक्षण वर्ष – सन् {{$start}} — {{$end}}</span>
@@ -223,21 +223,21 @@
                             <tr>
                                 <td>ब)</td>
                                 <td>5% पेक्षा अधिक ते 10% पर्यंत असल्यास</td>
-                                <td>14 ते 10</td>
+                                <td>10 ते 14</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_gross_npa_2_detail" value="{{ $clientInputs['assets_gross_npa_2_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>क)</td>
                                 <td>10% पेक्षा अधिक ते 15% पर्यंत असल्यास</td>
-                                <td>9 ते 5</td>
+                                <td>05 ते 09</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_gross_npa_3_detail" value="{{ $clientInputs['assets_gross_npa_3_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>ड)</td>
                                 <td>15% पेक्षा अधिक ते 20% पर्यंत असल्यास</td>
-                                <td>4 ते 0</td>
+                                <td>0 ते 04</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_gross_npa_4_detail" value="{{ $clientInputs['assets_gross_npa_4_detail'] ?? '' }}"></td>
                             </tr>
@@ -247,7 +247,7 @@
                             <tr>
                                 <td>अ)</td>
                                 <td>20% पेक्षा अधिक ते 30% व त्यापेक्षा अधिक असल्यास</td>
-                                <td>11 ते 5</td>
+                                <td>11 ते 15</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_npa_recovery_1_detail" value="{{ $clientInputs['assets_npa_recovery_1_detail'] ?? '' }}"></td>
                             </tr>
@@ -401,7 +401,7 @@
                                 <td></td>
                                 <td class="text-start">
                                     ड) संचालक मंडळ सभेमध्ये आयत्या वेळच्या विषयात धोरणात्मक
-                                    बाबींवर निर्णय घेतले नसल्यास
+                                    बाबींवर निर्णय घेतले असल्यास
                                 </td>
                                 <td>1</td>
                                 <td></td>
@@ -743,7 +743,14 @@
                                 <td>संचालक मंडळ निवडणूक – संचालक मंडळाच्या निवडणुकी संदर्भात कायदा व नियमातील तरतूदीप्रमाणे आवश्यक ती पुर्णता वेळेवर केली असल्यास</td>
                                 <td></td>
                                 <td>2</td>
+                                <td><input type="text" class="form-control" name="sysctrl_detail1" value="{{ $clientInputs['sysctrl_detail1'] ?? '' }}"></td>
+                            </tr>
+                           <tr>
+                            <td></td>
+                                <td class="text-start">अन्यथा</td>
+                                <td>0</td>
                                 <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_113_detail" value="{{ $clientInputs['earnings_net_profit_113_detail'] ?? '' }}"></td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -978,9 +985,16 @@
                                     निधीचे विहीत नमुन्यातील तिमाही विवरण विहित मुदतीत निबंधक
                                     कार्यालयास सादर केले असल्यास
                                 </td>
-                                <td>0</td>
+                                <td>1</td>
                                 <td></td>
                                 <td> <input type="text" class="form-control" name="earnings_net_profit_20_detail" value="{{ $clientInputs['earnings_net_profit_20_detail'] ?? '' }}"> </td>
+                            </tr>
+                              <tr>
+                                <td></td>
+                                <td class="text-start">अन्यथा</td>
+                                <td>0</td>
+                                <td></td>
+                                <td><input type="text" class="form-control" name="earnings_net_profit_18_detail" value="{{ $clientInputs['earnings_net_profit_18_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -1034,7 +1048,7 @@
                                 </td>
                                 <td></td>
                                 <td>2</td>
-                                <td> </td>
+                                <td> <input type="text" class="form-control" name="earnings_net_profit_25_detail" value="{{ $clientInputs['earnings_net_profit_25_detail'] ?? '' }}"></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="fw-bold" style="text-align:right;background: #ffff99;">एकूण गुण</td>
@@ -1084,7 +1098,7 @@
                             <tr>
                                 <td class="text-start">अ) वैधानिक लेखापरीक्षण अहवालाचा दोष दुरुस्ती अहवाल विहित
                                     मुदतीत सारद केला असल्यास</td>
-                                <td>1</td>
+                                <td>2</td>
                                 <td><input type="text" class="form-control" name="sysctrl_tech_audit_correction" value="{{ $clientInputs['sysctrl_tech_audit_correction'] ?? '' }}"></td>
                             </tr>
                             <tr>
@@ -1122,7 +1136,7 @@
                             <tr>
                                 <td>6</td>
                                 <td class="text-start">शाखा व मुख्यालय खाती जुळतात अथवा जुळत नसल्यास याबाबत
-                                    तयार केलेल्या मेळपत्रकानुसार बाक्या जुळतात व त्यामुध्ये तीन महिन्यापेशा जास्त काळाच्या नोंदी प्रलबीत नसल्यास </td>
+                                    तयार केलेल्या मेळपत्रकानुसार बाक्या जुळतात व त्यामध्ये तीन महिन्यापेश्रा जास्त काळाच्या नोंदी प्रलबीत नसल्यास </td>
                                 <td>1</td>
                                 <td><input type="text" class="form-control" name="sysctrl_bank_reconciliation" value="{{ $clientInputs['sysctrl_bank_reconciliation'] ?? '' }}"></td>
                             </tr>
@@ -1138,7 +1152,7 @@
                                 <td class="text-start">बँक खाते बाक्या पासबुक/दाखला यांचेशी जुळत असल्यास अथवा
                                     जुळत नसल्यास याबाबत तयार मेळपत्रकानुसार बाक्या जुळतात व
                                     त्यामध्ये तीन महिन्यापेक्षा जास्त काळाच्या नोंदी प्रलंबित नसल्यास</td>
-                                <td>1</td>
+                                <td>2</td>
                                 <td><input type="text" class="form-control" name="sysctrl_bank_passbook_match" value="{{ $clientInputs['sysctrl_bank_passbook_match'] ?? '' }}"></td>
                             </tr>
                             <tr>

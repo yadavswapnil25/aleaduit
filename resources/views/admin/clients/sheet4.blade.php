@@ -57,7 +57,7 @@ $auditPeriod = $client->year->audit_year;
                     <div class="fw-bold mb-2">2) हिशोब पध्दती व अंतर्गत नियंत्रण :-</div>
                     <div class="ps-3">
                         संस्थेच्या तपासणी कालावधीत संस्थेकडे नियमित कर्मचारी वर्ग नेमल्याचे दिसून येत
-                        आहे. संस्थेचा संपूर्ण हिशोब हे संस्थेचे सचिव <b>{{$client->vice_chairman}}</b> यांनी संस्थेचे दैनंदिन हिशोब
+                        आहे. संस्थेचा संपूर्ण हिशोब हे संस्थेचे सचिव <b>{{$client->manager}}</b> यांनी संस्थेचे दैनंदिन हिशोब
                         चांगल्या प्रकारे लिहिले आहेत. त्यांना दरमहा रु. <span><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="mandanadhan" value="{{ isset($clientInputs['mandanadhan']) ? $clientInputs['mandanadhan'] : '' }}"></span> मानधन देण्यात येत आहे. संस्थेला
                         संपूर्ण सभासंदानी केलेल्या सहकार्याने संस्था नियमीत प्रगतीपथाकडे वाटचाल करीत आहे. हे
                         संस्थेच्या आर्थिक परिस्थितीवरून दिसून येते याकडे संचालक मंडळाने विशेष लक्ष देणे गरजेचे
@@ -137,7 +137,7 @@ $auditPeriod = $client->year->audit_year;
                         अ) आमसभा :- <br>
                         संस्थेची सन <span>01/04/{{$start}} ते 31/03/{{$end}}</span> ची आमसभा दिनांक <span><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="general_meeting_date" value="{{ $clientInputs['general_meeting_date'] ?? '' }}"></span> ला संस्थेचे कार्यालय, <span><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="meeting_office" value="{{ $clientInputs['meeting_office'] ?? '' }}"></span> येथे संस्थेच्या अध्यक्षतेखाली घेण्यात आली असून सभेला एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="meeting_attendance" value="{{ $clientInputs['meeting_attendance'] ?? '' }}"></span> सभासद हजर होते.
                         <br>
-                        सभेमध्ये एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="tarav_ratio" value="{{ $clientInputs['tarav_ratio'] ?? '' }}"></span> ठरारावर चर्चा करण्यात आली असून योग्य ते निर्णय घेण्यात आले. सर्व ठराव सभासदांनी एकमताने मंजूर दिल्याचे इतिवृत्त पुस्तकावरून दिसून येते.
+                        सभेमध्ये एकूण <span><input type="text" class="form-control d-inline-block" style="width:60px;display:inline;" name="tarav_ratio" value="{{ $clientInputs['tarav_ratio'] ?? '' }}"></span> ठरावावर चर्चा करण्यात आली असून योग्य ते निर्णय घेण्यात आले. सर्व ठराव सभासदांनी एकमताने मंजूर दिल्याचे इतिवृत्त पुस्तकावरून दिसून येते.
                         <br>
                         ब) संचालक मंडळ सभा :-
                         <br>
@@ -305,7 +305,7 @@ $auditPeriod = $client->year->audit_year;
 
                 <!-- 10) लेखापरीक्षकाच्या निरीक्षणानुसार नमूद करावयाचे मुद्दे :- -->
                 <div class="mt-4">
-                    <div class="fw-bold mb-2">1) लेखापरीक्षकाच्या निरीक्षणानुसार नमूद करावयाचे मुद्दे :-</div>
+                    <div class="fw-bold mb-2">1) लेखापरीक्षकाच्या नीषकर्ष नूसार नमूद करावयाचे मुद्दे :-</div>
                     <div class="ps-3">
                         <table class="table table-bordered text-center align-middle" style="min-width:700px;">
                             <thead>
@@ -313,15 +313,29 @@ $auditPeriod = $client->year->audit_year;
                                     <th>अ. क्र.</th>
                                     <th>तपशील</th>
                                     <th>संस्थेचे आर्थिक पत्रकानुसार</th>
-                                    <th>लेखापरीक्षकाच्या निरीक्षणानुसार</th>
+                                    <th>लेखापरीक्षकाच्या नीषकर्ष नूसार</th>
                                     <th>फरक</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    @php
+                        $sum_current =
+                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
+                        $minus_current =
+                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
+
+                        $total_networth_current = $sum_current - $minus_current;
+                        @endphp
                                     <td>1</td>
                                     <td>स्वनिधी (नेटवर्थ)</td>
-                                    <td>{{$client['स्वनिधी_sum']}}</td>
+                                    <td>{{$total_networth_current}}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_auditor" value="{{ $clientInputs['networth_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_diff" value="{{ $clientInputs['networth_diff'] ?? '' }}"></td>
                                 </tr>
@@ -335,7 +349,10 @@ $auditPeriod = $client->year->audit_year;
                                 <tr>
                                     <td>3</td>
                                     <td>कर्ज/ठेवी प्रमाण (CD Ratio)</td>
-                                    <td>{{ number_format(($client['CR_ratio']), 2) }}</td>
+                                    @php
+                                    $total1= ($total_networth_current - $client['राखीव निधी_sum_currentYear'] -$client['कायम मालमत्ता_sum_currentYear']- $client['इतर भाग'])
+                                    @endphp
+                                    <td>{{ number_format( ( ($client['येणे कर्ज_sum'] - $total1) / $client['ठेवी_sum'] ) * 100, 2) }}</td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_auditor" value="{{ $clientInputs['cd_ratio_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="cd_ratio_diff" value="{{ $clientInputs['cd_ratio_diff'] ?? '' }}"></td>
                                 </tr>
@@ -349,14 +366,21 @@ $auditPeriod = $client->year->audit_year;
                                 <tr>
                                     <td>5</td>
                                     <td>ढोबळ एन. पी. ए. (%)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa" value="{{ $clientInputs['gross_npa'] ?? '' }}"></td>
+                                    @php
+                                    $total2=  @$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount'];
+
+                                    @endphp
+                                    <td><b>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</b></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa_auditor" value="{{ $clientInputs['gross_npa_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="gross_npa_diff" value="{{ $clientInputs['gross_npa_diff'] ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>निव्वळ एन. पी. ए. (%)</td>
-                                    <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa" value="{{ $clientInputs['net_npa'] ?? '' }}"></td>
+                                    @php
+                                    $total6=$total2 - $clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']
+                                    @endphp
+                                    <td><b>{{number_format(($total6 /$client['येणे कर्ज_sum'])*100, 2)}}</b></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa_auditor" value="{{ $clientInputs['net_npa_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa_diff" value="{{ $clientInputs['net_npa_diff'] ?? '' }}"></td>
                                 </tr>
@@ -503,15 +527,9 @@ $auditPeriod = $client->year->audit_year;
                         .
                         <br>
                         अशी तपासणी झाली असल्यास, संस्थेने त्या कालावधीत सहकार खात्याची कलम 89 (अ)(1) अन्वये हुद्दा यांनी तपासणी केली असून त्यांनी संस्थेस दि. <span><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="section_89a1_report_date" value="{{ $clientInputs['section_89a1_report_date'] ?? '' }}"></span>
-                        रोजी अहवाल सादर केला आहे. सदर अहवालाचा दोष दुरुस्ती अहवाल मुदतीत/ मुदतीनंतर सादर केलेबाबत तसेच अहवालातील पुर्तता न झालेल्या दोषांबाबत अभिप्राय नमूद करावेत. नाही
-                        <!-- <span>
-                            <select class="form-control d-inline-block" style="width:150px;display:inline;" name="section_89a1_correction_done">
-                                <option value="">Select</option>
-                                <option value="होय" {{ (isset($clientInputs['section_89a1_correction_done']) && $clientInputs['section_89a1_correction_done'] == 'होय') ? 'selected' : '' }}>होय</option>
-                                <option value="नाही" {{ (isset($clientInputs['section_89a1_correction_done']) && $clientInputs['section_89a1_correction_done'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                            </select>
-                        </span> -->
-                        .
+                        रोजी अहवाल सादर केला आहे. सदर अहवालाचा दोष दुरुस्ती अहवाल मुदतीत/ मुदतीनंतर सादर केलेबाबत तसेच अहवालातील पुर्तता न झालेल्या दोषांबाबत अभिप्राय नमूद करावेत.
+                        <input type="textarea" class="form-control d-inline-block" style="width:600px;display:inline;" name="section_89a1_remarks" value="{{ $clientInputs['section_89a1_remarks'] ?? '' }}">
+                        
                     </div>
                 </div>
 
@@ -821,10 +839,10 @@ $auditPeriod = $client->year->audit_year;
                                 : 0;
                                 @endphp
                                 स्वनिधी वाढीचे प्रमाण <span>{{ $networth_increase_percent }}</span>% आहे. स्वनिधीचे खेळत्या भांडवलाशी प्रमाण
-                                <span>{{ $working_capital_percent }}</span>% आहे. स्वनिधीप्रमाणे सन <span><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_year_for_loan" value="{{ $clientInputs['networth_year_for_loan'] ?? '' }}"></span> (पुढीलवर्षी) मध्ये कर्ज वाटपाचे धोरण निश्चित करावे.</span>
+                                <span><b>{{number_format(( $total_networth_current / $client['खेळते भागभांडवल_sum']) * 100, 2)}}</b></span>% आहे. स्वनिधीप्रमाणे सन <span><input type="text" class="form-control d-inline-block" style="width:150px;display:inline;" name="networth_year_for_loan" value="{{ $clientInputs['networth_year_for_loan'] ?? '' }}"></span> (पुढीलवर्षी) मध्ये कर्ज वाटपाचे धोरण निश्चित करावे.</span>
                         </div>
                         <div class="mt-2">
-                            संस्थेच्या एका भागाची दर्शनी किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span> असून एकूण वस्तुम भागसंख्या <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_total_count" value="{{ $clientInputs['share_total_count'] ?? '' }}"></span> आहे. स्वनिधीनुसार एका भागाची किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_value_by_networth" value="{{ $clientInputs['share_value_by_networth'] ?? '' }}"></span> आहे . महाराष्ट्र सहकारी संस्था नियम क्रमांक महाराष्ट्र . 23 अन्वये भाग रक्कम परत करतांना भागाचे मूल्यांपेक्षा दर्शनी किंमत यापैकी जी कमी असेल ती रक्कम <span>परत करावे</span> .
+                            संस्थेच्या एका भागाची दर्शनी किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_face_value" value="{{ $clientInputs['share_face_value'] ?? '' }}"></span> असून एकूण वसूल भागसंख्या <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_total_count" value="{{ $clientInputs['share_total_count'] ?? '' }}"></span> आहे. स्वनिधीनुसार एका भागाची किंमत रु. <span><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="share_value_by_networth" value="{{ $clientInputs['share_value_by_networth'] ?? '' }}"></span> आहे . महाराष्ट्र सहकारी संस्था नियम क्रमांक महाराष्ट्र . 23 अन्वये भाग रक्कम परत करतांना भागाचे मूल्यांपेक्षा दर्शनी किंमत यापैकी जी कमी असेल ती रक्कम <span>परत करावे</span> .
                             <input type="text" class="form-control d-inline-block" style="width:600px;display:inline;" name="share_return_remarks" value="{{ $clientInputs['share_return_remarks'] ?? '' }}">
                         </div>
                     </div>

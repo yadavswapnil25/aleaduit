@@ -630,7 +630,16 @@
                                     </select>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td>6)मृत, काढून टाकलेल्या व राजीनामा दिलेल्या सभासदांच्या बाबतीत त्यांचा नावापुढे वरील प्रमाणे योग्य ती नोंद केलीआहे काय ?</td>
+                                <td>
+                                    <select class="form-control" name="member_register_maintained_rule_34">
+                                        <option value="">Select</option>
+                                        <option value="होय" {{ (isset($clientInputs['member_register_maintained_rule_34']) && $clientInputs['member_register_maintained_rule_34'] == 'होय') ? 'selected' : '' }}>होय</option>
+                                        <option value="नाही" {{ (isset($clientInputs['member_register_maintained_rule_34']) && $clientInputs['member_register_maintained_rule_34'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                                    </select>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>7)राजीनामे रीतसर आहेत काय आणि ते यथोचितरीत्या
                                     स्वीकारले आहेत काय?</td>

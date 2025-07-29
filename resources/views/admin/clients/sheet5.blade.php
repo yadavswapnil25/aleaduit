@@ -58,6 +58,8 @@
                         <b> <span>{{$client['वसुल भाग भागभांडवल_sum_currentYear']}}</span></b>
                         झालेले आहे. सदरचे वसूल भागभांडवल अधिकृत भागभांडवलापेक्षा
                         <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_less_than_authorized">
+                            <option value="">Select</option>
+
                             <option value="कमी" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'कमी') ? 'selected' : '' }}>कमी</option>
                             <option value="जास्त" {{ (isset($clientInputs['share_capital_less_than_authorized']) && $clientInputs['share_capital_less_than_authorized'] == 'जास्त') ? 'selected' : '' }}>जास्त</option>
                         </select>
@@ -71,9 +73,11 @@
     ? number_format((($client['वसुल भाग भागभांडवल_sum_currentYear'] - $client['वसुल भाग भागभांडवल_sum_lastYear']) / $client['वसुल भाग भागभांडवल_sum_lastYear']) * 100, 2) 
     : '0.00' 
 }}
-                           </b> </span> % आहे. भागभांडवल यादीची रक्कम
+                                </b> </span> % आहे. भागभांडवल यादीची रक्कम
                             ताळेबंदातील रक्कमेशी जुळत
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="share_capital_matches">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['share_capital_matches']) && $clientInputs['share_capital_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['share_capital_matches']) && $clientInputs['share_capital_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -102,25 +106,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @php
+                                @php
                                 $totalCurrentYear = $client['राखीव निधी_sum_currentYear'];
                                 $totalLastYear = $client['राखीव निधी_sum_lastYear'];
                                 $totalDiff = $client['राखीव निधी_sum_currentYear'] - $client['राखीव निधी_sum_lastYear'];
                                 $i = 2;
-                            @endphp
-                            <tr>
-                                <td>1</td>
-                                <td>राखीव निधी</td>
-                                <td>{{ number_format($client['राखीव निधी_sum_lastYear'], 2) }}</td>
-                                <td>{{ number_format($client['राखीव निधी_sum_currentYear'], 2) }}</td>
-                                <td>{{ number_format($client['राखीव निधी_sum_currentYear'] - $client['राखीव निधी_sum_lastYear'], 2) }}</td>
-                                <td></td>
-                            </tr>
-                            @foreach($client['इतर सर्व निधी'] as $c)
+                                @endphp
+                                <tr>
+                                    <td>1</td>
+                                    <td>राखीव निधी</td>
+                                    <td>{{ number_format($client['राखीव निधी_sum_lastYear'], 2) }}</td>
+                                    <td>{{ number_format($client['राखीव निधी_sum_currentYear'], 2) }}</td>
+                                    <td>{{ number_format($client['राखीव निधी_sum_currentYear'] - $client['राखीव निधी_sum_lastYear'], 2) }}</td>
+                                    <td></td>
+                                </tr>
+                                @foreach($client['इतर सर्व निधी'] as $c)
                                 @php
-                                    $totalCurrentYear += $c->currentYear;
-                                    $totalLastYear += $c->lastYear;
-                                    $totalDiff += ($c->currentYear - $c->lastYear);
+                                $totalCurrentYear += $c->currentYear;
+                                $totalLastYear += $c->lastYear;
+                                $totalDiff += ($c->currentYear - $c->lastYear);
                                 @endphp
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -130,16 +134,16 @@
                                     <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
                                     <td></td>
                                 </tr>
-                            @endforeach
-                            <tr>
-                                <td class="fw-bold">एकूण</td>
-                                <td></td>
-                                <td>{{ number_format($totalLastYear, 2) }}</td>
-                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                <td>{{ number_format($totalDiff, 2) }}</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                                @endforeach
+                                <tr>
+                                    <td class="fw-bold">एकूण</td>
+                                    <td></td>
+                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalDiff, 2) }}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -149,6 +153,8 @@
                             तसेच लेखापरिक्षण कालवधीत काही निधींचा
                             विनियोग झालेला असल्यास तो योग्य पध्द्तीने झालेला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="funds_utilization_proper">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['funds_utilization_proper']) && $clientInputs['funds_utilization_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['funds_utilization_proper']) && $clientInputs['funds_utilization_proper'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -158,16 +164,16 @@
                     <div class="mb-2">
                         <span>वरील सर्व निधींची कलम 70 व नियम 54,55 प्रमाणे संस्थेने स्वतंत्रपणे गुंतवणूक केली
                         </span>
-                          <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared1">
-                                <option value="">Select</option>
-                                <option value="आहे" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
-                                <option value="नाही" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                            </select>
-                            <span>
-                        निधी विनियोगांची
+                        <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared1">
+                            <option value="">Select</option>
+                            <option value="आहे" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                            <option value="नाही" {{ (isset($clientInputs['fund_investment_policy_prepared1']) && $clientInputs['fund_investment_policy_prepared1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                        </select>
+                        <span>
+                            निधी विनियोगांची
                             नियमावली तयार करण्यात आली
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_investment_policy_prepared">
-                                                                <option value="">Select</option>
+                                <option value="">Select</option>
                                 <option value="आहे" {{ (isset($clientInputs['fund_investment_policy_prepared']) && $clientInputs['fund_investment_policy_prepared'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['fund_investment_policy_prepared']) && $clientInputs['fund_investment_policy_prepared'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -243,6 +249,8 @@
                             </span>
                             लाख इतकी
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_computerized_1">
+                                <option value="">Select</option>
+
                                 <option value="वाढ" {{ (isset($clientInputs['deposit_list_computerized_1']) && $clientInputs['deposit_list_computerized_1'] == 'वाढ') ? 'selected' : '' }}>वाढ</option>
                                 <option value="घट" {{ (isset($clientInputs['deposit_list_computerized_1']) && $clientInputs['deposit_list_computerized_1'] == 'नाही') ? 'selected' : '' }}>घट</option>
                             </select>
@@ -258,11 +266,15 @@
                             % पर्यंत आकारलेला आहे. संस्थेचे कामकाज संगणकीकृत
                             असल्याने ठेव यादयासंगणक प्रणालीव्दारे काढलेल्या
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_computerized">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['deposit_list_computerized']) && $clientInputs['deposit_list_computerized'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['deposit_list_computerized']) && $clientInputs['deposit_list_computerized'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                             . ताळेबंदाशी ठेव यादया जुळत
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="deposit_list_matches">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['deposit_list_matches']) && $clientInputs['deposit_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['deposit_list_matches']) && $clientInputs['deposit_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -328,22 +340,28 @@
                     </div>
                     <div class="mb-2">
                         संस्थेचे कामकाज संगणकीकृत असल्याने देय व्याजाच्या तरतुदी संगणक प्रणालीद्वारे काढलेल्या.
-                          <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement1">
-                        <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
-                        <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
-                    </select>
-                         काही देय
+                        <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement1">
+                            <option value="">Select</option>
+
+                            <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                            <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement1']) && $clientInputs['cash_safe_arrangement1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                        </select>
+                        काही देय
                         ठेव खात्यांची व्याजाची आकारणी तपासणी केली असता त्यामध्ये फरक दिसुन
                         <span>
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_diff_found">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['interest_diff_found']) && $clientInputs['interest_diff_found'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </span>
                         . या ठेवीच्या व्याजाच्या
                         तरतुदी प्रमाणात केल्या आहेत. त्याचा परिणाम नफा/तोटयावर
-                        झाला.  <span>
+                        झाला. <span>
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="interest_diff_found1">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['interest_diff_found1']) && $clientInputs['interest_diff_found1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['interest_diff_found1']) && $clientInputs['interest_diff_found1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -415,49 +433,49 @@
                     <span style="font-weight:bold;">रु. {{$client['शाखा ठेवी देणे_sum_currentYear']}}</span>
                 </div>
                 <table class="table table-bordered text-center align-middle" style="min-width:700px;">
-                            <thead>
-                                <tr>
-                                    <th>अ.क्र.</th>
-                                    <th>देणे रकमाचा तपशील</th>
-                                    <th>गतवर्षे अखेर रु.</th>
-                                    <th>चालूवर्षे अखेर रु.</th>
-                                    <th>फरक</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <thead>
+                        <tr>
+                            <th>अ.क्र.</th>
+                            <th>देणे रकमाचा तपशील</th>
+                            <th>गतवर्षे अखेर रु.</th>
+                            <th>चालूवर्षे अखेर रु.</th>
+                            <th>फरक</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                @php $i = 1; @endphp
-                                @php
-                                $totalCurrentYear = 0;
-                                $totalLastYear =0;
-                                $totalDiff = 0;
-                                @endphp
-                                @foreach( $client['शाखा ठेवी देणे'] as $c)
-                                @php
-                                $totalCurrentYear += $c->currentYear;
-                                $totalLastYear += $c->lastYear;
-                                $totalDiff += ($c->currentYear - $c->lastYear);
-                                @endphp
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $c->entity }}</td>
-                                    <td>{{ number_format($c->lastYear, 2) }}</td>
-                                    <td>{{ number_format($c->currentYear, 2) }}</td>
-                                    <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
-                                </tr>
-                                @endforeach
-                                <tr>
-                                    <td class="fw-bold">एकूण</td>
-                                    <td></td>
-                                    <td>{{ number_format($totalLastYear, 2) }}</td>
-                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                    <td>{{ number_format($totalDiff, 2) }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        @php $i = 1; @endphp
+                        @php
+                        $totalCurrentYear = 0;
+                        $totalLastYear =0;
+                        $totalDiff = 0;
+                        @endphp
+                        @foreach( $client['शाखा ठेवी देणे'] as $c)
+                        @php
+                        $totalCurrentYear += $c->currentYear;
+                        $totalLastYear += $c->lastYear;
+                        $totalDiff += ($c->currentYear - $c->lastYear);
+                        @endphp
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $c->entity }}</td>
+                            <td>{{ number_format($c->lastYear, 2) }}</td>
+                            <td>{{ number_format($c->currentYear, 2) }}</td>
+                            <td>{{ number_format(($c->currentYear - $c->lastYear), 2) }}</td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td class="fw-bold">एकूण</td>
+                            <td></td>
+                            <td>{{ number_format($totalLastYear, 2) }}</td>
+                            <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                            <td>{{ number_format($totalDiff, 2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="mb-2">
                     शाखा येणे देणे रक्कमांमध्ये फरक असल्यास या फ़रकाबाबत सखोल तपासणी करुन अभिप्राय नमुद करावेत.
-
+                    <input type="text" class="form-control" style="width:1000px;display:inline;" name="branch_payables_comments" value="{{ $clientInputs['branch_payables_comments'] ?? '' }}">
                 </div>
 
                 <!-- 7. देय कर्ज -->
@@ -504,7 +522,7 @@
                         <option value="मेळ जुळते नाही" {{ (isset($clientInputs['bank_balance_correct_option1']) && $clientInputs['bank_balance_correct_option1'] == 'मेळ जुळते नाही') ? 'selected' : '' }}>मेळ जुळते नाही</option>
 
                     </select>
-                    </div>
+                </div>
 
                 <!-- 8. संचीत नफा -->
                 <div class="mb-2">
@@ -514,8 +532,10 @@
                 <div class="mb-2">
                     सदर बाकी दि.<span>31/03/{{$end}}</span> अखेर ताळेबंदा प्रमाणे असुन मागील वर्षाचा संचीत नफा तोटा <span><b>{{$client['संचित नफा_sum_lastYear']}}</b></span> अधिक/व चालू वर्षाचा नफा/तोटा <span><b>{{$client['नफा_तोटा_sum_currentYear']}}</b></span> एकूण संचीत नफा <span><b>{{$client['संचित नफा_sum_currentYear']}}</b></span> बरोबर आहे.
                     आवष्यक
-                    तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता 
+                    तरतूद न केल्यामुळे संचीत नफा प्रमाणीत करता
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="retained_profit_certified">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['retained_profit_certified']) && $clientInputs['retained_profit_certified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -539,23 +559,31 @@
                     शाखासह एकूण रोख शिल्लक रु. <span>{{$client['रोख शिल्लक_sum_currentYear']}}</span> आहे. दैनंदिन पध्दतीने रोखता तरलता रजिस्टर ठेवलेले आहे. रोखता
                     उपविधीतील नियमानुसार मर्यादेत ठेवली
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_register_verified">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['cash_register_verified']) && $clientInputs['cash_register_verified'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_register_verified']) && $clientInputs['cash_register_verified'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     . ज्यादाची रोखतेचा परिणाम संस्थेच्या उत्पन्नावर होत
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="excess_cash_affects_income">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['excess_cash_affects_income']) && $clientInputs['excess_cash_affects_income'] == 'आहे') ? 'selected' : '' }}> आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['excess_cash_affects_income']) && $clientInputs['excess_cash_affects_income'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     .
                     <br>
-                    लेखापरीक्षणाचेवेळी दि. <input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '' }}"> रोजी अखेर/आरंभीची रोख शिल्लक  रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
+                    लेखापरीक्षणाचेवेळी दि. <input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="cash_balance_bank_date" value="{{ $clientInputs['cash_balance_bank_date'] ?? '' }}"> रोजी अखेर/आरंभीची रोख शिल्लक रोजी रु. <span style="background: yellow;"><input type="text" class="form-control d-inline-block" style="width:120px;display:inline;" name="cash_balance_bank_amount" value="{{ $clientInputs['cash_balance_bank_amount'] ?? '' }}"></span> मोजली असुन ती रोजकिर्दीप्रमाणे बरोबर आहे . रोख शिल्लक विम्याच्या प्रमाणात
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_certificate_available">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_certificate_available']) && $clientInputs['cash_certificate_available'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     . रोख शिल्लकाची सुरक्षिततेची तिजोरी, लॉकर यांची व्यवस्था
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="cash_safe_arrangement">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['cash_safe_arrangement']) && $clientInputs['cash_safe_arrangement'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -566,9 +594,9 @@
                 <div class="mt-4 mb-2">
                     <span style="font-weight:bold;"> रोख शिल्लक रक्कम जवळ बाळगणेबाबत रोखपालास अधिकार दिलेबाबतचा
                         तपशील विपद करा.
-                    <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="cash_keeper_details" value="{{ $clientInputs['cash_keeper_details'] ?? '' }}">
+                        <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="cash_keeper_details" value="{{ $clientInputs['cash_keeper_details'] ?? '' }}">
                     </span>
-                    रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेबाबतचा तपशील नमूद करा                    
+                    रोखपालाकडून जामिनकीचे बॉंड व सुरक्षा ठेव रक्कम घेतलेबाबतचा तपशील नमूद करा
                     <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="cash_balance_violation_details1" value="{{ $clientInputs['cash_balance_violation_details1'] ?? '' }}">
 
                 </div>
@@ -746,26 +774,34 @@
                 </div>
                 <div class="mb-2">
                     <ol class="mb-2" style="padding-left: 20px;">
-                        <li>संस्थेने सादर केलेल्या सर्व गुंतवणूक यादीनुसार गुंतवणूक रक्कम जुळत -
+                        <li>संस्थेने सादर केलेल्या यादीनुसार गुंतवणूक रक्कम जुळत -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_list_matches">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_list_matches']) && $clientInputs['investment_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
                         <li>गुंतवणूकीचे दाखले/ठेव पावत्या तपासले
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_available1">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['investment_certificates_available1']) && $clientInputs['investment_certificates_available1'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_certificates_available1']) && $clientInputs['investment_certificates_available1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
                         <li>राखीव निधी, इमारत निधी व इतर कायदेशीर निधीची स्वतंत्र गुंतवणूक केलेली -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="statutory_funds_invested">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['statutory_funds_invested']) && $clientInputs['statutory_funds_invested'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['statutory_funds_invested']) && $clientInputs['statutory_funds_invested'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
                         </li>
                         <li>निधीचे व्यवस्थापन योग्यरीत्या केले -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="fund_management_proper">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['fund_management_proper']) && $clientInputs['fund_management_proper'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -775,6 +811,8 @@
                         </li>
                         <li>गुंतवणूक चढउतार निधीसाठी पुरेशा प्रमाणात केले -
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="investment_certificates_compliant">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['investment_certificates_compliant']) && $clientInputs['investment_certificates_compliant'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['investment_certificates_compliant']) && $clientInputs['investment_certificates_compliant'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -858,11 +896,15 @@
                     </span>
                     व्याज आकारणी केली आहे. संस्थेचे कामकाज संगणकीकृत असल्याने कर्जे यादया संगणक प्रणालीद्वारे काढलेल्या
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_list_computerized">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['loan_list_computerized']) && $clientInputs['loan_list_computerized'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['loan_list_computerized']) && $clientInputs['loan_list_computerized'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
                     . ताळेबंदाशी कर्जे यादया जुळत
                     <select class="form-control d-inline-block" style="width:80px;display:inline;" name="loan_list_matches">
+                        <option value="">Select</option>
+
                         <option value="आहे" {{ (isset($clientInputs['loan_list_matches']) && $clientInputs['loan_list_matches'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                         <option value="नाही" {{ (isset($clientInputs['loan_list_matches']) && $clientInputs['loan_list_matches'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                     </select>
@@ -879,7 +921,7 @@
                     <span style="font-weight:bold;">5. शाखा येणे देणे :-</span>
                     <span style="font-weight:bold;">रु. {{ $client['शाखा ठेवी देणे_sum_currentYear'] ?? 0 }}</span>
                 </div>
-                 <div>
+                <div>
                     <table class="table table-bordered text-center align-middle" style="min-width:950px;">
                         <thead>
                             <tr>
@@ -926,6 +968,7 @@
                 </div>
                 <div class="mb-2">
                     शाखा येणे देणे रक्कमांमध्ये फरक असल्यास या फरकाबाबत सखोल तपासणी करून अभिप्राय नमूद करावा.
+                    <input type="text" class="form-control" name="शाखा येणे देणे_remarks" value="{{ $clientInputs['शाखा येणे देणे_remarks'] ?? '' }}">
                 </div>
                 <div class="mb-2">
                     <span style="font-weight:bold;">6. स्थावर व जंगम मालमत्ता: {{$client['कायम मालमत्ता_sum_currentYear']}}</span>
@@ -986,6 +1029,7 @@
                         <li>
                             संस्थेने मालमत्तेवर नियमाप्रमाणे घसारा आकारणी केलेली आहे का?
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="depreciation_applied">
+                                <option value="">Select</option>
                                 <option value="होय" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'होय') ? 'selected' : '' }}>होय</option>
                                 <option value="नाही" {{ (isset($clientInputs['depreciation_applied']) && $clientInputs['depreciation_applied'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -993,6 +1037,8 @@
                         <li>
                             संस्थेने अद्यावत मालमत्ता रजिस्टर ठेवलेले आहे का?
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="asset_register_maintained">
+                                <option value="">Select</option>
+
                                 <option value="आहे" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>
@@ -1005,8 +1051,10 @@
                             मालमत्तांची विक्री विविध कार्यपद्धती अवलंबून झाली.
                         </li>
                         <li>
-                            सदर विक्रीतुन संस्थेस नफा/तोटा झाला असल्यास त्यांचा जमाखर्च लेखे मानांकनाप्रमाणे केलेला 
+                            सदर विक्रीतुन संस्थेस नफा/तोटा झाला असल्यास त्यांचा जमाखर्च लेखे मानांकनाप्रमाणे केलेला
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="member_asset_loss_applied">
+                                <option value="">Select</option>
+
                                 <option value="लागु आहे" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'लागु आहे') ? 'selected' : '' }}>लागु आहे</option>
                                 <option value="लागु नाही" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'लागु नाही') ? 'selected' : '' }}>लागु नाही</option>
                                 <option value="आहे" {{ (isset($clientInputs['member_asset_loss_applied']) && $clientInputs['member_asset_loss_applied'] == 'आहे') ? 'selected' : '' }}>आहे</option>
@@ -1028,7 +1076,7 @@
                             <tr>
                                 <th>अ.क्र.</th>
                                 <th>तपशील</th>
-                                  <th>गतवर्षा अखेर रु.</th>
+                                <th>गतवर्षा अखेर रु.</th>
                                 <th>चालू वर्षा अखेर रु.</th>
                                 <th>वाढ/घट</th>
                             </tr>
@@ -1069,53 +1117,54 @@
                 <div class="mb-2">
                     <span class="fw-bold">9.घेणे व्याज :-</span>
                     <span style="font-weight:bold;">रु. {{ $client['घेणे व्यज_sum_currentYear']}}</span>
-                     <div>
-                    <table class="table table-bordered text-center align-middle" style="min-width:950px;">
-                        <thead>
-                            <tr>
-                                <th>अ.क्र.</th>
-                                <th>तपशील</th>
-                                  <th>गतवर्षा अखेर रु.</th>
-                                <th>चालू वर्षा अखेर रु.</th>
-                                <th>वाढ/घट</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php $i = 1; @endphp
-                            @php
-                            $totalCurrentYear = 0;
-                            $totalLastYear = 0;
-                            $totalDiff = 0;
-                            @endphp
-                            @foreach($client['घेणे व्यज'] as $c)
-                            @php
-                            $totalCurrentYear += $c->currentYear;
-                            $totalLastYear += $c->lastYear;
-                            $totalDiff += ($c->currentYear - $client->lastYear);
-                            @endphp
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c->entity }}</td>
-                                <td>{{ number_format($c->lastYear, 2) }}</td>
-                                <td>{{ number_format($c->currentYear, 2) }}</td>
-                                <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
-                            </tr>
-                            @endforeach
+                    <div>
+                        <table class="table table-bordered text-center align-middle" style="min-width:950px;">
+                            <thead>
+                                <tr>
+                                    <th>अ.क्र.</th>
+                                    <th>तपशील</th>
+                                    <th>गतवर्षा अखेर रु.</th>
+                                    <th>चालू वर्षा अखेर रु.</th>
+                                    <th>वाढ/घट</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i = 1; @endphp
+                                @php
+                                $totalCurrentYear = 0;
+                                $totalLastYear = 0;
+                                $totalDiff = 0;
+                                @endphp
+                                @foreach($client['घेणे व्यज'] as $c)
+                                @php
+                                $totalCurrentYear += $c->currentYear;
+                                $totalLastYear += $c->lastYear;
+                                $totalDiff += ($c->currentYear - $client->lastYear);
+                                @endphp
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->entity }}</td>
+                                    <td>{{ number_format($c->lastYear, 2) }}</td>
+                                    <td>{{ number_format($c->currentYear, 2) }}</td>
+                                    <td>{{number_format(($c->currentYear - $c->lastYear),2) }}</td>
+                                </tr>
+                                @endforeach
 
-                            <tr>
-                                <td class="fw-bold">एकूण</td>
-                                <td></td>
-                                <td>{{ number_format($totalLastYear, 2) }}</td>
-                                <td>{{ number_format($totalCurrentYear, 2) }}</td>
-                                <td>{{ number_format($totalDiff, 2) }}</td>
+                                <tr>
+                                    <td class="fw-bold">एकूण</td>
+                                    <td></td>
+                                    <td>{{ number_format($totalLastYear, 2) }}</td>
+                                    <td>{{ number_format($totalCurrentYear, 2) }}</td>
+                                    <td>{{ number_format($totalDiff, 2) }}</td>
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="mb-2">
                     दि. <span>31/03/2025</span> अखेर संस्थेस खालीलप्रमाणे इतर रक्कम घेणे आहे.
+                    <input type="text" class="form-control d-inline-block" style="width:500px;display:inline;" name="other_receivables_details" value="{{ $clientInputs['other_receivables_details'] ?? '' }}">
                 </div>
                 <div>
 
@@ -1131,7 +1180,7 @@
                     अधिक/व चालू वर्षाचा नफा/तोटा रु. <span><b>{{$client['नफा/तोटा_sum_currentYear']}}</b></span>
                     <span></span>
                     एकूण संचीत तोटा रु. <b>{{$client['नफा/तोटा_sum_currentYear']}}</b>
-                   
+
                     बरोबर आहे. आवष्यक तरतुद न केल्यामुळे संचीत तोटा प्रमाणीत करता येत नाही.
                     <br>
                     नफा वाटणी कायदा कलम 65 व पोटनियम 73 मधील तरतुदी प्रमाणे करण्यात यावे.
