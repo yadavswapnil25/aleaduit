@@ -130,7 +130,7 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold" style="text-align:left;">निव्वळ नफा</td>
-                                <td>{{$client['नफा_तोटा_sum_lastYear']}}</td>
+                                <td></td>
                                 @if($totalIncomeLastYear - $totalExpLastYear > 0)
                                 <td>{{ $totalIncomeLastYear - $totalExpLastYear}}</td>
                                 @else
@@ -909,7 +909,7 @@
                 <div class="mb-4">
 
                     <div class="mb-2">
-                        <span class="fw-bold">4. एन.पी.ए. प्रमाण ए ची तरतूद केले. सी.एल.एन -
+                        <span class="fw-bold">3.अनुत्पादित जिंदगी  
                             <span style="font-weight:bold;">
                                 <select class="form-control d-inline-block" style="width:80px;display:inline;" name="npa_provision_cln">
                                     <option value="">Select</option>
@@ -919,6 +919,7 @@
                             </span>
                         </span>
                     </div>
+                    अनुत्पादित कर्जाची करावयाची तरतुद
                     <div class="container my-4">
                         <table class="table table-bordered">
                             <thead class="table-light">
@@ -1112,8 +1113,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <span class="fw-bold">एन.पी.ए. सारांश व प्रमाणे :</span>
-                    <div class="mb-2">
+                     <div class="mb-2">
                         अहवाल वर्षअखेर एकूण <span><b>{{$client['येणे कर्ज_sum']}}</b></span> कर्जे त्यातील एनपीएमध्ये असलेली कर्जे येणे बाकी <span><b>{{@$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount']}}</b></span> आहे. व त्यापोटी संस्थेने रु. 
                         <span><b>{{ number_format($total7 + $total8 + $calcTotal9 + $calcTotal14 + $calcTotal10 + $calcTotal11 + $calcTotal12 + $calcTotal13 + $calcTotal15, 2) }}</b></span> तरतूद करणे आवश्यक असताना प्रत्यक्षात रु. 
                         <span><b>{{ number_format(@$clientInputs['npa_summary_overdue_npa71_amount'] + @$clientInputs['npa_summary_overdue_npa81_amount'] + @$clientInputs['npa_summary_overdue_npa91_amount'] + @$clientInputs['npa_summary_overdue_npa141_amount'] + @$clientInputs['npa_summary_overdue_npa101_amount'] + @$clientInputs['npa_summary_overdue_npa111_amount'] + @$clientInputs['npa_summary_overdue_npa121_amount'] + @$clientInputs['npa_summary_overdue_npa131_amount'] + @$clientInputs['npa_summary_overdue_npa151_amount'], 2) }}</b></span> तरतूद केली आहे. म्हणजेच रु. 
@@ -1122,6 +1122,14 @@
                     <div class="mb-2">
                         (टिप - लेखापरीक्षकाने संस्थेने दिलेले अनुत्पादक कर्जाचे जिंदगी तपासून प्रमाणित करून स्वतंत्र रित्या लेखापरीक्षण अहवालासोबत जोडण्यात यावी)
                     </div>
+                    <span class="fw-bold">4. एन.पी.ए. प्रमाण  एन.पी. ए ची तरतुद केले 
+                    <select name="npa_provision_npa">
+                        <option value="">Select</option>
+                        <option value="नाही" {{ (isset($clientInputs['npa_provision_npa']) && $clientInputs['npa_provision_npa'] == 'नाही') ? 'selected' : '' }}>नाही</option>
+                        <option value="आहे" {{ (isset($clientInputs['npa_provision_npa']) && $clientInputs['npa_provision_npa'] == 'आहे') ? 'selected' : '' }}>आहे</option>
+                    </select>
+                    :</span>
+                   
                     <div class="mb-2">
                         <table class="table table-bordered text-center align-middle" style="min-width:900px;">
                             <thead>

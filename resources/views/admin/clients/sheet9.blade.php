@@ -254,7 +254,7 @@
                             <tr>
                                 <td>ब)</td>
                                 <td>10% पेक्षा अधिक ते 20% पर्यंत असल्यास</td>
-                                <td>6 ते 0</td>
+                                <td>6 ते 10</td>
                                 <td></td>
                                 <td><input type="text" class="form-control" name="assets_npa_recovery_2_detail" value="{{ $clientInputs['assets_npa_recovery_2_detail'] ?? '' }}"></td>
                             </tr>
@@ -442,9 +442,9 @@
                                     सहकार शिक्षण व प्रशिक्षण :<br>
                                     <span style="margin-left: 1em;">अ) एका आर्थिक वर्षात एकूण सदस्यांपैकी किमान 1/5 सदस्यांना सहकार प्रशिक्षण केंद्र/मान्यताप्राप्त प्रशिक्षण संस्थेत 1 ते 3 दिवसांचे प्रशिक्षण दिले असल्यास</span>
                                 </td>
+                                <td>4</td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><input type="text" class="form-control" name="mgmt_training_detail" value="{{ $clientInputs['mgmt_training_detail'] ?? '' }}"></td>
                             </tr>
                              <tr>
                                 <td></td>
