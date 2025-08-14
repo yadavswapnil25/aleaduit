@@ -497,8 +497,13 @@
                             <tr>
                                 <td>4</td>
                                 <td class="text-start">
-                                    व्यवस्थापक / महाव्यवस्थापक/कार्यकारी संचालक/मुख्य कार्यकारी
-                                    अधिकारी / वरिष्ठ अधिकारीः-
+                                    अधिकारी, सेवक. वसुली अधिकारी
+धरून यांना शासनाने अधिसूचित
+केलेल्या प्रशिक्षण संस्थेत वर्षात
+किमान २ ते ७  दिवसाचे प्रशिक्षण
+दिले असल्यास
+
+
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -549,19 +554,10 @@
                             <!-- START: कार्यकारी/प्रशासकीय कार्यक्षमता Design as per pasted image -->
                             <tr>
                                 <td colspan="5" class="fw-bold" style="text-align:left;background: #f5f5f5;">
-                                    4. कार्यकारी/प्रशासकीय कार्यक्षमता :- <span style="font-weight:normal;">3 गुण</span>
+                                    4. व्यवस्थापक / महाव्यवस्थापक/कार्यकारी संचालक/मुख्य कार्यकारी अधिकारी / वरिष्ठ अधिकारी :- <span style="font-weight:normal;">3 गुण</span>
                                 </td>
                             </tr>
-                             <tr>
-                                <td></td>
-                                <td class="text-start">
-                                    <br>
-                                    <span>व्यवस्थापक/मुख्याधिकारी/कार्यकारी संचालक/मुख्य कार्यकारी अधिकारी/वरिष्ठ अधिकारी -</span>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        
                             <tr>
                                 <td>1</td>
                                 <td class="text-start">
@@ -1360,7 +1356,8 @@
             'mgmt_training_6_detail', 'mgmt_training_7_detail', 'mgmt_training_8_detail', 'mgmt_training_9_detail', 'admin_appoint_detail',
             'admin_branch_mgr_detail', 'admin_duty_detail', 'recovery_100_detail', 'recovery_75_99_detail', 'recovery_50_74_detail',
             'recovery_25_49_detail', 'recovery_below_25_detail', 'deposit_growth_above_10_detail', 'deposit_growth_5_10_detail',
-            'deposit_growth_below_5_detail', 'member_admission_detail', 'member_nomination_detail', 'member_loan_share_detail'
+            'deposit_growth_below_5_detail', 'member_admission_detail', 'member_nomination_detail', 'member_loan_share_detail',
+            'sysctrl_detail1','deposit_growth_above_10_detail'
         ];
         const inputNames3 = [
             'earnings_net_profit_1_detail', 'earnings_net_profit_2_detail', 'earnings_net_profit_3_detail', 'earnings_net_profit_4_detail',
@@ -1371,7 +1368,7 @@
             'earnings_net_profit_11_detail', 'earnings_net_profit_12_detail', 'earnings_net_profit_13_detail', 'earnings_net_profit_15_detail',
             'earnings_net_profit_16_detail', 'earnings_net_profit_17_detail', 'earnings_net_profit_18_detail', 'earnings_net_profit_19_detail',
             'earnings_net_profit_20_detail', 'earnings_net_profit_21_detail', 'earnings_net_profit_22_detail', 'earnings_net_profit_23_detail',
-            'earnings_net_profit_24_detail'
+            'earnings_net_profit_24_detail','earnings_net_profit_25_detail'
         ];
         const inputNames5 = [
             'sysctrl_deposit_interest_limit', 'sysctrl_stabilization_fund', 'sysctrl_tech_audit_correction', 'sysctrl_tech_audit_fulfilled',

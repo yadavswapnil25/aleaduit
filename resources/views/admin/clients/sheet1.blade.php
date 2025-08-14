@@ -782,14 +782,11 @@
                                 <td>2)ती उल्लंधिली
                                     गेली होती काय ?</td>
                                 <td>
-                                    <!-- <select class="form-control" name="loan_limit_exceeded_opt1">
-                                        <option value="">Select</option>
-                                        <option value="प्रश्न उत्पन्न नहीं" {{ (isset($clientInputs['loan_limit_exceeded_opt1']) && $clientInputs['loan_limit_exceeded_opt1'] == 'प्रश्न उत्पन्न नहीं') ? 'selected' : '' }}>प्रश्न उत्पन्न नहीं</option>
-                                    </select> -->
+                                 
                                     <br>
                                     <select class="form-control" name="loan_limit_exceeded">
                                         <option value="">Select</option>
-                                        <option value="प्रश्न उत्पन्न नहीं" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'प्रश्न उत्पन्न नहीं') ? 'selected' : '' }}>प्रश्न उत्पन्न नहीं</option>
+                                        <option value="प्रश्नच उदभावत नाही" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'प्रश्नच उदभावत नाही') ? 'selected' : '' }}>प्रश्नच उदभावत नाही</option>
                                         <option value="होय" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['loan_limit_exceeded']) && $clientInputs['loan_limit_exceeded'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -802,7 +799,7 @@
                                 <td>
                                     <select class="form-control" name="loan_limit_exceeded_permission_opt1">
                                         <option value="">Select</option>
-                                        <option value="प्रश्न उत्पन्न नहीं" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'प्रश्न उत्पन्न नहीं') ? 'selected' : '' }}>प्रश्न उत्पन्न नहीं</option>
+                                        <option value="प्रश्नच उदभावत नाही" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'प्रश्नच उदभावत नाही') ? 'selected' : '' }}>प्रश्नच उदभावत नाही</option>
                                         <option value="होय" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'होय') ? 'selected' : '' }}>होय</option>
                                         <option value="नाही" {{ (isset($clientInputs['loan_limit_exceeded_permission_opt1']) && $clientInputs['loan_limit_exceeded_permission_opt1'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                                     </select>
@@ -1240,7 +1237,7 @@
                             <tr>
                                 <td>3) जर गुंतवणुक रोक बँकेत ठेवले असतील तर त्या
                                     बाबतचे संबंधित दाखले मिळविले आहेत काय?
-                                    लिहिली आहे काय? </td>
+                                    </td>
                                 <td>
                                     <select class="form-control" name="investment_certificates_obtained_opt1">
                                         <option value="">Select</option>

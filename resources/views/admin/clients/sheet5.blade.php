@@ -1038,7 +1038,7 @@
                             संस्थेने अद्यावत मालमत्ता रजिस्टर ठेवलेले आहे का?
                             <select class="form-control d-inline-block" style="width:80px;display:inline;" name="asset_register_maintained">
                                 <option value="">Select</option>
-
+                                <option value="होय" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'होय') ? 'selected' : '' }}>होय</option>
                                 <option value="आहे" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'आहे') ? 'selected' : '' }}>आहे</option>
                                 <option value="नाही" {{ (isset($clientInputs['asset_register_maintained']) && $clientInputs['asset_register_maintained'] == 'नाही') ? 'selected' : '' }}>नाही</option>
                             </select>

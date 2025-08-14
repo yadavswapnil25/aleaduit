@@ -555,14 +555,14 @@
                         <tr>
                             <td>16)</td>
                             <td>संस्थेला येणे असलेली कर्ज तपासणी आणि त्यांचे बुडीत आणि
-                                संशयीत असे वर्गीकरण झाले आहेत काय? ते पहा. अशा
+                                संशयीत असे वर्गीकरण झाले आहेत काय? ते पहा. <br> अशा
                                 संशयीत व बुडीत कर्जासाठी पुरेशी तरतुद केली आहे काय ते
                                 तपासा.</td>
                             <td>
 
                                 <select class="form-control" name="loan_advances_17_2">
                                     <option value="">Select</option>
-                                    <option value="बुडीत कर्ज" {{ (isset($clientInputs['loan_advances_17_2']) && $clientInputs['loan_advances_17_2'] == 'बुडीत कर्ज') ? 'selected' : '' }}>बुडीत कर्ज</option>
+                                    <option value="बुडीत कर्ज नाही" {{ (isset($clientInputs['loan_advances_17_2']) && $clientInputs['loan_advances_17_2'] == 'बुडीत कर्ज नाही') ? 'selected' : '' }}>बुडीत कर्ज नाही</option>
 
                                     <option value="होय" {{ (isset($clientInputs['loan_advances_17_2']) && $clientInputs['loan_advances_17_2'] == 'होय') ? 'selected' : '' }}>होय</option>
                                     <option value="नाही" {{ (isset($clientInputs['loan_advances_17_2']) && $clientInputs['loan_advances_17_2'] == 'नाही') ? 'selected' : '' }}>नाही</option>

@@ -320,19 +320,19 @@ $auditPeriod = $client->year->audit_year;
                             <tbody>
                                 <tr>
                                     @php
-                        $sum_current =
-                        ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
-                        ($client['राखीव निधी_sum_currentYear'] ?? 0) +
-                        ($client['इमारत निधी_sum_currentYear'] ?? 0) +
-                        ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
-                        ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
-                        ($client['नफा_तोटा_sum_currentYear'] ?? 0);
-                        $minus_current =
-                        ($client['संचित तोटा_sum_currentYear'] ?? 0) +
-                        (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
+                                    $sum_current =
+                                    ($client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0) +
+                                    ($client['राखीव निधी_sum_currentYear'] ?? 0) +
+                                    ($client['इमारत निधी_sum_currentYear'] ?? 0) +
+                                    ($client['गुंतवणूक चढ उतार निधी_sum_currentYear'] ?? 0) +
+                                    ($client['लाभांश समीकरण_sum_currentYear'] ?? 0) +
+                                    ($client['नफा_तोटा_sum_currentYear'] ?? 0);
+                                    $minus_current =
+                                    ($client['संचित तोटा_sum_currentYear'] ?? 0) +
+                                    (is_numeric($clientInputs['networth_tax_current'] ?? null) ? $clientInputs['networth_tax_current'] : 0);
 
-                        $total_networth_current = $sum_current - $minus_current;
-                        @endphp
+                                    $total_networth_current = $sum_current - $minus_current;
+                                    @endphp
                                     <td>1</td>
                                     <td>स्वनिधी (नेटवर्थ)</td>
                                     <td>{{$total_networth_current}}</td>
@@ -342,7 +342,20 @@ $auditPeriod = $client->year->audit_year;
                                 <tr>
                                     <td>2</td>
                                     <td>भांडवल पर्याप्तता प्रमाण (CRAR)</td>
-                                    <td>{{number_format($client['CRAR_sum'],2)}}</td>
+                                    @php
+                                    $crar_sum = $client['CRAR_sum'] ?? 0;
+                                    $total_networth = $total_networth_current ?? 0;
+                                    $vasul_sum = $client['वसुल भाग भागभांडवल_sum_currentYear'] ?? 0;
+
+                                    $total_amount = $total_networth + $vasul_sum;
+
+                                    // Calculate percentage (avoid division by zero)
+                                    $percentage = $crar_sum > 0 ? ($total_amount / $crar_sum) * 100 : 0;
+                                    @endphp
+
+                                    <td>
+                                        {{ number_format($percentage, 2) }}%
+                                    </td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_auditor" value="{{ $clientInputs['crar_auditor'] ?? '' }}"></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="crar_diff" value="{{ $clientInputs['crar_diff'] ?? '' }}"></td>
                                 </tr>
@@ -367,7 +380,7 @@ $auditPeriod = $client->year->audit_year;
                                     <td>5</td>
                                     <td>ढोबळ एन. पी. ए. (%)</td>
                                     @php
-                                    $total2=  @$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount'];
+                                    $total2= @$clientInputs['npa_summary_overdue_npa7_amount'] + @$clientInputs['npa_summary_overdue_npa8_amount'] + @$clientInputs['npa_summary_overdue_npa9_amount'] + @$clientInputs['npa_summary_overdue_npa14_amount'] + @$clientInputs['npa_summary_overdue_npa10_amount'] + @$clientInputs['npa_summary_overdue_npa11_amount'] + @$clientInputs['npa_summary_overdue_npa12_amount'] + @$clientInputs['npa_summary_overdue_npa13_amount'] + @$clientInputs['npa_summary_overdue_npa15_amount'];
 
                                     @endphp
                                     <td><b>{{number_format(($total2 /$client['येणे कर्ज_sum'])*100, 2)}}</b></td>
@@ -529,7 +542,7 @@ $auditPeriod = $client->year->audit_year;
                         अशी तपासणी झाली असल्यास, संस्थेने त्या कालावधीत सहकार खात्याची कलम 89 (अ)(1) अन्वये हुद्दा यांनी तपासणी केली असून त्यांनी संस्थेस दि. <span><input type="date" class="form-control d-inline-block" style="width:150px;display:inline;" name="section_89a1_report_date" value="{{ $clientInputs['section_89a1_report_date'] ?? '' }}"></span>
                         रोजी अहवाल सादर केला आहे. सदर अहवालाचा दोष दुरुस्ती अहवाल मुदतीत/ मुदतीनंतर सादर केलेबाबत तसेच अहवालातील पुर्तता न झालेल्या दोषांबाबत अभिप्राय नमूद करावेत.
                         <input type="textarea" class="form-control d-inline-block" style="width:600px;display:inline;" name="section_89a1_remarks" value="{{ $clientInputs['section_89a1_remarks'] ?? '' }}">
-                        
+
                     </div>
                 </div>
 
