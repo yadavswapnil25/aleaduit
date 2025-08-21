@@ -430,7 +430,8 @@ class ClientController extends Controller
                 'रोख शिल्लक',
                 'बँक शिल्लक',
                 'देणे कर्ज',
-                'येणे कर्ज'
+                'येणे कर्ज',
+                'कायम मालमत्ता', 'इतर येणे', 'घेणे व्यज', 'संचित तोटा'
             ];
 
             // Process all menus in a single loop
@@ -475,7 +476,7 @@ class ClientController extends Controller
             $menusToProcess = [
                 'रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता', 
                 'येणे कर्ज', 'ठेवी', 'इतर देणी', 'वसुल भाग भागभांडवल', 
-                'राखीव निधी', 'संचित तोटा'
+                'राखीव निधी', 'संचित तोटा', 'इतर येणे', 'घेणे व्यज'
             ];
 
             foreach ($menusToProcess as $menu) {
@@ -521,7 +522,8 @@ class ClientController extends Controller
             // Process all required menus efficiently
             $menusToProcess = [
                 'वसुल भाग भागभांडवल', 'राखीव निधी', 'ठेवी', 'येणे कर्ज', 
-                'गुंतवणूक', 'कायम मालमत्ता', 'संचित तोटा', 'तरतुदी'
+                'गुंतवणूक', 'कायम मालमत्ता', 'संचित तोटा', 'तरतुदी', 'इतर देणी',
+                'इतर सर्व निधी', 'शाखा ठेवी देणे', 'बँक शिल्लक', 'इतर येणे', 'घेणे व्यज'
             ];
 
             foreach ($menusToProcess as $menu) {
@@ -592,7 +594,9 @@ class ClientController extends Controller
             
             // Process all required menus efficiently
             $menusToProcess = [
-                'वसुल भाग भागभांडवल', 'राखीव निधी', 'इतर सर्व निधी', 'ठेवी', 'तरतुदी'
+                'वसुल भाग भागभांडवल', 'राखीव निधी', 'इतर सर्व निधी', 'ठेवी', 'तरतुदी', 'इतर देणी',
+                'शाखा ठेवी देणे', 'बँक शिल्लक', 'इतर येणे', 'घेणे व्यज', 'गुंतवणूक',
+                'कायम मालमत्ता', 'येणे कर्ज', 'संचित तोटा', 'तरतूद'
             ];
 
             foreach ($menusToProcess as $menu) {
@@ -669,7 +673,7 @@ class ClientController extends Controller
             // Process remaining menus
             $remainingMenus = [
                 'को.ऑप. बँक मुदत ठेव तारण कर्ज', 'संचित नफा', 'शाखा ठेवी देणे', 
-                'देणे कर्ज', 'रोख शिल्लक', 'येणे कर्ज'
+                'देणे कर्ज', 'रोख शिल्लक', 'येणे कर्ज', 'वसूल भागभांडवल'
             ];
 
             foreach ($remainingMenus as $menu) {
@@ -679,6 +683,15 @@ class ClientController extends Controller
                 
                 if (in_array($menu, ['को.ऑप. बँक मुदत ठेव तारण कर्ज', 'संचित नफा'])) {
                     $client[$menu . '_sum_lastYear'] = $data->sum('lastYear');
+                }
+            }
+            
+            // Ensure all required menus have at least an empty collection to prevent foreach errors
+            $requiredMenus = ['इतर सर्व निधी', 'ठेवी', 'तरतुदी', 'इतर देणी', 'शाखा ठेवी देणे', 
+                             'बँक शिल्लक', 'गुंतवणूक', 'येणे कर्ज', 'कायम मालमत्ता', 'इतर येणे', 'घेणे व्यज'];
+            foreach ($requiredMenus as $menu) {
+                if (!isset($client[$menu]) || $client[$menu] === null) {
+                    $client[$menu] = collect();
                 }
             }
 
@@ -715,7 +728,8 @@ class ClientController extends Controller
             // Process all required menus efficiently
             $menusToProcess = [
                 'कर्जावरील व्याज', 'गुंतवणुकीवरील व्याज', 'इतर उत्त्पन्न', 'ठेवीवरील व्याज',
-                'आस्थापना खर्च', 'प्रशासकीय खर्च', 'तरतुदी', 'इतर खर्च'
+                'आस्थापना खर्च', 'प्रशासकीय खर्च', 'तरतुदी', 'इतर खर्च', 'इतर देणी',
+                'रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता', 'येणे कर्ज', 'इतर येणे', 'घेणे व्यज', 'संचित तोटा'
             ];
 
             foreach ($menusToProcess as $menu) {
