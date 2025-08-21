@@ -391,7 +391,7 @@ $auditPeriod = $client->year->audit_year;
                                     <td>6</td>
                                     <td>निव्वळ एन. पी. ए. (%)</td>
                                     @php
-                                    $total6=$total2 - $clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']
+                                    $total6=$total2 - @$clientInputs['npa_summary_net_npa'] - @$clientInputs['npa_summary_overdue_npa_value']
                                     @endphp
                                     <td><b>{{number_format(($total6 /$client['येणे कर्ज_sum'])*100, 2)}}</b></td>
                                     <td><input type="text" class="form-control d-inline-block" style="width:100px;display:inline;" name="net_npa_auditor" value="{{ $clientInputs['net_npa_auditor'] ?? '' }}"></td>
