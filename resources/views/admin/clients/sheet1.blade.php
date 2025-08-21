@@ -309,7 +309,7 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>संस्थेचे नाव व दुरध्वनी क्रमांक</td>
+                            <td>संस्थेचे नाव व दुरध्वनी क्रमांक1</td>
                             <td><b>{{$client->name_of_society}} {{ $client->registration_no }}</b></td>
                         </tr>
                         <tr>

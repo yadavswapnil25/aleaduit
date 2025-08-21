@@ -22,6 +22,7 @@ use Laravel\Passport\HasApiTokens;
 class UserController extends Controller
 {
     use HasApiTokens,AuthCode, CommonCode;
+
     public function verifyEmail($token)
     {
         $user = User::where('verification_token', $token)->firstOrFail();
