@@ -74,7 +74,9 @@ class ClientController extends Controller
                 $clients = Client::latest();
                 return Datatables::of($clients)
                     ->addColumn('action', function ($client) {
-                        $btn = '<a href="/admin/client/edit/' . $client->id . '" class="" title="Edit"><i class="fa fa-edit"></i></a>  <a href="/admin/client/show/' . $client->id . '" class="" title="Show"><i class="fa fa-eye"></i></a>';
+                        $btn = '<a href="/admin/client/edit/' . $client->id . '" class="btn btn-sm btn-warning mr-1" title="Edit"><i class="fa fa-edit"></i></a>';
+                        $btn .= '<a href="/admin/client/show/' . $client->id . '" class="btn btn-sm btn-info mr-1" title="Show"><i class="fa fa-eye"></i></a>';
+                        $btn .= '<a href="/admin/client/duplicate/' . $client->id . '" class="btn btn-sm btn-success" title="Duplicate"><i class="fa fa-copy"></i></a>';
                         return $btn;
                     })->editColumn('created_at', function ($client) {
                         return [
@@ -186,6 +188,81 @@ class ClientController extends Controller
         $years = Year::where('client_id', $id)->get();
         $client = Client::find($id);
         return view('admin.clients.show', compact('years', 'client'));
+    }
+
+    /**
+     * Show the form for duplicating a client.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(int $id)
+    {
+        $originalClient = Client::findOrFail($id);
+        
+        // Create a copy of the client data for the form
+        $client = new Client();
+        $client->name_of_society = $originalClient->name_of_society . ' (Copy)';
+        $client->chairman = $originalClient->chairman;
+        $client->vice_chairman = $originalClient->vice_chairman;
+        $client->manager = $originalClient->manager;
+        $client->registration_no = $originalClient->registration_no . '_COPY';
+        $client->lekha_parikshan_vargwari = $originalClient->lekha_parikshan_vargwari;
+        $client->total_shakha = $originalClient->total_shakha;
+        $client->district = $originalClient->district;
+        $client->taluka = $originalClient->taluka;
+        $client->registration_date = $originalClient->registration_date;
+        $client->karyashetra = $originalClient->karyashetra;
+        $client->society_address = $originalClient->society_address;
+        
+        return view('admin.clients.create', compact('client'));
+    }
+
+    /**
+     * Duplicate a client with all related data.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicateWithData(int $id)
+    {
+        try {
+            $originalClient = Client::findOrFail($id);
+            
+            // Create new client
+            $newClient = $originalClient->replicate();
+            $newClient->name_of_society = $originalClient->name_of_society . ' (Copy)';
+            $newClient->registration_no = $originalClient->registration_no . '_COPY';
+            $newClient->save();
+            
+            // Duplicate MasterData
+            $masterData = MasterData::where('client_id', $originalClient->id)->get();
+            foreach ($masterData as $data) {
+                $newMasterData = $data->replicate();
+                $newMasterData->client_id = $newClient->id;
+                $newMasterData->save();
+            }
+            
+            // Duplicate ClientInput
+            $clientInputs = ClientInput::where('client_id', $originalClient->id)->get();
+            foreach ($clientInputs as $input) {
+                $newClientInput = $input->replicate();
+                $newClientInput->client_id = $newClient->id;
+                $newClientInput->save();
+            }
+            
+            // Duplicate Years
+            $years = Year::where('client_id', $originalClient->id)->get();
+            foreach ($years as $year) {
+                $newYear = $year->replicate();
+                $newYear->client_id = $newClient->id;
+                $newYear->save();
+            }
+            
+            return redirect()->route('admin.clients.index')->with('success', 'Client duplicated successfully with all related data');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'An error occurred while duplicating the client: ' . $e->getMessage()]);
+        }
     }
 
     public function showAddYearForm($id)

@@ -10,6 +10,8 @@
                     <div class="card-tools">
                         <div class="d-flex flex-row justify-content-center">
                             <a href="{{ url('admin/client/addYear',$client->id) }}" class="btn btn-primary btn-sm ml-2">Add Year</a>
+                            <a href="{{ route('admin.client.duplicate', $client->id) }}" class="btn btn-success btn-sm ml-2">Duplicate Client</a>
+                            <a href="#" class="btn btn-warning btn-sm ml-2" onclick="confirmDuplicateWithData()">Duplicate with All Data</a>
                         </div>
                     </div>
                 </div>
@@ -47,6 +49,9 @@
                                                 </a>
                                                 <a href="{{ route('admin.client.download', $year->id) }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-download"></i> Download
+                                                </a>
+                                                <a href="{{ route('admin.client.duplicate', $client->id) }}" class="btn btn-info btn-sm">
+                                                    <i class="fa fa-copy"></i> Duplicate
                                                 </a>
                                                 <form action="{{ route('admin.client.destroy', $year->id) }}" method="POST" style="display:inline;">
                                                     @csrf
@@ -126,5 +131,11 @@
             window.location.href = "{{ url('admin/client/') }}/" + clientId + "/sheet/" + sheetNumber; // Redirect with client_id and sheetNumber
         });
     });
+
+    function confirmDuplicateWithData() {
+        if (confirm('This will create a complete copy of the client with all related data (Master Data, Client Inputs, Years, etc.). Are you sure you want to proceed?')) {
+            window.location.href = "{{ route('admin.client.duplicateWithData', $client->id) }}";
+        }
+    }
 </script>
 @endsection

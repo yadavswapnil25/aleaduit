@@ -31,6 +31,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
     Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
     Route::get('/client/show/{id}', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/client/duplicate/{id}', [ClientController::class, 'duplicate'])->name('client.duplicate');
+    Route::get('/client/duplicate-with-data/{id}', [ClientController::class, 'duplicateWithData'])->name('client.duplicateWithData');
     Route::post('/client/update', [ClientController::class, 'update'])->name('client.update');
     Route::get('/client/addYear/{id}', [ClientController::class, 'showAddYearForm'])->name('client.addYearForm');
     Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
