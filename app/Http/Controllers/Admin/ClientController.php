@@ -274,51 +274,309 @@ class ClientController extends Controller
     }
 
     public function addYear(StoreYearRequest $request)
-    {
-        try {
-            $client = Client::with('audit')->find($request->client_id);
-            if (!$client) {
-                return redirect()->back()->withErrors(['error' => 'Client not found.']);
-            }
+{
+    try {
+        $client = Client::with('audit', 'masterData')->find($request->client_id);
+        $clientInputs = ClientInput::where('client_id', $request->client_id)->pluck('value', 'key');
+        $auditor = Audit::where('user_id', auth()->id())->first();
 
-            // Handle file upload
-            $fileName = null;
-
-            // Copy master.docs file from public folder to storage folder with the name of the client
-            $masterFilePath = public_path('master.docx');
-            $fileName = $client->name_of_society . '.docx';
-            $storageFilePath = storage_path('app/public/uploads/' . $fileName);
-            $templateProcessor = new TemplateProcessor($masterFilePath);
-            $templateProcessor->setValue('name_of_society', $client->name_of_society ?? '');
-            $templateProcessor->setValue('chairman', $client->chairman ?? '');
-            $templateProcessor->setValue('registration_no', $client->registration_no ?? '');
-            $templateProcessor->setValue('society_address', $client->society_address ?? '');
-            $templateProcessor->setValue('taluka', $client->taluka ?? '');
-            $templateProcessor->setValue('district', $client->district ?? '');
-            $templateProcessor->setValue('audit_year', $client->audit_year ?? '');
-            $templateProcessor->setValue('lekha_parikshan_vargwari', $client->lekha_parikshan_vargwari ?? '');
-            $templateProcessor->setValue('audit_name', $client->audit->name ?? '');
-            $templateProcessor->setValue('audit_registration_no', $client->audit->registration_no ?? '');
-            $templateProcessor->setValue('namtalika_vargwari', $client->audit->namtalika_vargwari ?? '');
-            $templateProcessor->setValue('audit_address', $client->audit->address ?? '');
-            $templateProcessor->setValue('audit_email', $client->audit->email ?? '');
-            $templateProcessor->setValue('audit_phone', $client->audit->phone_number ?? '');
-            $templateProcessor->setValue('audit_javak_kramank', $client->audit->javak_kramank ?? '');
-            $templateProcessor->setValue('audit_date', $client->audit->date ?? '');
-            $templateProcessor->saveAs($storageFilePath);
-            // End of file upload handling
-            $year = new Year();
-            $year->audit_year = $request->audit_year;
-            $year->auditor_id = $request->auditor_id;
-            $year->client_id = $request->client_id;
-            $year->file = $fileName;
-            $year->save();
-
-            return redirect()->route('admin.client.show', $year->client_id)->with('success', 'Year added successfully');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'An error occurred while adding the year: ' . $e->getMessage()]);
+        if (!$client) {
+            return redirect()->back()->withErrors(['error' => 'Client not found.']);
         }
+
+        // File paths
+        $masterFilePath = public_path('master.docx');
+        $fileName = $client->name_of_society . '.docx';
+        $storageFilePath = storage_path('app/public/uploads/' . $fileName);
+        
+        // Initialize TemplateProcessor
+        $templateProcessor = new TemplateProcessor($masterFilePath);
+        
+        // 1. Basic Client Information
+        $basicInfo = [
+            'name_of_society' => $client->name_of_society ?? '',
+            'chairman' => $client->chairman ?? '',
+            'vice_chairman' => $client->vice_chairman ?? '',
+            'manager' => $client->manager ?? '',
+            'registration_no' => $client->registration_no ?? '',
+            'registration_date' => $client->registration_date ? \Carbon\Carbon::parse($client->registration_date)->format('d/m/Y') : '',
+            'karyashetra' => $client->karyashetra ?? '',
+            'society_address' => $client->society_address ?? '',
+            'taluka' => $client->taluka ?? '',
+            'district' => $client->district ?? '',
+            'audit_year' => $request->audit_year ?? '',
+            'lekha_parikshan_vargwari' => $client->lekha_parikshan_vargwari ?? '',
+        ];
+
+        // 2. Auditor Information
+        $auditorInfo = [
+            'auditor_name' => $auditor->name ?? '',
+            'auditor_type' => $auditor->type->value ?? '',
+            'auditor_address' => $auditor->address ?? '',
+        ];
+
+        // 3. Financial Calculations
+        // Profit/Loss Calculation
+        $incomeMenus = ['इतर उत्त्पन्न', 'गुंतवणुकीवरील व्याज', 'कर्जावरील व्याज', 'किरकोळ उत्त्पन्न'];
+        $expenseMenus = ['इतर खर्च', 'तरतूद खर्च', 'प्रशासकीय खर्च', 'आस्थापना खर्च', 'ठेवीवरील व्याज'];
+        $profitLoss = $client->masterData->whereIn('menu', $incomeMenus)->sum('currentYear') 
+                   - $client->masterData->whereIn('menu', $expenseMenus)->sum('currentYear');
+        
+        // Working Capital Calculation
+        $incomeTotalMenus = ['रोख शिल्लक', 'बँक शिल्लक', 'गुंतवणूक', 'कायम मालमत्ता', 
+                            'येणे कर्ज', 'इतर येणे', 'घेणे व्यज', 'संचित तोटा'];
+        $workingCapital = $client->masterData->whereIn('menu', $incomeTotalMenus)->sum('currentYear');
+        
+        // Accumulated Profit/Loss
+        $accumulatedProfit = $client->masterData->where('menu', 'संचित नफा')->first();
+        $currentYearSum = $accumulatedProfit ? $accumulatedProfit->currentYear : 0;
+        $lastYearSum = $accumulatedProfit ? $accumulatedProfit->lastYear : 0;
+        
+        // Other Financial Data
+        $reserveFund = $client->masterData->where('menu', 'राखीव निधी')->first();
+        $deposits = $client->masterData->where('menu', 'ठेवी')->first();
+        $vasulBhagBhandval = $client->masterData->where('menu', 'वसूल भागभांडवल')->first();
+        $investmentSum = $client->masterData->where('menu', 'गुंतवणूक')->sum('currentYear') ?? '';
+        $cashBalance = $client->masterData->where('menu', 'रोख शिल्लक')->first();
+        $bankBalance = $client->masterData->where('menu', 'बँक शिल्लक')->first();
+        $deyneKarj = $client->masterData->where('menu', 'देणे कर्ज')->first();
+        $yeneKarj = $client->masterData->where('menu', 'येणे कर्ज')->first();
+        
+        // Format all financial values
+        $financialData = [
+            'नफा_तोटा_sum' => $this->formatFinancialValue($profitLoss),
+            'खेळते_भागभांडवल_sum' => $this->formatFinancialValue($workingCapital),
+            'संचित_नफा_sum_currentYear' => $this->formatFinancialValue($currentYearSum),
+            'संचित_नफा_sum_lastYear' => $this->formatFinancialValue($lastYearSum),
+            'संचित_नफा_sum' => $this->formatFinancialValue($currentYearSum),
+            'राखीव_निधी_sum' => $this->formatFinancialValue($reserveFund ? $reserveFund->currentYear : 0),
+            'राखीव_निधी_sum_lastYear' => $this->formatFinancialValue($reserveFund ? $reserveFund->lastYear : 0),
+            'राखीव_निधी_sum_currentYear' => $this->formatFinancialValue($reserveFund ? $reserveFund->currentYear : 0),
+            'वसूल_भागभांडवल_sum_currentYear' => $this->formatFinancialValue($vasulBhagBhandval ? $vasulBhagBhandval->currentYear : 0),
+            'वसूल_भागभांडवल_sum_lastYear' => $this->formatFinancialValue($vasulBhagBhandval ? $vasulBhagBhandval->lastYear : 0),
+            'ठेवी_sum_lastYear' => $this->formatFinancialValue($deposits ? $deposits->lastYear : 0),
+            'ठेवी_sum_currentYear' => $this->formatFinancialValue($deposits ? $deposits->currentYear : 0),
+            'ठेवी_sum' => $this->formatFinancialValue($deposits ? $deposits->currentYear : 0),
+            'गुंतवणूक_sum' => $this->formatFinancialValue($investmentSum),
+            'देणे_कर्ज_sum_currentYear' => $this->formatFinancialValue($deyneKarj ? $deyneKarj->currentYear : 0),
+            'येणे_कर्ज_sum_currentYear' => $this->formatFinancialValue($yeneKarj ? $yeneKarj->currentYear : 0),
+            
+            // Cash and Bank balances
+            'रोख_शिल्लक_sum_currentYear' => $this->formatFinancialValue($cashBalance ? $cashBalance->currentYear : 0),
+            'रोख_शिल्लक_sum_lastYear' => $this->formatFinancialValue($cashBalance ? $cashBalance->lastYear : 0),
+            'रोख_शिल्लक_sum' => $this->formatFinancialValue($cashBalance ? $cashBalance->currentYear : 0),
+            'बँक_शिल्लक_sum_currentYear' => $this->formatFinancialValue($bankBalance ? $bankBalance->currentYear : 0),
+            'बँक_शिल्लक_sum_lastYear' => $this->formatFinancialValue($bankBalance ? $bankBalance->lastYear : 0),
+            'बँक_शिल्लक_sum' => $this->formatFinancialValue($bankBalance ? $bankBalance->currentYear : 0),
+        ];
+        
+        // 4. Client Inputs from form
+        $clientInputValues = [
+            'deposits_deductions_b' => $clientInputs['deposits_deductions_b'] ?? '',
+            'transformation_regular' => $clientInputs['transformation_regular'] ?? '',
+            'separate_rules_deposits' => $clientInputs['separate_rules_deposits'] ?? '',
+            'compliance_properly' => $clientInputs['compliance_properly'] ?? '',
+            'deposits_from_non_members' => $clientInputs['deposits_from_non_members'] ?? '',
+            'personal_account_match_2' => $clientInputs['personal_account_match_2'] ?? '',
+            'personal_account_match' => $clientInputs['personal_account_match'] ?? '',
+            'timely_repayment_deposits' => $clientInputs['timely_repayment_deposits'] ?? '',
+            'timely_repayment_deposits_2' => $clientInputs['timely_repayment_deposits_2'] ?? '',
+            'loan_disbursement_compliance_2' => $clientInputs['loan_disbursement_compliance_2'] ?? '',
+            'loan_disbursement_compliance' => $clientInputs['loan_disbursement_compliance'] ?? '',
+            'interest_calculation' => $clientInputs['interest_calculation'] ?? '',
+            'current_assets_1_2' => $clientInputs['current_assets_1_2'] ?? '',
+            'current_assets_1' => $clientInputs['current_assets_1'] ?? '',
+            'current_assets_2_2' => $clientInputs['current_assets_2_2'] ?? '',
+            'current_assets_2' => $clientInputs['current_assets_2'] ?? '',
+            'financial_info_timely' => $clientInputs['financial_info_timely'] ?? '',
+            'capital_shortfall' => $clientInputs['capital_shortfall'] ?? '',
+            'over_trading' => $clientInputs['over_trading'] ?? '',
+            'over_trading_limit' => $clientInputs['over_trading_limit'] ?? '',
+            'external_loan_1_2' => $clientInputs['external_loan_1_2'] ?? '',
+            'external_loan_1' => $clientInputs['external_loan_1'] ?? '',
+            'annex11_row1_col1' => $clientInputs['annex11_row1_col1'] ?? '',
+            'external_loan_2_2' => $clientInputs['external_loan_2_2'] ?? '',
+            'external_loan_2' => $clientInputs['external_loan_2'] ?? '',
+            'repayment_timeliness' => $clientInputs['repayment_timeliness'] ?? '',
+            'loan_terms_read' => $clientInputs['loan_terms_read'] ?? '',
+            'management_bonus' => $clientInputs['management_bonus'] ?? '',
+            'internal_audit_2_2' => $clientInputs['internal_audit_2_2'] ?? '',
+            'internal_audit_1_2' => $clientInputs['internal_audit_1_2'] ?? '',
+            'internal_audit_1' => $clientInputs['internal_audit_1'] ?? '',
+            // Basic info from form
+            'branches' => $clientInputs['branches'] ?? '',
+            'board_duration_start' => $clientInputs['board_duration_start'] ?? '',
+            'board_duration_end' => $clientInputs['board_duration_end'] ?? '',
+            'election_date' => $clientInputs['election_date'] ?? '',
+            'member_count' => $clientInputs['member_count'] ?? '',
+            'member_count_2' => $clientInputs['member_count_2'] ?? '',
+            'audit_classification' => $clientInputs['audit_classification'] ?? '',
+            'recovery_cases' => $clientInputs['recovery_cases'] ?? '',
+            'own_building' => $clientInputs['own_building'] ?? '',
+            'vehicles' => $clientInputs['vehicles'] ?? '',
+            'total_employees' => $clientInputs['total_employees'] ?? '',
+            
+            // Audit dates
+            'audit_period_start' => $clientInputs['audit_period_start'] ?? '',
+            'audit_period_end' => $clientInputs['audit_period_end'] ?? '',
+            'audit_start_date' => $clientInputs['audit_start_date'] ?? '',
+            'audit_end_date' => $clientInputs['audit_end_date'] ?? '',
+            'audit_submission_date' => $clientInputs['audit_submission_date'] ?? '',
+            
+            // Members info
+            'total_members' => $clientInputs['total_members'] ?? '',
+            'individual_members' => $clientInputs['individual_members'] ?? '',
+            'regular_members' => $clientInputs['regular_members'] ?? '',
+            'nominal_members' => $clientInputs['nominal_members'] ?? '',
+            'minority_members' => $clientInputs['minority_members'] ?? '',
+            'institution_members' => $clientInputs['institution_members'] ?? '',
+            'other_members' => $clientInputs['other_members'] ?? '',
+            'total_members_sum' => $clientInputs['total_members_sum'] ?? '',
+            'new_members_fee_paid' => $clientInputs['new_members_fee_paid'] ?? '',
+            'written_applications_received' => $clientInputs['written_applications_received'] ?? '',
+            'member_register_maintained' => $clientInputs['member_register_maintained'] ?? '',
+            'member_register_maintained_rule_33' => $clientInputs['member_register_maintained_rule_33'] ?? '',
+            'resignations_properly_accepted' => $clientInputs['resignations_properly_accepted'] ?? '',
+            'nominee_appointed' => $clientInputs['nominee_appointed'] ?? '',
+            'nominee_name' => $clientInputs['nominee_name'] ?? '',
+            
+            // Shares info
+            'share_applications_correct' => $clientInputs['share_applications_correct'] ?? '',
+            'share_register_updated' => $clientInputs['share_register_updated'] ?? '',
+            'share_register_entries_match' => $clientInputs['share_register_entries_match'] ?? '',
+            'share_register_entries_match_details' => $clientInputs['share_register_entries_match_details'] ?? '',
+            'share_ledger_updated' => $clientInputs['share_ledger_updated'] ?? '',
+            'share_ledger_balance_matches' => $clientInputs['share_ledger_balance_matches'] ?? '',
+            'share_certificates_issued' => $clientInputs['share_certificates_issued'] ?? '',
+            'share_certificates_issued_details' => $clientInputs['share_certificates_issued_details'] ?? '',
+            'share_transfers_legal' => $clientInputs['share_transfers_legal'] ?? '',
+            'share_transfers_legal_details' => $clientInputs['share_transfers_legal_details'] ?? '',
+            
+            // Loans info
+            'loan_limit_followed' => $clientInputs['loan_limit_followed'] ?? '',
+            'loan_limit_followed_opt1' => $clientInputs['loan_limit_followed_opt1'] ?? '',
+            'loan_limit_exceeded' => $clientInputs['loan_limit_exceeded'] ?? '',
+            'loan_limit_exceeded_permission' => $clientInputs['loan_limit_exceeded_permission'] ?? '',
+            'loan_limit_exceeded_permission_opt1' => $clientInputs['loan_limit_exceeded_permission_opt1'] ?? '',
+            
+            // Meetings info
+            'meeting_date' => $clientInputs['meeting_date'] ?? '',
+            'annual_general_meeting' => $clientInputs['annual_general_meeting'] ?? '',
+            'special_general_meeting' => $clientInputs['special_general_meeting'] ?? '',
+            'board_meetings_count' => $clientInputs['board_meetings_count'] ?? '',
+            'executive_meetings_count' => $clientInputs['executive_meetings_count'] ?? '',
+            'executive_meetings_held' => $clientInputs['executive_meetings_held'] ?? '',
+            'other_meetings_count' => $clientInputs['other_meetings_count'] ?? '',
+            'other_meetings_held' => $clientInputs['other_meetings_held'] ?? '',
+            
+            // Audit reports
+            'previous_audit_correction_report_date' => $clientInputs['previous_audit_correction_report_date'] ?? '',
+            'previous_audit_correction_report' => $clientInputs['previous_audit_correction_report'] ?? '',
+            'previous_audit_issues_ignored' => $clientInputs['previous_audit_issues_ignored'] ?? '',
+            'previous_audit_issues_ignored_1' => $clientInputs['previous_audit_issues_ignored_1'] ?? '',
+            
+            // Audit fees
+            'last_audit_fee_date' => $clientInputs['last_audit_fee_date'] ?? '',
+            'last_audit_fee_paid' => $clientInputs['last_audit_fee_paid'] ?? '',
+            'last_audit_fee_paid_details' => $clientInputs['last_audit_fee_paid_details'] ?? '',
+            'audit_fee_not_paid' => $clientInputs['audit_fee_not_paid'] ?? '',
+            'audit_fee_not_paid_1' => $clientInputs['audit_fee_not_paid_1'] ?? '',
+            
+            // Internal audit
+            'internal_audit_date' => $clientInputs['internal_audit_date'] ?? '',
+            'internal_audit_report' => $clientInputs['internal_audit_report'] ?? '',
+            'statutory_internal_audit' => $clientInputs['statutory_internal_audit'] ?? '',
+            
+            // Manager info
+            'monthly_honorarium' => $clientInputs['monthly_honorarium'] ?? '',
+            'other_allowances' => $clientInputs['other_allowances'] ?? '',
+            'other_allowances_1' => $clientInputs['other_allowances_1'] ?? '',
+            'member_status' => $clientInputs['member_status'] ?? '',
+            'loans_taken_by_manager' => $clientInputs['loans_taken_by_manager'] ?? '',
+            'other_amounts_due_from_manager' => $clientInputs['other_amounts_due_from_manager'] ?? '',
+            'other_amounts_due_from_manager_opt1' => $clientInputs['other_amounts_due_from_manager_opt1'] ?? '',
+            'employee_details' => $clientInputs['employee_details'] ?? '',
+            'employee_details_opt1' => $clientInputs['employee_details_opt1'] ?? '',
+            
+            // Violations
+            'bylaws_copy_available' => $clientInputs['bylaws_copy_available'] ?? '',
+            'violations_record' => $clientInputs['violations_record'] ?? '',
+            'total_violations_record' => $clientInputs['total_violations_record'] ?? '',
+            'total_bylaws_record' => $clientInputs['total_bylaws_record'] ?? '',
+            'total_bylaws_record_2' => $clientInputs['total_bylaws_record_2'] ?? '',
+            'rules_prepared_as_per_bylaws' => $clientInputs['rules_prepared_as_per_bylaws'] ?? '',
+            'bylaws_copy_available_opt1' => $clientInputs['bylaws_copy_available_opt1'] ?? '',
+            
+            // Profit and loss
+            'profit_loss_last_year' => $clientInputs['profit_loss_last_year'] ?? '',
+            'profit_distribution' => $clientInputs['profit_distribution'] ?? '',
+            'profit_distribution_opt1' => $clientInputs['profit_distribution_opt1'] ?? '',
+            
+            // Cash and bank
+            'cash_balance_date' => $clientInputs['cash_balance_date'] ?? '',
+            'cash_balance_date_opt1' => $clientInputs['cash_balance_date_opt1'] ?? '',
+            'cash_counted_by' => $clientInputs['cash_counted_by'] ?? '',
+            'cash_balance_correct' => $clientInputs['cash_balance_correct'] ?? '',
+            'cash_security_arrangements' => $clientInputs['cash_security_arrangements'] ?? '',
+            'bank_balance_correct' => $clientInputs['bank_balance_correct'] ?? '',
+            'bank_balance_correct_option' => $clientInputs['bank_balance_correct_option'] ?? '',
+            
+            // Investments
+            'investments_in_name_of_society' => $clientInputs['investments_in_name_of_society'] ?? '',
+            'dividends_interest_collected' => $clientInputs['dividends_interest_collected'] ?? '',
+            'investment_certificates_obtained' => $clientInputs['investment_certificates_obtained'] ?? '',
+            'investment_certificates_obtained_opt1' => $clientInputs['investment_certificates_obtained_opt1'] ?? '',
+            'investment_register_updated' => $clientInputs['investment_register_updated'] ?? '',
+            
+            // Property
+            'property_register_updated' => $clientInputs['property_register_updated'] ?? '',
+            'property_list_matches_balance_sheet' => $clientInputs['property_list_matches_balance_sheet'] ?? '',
+            'property_deeds_in_name_of_society' => $clientInputs['property_deeds_in_name_of_society'] ?? '',
+            'property_deeds_in_name_of_society_details' => $clientInputs['property_deeds_in_name_of_society_details'] ?? '',
+            'property_insured' => $clientInputs['property_insured'] ?? '',
+            'property_insured_details' => $clientInputs['property_insured_details'] ?? '',
+            
+            // Depreciation
+            'depreciation_charged' => $clientInputs['depreciation_charged'] ?? '',
+            'depreciation_rates' => $clientInputs['depreciation_rates'] ?? '',
+            'depreciation_rates_opt2' => $clientInputs['depreciation_rates_opt2'] ?? '',
+            
+            // Discussion with board
+            'depreciation_rates_opt1' => $clientInputs['depreciation_rates_opt1'] ?? '',
+            'branch_count' => $clientInputs['branch_count'] ?? '',
+        ];
+
+        // Combine all values and set them in the template
+        $allValues = array_merge($basicInfo, $financialData, $auditorInfo, $clientInputValues);
+        
+        foreach ($allValues as $key => $value) {
+            $templateProcessor->setValue($key, $value);
+        }
+        
+        // Save the processed template
+        $templateProcessor->saveAs($storageFilePath);
+        
+        // Save year record
+        $year = new Year();
+        $year->audit_year = $request->audit_year;
+        $year->auditor_id = $request->auditor_id;
+        $year->client_id = $request->client_id;
+        $year->file = $fileName;
+        $year->save();
+
+        return redirect()->route('admin.client.show', $year->client_id)->with('success', 'Year added successfully');
+    } catch (Exception $e) {
+        return redirect()->back()->withErrors(['error' => 'An error occurred while adding the year: ' . $e->getMessage()]);
     }
+}
+
+private function formatFinancialValue($value)
+{
+    if ($value < 0) {
+        return '(-) ' . number_format(abs($value), 2);
+    }
+    return number_format($value, 2);
+}
 
     public function destroy($id)
     {
@@ -331,6 +589,7 @@ class ClientController extends Controller
     public function download($id)
     {
         $year = Year::find($id);
+     
         $filePath = storage_path('app/public/uploads/' . $year->file);
         return response()->download($filePath);
     }

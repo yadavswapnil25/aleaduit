@@ -61,7 +61,7 @@
                                 <select id="client_data" class="form-control @error('client_data') is-invalid @enderror" name="client_data">
                                     <option value="0">None</option>
                                     @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}" {{ old('client_data') == $client->id ? 'selected' : '' }}>{{ $client->name }}</option>
+                                    <option value="{{ $client->id }}" {{ old('client_data') == $client->id ? 'selected' : '' }}>{{ $client->name_of_society }}</option>
                                     @endforeach
                                 </select>
                                 @error('client_data')
